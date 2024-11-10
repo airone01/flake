@@ -3,5 +3,7 @@
     bat
     git
     nmap
+    # Nix formatter
+    alejandra
   ];
 }

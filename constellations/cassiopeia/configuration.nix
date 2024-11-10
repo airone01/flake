@@ -13,6 +13,7 @@
     boot-plymouth
     cli-btop
     cli-eza
+    cli-just
     cli-nvim
     cli-oh-my-posh
     cli-zellij
