@@ -40,7 +40,7 @@ update:
     #!/usr/bin/env bash
     set -euo pipefail
     echo "⬆️  Updating flake inputs..."
-    nix flake update {{flake_dir}}
+    nix flake update --flake {{flake_dir}}
     echo "✅ Flake inputs updated!"
 
 # Update specific flake input
