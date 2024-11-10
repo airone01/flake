@@ -10,21 +10,20 @@
   };
   time.timeZone = "Europe/Paris";
 
-  imports = with stars;
-    [
-      cli-btop
-      cli-eza
-      cli-nvim
-      cli-oh-my-posh
-      cli-zellij
-      cli-zsh
-      core-sops
-      dev-core
-      dev-garnix
-      net-network-manager
-      r1-git
-    ]
-    ++ [
-      ./services/caddy.nix
-    ];
+  imports = with stars; [
+    cli-btop
+    cli-eza
+    cli-nvim
+    cli-oh-my-posh
+    cli-zellij
+    cli-zsh
+    core-sops
+    dev-core
+    dev-garnix
+    net-network-manager
+    r1-git
+  ];
+  # ++ [
+  #   ./services/caddy.nix
+  # ];
 }

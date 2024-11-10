@@ -6,17 +6,17 @@ rules:
   type-enum:
     - 2
     - always
-    - - feat     # New feature
-      - fix      # Bug fixes
-      - docs     # Documentation only
-      - style    # Formatting, missing semi colons, etc
+    - - feat # New feature
+      - fix # Bug fixes
+      - docs # Documentation only
+      - style # Formatting, missing semi colons, etc
       - refactor # Code change that neither fixes a bug nor adds a feature
-      - perf     # Code change that improves performance
-      - test     # Adding missing tests
-      - build    # Changes that affect the build system
-      - ci       # Changes to CI configuration files and scripts
-      - chore    # Other changes that don't modify src or test files
-      - revert   # Reverts a previous commit
+      - perf # Code change that improves performance
+      - test # Adding missing tests
+      - build # Changes that affect the build system
+      - ci # Changes to CI configuration files and scripts
+      - chore # Other changes that don't modify src or test files
+      - revert # Reverts a previous commit
 
   # Scope naming convention
   scope-enum:
@@ -64,39 +64,41 @@ rules:
       - readme
       - changelog
       - docs
+      # Release-please
+      - main
 
   # Other rules
   scope-case:
     - 2
     - always
-    - - lower-case    # scope must be lower-case
-      - kebab-case    # allow kebab-case
+    - - lower-case # scope must be lower-case
+      - kebab-case # allow kebab-case
 
   subject-case:
     - 2
     - always
-    - - lower-case    # subject must start with lower case
+    - - lower-case # subject must start with lower case
 
   subject-empty:
     - 2
-    - never          # subject cannot be empty
+    - never # subject cannot be empty
 
   subject-full-stop:
     - 2
-    - never          # subject cannot end with dot
+    - never # subject cannot end with dot
 
   header-max-length:
     - 2
     - always
-    - 72             # keep header (first line) concise
+    - 72 # keep header (first line) concise
 
   body-leading-blank:
     - 2
-    - always        # body must start with blank line
+    - always # body must start with blank line
 
   footer-leading-blank:
     - 2
-    - always        # footer must start with blank line
+    - always # footer must start with blank line
 
 help: |
   Your commit message should follow this format:
