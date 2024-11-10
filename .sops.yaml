@@ -1,0 +1,13 @@
+keys:
+  - &primary age15ptmy54dcgrz7aa5k6jjutgrkj9x8cfcecnmy6uqkp2l7m5muvzskdtsnf
+  - &host_aquarius age1h8xkw2gar4nlfrwx7099lzs7jda3mcj8txn86cfppx3kyayfjcps2rutyd
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *primary
+  - path_regex: secrets/net/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *primary
+          - *host_aquarius

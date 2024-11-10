@@ -1,0 +1,33 @@
+# Build outputs
+result
+result-*
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Temporary files
+*.log
+.direnv/
+
+# Local overrides
+local.nix
+
+# Generated files
+hardware-configuration.nix
+!/constellations/*/hardware-configuration.nix
+
+# SOPS age key
+.config/sops/age/keys.txt
+
+# System-specific files that shouldn't be tracked
+*.uuid
+
+# AI 😈
+repomix-output.txt
+
+# NodeJS
+node_modules/
+

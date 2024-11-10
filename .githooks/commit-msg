@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Get the commit message (first argument is the file containing the message)
+MSG_FILE=$1
+
+# Run commitlint using nix develop
+nix develop .#commitlint --command commitlint --edit $MSG_FILE
