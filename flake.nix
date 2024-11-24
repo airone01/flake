@@ -133,7 +133,7 @@
       }
       // mkConstellationForNixosConfiguration {
         userName = "rack";
-        constellations = ["aquarius"];
+        constellations = ["aquarius" "cetus"];
       };
 
     # Packages, including temporary setups (ISO images)
