@@ -9,7 +9,7 @@
     ];
 
   boot = {
-    intrd = {
+    initrd = {
       availableKernelModules = [ "ehci_pci" "ahci" "megaraid_sas" "xhci_pci" "usbhid" "sd_mod" "sr_mod" ];
       kernelModules = [ ];
     };
