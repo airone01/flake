@@ -8,10 +8,20 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "megaraid_sas" "xhci_pci" "usbhid" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    intrd = {
+      availableKernelModules = [ "ehci_pci" "ahci" "megaraid_sas" "xhci_pci" "usbhid" "sd_mod" "sr_mod" ];
+      kernelModules = [ ];
+    };
+
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+
+    loader = {
+      systemd-boot.enable = true;
+      # efi.canTouchEfiVariables = true;
+    };
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/NIXROOT";
