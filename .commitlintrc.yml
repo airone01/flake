@@ -37,6 +37,7 @@ rules:
       - cassiopeia
       - aquarius
       - ursamajor
+      - cetus
       # Core components
       - sops
       - stars
