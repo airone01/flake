@@ -18,6 +18,7 @@
     cli-oh-my-posh
     cli-zellij
     cli-zsh
+    core-direnv
     core-docker
     core-font
     core-gh
