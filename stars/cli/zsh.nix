@@ -10,12 +10,30 @@
         syntaxHighlighting.enable = true;
 
         shellAliases = {
-          l = "eza -laag --git --icons";
+          l = "ll --icons --git -a";
           zz = "zellij -l compact";
+        };
+
+        oh-my-zsh = {
+          enable = true;
+          plugins = [
+            "eza"
+            "git"
+            "sudo"
+            "thefuck"
+            "web-search"
+            "zoxide"
+          ];
+          theme = "robbyrussell";
         };
       };
     };
   };
+
+  packages = with pkgs; [
+    thefuck
+    zoxide
+  ];
 
   config = {config, ...}: {
     users.users.${config.stars.mainUser}.shell = pkgs.zsh;
