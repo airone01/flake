@@ -141,6 +141,7 @@
 
     # Rockets
     devShells = eachSystem (system: {
+      default = import ./rockets {inherit system nixpkgs;};
       commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
       tauri = import ./rockets/tauri.nix {inherit system nixpkgs;};
     });

@@ -21,6 +21,7 @@ A modular and extensible NixOS configuration system using a custom star-based ar
 - 📦 Multiple machine configurations
 - 🔄 Automated formatting and checks
 - 💾 ISO generation capabilities
+- 📁 Direnv support
 
 ## 🏗️ Structure
 
@@ -57,32 +58,38 @@ A modular and extensible NixOS configuration system using a custom star-based ar
 ### Installation
 
 1. Install the `just` command runner:
+
 ```bash
 nix-env -iA nixpkgs.just
 ```
 
 2. Bootstrap a new system:
+
 ```bash
 just bootstrap <hostname>
 ```
 
 This will:
+
 - Set up the nix channels
 - Install required tools
 - Clone the repository
 - Prepare the system for configuration
 
 3. Generate SOPS key (if using secrets):
+
 ```bash
 just sops-key
 ```
 
 4. Review and modify the configuration:
+
    - Choose or create a constellation in `constellations/`
    - Modify `flake.nix` to include your system
    - Adjust hardware configuration as needed
 
 5. Deploy the configuration:
+
 ```bash
 just switch <hostname>
 ```
@@ -177,16 +184,19 @@ Secrets are managed using sops-nix with age encryption:
 ## 📦 Machines
 
 ### aquarius
+
 - Purpose: Home server
 - Services: Caddy, planned hosting for various services
 - Status: Active
 
 ### cassiopeia
+
 - Purpose: Desktop workstation
 - Features: GNOME desktop, development tools
 - Status: Active
 
 ### ursamajor
+
 - Purpose: Installation ISO
 - Features: Basic system for testing and installation
 - Status: In Development
@@ -199,6 +209,7 @@ This is my flake and it's mainly personal but contributions are welcome if you h
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes
 4. Run the following checks:
+
    ```bash
    # Format code
    just fmt
@@ -206,6 +217,7 @@ This is my flake and it's mainly personal but contributions are welcome if you h
    # Verify builds
    just check
    ```
+
 5. Commit your changes (following commitlint conventions)
 6. Push to your branch
 7. Open a Pull Request
@@ -226,41 +238,42 @@ Scopes: See `.commitlintrc.yml` for valid scopes
 
 ## 📋 Roadmap
 
-| Category | Task | Priority | Status |
-|----------|------|----------|--------|
-| Documentation | Add installation guides for each constellation | High | 🟡 Pending |
-| Documentation | Add architecture diagrams | Medium | 🔴 Not Started |
-| Documentation | Create contribution guidelines | Medium | 🔴 Not Started |
-| Testing | Add GitHub Actions workflows | High | 🔴 Not Started |
-| Testing | Implement basic system tests | Medium | 🔴 Not Started |
-| Testing | Add Nix formatting checks | High | 🟢 Complete |
-| Security | Implement firewall configuration | High | 🔴 Not Started |
-| Security | Add fail2ban configuration | Medium | 🔴 Not Started |
-| Security | Configure automatic security updates | High | 🔴 Not Started |
-| Security | Implement SSH hardening | High | 🔴 Not Started |
-| Backup | Add restic/borgbackup configuration | High | 🔴 Not Started |
-| Monitoring | Set up Prometheus + Grafana | Medium | 🔴 Not Started |
-| Updates | Configure automatic system updates | Medium | 🔴 Not Started |
-| Infrastructure | Add Hydra instance | Low | 🔴 Not Started |
-| Infrastructure | Add TeamCity instance | Low | 🔴 Not Started |
-| Infrastructure | Add Attic binary cache | Medium | 🔴 Not Started |
-| Infrastructure | Add Mastodon instance | Low | 🔴 Not Started |
-| Infrastructure | Add Matrix instance | Low | 🔴 Not Started |
-| Infrastructure | Add Lemmy instance | Low | 🔴 Not Started |
-| Infrastructure | Add Invidious instance | Low | 🔴 Not Started |
-| Infrastructure | Add SearXNG instance | Medium | 🔴 Not Started |
-| Infrastructure | Add Gitea instance | Medium | 🔴 Not Started |
-| Infrastructure | Add Jellyfin instance | Low | 🔴 Not Started |
-| Infrastructure | Add Vaultwarden instance | Low | 🔴 Not Started |
-| Infrastructure | Add Home Assistant instance | Low | 🔴 Not Started |
-| Infrastructure | Add Paperless-ngx instance | Low | 🔴 Not Started |
-| Infrastructure | Add Syncthing instance | Low | 🔴 Not Started |
-| Infrastructure | Add Calibre-Web instance | Low | 🔴 Not Started |
-| Infrastructure | Add Photoprism instance | Low | 🔴 Not Started |
-| Architecture | Task runner implementation | High | 🟢 Complete |
-| Architecture | Figuring all of this out | High | 🟣 Always going on |
+| Category       | Task                                           | Priority | Status             |
+| -------------- | ---------------------------------------------- | -------- | ------------------ |
+| Documentation  | Add installation guides for each constellation | High     | 🟡 Pending         |
+| Documentation  | Add architecture diagrams                      | Medium   | 🔴 Not Started     |
+| Documentation  | Create contribution guidelines                 | Medium   | 🔴 Not Started     |
+| Testing        | Add GitHub Actions workflows                   | High     | 🔴 Not Started     |
+| Testing        | Implement basic system tests                   | Medium   | 🔴 Not Started     |
+| Testing        | Add Nix formatting checks                      | High     | 🟢 Complete        |
+| Security       | Implement firewall configuration               | High     | 🔴 Not Started     |
+| Security       | Add fail2ban configuration                     | Medium   | 🔴 Not Started     |
+| Security       | Configure automatic security updates           | High     | 🔴 Not Started     |
+| Security       | Implement SSH hardening                        | High     | 🔴 Not Started     |
+| Backup         | Add restic/borgbackup configuration            | High     | 🔴 Not Started     |
+| Monitoring     | Set up Prometheus + Grafana                    | Medium   | 🔴 Not Started     |
+| Updates        | Configure automatic system updates             | Medium   | 🔴 Not Started     |
+| Infrastructure | Add Hydra instance                             | Low      | 🔴 Not Started     |
+| Infrastructure | Add TeamCity instance                          | Low      | 🔴 Not Started     |
+| Infrastructure | Add Attic binary cache                         | Medium   | 🔴 Not Started     |
+| Infrastructure | Add Mastodon instance                          | Low      | 🔴 Not Started     |
+| Infrastructure | Add Matrix instance                            | Low      | 🔴 Not Started     |
+| Infrastructure | Add Lemmy instance                             | Low      | 🔴 Not Started     |
+| Infrastructure | Add Invidious instance                         | Low      | 🔴 Not Started     |
+| Infrastructure | Add SearXNG instance                           | Medium   | 🔴 Not Started     |
+| Infrastructure | Add Gitea instance                             | Medium   | 🔴 Not Started     |
+| Infrastructure | Add Jellyfin instance                          | Low      | 🔴 Not Started     |
+| Infrastructure | Add Vaultwarden instance                       | Low      | 🔴 Not Started     |
+| Infrastructure | Add Home Assistant instance                    | Low      | 🔴 Not Started     |
+| Infrastructure | Add Paperless-ngx instance                     | Low      | 🔴 Not Started     |
+| Infrastructure | Add Syncthing instance                         | Low      | 🔴 Not Started     |
+| Infrastructure | Add Calibre-Web instance                       | Low      | 🔴 Not Started     |
+| Infrastructure | Add Photoprism instance                        | Low      | 🔴 Not Started     |
+| Architecture   | Task runner implementation                     | High     | 🟢 Complete        |
+| Architecture   | Figuring all of this out                       | High     | 🟣 Always going on |
 
 Legend:
+
 - 🟢 Complete
 - 🟡 In Progress/Partial
 - 🔴 Not Started
