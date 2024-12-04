@@ -6,8 +6,4 @@ creation_rules:
     key_groups:
       - age:
           - *primary
-  - path_regex: secrets/net/[^/]+\.(yaml|json|env|ini)$
-    key_groups:
-      - age:
-          - *primary
           - *c_hercules
