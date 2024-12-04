@@ -35,7 +35,6 @@ rules:
       - module
       # Constellation names
       - cassiopeia
-      - aquarius
       - ursamajor
       - cetus
       - hercules
@@ -62,6 +61,11 @@ rules:
       - python
       - rust
       - nix
+      # Server
+      - srv
+      - traefik
+      - nginx
+      - hydra
       # Documentation
       - readme
       - changelog

@@ -15,6 +15,12 @@
       mode = "0400";
     };
 
+    # Makes sure that Traefik starts *AFTER* sops-nix populates the secrets
+    systemd.services.traefik = {
+      after = ["sops-nix.service"];
+      requires = ["sops-nix.service"];
+    };
+
     services.traefik = {
       enable = true;
 
@@ -95,8 +101,8 @@
           }
         ];
         root = pkgs.writeTextDir "index.html" ''
-          <h1>Welcome to air1.one.</h1><hr><pre><a href="../">../</a>
-          <a href="hydra.nix.air1.one">Hydra</a>
+          <h1>Welcome to air1.one.</h1><hr><pre>
+          <a href="https://hydra.nix.air1.one/">Hydra</a>
           </pre><hr>
         '';
       };
