@@ -253,15 +253,15 @@ Scopes: See `.commitlintrc.yml` for valid scopes
 | Backup         | Add restic/borgbackup configuration            | High     | 🔴 Not Started     |
 | Monitoring     | Set up Prometheus + Grafana                    | Medium   | 🔴 Not Started     |
 | Updates        | Configure automatic system updates             | Medium   | 🔴 Not Started     |
-| Infrastructure | Add Hydra instance                             | Low      | 🔴 Not Started     |
+| Infrastructure | Add Hydra instance                             | Low      | 🟢 Complete        |
 | Infrastructure | Add TeamCity instance                          | Low      | 🔴 Not Started     |
 | Infrastructure | Add Attic binary cache                         | Medium   | 🔴 Not Started     |
-| Infrastructure | Add Mastodon instance                          | Low      | 🔴 Not Started     |
-| Infrastructure | Add Matrix instance                            | Low      | 🔴 Not Started     |
+| Infrastructure | Add Mastodon instance                          | Low      | 🟢 Complete        |
+| Infrastructure | Add Matrix instance                            | Low      | 🟢 Complete        |
 | Infrastructure | Add Lemmy instance                             | Low      | 🔴 Not Started     |
 | Infrastructure | Add Invidious instance                         | Low      | 🔴 Not Started     |
 | Infrastructure | Add SearXNG instance                           | Medium   | 🔴 Not Started     |
-| Infrastructure | Add Gitea instance                             | Medium   | 🔴 Not Started     |
+| Infrastructure | Add Gitea instance                             | Medium   | 🟢 Complete        |
 | Infrastructure | Add Jellyfin instance                          | Low      | 🔴 Not Started     |
 | Infrastructure | Add Vaultwarden instance                       | Low      | 🔴 Not Started     |
 | Infrastructure | Add Home Assistant instance                    | Low      | 🔴 Not Started     |

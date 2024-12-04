@@ -19,6 +19,9 @@
     dev-garnix
     r1-git
     srv-hydra
+    srv-gitea
+    srv-mastodon
+    srv-matrix
     srv-traefik
   ];
 
@@ -39,5 +42,13 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHlRI2ynQ1ZAJWVWlk/Obhcbl+IIBDnMjvZDlWqSMvw8 rack@warrior-emu"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILrsNjp641wst+zLOMlTFqQTIEUi08D5yM3AKp5+LpYL r1@cassiopeia"
   ];
-  networking.firewall.allowedTCPPorts = [22];
+
+  networking.firewall.allowedTCPPorts = [
+    22 # SSH
+    # 80 # HTTP
+    443 # HTTPS
+    # 3001 # Gitea
+    # 3002 # Mastodon
+    # 3003 # Matrix
+  ];
 }
