@@ -3,13 +3,13 @@
 
   config = {config, ...}: {
     sops.secrets."cloudflare/cert" = {
-      sopsFile = ../../secrets/net/cloudflare.yaml;
+      sopsFile = ../../secrets/cloudflare.yaml;
       owner = "traefik";
       group = "traefik";
       mode = "0400";
     };
     sops.secrets."cloudflare/key" = {
-      sopsFile = ../../secrets/net/cloudflare.yaml;
+      sopsFile = ../../secrets/cloudflare.yaml;
       owner = "traefik";
       group = "traefik";
       mode = "0400";
