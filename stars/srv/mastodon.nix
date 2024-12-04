@@ -18,9 +18,10 @@
 
       database = {
         createLocally = true;
-        type = "postgresql";
         passwordFile = config.sops.secrets."mastodon/db_password".path;
       };
+
+      streamingProcesses = 3;
 
       redis = {
         createLocally = true;

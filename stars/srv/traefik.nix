@@ -96,7 +96,10 @@
         ];
         root = pkgs.writeTextDir "index.html" ''
           <h1>Welcome to air1.one.</h1><hr><pre>
+          <a href="https://git.air1.one/">Gitea</a>
           <a href="https://hydra.air1.one/">Hydra</a>
+          <a href="https://m.air1.one/">Mastodon</a>
+          <a href="https://matrix.air1.one/">Matrix</a>
           </pre><hr>
         '';
       };

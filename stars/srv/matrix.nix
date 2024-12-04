@@ -54,7 +54,7 @@
         ensureUsers = [
           {
             name = "matrix-synapse";
-            ensurePermissions."DATABASE matrix-synapse" = "ALL PRIVILEGES";
+            ensureDBOwnership = true;
           }
         ];
       };

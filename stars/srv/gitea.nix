@@ -36,7 +36,7 @@
         ensureUsers = [
           {
             name = "gitea";
-            ensurePermissions."DATABASE gitea" = "ALL PRIVILEGES";
+            ensureDBOwnership = true;
           }
         ];
       };
