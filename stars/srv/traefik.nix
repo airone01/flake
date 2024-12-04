@@ -15,12 +15,6 @@
       mode = "0400";
     };
 
-    # Makes sure that Traefik starts *AFTER* sops-nix populates the secrets
-    systemd.services.traefik = {
-      after = ["sops-nix.service"];
-      requires = ["sops-nix.service"];
-    };
-
     services.traefik = {
       enable = true;
 
