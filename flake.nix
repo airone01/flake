@@ -95,10 +95,9 @@
     mkConstellationForNixosConfiguration = {
       userName,
       constellations,
+      system ? "x86_64-linux",
     }:
-      lib.genAttrs constellations (name: let
-        system = "x86_64-linux";
-      in
+      lib.genAttrs constellations (name:
         nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
@@ -134,6 +133,11 @@
       // mkConstellationForNixosConfiguration {
         userName = "rack";
         constellations = ["aquarius" "cetus"];
+      }
+      // mkConstellationForNixosConfiguration {
+        system = "aarch64-linux";
+        userName = "rack";
+        constellations = ["hercules"];
       };
 
     # Packages, including temporary setups (ISO images)

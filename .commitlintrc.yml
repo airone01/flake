@@ -38,6 +38,7 @@ rules:
       - aquarius
       - ursamajor
       - cetus
+      - hercules
       # Core components
       - sops
       - stars
