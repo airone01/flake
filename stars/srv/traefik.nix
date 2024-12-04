@@ -44,18 +44,6 @@
             certFile = config.sops.secrets."cloudflare/cert".path;
             keyFile = config.sops.secrets."cloudflare/key".path;
           };
-
-          options = {
-            minVersion = "VersionTLS12";
-            cipherSuites = [
-              "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
-              "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
-              "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
-              "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
-              "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305"
-              "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"
-            ];
-          };
         };
 
         http = {
@@ -70,7 +58,7 @@
 
             # Hydra router
             hydra = {
-              rule = "Host(`hydra.nix.air1.one`)";
+              rule = "Host(`hydra.air1.one`)";
               service = "hydra";
               entryPoints = ["websecure"];
               tls = {};
@@ -108,7 +96,7 @@
         ];
         root = pkgs.writeTextDir "index.html" ''
           <h1>Welcome to air1.one.</h1><hr><pre>
-          <a href="https://hydra.nix.air1.one/">Hydra</a>
+          <a href="https://hydra.air1.one/">Hydra</a>
           </pre><hr>
         '';
       };

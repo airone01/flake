@@ -5,7 +5,7 @@ _: {
     # Enable Hydra service
     services.hydra = {
       enable = true;
-      hydraURL = "https://hydra.nix.air1.one";
+      hydraURL = "https://hydra.air1.one";
       notificationSender = "hydra@air1.one";
 
       # Basic Hydra configuration
