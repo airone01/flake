@@ -20,6 +20,10 @@
     r1-git
   ];
 
+  # Booting
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   # Remote access
   services.openssh = {
     enable = true;
