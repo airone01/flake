@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   name = "hydra";
 
-  config = _: {
+  config = {config, ...}: {
     # Enable Hydra service
     services.hydra = {
       enable = true;
@@ -33,8 +33,8 @@
     # Required system configuration for Hydra
     nix = {
       settings = {
-        allowed-users = ["hydra" "hydra-queue-runner"];
-        trusted-users = ["hydra" "hydra-queue-runner"];
+        allowed-users = ["hydra" "hydra-queue-runner" config.stars.mainUser];
+        trusted-users = ["hydra" "hydra-queue-runner" config.stars.mainUser];
         auto-optimise-store = true;
       };
       extraOptions = ''
