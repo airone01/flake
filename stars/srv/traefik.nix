@@ -1,8 +1,20 @@
-{pkgs, ...}: {
+{pkgs, ...}:{config, pkgs, ...}: {
   name = "traefik";
 
   config = _: {
-    # Enable and configure Traefik
+    sops.secrets."cloudflare/cert" = {
+      sopsFile = ../../secrets/net/cloudflare.yaml;
+      owner = "traefik";
+      group = "traefik";
+      mode = "0400";
+    };
+    sops.secrets."cloudflare/key" = {
+      sopsFile = ../../secrets/net/cloudflare.yaml;
+      owner = "traefik";
+      group = "traefik";
+      mode = "0400";
+    };
+
     services.traefik = {
       enable = true;
 
@@ -17,15 +29,7 @@
           };
           websecure = {
             address = ":443";
-            http.tls.certResolver = "letsencrypt";
           };
-        };
-
-        certificatesResolvers.letsencrypt.acme = {
-          email = "21955960+airone01@users.noreply.github.com";
-          storage = "/var/lib/traefik/acme.json";
-
-          tlsChallenge = {};
         };
 
         api = {
@@ -35,6 +39,13 @@
       };
 
       dynamicConfigOptions = {
+        tls = {
+          stores.default.defaultCertificate = {
+            certFile = config.sops.secrets."cloudflare/cert".path;
+            keyFile = config.sops.secrets."cloudflare/key".path;
+          };
+        };
+
         http = {
           routers = {
             # Main site router
@@ -56,18 +67,14 @@
 
           services = {
             # Main site service
-            mainsite.loadBalancer.servers = [
-              {
-                url = "http://127.0.0.1:8000";
-              }
-            ];
+            mainsite.loadBalancer.servers = [{
+              url = "http://127.0.0.1:8000";
+            }];
 
             # Hydra service
-            hydra.loadBalancer.servers = [
-              {
-                url = "http://127.0.0.1:3000";
-              }
-            ];
+            hydra.loadBalancer.servers = [{
+              url = "http://127.0.0.1:3000";
+            }];
           };
         };
       };
@@ -77,13 +84,10 @@
     services.nginx = {
       enable = true;
       virtualHosts."_" = {
-        # Default host
-        listen = [
-          {
-            addr = "127.0.0.1";
-            port = 8000;
-          }
-        ];
+        listen = [{
+          addr = "127.0.0.1";
+          port = 8000;
+        }];
         root = pkgs.writeTextDir "index.html" ''
           <h1>Welcome to air1.one.</h1><hr><pre><a href="../">../</a>
           <a href="hydra.nix.air1.one">Hydra</a>
@@ -93,7 +97,6 @@
     };
 
     # Open necessary ports
-    networking.firewall.allowedTCPPorts = [80 443 8000 3000];
+    networking.firewall.allowedTCPPorts = [ 80 443 8000 3000 ];
   };
 }
-
