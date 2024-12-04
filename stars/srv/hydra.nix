@@ -1,7 +1,7 @@
-{pkgs, ...}: {
+_: {
   name = "hydra";
 
-  config = {config, ...}: {
+  config = _: {
     # Enable Hydra service
     services.hydra = {
       enable = true;
@@ -16,38 +16,5 @@
       port = 3000;
       listenHost = "127.0.0.1";
     };
-
-    # Hydra needs these
-    services.postgresql = {
-      enable = true;
-      package = pkgs.postgresql_14;
-      ensureDatabases = ["hydra"];
-      ensureUsers = [
-        {
-          name = "hydra";
-          ensureDBOwnership = true;
-        }
-      ];
-    };
-
-    # Required system configuration for Hydra
-    nix = {
-      settings = {
-        allowed-users = ["hydra" "hydra-queue-runner" config.stars.mainUser];
-        trusted-users = ["hydra" "hydra-queue-runner" config.stars.mainUser];
-        auto-optimise-store = true;
-      };
-      extraOptions = ''
-        experimental-features = nix-command flakes
-      '';
-    };
-
-    # Create hydra user/group
-    users.users.hydra = {
-      group = "hydra";
-      isNormalUser = false;
-      isSystemUser = true;
-    };
-    users.groups.hydra = {};
   };
 }
