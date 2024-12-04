@@ -132,7 +132,7 @@
       }
       // mkConstellationForNixosConfiguration {
         userName = "rack";
-        constellations = ["aquarius" "cetus"];
+        constellations = ["cetus"];
       }
       // mkConstellationForNixosConfiguration {
         system = "aarch64-linux";
