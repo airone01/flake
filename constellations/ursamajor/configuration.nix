@@ -1,5 +1,4 @@
 _: {
-  # hostname
   networking.hostName = "ursamajor";
   stars.mainUser = "nixos";
 
