@@ -4,7 +4,6 @@ _: {
     nix = {
       settings = {
         # Parallel operations
-        max-substituters = 16;
         builders-use-substitutes = true;
 
         # Cache settings
@@ -31,7 +30,6 @@ _: {
 
         # Evaluation cache
         eval-cache = true;
-        eval-cache-ttl = 3600; # 1 hour
       };
 
       # Daemon CPU scheduling
