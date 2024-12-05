@@ -50,7 +50,7 @@
         inherit lib userName;
         pkgs = import nixpkgs {
           inherit system;
-          config.allowUnfree = true; # This only affects the evaluation of stars
+          config.allowUnfree = true;
         };
       };
 
@@ -132,7 +132,7 @@
       }
       // mkConstellationForNixosConfiguration {
         userName = "rack";
-        constellations = ["aquarius" "cetus"];
+        constellations = ["cetus"];
       }
       // mkConstellationForNixosConfiguration {
         system = "aarch64-linux";

@@ -122,15 +122,3 @@ sops-key:
         echo "⚠️  Key already exists at ~/.config/sops/age/keys.txt"
     fi
 
-# Bootstrap a new system
-bootstrap host tools="git curl":
-    #!/usr/bin/env bash
-    set -euo pipefail
-    echo "🚀 Bootstrapping new system for {{host}}..."
-    sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
-    sudo nix-channel --update
-    sudo nix-env -iA nixos.{{tools}}
-    if [ ! -d "{{flake_dir}}" ]; then
-        git clone {{flake_url}} {{flake_dir}}
-    fi
-    echo "✅ Bootstrap complete! You can now run: just switch {{host}}"
