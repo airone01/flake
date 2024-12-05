@@ -20,9 +20,6 @@
     r1-git
     srv-hydra
     srv-gitea
-    # srv-mastodon
-    # srv-matrix
-    srv-phanpy
     srv-traefik
   ];
 
@@ -49,7 +46,5 @@
     # 80 # HTTP
     443 # HTTPS
     # 3001 # Gitea
-    # 3002 # Mastodon
-    # 3003 # Matrix
   ];
 }
