@@ -47,11 +47,15 @@
     ...
   } @ inputs: let
     inherit (nixpkgs) lib;
+
+    # Systems definition
     eachSystem = f: lib.genAttrs (import inputs.systems) (system: f system);
     eachLinuxSystem = f: lib.genAttrs (import inputs.systems-linux) (system: f system);
 
-    perfUtils = import ./lib/perf.nix {inherit (nixpkgs) lib;};
+    # Performance and caching
+    optimizations = import ./lib/optimizations.nix {inherit (inputs.nixpkgs) lib;};
 
+    # Stars system
     mkStars = {
       system ? "x86_64-linux",
       userName,
@@ -64,12 +68,11 @@
         };
       };
 
-    # List of my NixOS images
+    # Packages list
     outImages = ["ursamajor"];
-
-    # List of formats i want to compile my images to
     outFormats = ["install-iso"];
 
+    # Utility functions
     combineArrays = arr1: arr2: f:
       builtins.listToAttrs (builtins.concatMap
         (x:
@@ -95,6 +98,10 @@
         inherit system format;
 
         modules = [
+          # Optimization module
+          optimizations.mkOptimizationConfig
+
+          # Actual modules
           home-manager.nixosModules.default
           inputs.sops-nix.nixosModules.sops
           (import ./lib/stars-core.nix)
@@ -117,7 +124,8 @@
 
           modules = [
             # Optimization module
-            perfUtils.mkCachedConfig
+            optimizations.mkOptimizationConfig
+
             # Actual modules
             home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
@@ -127,7 +135,6 @@
           ];
         });
 
-    # Generate packages for all combinations
     mkPackages = system:
       combineArrays outImages outFormats (
         hostName: format:
