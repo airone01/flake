@@ -256,8 +256,7 @@ Scopes: See `.commitlintrc.yml` for valid scopes
 | Infrastructure | Add Hydra instance                             | Low      | 🟢 Complete        |
 | Infrastructure | Add TeamCity instance                          | Low      | 🔴 Not Started     |
 | Infrastructure | Add Attic binary cache                         | Medium   | 🔴 Not Started     |
-| Infrastructure | Add Mastodon instance                          | Low      | 🟢 Complete        |
-| Infrastructure | Add Matrix instance                            | Low      | 🟢 Complete        |
+| Infrastructure | Add Mastodon frontend                          | Low      | 🟢 Complete        |
 | Infrastructure | Add Lemmy instance                             | Low      | 🔴 Not Started     |
 | Infrastructure | Add Invidious instance                         | Low      | 🔴 Not Started     |
 | Infrastructure | Add SearXNG instance                           | Medium   | 🔴 Not Started     |

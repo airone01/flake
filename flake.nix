@@ -50,7 +50,7 @@
         inherit lib userName;
         pkgs = import nixpkgs {
           inherit system;
-          config.allowUnfree = true; # This only affects the evaluation of stars
+          config.allowUnfree = true;
         };
       };
 

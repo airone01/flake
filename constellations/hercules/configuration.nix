@@ -20,8 +20,9 @@
     r1-git
     srv-hydra
     srv-gitea
-    srv-mastodon
-    srv-matrix
+    # srv-mastodon
+    # srv-matrix
+    srv-phanpy
     srv-traefik
   ];
 

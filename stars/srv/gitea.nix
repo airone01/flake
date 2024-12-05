@@ -42,11 +42,13 @@
       };
     };
 
-    sops.secrets."gitea/db_password" = {
-      owner = "gitea";
-      group = "gitea";
-      mode = "0400";
-      sopsFile = ../../secrets/secrets.yaml;
+    sops.secrets = {
+      "gitea/db_password" = {
+        owner = "gitea";
+        group = "gitea";
+        mode = "0400";
+        sopsFile = ../../secrets/secrets.yaml;
+      };
     };
 
     # Add gitea to traefik config
