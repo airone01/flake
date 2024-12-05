@@ -32,6 +32,14 @@
     systems-linux.url = "github:nix-systems/default-linux";
   };
 
+  # Some optimization
+  nixConfig = {
+    extra-experimental-features = ["flakes" "nix-command" "recursive-nix"];
+    flake-registry = "https://raw.githubusercontent.com/NixOS/flake-registry/master/flake-registry.json";
+    max-substituters = 8;
+    connect-timeout = 5;
+  };
+
   outputs = {
     home-manager,
     nixpkgs,
@@ -41,6 +49,8 @@
     inherit (nixpkgs) lib;
     eachSystem = f: lib.genAttrs (import inputs.systems) (system: f system);
     eachLinuxSystem = f: lib.genAttrs (import inputs.systems-linux) (system: f system);
+
+    perfUtils = import ./lib/perf.nix {inherit (nixpkgs) lib;};
 
     mkStars = {
       system ? "x86_64-linux",
@@ -106,9 +116,9 @@
           inherit system;
 
           modules = [
-            # Enable unfree packages by default, but allow overriding
-            {nixpkgs.config.allowUnfree = lib.mkDefault true;}
-
+            # Optimization module
+            perfUtils.mkCachedConfig
+            # Actual modules
             home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
             (import ./lib/stars-core.nix)
