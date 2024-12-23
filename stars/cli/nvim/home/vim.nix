@@ -7,11 +7,11 @@ _: {
     vimAlias = true;
 
     # yes pretty please
-    autocomplete.enable = true;
+    # autocomplete.enable = true;
     syntaxHighlighting = true;
 
     # i have a small screen
-    tabWidth = 2;
+    # tabWidth = 2;
 
     # this is the equivalent of
     # unbinding the crouch key in CS:GO

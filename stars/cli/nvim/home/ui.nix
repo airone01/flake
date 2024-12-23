@@ -1,7 +1,7 @@
 _: {
   programs.nvf.settings.vim = {
     visuals = {
-      enable = true;
+      # enable = true;
 
       # hmm...
       cellularAutomaton = {
@@ -33,7 +33,7 @@ _: {
       indentBlankline.enable = true;
       # scollbar
       scrollBar.enable = true;
-      smoothScroll.enable = true;
+      # smoothScroll.enable = true;
     };
 
     ui = {

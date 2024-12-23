@@ -3,5 +3,6 @@ _: {
 
   config = _: {
     programs.steam.enable = true;
+    programs.gamemode.enable = true;
   };
 }

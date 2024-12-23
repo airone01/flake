@@ -9,7 +9,10 @@
 
   config = _: {
     fonts.packages = with pkgs; [
-      (nerdfonts.override {fonts = ["JetBrainsMono" "FiraMono" "FiraCode"];})
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      nerd-fonts.fira-mono
+      # (nerdfonts.override {fonts = ["JetBrainsMono" "FiraMono" "FiraCode"];})
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji

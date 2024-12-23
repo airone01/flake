@@ -62,7 +62,7 @@
       };
 
       # UDEV rules
-      udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+      udev.packages = with pkgs; [gnome-settings-daemon];
       # Patch for GNOME2 applications
       dbus.packages = with pkgs; [gnome2.GConf];
 

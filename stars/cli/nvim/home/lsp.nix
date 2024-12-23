@@ -12,7 +12,7 @@
       lspSignature.enable = true;
 
       # pictograms
-      lspkind.enable = true;
+      # lspkind.enable = true;
 
       # lines showing errors
       lsplines.enable = true;
