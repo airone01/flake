@@ -15,6 +15,7 @@
     alejandra
     # project-specific
     just
+    bun
   ];
 in
   pkgs.mkShell {
