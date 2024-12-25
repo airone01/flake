@@ -2,10 +2,6 @@
   description = "r1's increasingly-less-simple NixOS config";
 
   inputs = {
-    caddy-many = {
-      url = "github:crabdancing/nixos-caddy-with-plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
