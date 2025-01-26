@@ -120,10 +120,9 @@
     packages = eachLinuxSystem (system: mkPackages system);
 
     # Rockets
-    # devShells = eachSystem (system: {
-    #   default = import ./rockets {inherit system nixpkgs;};
-    #   commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
-    #   tauri = import ./rockets/tauri.nix {inherit system nixpkgs;};
-    # });
+    devShells = eachSystem (system: {
+      commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
+      default = import ./rockets {inherit system nixpkgs;};
+    });
   };
 }
