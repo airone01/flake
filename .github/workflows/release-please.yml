@@ -16,6 +16,9 @@ jobs:
         with:
           release-type: simple
           package-name: nixos-config
+          default-branch: main
+          include-v-in-tag: true
+          pull-request-title-pattern: "chore(main): release ${version}"
           changelog-types: |
             [
               {"type":"feat","section":"Features","hidden":false},
