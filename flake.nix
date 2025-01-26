@@ -68,10 +68,11 @@
         modules = [
           # Optimization module
           optimizations.mkOptimizationConfig
-
-          # Actual modules
+            # Libraries
           home-manager.nixosModules.default
           inputs.sops-nix.nixosModules.sops
+          ./lib/core.nix
+          # Actual modules
           ./constellations/${hostName}/configuration.nix
         ];
       };
@@ -98,6 +99,12 @@
             ./constellations/${name}/configuration.nix
           ];
         });
+
+    mkPackages = system:
+      combineArrays outImages outFormats (
+        hostName: format:
+          mkConstellationForPackage system format hostName
+      );
   in {
     # NixOS configurations
     nixosConfigurations =
@@ -110,7 +117,7 @@
       };
 
     # Packages, including temporary setups (ISO images)
-    # packages = eachLinuxSystem (system: mkPackages system);
+    packages = eachLinuxSystem (system: mkPackages system);
 
     # Rockets
     # devShells = eachSystem (system: {
