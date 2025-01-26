@@ -1,34 +1,33 @@
-{stars, ...}: {
-  imports = with stars; [
+{ config, pkgs, ... }: {
+  imports = [
     # Asterism-unspecific stuff
     ./base.nix
 
     # CLI tools/apps
-    cli-btop
-    cli-eza
-    cli-nvim
-    cli-oh-my-posh
-    cli-zellij
-    cli-zsh
+    ../stars/cli/btop.nix
+    ../stars/cli/eza.nix
+    ../stars/cli/nvim/default.nix
+    ../stars/cli/oh-my-posh.nix
+    ../stars/cli/zellij.nix
+    ../stars/cli/zsh.nix
 
     # GUI tools/apps
-    gui-cursor
-    gui-discord
-    gui-gnome
-    gui-kitty
-    gui-firefox
-    gui-steam
+    ../stars/gui/cursor.nix
+    ../stars/gui/discord.nix
+    ../stars/gui/gnome.nix
+    ../stars/gui/kitty.nix
+    ../stars/gui/firefox.nix
+    ../stars/gui/steam.nix
 
     # Core components
-    core-docker
-    core-font
-    core-gh
-    core-gnupg
-    core-pipewire
+    ../stars/core/docker.nix
+    ../stars/core/font.nix
+    ../stars/core/gh.nix
+    ../stars/core/gnupg.nix
+    ../stars/core/pipewire.nix
 
     # Networking
-    net-network-manager
-
-    #dev-rust # TODO: Move to direnv
+    ../stars/net/network-manager.nix
   ];
+
 }

@@ -1,5 +1,5 @@
-_: {
-  homeConfig = _: {
+{config, ...}: {
+  home-manager.users.${config.stars.mainUser} = {
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;

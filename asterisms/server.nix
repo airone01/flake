@@ -1,4 +1,7 @@
-{stars, ...}: {
+{ config, pkgs, ... }:
+let
+  stars = import ../stars { inherit config pkgs; };
+in {
   imports = with stars; [
     # Asterism-unspecific stuff
     ./base.nix

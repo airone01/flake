@@ -1,7 +1,5 @@
-{pkgs, ...}: {
-  packages = with pkgs; [zellij];
-
-  homeConfiguration = _: {
+{pkgs, config, ...}: {
+  home-manager.users.${config.stars.mainUser} = {
     programs.zellij = {
       enable = true;
 

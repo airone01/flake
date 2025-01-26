@@ -68,7 +68,7 @@ _: {
       breadcrumbs = {
         enable = true;
 
-        alwaysRender = true;
+        lualine.winbar.alwaysRender = true;
         navbuddy.enable = true;
       };
 

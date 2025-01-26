@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home = {
+  home-manager.users.${config.stars.mainUser} = {
     packages = with pkgs; [
       # screenshot tool
       grimblast

@@ -1,20 +1,18 @@
-{stars, ...}: {
-  # Imports for the base asterism (profile)
-  imports = with stars; [
+{ config, pkgs, lib, ... }: {
+  imports = [
     # Network core
-    core-direnv
-    core-sops
-    core-unfree
+    ../stars/core/direnv.nix
+    ../stars/core/sops.nix
 
     # Dev core
-    dev-core
-    # dev-garnix
+    ../stars/dev/core.nix
+    # ../stars/dev/garnix.nix
 
     # Hardware settings
-    hard-graphics
-    hard-nvidia
+    ../stars/hard/graphics.nix
+    ../stars/hard/nvidia.nix
 
-    # airone01-specific
-    r1-git
+    # my specific configs
+    ../stars/r1/git.nix
   ];
 }

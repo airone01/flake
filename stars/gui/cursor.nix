@@ -1,8 +1,7 @@
-{pkgs, ...}: {
-  name = "cursor";
+{pkgs, config, ...}: {
+  home-manager.users.${config.stars.mainUser}.home.packages = with pkgs; [code-cursor];
 
-  systemPackages = with pkgs; [code-cursor];
-  config = _: {
-    nixpkgs.config.allowUnfree = true;
-  };
+  # Allow non-free packages
+  # Needed because cursor ain't oss m8
+  nixpkgs.config.allowUnfree = true;
 }

@@ -43,19 +43,6 @@
     # Performance and caching
     optimizations = import ./lib/optimizations.nix {inherit (inputs.nixpkgs) lib;};
 
-    # Stars system
-    mkStars = {
-      system ? "x86_64-linux",
-      userName,
-    }:
-      import ./lib/mkStars.nix {
-        inherit lib userName;
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      };
-
     # Packages list
     outImages = ["ursamajor"];
     outFormats = ["install-iso"];
@@ -75,13 +62,6 @@
       nixos-generators.nixosGenerate {
         specialArgs = {
           inherit inputs;
-          inherit
-            ((mkStars {
-              pkgs = nixpkgs.legacyPackages.${system};
-              userName = "r1";
-            }))
-            stars
-            ;
         };
         inherit system format;
 
@@ -92,7 +72,6 @@
           # Actual modules
           home-manager.nixosModules.default
           inputs.sops-nix.nixosModules.sops
-          (import ./lib/stars-core.nix)
           ./constellations/${hostName}/configuration.nix
         ];
       };
@@ -106,7 +85,6 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
-            inherit ((mkStars {inherit system userName;})) stars;
           };
           inherit system;
 
@@ -117,42 +95,52 @@
             # Actual modules
             home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
-            (import ./lib/stars-core.nix)
             ./constellations/${name}/hardware-configuration.nix
             ./constellations/${name}/configuration.nix
           ];
         });
-
-    mkPackages = system:
-      combineArrays outImages outFormats (
-        hostName: format:
-          mkConstellationForPackage system format hostName
-      );
   in {
     # NixOS configurations
-    nixosConfigurations =
-      mkConstellationForNixosConfiguration {
-        userName = "r1";
-        constellations = ["cassiopeia"];
-      }
-      // mkConstellationForNixosConfiguration {
-        userName = "rack";
-        constellations = ["cetus"];
-      }
-      // mkConstellationForNixosConfiguration {
-        system = "aarch64-linux";
-        userName = "rack";
-        constellations = ["hercules"];
+    nixosConfigurations = {
+      # cassiopeia = nixos-generators.nixosGenerate {
+      cassiopeia = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+        system = "x86_64-linux";
+
+        modules = [
+          # Library modules
+          home-manager.nixosModules.home-manager
+          ./lib/core.nix
+          inputs.sops-nix.nixosModules.sops
+          # Config
+          ./constellations/cassiopeia/configuration.nix
+        ];
       };
+    };
+      # mkConstellationForNixosConfiguration {
+      #   userName = "r1";
+      #   constellations = ["cassiopeia"];
+      # };
+      # // mkConstellationForNixosConfiguration {
+      #   userName = "rack";
+      #   constellations = ["cetus"];
+      # }
+      # // mkConstellationForNixosConfiguration {
+      #   system = "aarch64-linux";
+      #   userName = "rack";
+      #   constellations = ["hercules"];
+      # };
 
     # Packages, including temporary setups (ISO images)
-    packages = eachLinuxSystem (system: mkPackages system);
+    # packages = eachLinuxSystem (system: mkPackages system);
 
     # Rockets
-    devShells = eachSystem (system: {
-      default = import ./rockets {inherit system nixpkgs;};
-      commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
-      tauri = import ./rockets/tauri.nix {inherit system nixpkgs;};
-    });
+    # devShells = eachSystem (system: {
+    #   default = import ./rockets {inherit system nixpkgs;};
+    #   commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
+    #   tauri = import ./rockets/tauri.nix {inherit system nixpkgs;};
+    # });
   };
 }

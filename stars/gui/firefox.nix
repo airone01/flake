@@ -1,5 +1,7 @@
-{pkgs, ...}: {
-  homeConfig = _: {
+{pkgs, config, ...}: {
+  # TODO: use better firefox here
+
+  home-manager.users.${config.stars.mainUser} = {
     programs.firefox = {
       enable = true;
 

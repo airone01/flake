@@ -1,7 +1,5 @@
-_: {
-  name = "btop";
-
-  homeConfig = _: {
+{config, ...}: {
+  home-manager.users.${config.stars.mainUser} = {
     programs.btop = {
       enable = true;
 
