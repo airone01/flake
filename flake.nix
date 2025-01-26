@@ -77,7 +77,6 @@
       };
 
     mkConstellationForNixosConfiguration = {
-      userName,
       constellations,
       system ? "x86_64-linux",
     }:
@@ -91,47 +90,24 @@
           modules = [
             # Optimization module
             optimizations.mkOptimizationConfig
-
-            # Actual modules
+            # Libraries
             home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
-            ./constellations/${name}/hardware-configuration.nix
+            ./lib/core.nix
+            # Actual modules
             ./constellations/${name}/configuration.nix
           ];
         });
   in {
     # NixOS configurations
-    nixosConfigurations = {
-      # cassiopeia = nixos-generators.nixosGenerate {
-      cassiopeia = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-        };
-        system = "x86_64-linux";
-
-        modules = [
-          # Library modules
-          home-manager.nixosModules.home-manager
-          ./lib/core.nix
-          inputs.sops-nix.nixosModules.sops
-          # Config
-          ./constellations/cassiopeia/configuration.nix
-        ];
+    nixosConfigurations =
+      mkConstellationForNixosConfiguration {
+        constellations = ["cassiopeia" "cetus"];
+      }
+      // mkConstellationForNixosConfiguration {
+        system = "aarch64-linux";
+        constellations = ["hercules"];
       };
-    };
-      # mkConstellationForNixosConfiguration {
-      #   userName = "r1";
-      #   constellations = ["cassiopeia"];
-      # };
-      # // mkConstellationForNixosConfiguration {
-      #   userName = "rack";
-      #   constellations = ["cetus"];
-      # }
-      # // mkConstellationForNixosConfiguration {
-      #   system = "aarch64-linux";
-      #   userName = "rack";
-      #   constellations = ["hercules"];
-      # };
 
     # Packages, including temporary setups (ISO images)
     # packages = eachLinuxSystem (system: mkPackages system);

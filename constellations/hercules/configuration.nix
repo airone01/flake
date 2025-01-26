@@ -1,15 +1,21 @@
-{stars, ...}: {
+_: {
   networking.hostName = "hercules";
-  stars.mainUser = "rack";
   system.stateVersion = "24.05";
   time.timeZone = "Europe/Paris";
 
-  imports = with stars; [
+  stars.mainUser = "rack";
+
+  imports = [
+    # Asterisms
     ../../asterisms/server.nix
 
-    srv-hydra
-    srv-gitea
-    srv-traefik
+    # Additional stars
+    ../../stars/srv/hydra.nix
+    ../../stars/srv/gitea.nix
+    ../../stars/srv/traefik.nix
+
+    # Hardware
+    ./hardware-configuration.nix
   ];
 
   # Booting

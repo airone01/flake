@@ -1,10 +1,15 @@
-{stars, ...}: {
+_: {
   networking.hostName = "cetus";
-  stars.mainUser = "rack";
   system.stateVersion = "24.05";
   time.timeZone = "Europe/Paris";
 
-  imports = with stars; [
+  stars.mainUser = "rack";
+
+  imports = [
+    # Asterisms
     ../../asterisms/server.nix
+
+    # Hardware
+    ./hardware-configuration.nix
   ];
 }

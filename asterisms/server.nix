@@ -1,18 +1,15 @@
-{ config, pkgs, ... }:
-let
-  stars = import ../stars { inherit config pkgs; };
-in {
-  imports = with stars; [
+{ config, pkgs, ... }: {
+  imports = [
     # Asterism-unspecific stuff
     ./base.nix
 
     # CLI tools/apps
-    cli-btop
-    cli-eza
-    cli-zellij
-    cli-zsh
+    ../stars/cli/btop.nix
+    ../stars/cli/eza.nix
+    ../stars/cli/zellij.nix
+    ../stars/cli/zsh.nix
 
     # Core components
-    core-gh
+    ../stars/core/gh.nix
   ];
 }

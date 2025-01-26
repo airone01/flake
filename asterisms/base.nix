@@ -6,7 +6,7 @@
 
     # Dev core
     ../stars/dev/core.nix
-    # ../stars/dev/garnix.nix
+    ../stars/dev/garnix.nix
 
     # Hardware settings
     ../stars/hard/graphics.nix
