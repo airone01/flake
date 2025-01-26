@@ -144,7 +144,7 @@ just update-input <input-name>
 ### Available Development Shells
 
 - `commitlint`: For commit message linting
-- `tauri`: For Tauri application development (JS/TS support included)
+- `default`: Contains tools to program in this repo
 
 ## 🏛️ Architecture
 
@@ -185,14 +185,18 @@ Secrets are managed using sops-nix with age encryption:
 
 ### aquarius
 
-- Purpose: Home server
-- Services: Caddy, planned hosting for various services
-- Status: Active
+- Status: Abandonned
 
 ### cassiopeia
 
 - Purpose: Desktop workstation
 - Features: GNOME desktop, development tools
+- Status: Active
+
+### cetus
+
+- Purpose: Home server
+- Services: Traefik, planned hosting for various services
 - Status: Active
 
 ### ursamajor
@@ -201,36 +205,16 @@ Secrets are managed using sops-nix with age encryption:
 - Features: Basic system for testing and installation
 - Status: In Development
 
-## 🤝 Contributing
-
-This is my flake and it's mainly personal but contributions are welcome if you have spare time. Here's how you can help:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Run the following checks:
-
-   ```bash
-   # Format code
-   just fmt
-
-   # Verify builds
-   just check
-   ```
-
-5. Commit your changes (following commitlint conventions)
-6. Push to your branch
-7. Open a Pull Request
-
 ### Commit Message Convention
 
 This repository uses [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). Each commit message should be structured as:
 
 ```
-type(scope): description
+<type>(<scope>)[!]: <description>
 
-[optional body]
-[optional footer]
+[body]
+
+[BREAKING CHANGE: ][footer]
 ```
 
 Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`
@@ -241,9 +225,7 @@ Scopes: See `.commitlintrc.yml` for valid scopes
 | Category       | Task                                           | Priority | Status             |
 | -------------- | ---------------------------------------------- | -------- | ------------------ |
 | Documentation  | Add installation guides for each constellation | High     | 🟡 Pending         |
-| Documentation  | Add architecture diagrams                      | Medium   | 🔴 Not Started     |
-| Documentation  | Create contribution guidelines                 | Medium   | 🔴 Not Started     |
-| Testing        | Add GitHub Actions workflows                   | High     | 🔴 Not Started     |
+| Testing        | Add GitHub Actions workflows                   | High     | 🟢 Complete        |
 | Testing        | Implement basic system tests                   | Medium   | 🔴 Not Started     |
 | Testing        | Add Nix formatting checks                      | High     | 🟢 Complete        |
 | Security       | Implement firewall configuration               | High     | 🔴 Not Started     |
@@ -252,7 +234,6 @@ Scopes: See `.commitlintrc.yml` for valid scopes
 | Security       | Implement SSH hardening                        | High     | 🔴 Not Started     |
 | Backup         | Add restic/borgbackup configuration            | High     | 🔴 Not Started     |
 | Monitoring     | Set up Prometheus + Grafana                    | Medium   | 🔴 Not Started     |
-| Updates        | Configure automatic system updates             | Medium   | 🔴 Not Started     |
 | Infrastructure | Add Hydra instance                             | Low      | 🟢 Complete        |
 | Infrastructure | Add TeamCity instance                          | Low      | 🔴 Not Started     |
 | Infrastructure | Add Attic binary cache                         | Medium   | 🔴 Not Started     |
