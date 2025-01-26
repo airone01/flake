@@ -1,39 +1,46 @@
 _: {
   programs.nvf.settings.vim = {
     visuals = {
-      enable = true;
+      # enable = true;
 
       # hmm...
-      cellularAutomaton = {
+      cellular-automaton = {
         enable = true;
 
         # bind is "<leader>fml" for "fuck my life"
         mappings.makeItRain = "<leader>fml";
       };
-      # highlight cursor
-      cursorline.enable = true;
-      # icons
-      nvimWebDevicons.enable = true;
+
+      # Smooth scrolling
+      cinnamon-nvim.enable = true;
+
       # notification widget
-      fidget-nvim = {
+      fidget-nvim.enable = true;
+
+      # indent blankline
+      indent-blankline = {
         enable = true;
 
         setupOpts = {
-          # TODO: setup options here
-
-          # nvim-tree
-          integration.nvim-tree.enable = true;
-          # widget
-          notification.window.winblend = 75; # opacity%
+          scope.enabled = true;
         };
       };
-      # highlight undo/redo
-      highlight-undo.enable = true;
-      # indent blankline
-      indentBlankline.enable = true;
-      # scollbar
-      scrollBar.enable = true;
-      smoothScroll.enable = true;
+
+      # highlight cursor
+      nvim-cursorline = {
+        enable = true;
+
+        setupOpts = {
+          cursorline.enable = true;
+          cursorword.enable = true;
+        };
+      };
+
+      # Scroll bar
+      nvim-scrollbar.enable = true;
+
+      # icons
+      nvim-web-devicons.enable = true;
     };
 
     ui = {
@@ -61,7 +68,7 @@ _: {
       breadcrumbs = {
         enable = true;
 
-        alwaysRender = true;
+        lualine.winbar.alwaysRender = true;
         navbuddy.enable = true;
       };
 

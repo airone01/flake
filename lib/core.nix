@@ -12,14 +12,12 @@
   };
 
   config = {
-    # Allow unfree packages globally
-    nixpkgs.config.allowUnfree = lib.mkDefault true;
-
     users.users.${config.stars.mainUser} = {
       # UID > 1000
       isNormalUser = true;
-      # gives sudo access
+      # Gives sudo access
       extraGroups = ["wheel"];
+      # Other groups will be added to the user in the respective stars
     };
 
     environment.systemPackages = with pkgs; [git wget curl];

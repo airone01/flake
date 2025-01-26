@@ -6,15 +6,20 @@ _: {
     viAlias = true;
     vimAlias = true;
 
-    # yes pretty please
-    autocomplete.enable = true;
+    # Autocomplete
+    autocomplete.nvim-cmp.enable = true;
+
+    # Auto pairs
+    autopairs.nvim-autopairs.enable = true;
+
+    # Syntax highlighting
     syntaxHighlighting = true;
 
     # i have a small screen
-    tabWidth = 2;
+    # tabWidth = 2;
 
-    # this is the equivalent of
-    # unbinding the crouch key in CS:GO
+    # disable the keyboard arrows for movement
+    # forces the use of hjkl
     disableArrows = true;
   };
 }

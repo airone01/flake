@@ -1,22 +1,22 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # for lightbulb emoji
+    # Lightbulb requires an emoji font
     noto-fonts-color-emoji
-    # image display backend
-    ueberzug
+    twemoji-color-font
   ];
 
   imports = [
     ./binds.nix
     ./filetree.nix
     ./lsp.nix
-    ./statusline.nix
-    ./tabline.nix
+    # ./statusline.nix
+    # ./tabline.nix
     ./telescope.nix
     ./treesitter.nix
     ./ui.nix
     ./utility.nix
     ./vim.nix
+    ./wrappers.nix
   ];
 
   programs.nvf = {

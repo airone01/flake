@@ -1,5 +1,5 @@
-_: {
-  homeConfig = _: {
+{config, ...}: {
+  home-manager.users.${config.stars.mainUser} = {
     programs.git = {
       enable = true;
 

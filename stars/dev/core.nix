@@ -1,7 +1,6 @@
-{pkgs, ...}: {
-  packages = with pkgs; [
+{pkgs, config, ...}: {
+  home-manager.users.${config.stars.mainUser}.home.packages = with pkgs; [
     bat
     git
-    nmap
   ];
 }

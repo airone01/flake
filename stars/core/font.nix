@@ -1,15 +1,9 @@
-{pkgs, ...}: {
-  homeConfig = _: {
-    fonts.fontconfig = {
-      enable = true;
-
-      defaultFonts.monospace = ["JetBrainsMono Nerd"];
-    };
-  };
-
-  config = _: {
-    fonts.packages = with pkgs; [
-      (nerdfonts.override {fonts = ["JetBrainsMono" "FiraMono" "FiraCode"];})
+{pkgs, config, ...}: {
+  home-manager.users.${config.stars.mainUser} = {
+    home.packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      nerd-fonts.fira-mono
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
@@ -18,7 +12,12 @@
       fira-code-symbols
       mplus-outline-fonts.githubRelease
       dina-font
-      proggyfonts
     ];
+
+    fonts.fontconfig = {
+      enable = true;
+
+      defaultFonts.monospace = ["JetBrainsMono Nerd"];
+    };
   };
 }

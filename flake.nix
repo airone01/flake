@@ -2,10 +2,6 @@
   description = "r1's increasingly-less-simple NixOS config";
 
   inputs = {
-    caddy-many = {
-      url = "github:crabdancing/nixos-caddy-with-plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -39,27 +35,19 @@
     ...
   } @ inputs: let
     inherit (nixpkgs) lib;
+
+    # Systems definition
     eachSystem = f: lib.genAttrs (import inputs.systems) (system: f system);
     eachLinuxSystem = f: lib.genAttrs (import inputs.systems-linux) (system: f system);
 
-    mkStars = {
-      system ? "x86_64-linux",
-      userName,
-    }:
-      import ./lib/mkStars.nix {
-        inherit lib userName;
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true; # This only affects the evaluation of stars
-        };
-      };
+    # Performance and caching
+    optimizations = import ./lib/optimizations.nix {inherit (inputs.nixpkgs) lib;};
 
-    # List of my NixOS images
+    # Packages list
     outImages = ["ursamajor"];
-
-    # List of formats i want to compile my images to
     outFormats = ["install-iso"];
 
+    # Utility functions
     combineArrays = arr1: arr2: f:
       builtins.listToAttrs (builtins.concatMap
         (x:
@@ -74,51 +62,44 @@
       nixos-generators.nixosGenerate {
         specialArgs = {
           inherit inputs;
-          inherit
-            ((mkStars {
-              pkgs = nixpkgs.legacyPackages.${system};
-              userName = "r1";
-            }))
-            stars
-            ;
         };
         inherit system format;
 
         modules = [
+          # Optimization module
+          optimizations.mkOptimizationConfig
+            # Libraries
           home-manager.nixosModules.default
           inputs.sops-nix.nixosModules.sops
-          (import ./lib/stars-core.nix)
+          ./lib/core.nix
+          # Actual modules
           ./constellations/${hostName}/configuration.nix
         ];
       };
 
     mkConstellationForNixosConfiguration = {
-      userName,
       constellations,
+      system ? "x86_64-linux",
     }:
-      lib.genAttrs constellations (name: let
-        system = "x86_64-linux";
-      in
+      lib.genAttrs constellations (name:
         nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
-            inherit ((mkStars {inherit system userName;})) stars;
           };
           inherit system;
 
           modules = [
-            # Enable unfree packages by default, but allow overriding
-            {nixpkgs.config.allowUnfree = lib.mkDefault true;}
-
+            # Optimization module
+            optimizations.mkOptimizationConfig
+            # Libraries
             home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
-            (import ./lib/stars-core.nix)
-            ./constellations/${name}/hardware-configuration.nix
+            ./lib/core.nix
+            # Actual modules
             ./constellations/${name}/configuration.nix
           ];
         });
 
-    # Generate packages for all combinations
     mkPackages = system:
       combineArrays outImages outFormats (
         hostName: format:
@@ -128,12 +109,11 @@
     # NixOS configurations
     nixosConfigurations =
       mkConstellationForNixosConfiguration {
-        userName = "r1";
-        constellations = ["cassiopeia"];
+        constellations = ["cassiopeia" "cetus"];
       }
       // mkConstellationForNixosConfiguration {
-        userName = "rack";
-        constellations = ["aquarius"];
+        system = "aarch64-linux";
+        constellations = ["hercules"];
       };
 
     # Packages, including temporary setups (ISO images)
@@ -142,7 +122,7 @@
     # Rockets
     devShells = eachSystem (system: {
       commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
-      tauri = import ./rockets/tauri.nix {inherit system nixpkgs;};
+      default = import ./rockets {inherit system nixpkgs;};
     });
   };
 }
