@@ -1,5 +1,5 @@
 {
-  pkgs,
+ pkgs,
   stars,
   config,
   ...

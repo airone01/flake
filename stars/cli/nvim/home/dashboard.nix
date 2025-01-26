@@ -1,5 +1,5 @@
 _: {
-  programs.nvf.settings.vim.dahboard.startify = {
+  programs.nvf.settings.vim.dahboard.alpha = {
     enable = true;
   };
 }

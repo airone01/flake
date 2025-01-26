@@ -8,7 +8,7 @@
 
     # Dev core
     dev-core
-    dev-garnix
+    # dev-garnix
 
     # Hardware settings
     hard-graphics

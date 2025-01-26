@@ -13,7 +13,10 @@ _: {
     images.image-nvim = {
       enable = true;
 
-      setupOpts.integrations.markdown.downloadRemoteImages = true;
+      setupOpts = {
+        backend = "kitty";
+        integrations.markdown.downloadRemoteImages = true;
+      };
     };
   };
 }

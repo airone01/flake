@@ -13,6 +13,7 @@
 
     # GUI tools/apps
     gui-cursor
+    gui-discord
     gui-gnome
     gui-kitty
     gui-firefox
@@ -22,6 +23,7 @@
     core-docker
     core-font
     core-gh
+    core-gnupg
     core-pipewire
 
     # Networking

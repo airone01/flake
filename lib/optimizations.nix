@@ -14,7 +14,7 @@ _: {
         # Binary caches
         substituters = [
           "https://cache.nixos.org"
-          "https://cache.garnix.io"
+          # "https://cache.garnix.io"
           "https://nix-community.cachix.org"
         ];
 
