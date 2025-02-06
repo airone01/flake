@@ -4,6 +4,7 @@
     ./base.nix
 
     # CLI tools/apps
+    ../stars/cli/act.nix
     ../stars/cli/btop.nix
     ../stars/cli/eza.nix
     ../stars/cli/nvim/default.nix

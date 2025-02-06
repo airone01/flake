@@ -1,0 +1,23 @@
+name: Update flake-lock
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0' # Every Sunday midnight
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@main
+        with:
+          pr-title: "chore(flake): update flake.lock"
+          pr-labels: |
+            dependencies
+            automated
+
