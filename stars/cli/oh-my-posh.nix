@@ -8,7 +8,7 @@
       enableNushellIntegration = true;
       enableZshIntegration = true;
 
-      useTheme = "M365Princess";
+      useTheme = "bubblesextra";
     };
   };
 }
