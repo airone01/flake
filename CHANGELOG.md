@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/airone01/flake/compare/v2.0.0...v2.1.0) (2025-02-06)
+
+
+### Features
+
+* **qflipper:** add ([#16](https://github.com/airone01/flake/issues/16)) ([bd623c9](https://github.com/airone01/flake/commit/bd623c9d876ca7c0caf08a6200bb9842fe194106))
+
+
+### Documentation
+
+* **readme:** update for recent versions ([#12](https://github.com/airone01/flake/issues/12)) ([2d3141f](https://github.com/airone01/flake/commit/2d3141f54b9ec01e4f28082ee440eb62415723de))
+
 ## [2.0.0](https://github.com/airone01/flake/compare/v1.0.0...v2.0.0) (2025-01-26)
 
 
