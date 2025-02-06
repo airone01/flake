@@ -7,8 +7,9 @@
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
 
-      shellAliases = {
-          l = "ll --icons --git -a";
+        shellAliases = {
+          l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons"
+          ll = "ll -laab --icons --git --group";
           zz = "zellij -l compact";
         };
 
@@ -22,7 +23,6 @@
             "web-search"
             "zoxide"
           ];
-          theme = "robbyrussell";
         };
       };
     };
