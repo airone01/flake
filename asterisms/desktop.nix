@@ -14,9 +14,10 @@
     # GUI tools/apps
     ../stars/gui/cursor.nix
     ../stars/gui/discord.nix
+    ../stars/gui/firefox.nix
     ../stars/gui/gnome.nix
     ../stars/gui/kitty.nix
-    ../stars/gui/firefox.nix
+    ../stars/gui/qFlipper.nix
     ../stars/gui/steam.nix
 
     # Core components
