@@ -15,7 +15,10 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@main
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@main
+        env:
+          GIT_COMMIT_MESSAGE: "chore(flake): update flake.lock"
         with:
+          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
           pr-title: "chore(flake): update flake.lock"
           pr-labels: |
             dependencies
