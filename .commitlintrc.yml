@@ -47,11 +47,12 @@ rules:
       - gnome
       - hyprland
       # Applications
-      - nvim
+      - btop
       - firefox
       - kitty
+      - nvim
+      - qflipper
       - zsh
-      - btop
       # Subsystems
       - audio
       - video
