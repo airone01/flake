@@ -1,10 +1,11 @@
 {pkgs, config, ...}: {
   home-manager.users.${config.stars.mainUser} = {
     home.shellAliases = {
+      f = "fuck";
       l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons";
       ll = "eza -laab --icons --git --group";
+      neofetch = "pfetch";
       zz = "zellij -l compact";
-      f = "fuck";
     };
     programs = {
       zsh = {

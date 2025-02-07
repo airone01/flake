@@ -53,6 +53,8 @@ rules:
       - firefox
       - kitty
       - nvim
+      - onefetch
+      - pfetch
       - qflipper
       - typer
       - zsh
