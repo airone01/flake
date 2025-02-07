@@ -5,6 +5,7 @@
 
     # CLI tools/apps
     ../stars/cli/act.nix
+    ../stars/cli/atac.nix
     ../stars/cli/btop.nix
     ../stars/cli/nvim/default.nix
     ../stars/cli/oh-my-posh
