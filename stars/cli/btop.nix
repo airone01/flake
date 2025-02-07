@@ -4,7 +4,7 @@
       enable = true;
 
       settings = {
-        color_theme = "horizon";
+        color_theme = "tokyo-storm";
         update_ms = 200;
       };
     };
