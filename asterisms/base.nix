@@ -4,6 +4,9 @@
     ../stars/core/direnv.nix
     ../stars/core/sops.nix
 
+    # Cli
+    ../stars/cli/eza.nix
+
     # Dev core
     ../stars/dev/core.nix
     ../stars/dev/garnix.nix

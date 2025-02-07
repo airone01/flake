@@ -6,9 +6,8 @@
     # CLI tools/apps
     ../stars/cli/act.nix
     ../stars/cli/btop.nix
-    ../stars/cli/eza.nix
     ../stars/cli/nvim/default.nix
-    ../stars/cli/oh-my-posh.nix
+    ../stars/cli/oh-my-posh
     ../stars/cli/zellij.nix
     ../stars/cli/zsh.nix
 

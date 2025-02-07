@@ -5,7 +5,6 @@
 
     # CLI tools/apps
     ../stars/cli/btop.nix
-    ../stars/cli/eza.nix
     ../stars/cli/zellij.nix
     ../stars/cli/zsh.nix
 

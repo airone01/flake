@@ -8,7 +8,7 @@
       enableNushellIntegration = true;
       enableZshIntegration = true;
 
-      useTheme = "bubblesextra";
+      settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (builtins.readFile ./config.omp.json));
     };
   };
 }
