@@ -1,17 +1,17 @@
 {pkgs, config, ...}: {
   home-manager.users.${config.stars.mainUser} = {
+    home.shellAliases = {
+      l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons";
+      ll = "eza -laab --icons --git --group";
+      zz = "zellij -l compact";
+      f = "fuck";
+    };
     programs = {
       zsh = {
         enable = true;
         enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
-
-        shellAliases = {
-          l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons"
-          ll = "ll -laab --icons --git --group";
-          zz = "zellij -l compact";
-        };
 
         oh-my-zsh = {
           enable = true;
