@@ -9,6 +9,8 @@
     ../stars/cli/btop.nix
     ../stars/cli/nvim/default.nix
     ../stars/cli/oh-my-posh
+    ../stars/cli/onefetch.nix
+    ../stars/cli/pfetch.nix
     ../stars/cli/typer.nix
     ../stars/cli/zellij.nix
     ../stars/cli/zsh.nix
@@ -28,6 +30,9 @@
     ../stars/core/gh.nix
     ../stars/core/gnupg.nix
     ../stars/core/pipewire.nix
+
+    # Dev stuff
+    ../stars/dev/c.nix
 
     # Networking
     ../stars/net/network-manager.nix
