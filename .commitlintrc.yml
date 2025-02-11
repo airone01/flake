@@ -52,10 +52,13 @@ rules:
       - discord
       - firefox
       - kitty
+      - loclasend
       - nvim
+      - obsidian
       - onefetch
       - pfetch
       - qflipper
+      - switcheroo
       - typer
       - zsh
       # Subsystems

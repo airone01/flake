@@ -15,12 +15,14 @@
 
       extensions = [
         {package = pkgs.gnomeExtensions.blur-my-shell;}
-        {package = pkgs.gnomeExtensions.gsconnect;}
         {package = pkgs.gnomeExtensions.dash-to-dock;}
         {package = pkgs.gnomeExtensions.appindicator;}
-        #{package = pkgs.gnomeExtensions.user-themes;}
       ];
     };
+
+    home.packages = with pkgs; [
+      switcheroo
+    ];
 
     # GTK themes
     gtk = {

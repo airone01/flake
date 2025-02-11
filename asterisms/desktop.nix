@@ -21,6 +21,7 @@
     ../stars/gui/firefox.nix
     ../stars/gui/gnome.nix
     ../stars/gui/kitty.nix
+    ../stars/gui/obsidian.nix
     ../stars/gui/qFlipper.nix
     ../stars/gui/steam.nix
 
@@ -29,6 +30,7 @@
     ../stars/core/font.nix
     ../stars/core/gh.nix
     ../stars/core/gnupg.nix
+    ../stars/core/localsend.nix
     ../stars/core/pipewire.nix
 
     # Dev stuff
