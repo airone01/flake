@@ -59,6 +59,7 @@ rules:
       - pfetch
       - qflipper
       - switcheroo
+      - thunderbird
       - typer
       - zsh
       # Subsystems
