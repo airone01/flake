@@ -16,7 +16,7 @@
       # UID > 1000
       isNormalUser = true;
       # Gives sudo access
-      extraGroups = ["wheel"];
+      extraGroups = ["wheel" "dialout"];
       # Other groups will be added to the user in the respective stars
     };
 

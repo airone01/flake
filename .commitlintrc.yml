@@ -55,7 +55,9 @@ rules:
       - loclasend
       - nvim
       - obsidian
+      - ollama
       - onefetch
+      - open-webui
       - pfetch
       - qflipper
       - switcheroo

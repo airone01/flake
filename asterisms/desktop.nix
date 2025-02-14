@@ -15,6 +15,7 @@
     ../stars/cli/zsh.nix
 
     # GUI tools/apps
+    ../stars/gui/arduino.nix
     ../stars/gui/cursor.nix
     ../stars/gui/discord.nix
     ../stars/gui/firefox.nix
@@ -41,6 +42,8 @@
     # Networking
     ../stars/cli/atac.nix
     ../stars/net/network-manager.nix
-  ];
 
+    # Self-hosted servers
+    ../stars/srv/ollama.nix
+  ];
 }
