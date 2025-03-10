@@ -49,6 +49,7 @@ rules:
       # Applications
       - arduino
       - atac
+      - cachix
       - btop
       - discord
       - dust

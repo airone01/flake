@@ -10,6 +10,7 @@ _: {
     ../../asterisms/server.nix
 
     # Additional stars
+    ../../stars/core/cachix.nix
     ../../stars/srv/gitea.nix
     ../../stars/srv/hercules.nix
     ../../stars/srv/hydra.nix
