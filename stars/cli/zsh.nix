@@ -1,16 +1,18 @@
 {pkgs, config, ...}: {
   home-manager.users.${config.stars.mainUser} = {
+    home.shellAliases = {
+      f = "fuck";
+      l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons";
+      ll = "eza -laab --icons --git --group";
+      neofetch = "pfetch";
+      zz = "zellij -l compact";
+    };
     programs = {
       zsh = {
         enable = true;
         enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
-
-      shellAliases = {
-          l = "ll --icons --git -a";
-          zz = "zellij -l compact";
-        };
 
         oh-my-zsh = {
           enable = true;
@@ -22,7 +24,6 @@
             "web-search"
             "zoxide"
           ];
-          theme = "robbyrussell";
         };
       };
     };

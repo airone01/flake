@@ -35,9 +35,9 @@ rules:
       - module
       # Constellation names
       - cassiopeia
-      - ursamajor
       - cetus
       - hercules
+      - ursamajor
       # Core components
       - sops
       - stars
@@ -47,11 +47,25 @@ rules:
       - gnome
       - hyprland
       # Applications
+      - arduino
+      - atac
       - btop
+      - discord
+      - dust
       - firefox
+      - hercules-ci
       - kitty
+      - loclasend
       - nvim
+      - obsidian
+      - ollama
+      - onefetch
+      - open-webui
+      - pfetch
       - qflipper
+      - switcheroo
+      - thunderbird
+      - typer
       - zsh
       # Subsystems
       - audio

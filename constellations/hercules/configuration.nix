@@ -10,8 +10,9 @@ _: {
     ../../asterisms/server.nix
 
     # Additional stars
-    ../../stars/srv/hydra.nix
     ../../stars/srv/gitea.nix
+    ../../stars/srv/hercules.nix
+    ../../stars/srv/hydra.nix
     ../../stars/srv/traefik.nix
 
     # Hardware

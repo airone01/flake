@@ -8,5 +8,5 @@ _: {
     jack.enable = true;
   };
   # this is required to be explicitly set to false
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 }
