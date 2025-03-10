@@ -53,6 +53,7 @@ rules:
       - discord
       - dust
       - firefox
+      - hercules-ci
       - kitty
       - loclasend
       - nvim
