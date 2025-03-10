@@ -51,6 +51,7 @@ rules:
       - atac
       - btop
       - discord
+      - dust
       - firefox
       - kitty
       - loclasend
