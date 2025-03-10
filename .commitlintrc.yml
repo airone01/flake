@@ -47,6 +47,7 @@ rules:
       - gnome
       - hyprland
       # Applications
+      - arduino
       - atac
       - btop
       - discord
