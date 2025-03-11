@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.1.0](https://github.com/airone01/flake/compare/v2.0.0...v2.1.0) (2025-03-11)
+
+
+### Features
+
+* **flake:** various changes ([#21](https://github.com/airone01/flake/issues/21)) ([978e10d](https://github.com/airone01/flake/commit/978e10d34083ef5f1fdc22266418727ff46174e9))
+* **qflipper:** add ([#16](https://github.com/airone01/flake/issues/16)) ([bd623c9](https://github.com/airone01/flake/commit/bd623c9d876ca7c0caf08a6200bb9842fe194106))
+
+
+### Bug Fixes
+
+* **hercules-ci:** add support for cachix cache ([ff542a2](https://github.com/airone01/flake/commit/ff542a2e0229d032634470fd3b29c8989a17b73b))
+
+
+### Documentation
+
+* **readme:** update for recent versions ([#12](https://github.com/airone01/flake/issues/12)) ([2d3141f](https://github.com/airone01/flake/commit/2d3141f54b9ec01e4f28082ee440eb62415723de))
+
 ## [2.0.0](https://github.com/airone01/flake/compare/v1.0.0...v2.0.0) (2025-01-26)
 
 
