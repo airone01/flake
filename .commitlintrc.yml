@@ -82,6 +82,7 @@ rules:
       - traefik
       - nginx
       - hydra
+      - wireguard
       # Documentation
       - readme
       - changelog

@@ -16,6 +16,9 @@ _: {
     ../../stars/srv/hydra.nix
     ../../stars/srv/traefik.nix
 
+    # WireGuard configuration
+    ./wireguard.nix
+
     # Hardware
     ./hardware-configuration.nix
   ];
