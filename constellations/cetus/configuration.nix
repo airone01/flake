@@ -9,6 +9,10 @@ _: {
     # Asterisms
     ../../asterisms/server.nix
 
+    # Additional stars
+    ../../stars/core/cachix.nix
+    ../../stars/srv/hercules.nix
+
     # Hardware
     ./hardware-configuration.nix
   ];
