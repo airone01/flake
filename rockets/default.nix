@@ -11,6 +11,8 @@
     wget
     pkg-config
     openssl
+    vim
+    wireguard-tools
     # nix
     alejandra
     # project-specific
