@@ -139,13 +139,13 @@
     };
     
     # Create SOPS secrets for WireGuard keys
-    sops.secrets = {
-      "wireguard/private" = {
-        owner = "root";
-        group = "root";
-        mode = "0400";
-      };
-    };
+    #sops.secrets = {
+    #  "wireguard/private" = {
+    #    owner = "root";
+    #    group = "root";
+    #    mode = "0400";
+    #  };
+    #};
   };
 }
 
