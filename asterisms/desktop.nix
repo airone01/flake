@@ -44,6 +44,7 @@
     # Networking
     ../stars/cli/atac.nix
     ../stars/net/network-manager.nix
+    ../stars/net/tools.nix
 
     # Self-hosted servers
     ../stars/srv/ollama.nix

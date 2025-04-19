@@ -1,6 +1,5 @@
-{pkgs, ...}: {
-  packages = _:
-    with pkgs; [
-      nmap
-    ];
+{pkgs, config, ...}: {
+  home-manager.users.${config.stars.mainUser}.home.packages = with pkgs; [
+    nmap
+  ];
 }
