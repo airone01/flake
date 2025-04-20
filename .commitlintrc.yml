@@ -63,6 +63,7 @@ rules:
       - onefetch
       - open-webui
       - pfetch
+      - protonvpn
       - qflipper
       - switcheroo
       - thunderbird
