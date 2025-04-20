@@ -11,6 +11,7 @@ _: {
 
     # Additional stars
     ../../stars/boot/plymouth.nix
+    ../../stars/game/prismlauncher.nix
     ../../stars/kbd/fr.nix
 
     # Hardware
