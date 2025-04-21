@@ -13,6 +13,7 @@ _: {
     ../../stars/boot/plymouth.nix
     ../../stars/game/prismlauncher.nix
     ../../stars/kbd/fr.nix
+    ../../stars/virt/qemu.nix
 
     # Hardware
     ./hardware-configuration.nix
