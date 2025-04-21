@@ -1,7 +1,7 @@
 _: {
-  # for most advanced wayland compositors
+  # Enable Nvidia drivers
   hardware.nvidia.modesetting.enable = true;
 
-  # TODO: Use NixGL
-  # https://nix-community.github.io/home-manager/index.xhtml#sec-usage-gpu-non-nixos
+  # Force usage of Nvidia drivers in GNOME
+  services.xserver.videoDrivers = ["nvidia"];
 }
