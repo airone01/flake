@@ -65,7 +65,10 @@
     # UDEV rules
     udev.packages = with pkgs; [gnome-settings-daemon];
     # Patch for GNOME2 applications
-    dbus.packages = with pkgs; [gnome2.GConf];
+    dbus = {
+      enable = true;
+      packages = with pkgs; [gnome2.GConf];
+    };
 
     # Enable GNOME-specific services
     gnome = {
