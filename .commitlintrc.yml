@@ -64,6 +64,7 @@ rules:
       - open-webui
       - pfetch
       - protonvpn
+      - qbittorrent
       - qflipper
       - switcheroo
       - thunderbird
