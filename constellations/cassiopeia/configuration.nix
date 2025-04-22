@@ -10,7 +10,7 @@
     ../../asterisms/desktop.nix
 
     # Additional stars
-    ../../stars/boot/plymouth.nix
+    #../../stars/boot/plymouth.nix
     ../../stars/game/prismlauncher.nix
     ../../stars/kbd/fr.nix
     ../../stars/virt/qemu.nix

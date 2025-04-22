@@ -21,7 +21,7 @@
     ../stars/gui/cursor.nix
     ../stars/gui/discord.nix
     ../stars/gui/firefox.nix
-    #../stars/gui/gnome.nix
+    ../stars/gui/gnome.nix
     ../stars/gui/kitty.nix
     ../stars/gui/obsidian.nix
     ../stars/gui/qFlipper.nix

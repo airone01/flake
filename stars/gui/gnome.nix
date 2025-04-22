@@ -41,8 +41,6 @@
 
   security.rtkit.enable = true;
 
-  hardware.graphics.enable = true;
-
   # Exclude some default GNOME apps
   environment.gnome.excludePackages = with pkgs; [
     epiphany # web browser
