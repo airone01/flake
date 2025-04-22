@@ -41,6 +41,8 @@
 
   security.rtkit.enable = true;
 
+  hardware.graphics.enable = true;
+
   # Exclude some default GNOME apps
   environment.gnome.excludePackages = with pkgs; [
     epiphany # web browser
@@ -49,16 +51,16 @@
     gnome-music # music player
   ];
 
-  # Add your user to necessary groups
   users.users.${config.stars.mainUser} = {
     extraGroups = ["networkmanager" "video"];
   };
 
   services = {
-    # Enable the GNOME Desktop Environment
+    # X11 config
     xserver = {
       enable = true;
 
+      windowManager.xmonad.enable = false;
       desktopManager.gnome.enable = true;
       displayManager.gdm = {
         wayland = false;
@@ -80,8 +82,5 @@
       gnome-online-accounts.enable = true;
       gnome-settings-daemon.enable = true;
     };
-
-    # Enable Flatpak support (optional, but useful for GNOME users)
-    flatpak.enable = true;
   };
 }

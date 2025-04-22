@@ -13,7 +13,6 @@
 
     # Hardware settings
     ../stars/hard/graphics.nix
-    ../stars/hard/nvidia.nix
 
     # my specific configs
     ../stars/r1/git.nix
