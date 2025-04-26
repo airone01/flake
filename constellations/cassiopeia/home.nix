@@ -47,9 +47,9 @@
       EDITOR = "nvim";
       # wayland
       ## if the cursor becomes invisible
-      WLR_NO_HARDWARE_CURSORS = "1";
+      # WLR_NO_HARDWARE_CURSORS = "1";
       ## tell electron apps to use wayland
-      NIXOS_OZONE_WL = "1";
+      # NIXOS_OZONE_WL = "1";
     };
   };
 }

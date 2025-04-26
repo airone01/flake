@@ -28,6 +28,7 @@ rules:
       - hardware
       - network
       - security
+      - virtualization
       # NixOS-specific
       - nixos
       - flake
@@ -63,6 +64,9 @@ rules:
       - onefetch
       - open-webui
       - pfetch
+      - protonvpn
+      - qemu/kvm
+      - qbittorrent
       - qflipper
       - switcheroo
       - thunderbird

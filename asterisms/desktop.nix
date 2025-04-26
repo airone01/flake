@@ -44,6 +44,8 @@
     # Networking
     ../stars/cli/atac.nix
     ../stars/net/network-manager.nix
+    ../stars/net/qbittorrent.nix
+    ../stars/net/protonvpn.nix
     ../stars/net/tools.nix
 
     # Self-hosted servers

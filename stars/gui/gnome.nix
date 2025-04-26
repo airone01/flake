@@ -49,23 +49,30 @@
     gnome-music # music player
   ];
 
-  # Add your user to necessary groups
   users.users.${config.stars.mainUser} = {
     extraGroups = ["networkmanager" "video"];
   };
 
   services = {
-    # Enable the GNOME Desktop Environment
+    # X11 config
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
+
+      windowManager.xmonad.enable = false;
       desktopManager.gnome.enable = true;
+      displayManager.gdm = {
+        wayland = false;
+        enable = true;
+      };
     };
 
     # UDEV rules
     udev.packages = with pkgs; [gnome-settings-daemon];
     # Patch for GNOME2 applications
-    dbus.packages = with pkgs; [gnome2.GConf];
+    dbus = {
+      enable = true;
+      packages = with pkgs; [gnome2.GConf];
+    };
 
     # Enable GNOME-specific services
     gnome = {
@@ -73,8 +80,5 @@
       gnome-online-accounts.enable = true;
       gnome-settings-daemon.enable = true;
     };
-
-    # Enable Flatpak support (optional, but useful for GNOME users)
-    flatpak.enable = true;
   };
 }
