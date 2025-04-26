@@ -1,16 +1,41 @@
-# airone01/flake
+<h1 align="center">
+  airone01/flake
+</h2>
+
+<h4 align="center">
+  <a href="https://profile.intra.42.fr/users/elagouch"><img alt="School 42 badge" src="https://img.shields.io/badge/-elagouch-020617?style=flat-square&labelColor=020617&color=5a45fe&logo=42"></a>
+  <img alt="Apache-2.0 license" src="https://img.shields.io/badge/License-Apache--2.0-ef00c7?style=flat-square&logo=creativecommons&logoColor=fff&labelColor=020617">
+  <img alt="Made with Nix" src="https://img.shields.io/badge/Made_with-Nix-ff2b89?style=flat-square&logo=nixos&logoColor=fff&labelColor=020617">
+  <img alt="Release version" src="https://img.shields.io/github/v/release/airone01/flake?style=flat-square&logo=nixos&logoColor=fff&label=Release&labelColor=020617&color=ff8059">
+  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/airone01/diem?style=flat-square&logo=github&labelColor=020617&color=ffc248&label=Contributors">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/airone01/diem?style=flat-square&logo=github&labelColor=020617&color=f9f871&label=Last%20commit">
+</h4>
 
 A modular and extensible NixOS configuration system using a custom star-based architecture. This repository contains my personal NixOS configurations for multiple machines and deployments, managed with a comprehensive task runner.
 
-## 📚 Table of Contents
+---
 
-- [Features](#features)
-- [Structure](#structure)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Architecture](#architecture)
-- [Contributing](#contributing)
-- [Roadmap](#roadmap)
+<div align="center"><p>
+
+[Features]: #features
+[Structure]: #structure
+[Getting Started]: #getting-started
+[Usage]: #usage
+[Architecture]: #architecture
+[Contributing]: #contributing
+[Roadmap]: #roadmap
+
+**[<kbd> <br> Features <br> </kbd>][Features]**
+**[<kbd> <br> Structure <br> </kbd>][Structure]**
+**[<kbd> <br> Getting Started <br> </kbd>][Getting Started]**
+**[<kbd> <br> Usage <br> </kbd>][Usage]**
+**[<kbd> <br> Architecture <br> </kbd>][Architecture]**
+**[<kbd> <br> Contributing <br> </kbd>][Contributing]**
+**[<kbd> <br> Roadmap <br> </kbd>][Roadmap]**
+
+</p></div>
+
+---
 
 ## ✨ Features
 
