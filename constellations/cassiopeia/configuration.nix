@@ -55,11 +55,6 @@
     nvidiaSettings = true;
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-    ];
-
   environment.systemPackages = with pkgs; [
     glxinfo # Nvidia settings
   ];
