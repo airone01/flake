@@ -38,10 +38,11 @@ in {
     stars.ssh-keys = hostKeys;
 
     # Configure SSH host keys
+    # The new format uses a list of attribute sets with path and type
     services.openssh.hostKeys = lib.mapAttrsToList
-      (name: path: {
+      (type: path: {
         inherit path;
-        type = name;
+        inherit type;
       })
       config.stars.ssh-keys.hostKeys;
 

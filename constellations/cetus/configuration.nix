@@ -4,7 +4,6 @@ _: {
   time.timeZone = "Europe/Paris";
 
   stars.mainUser = "rack";
-  stars.wireguard.enable = true;
 
   # Enable Wireguard
   stars.wireguard = {

@@ -14,10 +14,20 @@
             type = lib.types.str;
             description = "Public host key";
           };
+          publicKeyFile = lib.mkOption {
+            type = lib.types.nullOr lib.types.path;
+            default = null;
+            description = "Path to the public host key file";
+          };
           certAuthority = lib.mkOption {
             default = false;
             type = lib.types.bool;
             description = "Whether this key is a certificate authority";
+          };
+          extraHostNames = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [];
+            description = "Additional host names for this host";
           };
         };
       });
@@ -51,9 +61,8 @@
               hostNames = [
                 name
                 "${host.ip_addr}"
-                (if host ? wireguard && host.wireguard ? addrs && host.wireguard.addrs ? v4
-                 then "${host.wireguard.addrs.v4}" else "")
-              ];
+              ] ++ lib.optional (host ? wireguard && host.wireguard ? addrs && host.wireguard.addrs ? v4)
+                "${host.wireguard.addrs.v4}";
               publicKey = if host ? ssh_pubkey then host.ssh_pubkey else "";
             })
             hostsTOML.hosts

@@ -25,16 +25,48 @@ in {
     };
 
     listenAddresses = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ "0.0.0.0" "::" ];
-      description = "Addresses on which the SSH server should listen";
-      example = [ "192.168.1.1" "10.77.1.1" ];
+      type = lib.types.listOf (lib.types.submodule {
+        options = {
+          addr = lib.mkOption {
+            type = lib.types.str;
+            description = "IP address to listen on";
+          };
+          port = lib.mkOption {
+            type = lib.types.port;
+            default = 22;
+            description = "Port to listen on for this address";
+          };
+        };
+      });
+      default = [
+        { addr = "0.0.0.0"; port = 22; }
+        { addr = "::"; port = 22; }
+      ];
+      description = "Addresses and ports on which the SSH server should listen";
+      example = [
+        { addr = "192.168.1.1"; port = 22; }
+        { addr = "10.77.1.1"; port = 2222; }
+      ];
     };
 
     ports = lib.mkOption {
       type = lib.types.listOf lib.types.port;
       default = [ 22 ];
-      description = "Ports on which the SSH server should listen";
+      description = "Additional ports on which the SSH server should listen (simplified alternative to listenAddresses)";
+    };
+
+    banner = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = null;
+      description = "Path to a file containing the banner text shown to SSH clients on connect";
+    };
+
+    logLevel = lib.mkOption {
+      type = lib.types.enum [
+        "QUIET" "FATAL" "ERROR" "INFO" "VERBOSE" "DEBUG" "DEBUG1" "DEBUG2" "DEBUG3"
+      ];
+      default = "VERBOSE";
+      description = "Logging level of the SSH daemon";
     };
 
     extraConfig = lib.mkOption {
@@ -56,6 +88,36 @@ in {
       description = "List of groups allowed to connect via SSH";
     };
 
+    denyUsers = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "List of users denied SSH access";
+    };
+
+    denyGroups = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "List of groups denied SSH access";
+    };
+
+    openFirewall = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Automatically open firewall ports for the SSH server";
+    };
+
+    allowSFTP = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Whether to enable the SFTP subsystem";
+    };
+
+    startWhenNeeded = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Whether to start the SSH server on demand (socket activation)";
+    };
+
     mosh = {
       enable = lib.mkEnableOption "Enable Mosh server";
 
@@ -71,46 +133,50 @@ in {
     # Basic SSH server configuration
     services.openssh = {
       enable = true;
+      startWhenNeeded = cfg.startWhenNeeded;
+      openFirewall = cfg.openFirewall;
+      banner = cfg.banner;
+      allowSFTP = cfg.allowSFTP;
+      ports = cfg.ports;
+
+      # Configure listen addresses
+      listenAddresses = cfg.listenAddresses;
 
       settings = {
+        # Authentication settings
         PermitRootLogin = cfg.permitRootLogin;
         PasswordAuthentication = cfg.passwordAuthentication;
         KbdInteractiveAuthentication = cfg.passwordAuthentication;
-        ListenAddress = cfg.listenAddresses;
-        Port = cfg.ports;
-      } // lib.optionalAttrs (cfg.allowUsers != []) {
-        AllowUsers = cfg.allowUsers;
-      } // lib.optionalAttrs (cfg.allowGroups != []) {
-        AllowGroups = cfg.allowGroups;
+
+        # Logging and display settings
+        LogLevel = cfg.logLevel;
+        PrintMotd = false;
+        PrintLastLog = true;
+
+        # Privilege separation and security
+        UsePrivilegeSeparation = "sandbox";
+        StrictModes = true;
+
+        # Feature settings
+        Compression = false;
+        X11Forwarding = false;
+        AllowAgentForwarding = true;
+        AllowTcpForwarding = true;
+        GatewayPorts = "no";
+
+        # Disable DNS lookups for connecting clients
+        UseDns = false;
+
+        # Access control lists
+        AllowUsers = lib.mkIf (cfg.allowUsers != []) cfg.allowUsers;
+        AllowGroups = lib.mkIf (cfg.allowGroups != []) cfg.allowGroups;
+        DenyUsers = lib.mkIf (cfg.denyUsers != []) cfg.denyUsers;
+        DenyGroups = lib.mkIf (cfg.denyGroups != []) cfg.denyGroups;
       };
 
-      # Log more verbosely for auth failures
-      extraConfig = ''
-        LogLevel VERBOSE
-
-        # Privilege separation (ensure it's on in modern OpenSSH)
-        UsePrivilegeSeparation sandbox
-
-        # Disable unused features
-        Compression no
-        AllowAgentForwarding yes
-        AllowTcpForwarding yes
-        AllowStreamLocalForwarding no
-
-        # Banner and login settings
-        Banner none
-        PrintMotd no
-        PrintLastLog yes
-
-        # Enforce secure ciphers and algorithms
-        # (This is managed in hardening.nix)
-
-        ${cfg.extraConfig}
-      '';
+      # Additional configuration
+      extraConfig = cfg.extraConfig;
     };
-
-    # Open SSH ports in the firewall
-    networking.firewall.allowedTCPPorts = cfg.ports;
 
     # Mosh support (if enabled)
     programs.mosh = lib.mkIf cfg.mosh.enable {
@@ -119,9 +185,9 @@ in {
     };
 
     # If mosh is enabled, open its UDP ports
-    networking.firewall = lib.mkIf cfg.mosh.enable {
-      allowedUDPPortRanges = [ { from = 60000; to = 61000; } ];
-    };
+    networking.firewall.allowedUDPPortRanges = lib.mkIf (cfg.mosh.enable && cfg.openFirewall) [
+      { from = 60000; to = 61000; }
+    ];
 
     # Add convenient SSH client tools
     environment.systemPackages = with pkgs; [
