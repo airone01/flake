@@ -11,6 +11,7 @@ _: {
 
     # Additional stars
     ../../stars/core/cachix.nix
+    ../../stars/net/wireguard
     ../../stars/srv/gitea.nix
     ../../stars/srv/hercules.nix
     ../../stars/srv/hydra.nix
