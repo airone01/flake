@@ -6,12 +6,28 @@ _: {
   stars.mainUser = "rack";
   stars.wireguard.enable = true;
 
+  # Enable Wireguard
+  stars.wireguard = {
+    enable = true;
+    interfaceName = "wg0";
+  };
+
+  # Enable SSH server with custom configuration
+  stars.ssh-server = {
+    enable = true;
+    permitRootLogin = "prohibit-password";
+    passwordAuthentication = false;
+    ports = [ 22 ];
+    allowGroups = [ "wheel" ];
+  };
+
   imports = [
     # Asterisms
     ../../asterisms/server.nix
 
     # Additional stars
     ../../stars/core/cachix.nix
+    ../../stars/net/ssh-server
     ../../stars/net/wireguard
     ../../stars/srv/hercules.nix
 
