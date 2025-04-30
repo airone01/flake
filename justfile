@@ -152,3 +152,11 @@ wg-status:
     echo "📊 Wireguard Status:"
     sudo wg show
 
+# Debug Wireguard setup
+wg-debug:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "🔍 Running Wireguard diagnostics..."
+    chmod +x ./stars/net/wireguard/debug.sh
+    sudo ./stars/net/wireguard/debug.sh
+
