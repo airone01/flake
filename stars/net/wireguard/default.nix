@@ -28,7 +28,7 @@ in {
       group = "root";
       mode = "0400";
       path = "/root/wireguard-keys/private";
-      sopsFile = ../../secrets/wireguard/${hostname}.yaml;
+      sopsFile = ../../../secrets/wireguard/${hostname}.yaml;
     };
 
     # Open firewall for Wireguard
