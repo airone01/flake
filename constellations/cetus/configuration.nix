@@ -11,6 +11,7 @@ _: {
 
     # Additional stars
     ../../stars/core/cachix.nix
+    ../../stars/net/wireguard
     ../../stars/srv/hercules.nix
 
     # Hardware

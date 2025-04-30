@@ -122,3 +122,33 @@ sops-key:
         echo "⚠️  Key already exists at ~/.config/sops/age/keys.txt"
     fi
 
+# Generate Wireguard keys for a host
+wg-keygen host:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "🔑 Generating Wireguard keys for {{host}}..."
+    mkdir -p secrets/wireguard
+    chmod +x ./stars/net/wireguard/generate-keys.sh
+    ./stars/net/wireguard/generate-keys.sh {{host}}
+    echo "✅ Wireguard keys generated for {{host}}"
+
+# Test Wireguard connection to another host
+wg-test peer:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "🧪 Testing Wireguard connection to {{peer}}..."
+    PEER_IP=$(grep -A 2 "\[hosts.{{peer}}.wireguard\]" ./stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
+    echo "Attempting to ping ${PEER_IP}..."
+    if ping -c 3 ${PEER_IP}; then
+        echo "✅ Connection successful!"
+    else
+        echo "❌ Connection failed!"
+    fi
+
+# Show Wireguard status
+wg-status:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "📊 Wireguard Status:"
+    sudo wg show
+
