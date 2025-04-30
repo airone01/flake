@@ -16,14 +16,21 @@ _: {
       # pictograms
       lspkind.enable = true;
 
-      # lines showing errors
-      lsplines.enable = true;
-
       # advanced lsp framework
       lspsaga.enable = true;
 
       # Language-in-language
       otter-nvim.enable = true;
+    };
+
+    diagnostics = {
+      enable = true;
+      config = {
+        signs.text = {
+          "vim.diagnostic.severity.ERROR" = "󰅚 ";
+          "vim.diagnostic.severity.WARN" = "󰀪 ";
+        };
+      };
     };
 
     # spoken/written languages

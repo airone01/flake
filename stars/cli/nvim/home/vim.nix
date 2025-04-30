@@ -14,12 +14,5 @@ _: {
 
     # Syntax highlighting
     syntaxHighlighting = true;
-
-    # i have a small screen
-    # tabWidth = 2;
-
-    # disable the keyboard arrows for movement
-    # forces the use of hjkl
-    disableArrows = true;
   };
 }

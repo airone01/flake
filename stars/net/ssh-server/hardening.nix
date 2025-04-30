@@ -2,57 +2,38 @@
 
 let
   cfg = config.stars.ssh-server;
-
-  # Define more secure defaults
-  secureDefaults = {
-    # Secure key exchange algorithms
-    KexAlgorithms = [
-      "curve25519-sha256@libssh.org"
-      "diffie-hellman-group-exchange-sha256"
-    ];
-
-    # Secure ciphers
-    Ciphers = [
-      "chacha20-poly1305@openssh.com"
-      "aes256-gcm@openssh.com"
-      "aes128-gcm@openssh.com"
-      "aes256-ctr"
-      "aes192-ctr"
-      "aes128-ctr"
-    ];
-
-    # Secure MACs
-    MACs = [
-      "hmac-sha2-512-etm@openssh.com"
-      "hmac-sha2-256-etm@openssh.com"
-      "umac-128-etm@openssh.com"
-      "hmac-sha2-512"
-      "hmac-sha2-256"
-      "umac-128@openssh.com"
-    ];
-
-    # Secure host key algorithms
-    HostKeyAlgorithms = [
-      "ssh-ed25519-cert-v01@openssh.com"
-      "ssh-rsa-cert-v01@openssh.com"
-      "ssh-ed25519"
-      "ssh-rsa"
-      "ecdsa-sha2-nistp521-cert-v01@openssh.com"
-      "ecdsa-sha2-nistp384-cert-v01@openssh.com"
-      "ecdsa-sha2-nistp256-cert-v01@openssh.com"
-      "ecdsa-sha2-nistp521"
-      "ecdsa-sha2-nistp384"
-      "ecdsa-sha2-nistp256"
-    ];
-  };
 in {
   config = lib.mkIf cfg.enable {
     # Apply secure SSH defaults
-    services.openssh.settings = secureDefaults // {
+    services.openssh.settings = {
+      # Key exchange algorithms
+      KexAlgorithms = [
+        "curve25519-sha256@libssh.org"
+        "diffie-hellman-group-exchange-sha256"
+      ];
+
+      # Ciphers
+      Ciphers = [
+        "chacha20-poly1305@openssh.com"
+        "aes256-gcm@openssh.com"
+        "aes128-gcm@openssh.com"
+        "aes256-ctr"
+        "aes192-ctr"
+        "aes128-ctr"
+      ];
+
+      # MACs (message authentication codes)
+      Macs = [
+        "hmac-sha2-512-etm@openssh.com"
+        "hmac-sha2-256-etm@openssh.com"
+        "umac-128-etm@openssh.com"
+        "hmac-sha2-512"
+        "hmac-sha2-256"
+        "umac-128@openssh.com"
+      ];
+
       # Additional hardening settings
-      X11Forwarding = false;
       IgnoreRhosts = true;
-      UseDNS = false;
       MaxAuthTries = 3;
       MaxSessions = 5;
       LoginGraceTime = 30;
