@@ -49,6 +49,7 @@ rules:
       - hyprland
       # Applications
       - arduino
+      - asusd
       - atac
       - cachix
       - btop
