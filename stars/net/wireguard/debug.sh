@@ -3,6 +3,8 @@
 
 set -e
 
+export NIXOS_CONFIG_PATH="$USER/.config/nixos"
+
 echo "=== Wireguard Interface Status ==="
 ip a show wg0 || echo "wg0 interface not found!"
 
@@ -25,7 +27,7 @@ journalctl -u wireguard-wg0 -n 20 || true
 
 echo -e "\n=== Checking Firewall Status ==="
 echo "Wireguard port:"
-grep listenPort /etc/nixos/stars/net/wireguard/hosts.toml | grep $(hostname) -A 3 | grep port
+grep listenPort $NIXOS_CONFIG_PATH/stars/net/wireguard/hosts.toml | grep $(hostname) -A 3 | grep port
 
 echo -e "\nFirewall rules:"
 sudo iptables -L -n | grep -i udp
@@ -35,10 +37,10 @@ ip route
 
 echo -e "\n=== Testing connection to peer ==="
 if [ "$(hostname)" == "hercules" ]; then
-    PEER_IP=$(grep -A 3 "\[hosts.cetus.wireguard\]" /etc/nixos/stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
+    PEER_IP=$(grep -A 3 "\[hosts.cetus.wireguard\]" $NIXOS_CONFIG_PATH/stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
     echo "Attempting to ping cetus at ${PEER_IP}..."
 else
-    PEER_IP=$(grep -A 3 "\[hosts.hercules.wireguard\]" /etc/nixos/stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
+    PEER_IP=$(grep -A 3 "\[hosts.hercules.wireguard\]" $NIXOS_CONFIG_PATH/stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
     echo "Attempting to ping hercules at ${PEER_IP}..."
 fi
 
