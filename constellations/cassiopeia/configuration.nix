@@ -17,6 +17,7 @@
 
     # Hardware
     ./hardware-configuration.nix
+    ../../stars/hard/asusd.nix
   ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
