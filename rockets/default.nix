@@ -14,6 +14,8 @@
     vim
     wireguard-tools
     # nix
+    nh
+    nix-output-monitor # nom
     alejandra
     # project-specific
     just

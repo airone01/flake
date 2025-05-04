@@ -57,9 +57,12 @@ rules:
       - dust
       - firefox
       - hercules-ci
+      - just
       - kitty
       - lix
       - localsend
+      - nh
+      - nom
       - nvim
       - obsidian
       - ollama
