@@ -40,9 +40,6 @@
     eachSystem = f: lib.genAttrs (import inputs.systems) (system: f system);
     eachLinuxSystem = f: lib.genAttrs (import inputs.systems-linux) (system: f system);
 
-    # Performance and caching
-    optimizations = import ./lib/optimizations.nix {inherit (inputs.nixpkgs) lib;};
-
     # Packages list
     outImages = ["ursamajor"];
     outFormats = ["install-iso"];
@@ -66,9 +63,7 @@
         inherit system format;
 
         modules = [
-          # Optimization module
-          optimizations.mkOptimizationConfig
-            # Libraries
+          # Libraries
           home-manager.nixosModules.default
           inputs.sops-nix.nixosModules.sops
           ./lib/core.nix
@@ -89,8 +84,6 @@
           inherit system;
 
           modules = [
-            # Optimization module
-            optimizations.mkOptimizationConfig
             # Libraries
             home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
