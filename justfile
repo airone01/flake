@@ -11,85 +11,62 @@ default:
 switch host=hostname *args="": check-dirty
     #!/usr/bin/env bash
     set -euo pipefail
-    echo "🔄 Rebuilding system for {{host}}..."
-    sudo nixos-rebuild switch --flake {{flake_dir}}#{{host}} {{args}} 2>&1 | tee nixos-switch.log || (
-        grep --color error nixos-switch.log && false
-    )
-    echo "✅ System successfully rebuilt!"
+    nh os switch -aH {{host}} {{flake_dir}} {{args}}
 
 # Build and test configuration without switching
 test host=hostname *args="": check-dirty
     #!/usr/bin/env bash
     set -euo pipefail
-    echo "🧪 Testing configuration for {{host}}..."
-    nixos-rebuild test --flake {{flake_dir}}#{{host}} {{args}} 2>&1 | tee nixos-test.log || (
-        grep --color error nixos-test.log && false
-    )
-    echo "✅ Test build successful!"
+    nh os test -aH {{host}} {{flake_dir}} {{args}}
 
 # Build an ISO image
 iso system="ursamajor" format="install-iso":
     #!/usr/bin/env bash
     set -euo pipefail
-    echo "📀 Building {{format}} for {{system}}..."
-    nix build {{flake_dir}}#{{system}}-{{format}}
-    echo "✅ ISO build complete!"
+    nom build {{flake_dir}}#{{system}}-{{format}}
 
 # Update all flake inputs
 update:
     #!/usr/bin/env bash
     set -euo pipefail
-    echo "⬆️  Updating flake inputs..."
-    nix flake update --flake {{flake_dir}}
-    echo "✅ Flake inputs updated!"
+    nix flake update --flake {{flake_dir}}|& nom
 
 # Update specific flake input
 update-input input:
     #!/usr/bin/env bash
     set -euo pipefail
-    echo "⬆️  Updating {{input}}..."
-    nix flake lock {{flake_dir}} --update-input {{input}}
-    echo "✅ {{input}} updated!"
+    nix flake lock {{flake_dir}} --update-input {{input}}|& nom
 
 # Format all nix files
 fmt:
     #!/usr/bin/env bash
     set -euo pipefail
-    echo "🎨 Formatting nix files..."
     find . -name "*.nix" -exec alejandra {} +
-    echo "✅ Formatting complete!"
 
 # Check nix file formatting
 fmt-check:
     #!/usr/bin/env bash
     set -euo pipefail
-    echo "🔍 Checking nix formatting..."
     find . -name "*.nix" -exec alejandra --check {} +
-    echo "✅ Format check passed!"
 
 # Run checks on the flake
 check:
     #!/usr/bin/env bash
     set -euo pipefail
-    echo "🔍 Running flake checks..."
-    nix flake check {{flake_dir}}
-    echo "✅ All checks passed!"
+    nix flake check {{flake_dir}}|& nom
 
 # Clean old generations
-clean generations="14d":
+clean:
     #!/usr/bin/env bash
     set -euo pipefail
-    echo "🧹 Cleaning generations older than {{generations}}..."
-    sudo nix-collect-garbage --delete-older-than {{generations}}
-    sudo /run/current-system/bin/switch-to-configuration switch
-    echo "✅ System cleaned!"
+    nh clean -a
 
 # Enter a development shell
 develop shell="commitlint":
     #!/usr/bin/env bash
     set -euo pipefail
     echo "🚀 Launching {{shell}} development environment..."
-    nix develop {{flake_dir}}#{{shell}}
+    nom develop {{flake_dir}}#{{shell}}
 
 # Show the diff of staged nix files
 show-diff:
