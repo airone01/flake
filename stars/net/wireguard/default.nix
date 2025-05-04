@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   cfg = config.stars.wireguard;
   metadata = pkgs.callPackage ./peers.nix {};
   hostname = config.networking.hostName;
@@ -43,7 +46,7 @@ in {
 
     # Open firewall for Wireguard
     networking.firewall = {
-      allowedUDPPorts = [ (metadata.hosts.${hostname}.listenPort or 51820) ];
+      allowedUDPPorts = [(metadata.hosts.${hostname}.listenPort or 51820)];
     };
 
     environment.systemPackages = with pkgs; [

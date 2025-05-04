@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   options.stars.ssh-known-hosts = {
     hosts = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule {
@@ -57,20 +59,27 @@
         if hostsTOML ? hosts
         then
           lib.mapAttrs
-            (name: host: {
-              hostNames = [
+          (name: host: {
+            hostNames =
+              [
                 name
                 "${host.ip_addr}"
-              ] ++ lib.optional (host ? wireguard && host.wireguard ? addrs && host.wireguard.addrs ? v4)
-                "${host.wireguard.addrs.v4}";
-              publicKey = if host ? ssh_pubkey then host.ssh_pubkey else "";
-            })
-            hostsTOML.hosts
+              ]
+              ++ lib.optional (host ? wireguard && host.wireguard ? addrs && host.wireguard.addrs ? v4)
+              "${host.wireguard.addrs.v4}";
+            publicKey =
+              if host ? ssh_pubkey
+              then host.ssh_pubkey
+              else "";
+          })
+          hostsTOML.hosts
         else {};
-    in lib.filterAttrs (n: v: v.publicKey != "") wgHosts;
+    in
+      lib.filterAttrs (n: v: v.publicKey != "") wgHosts;
 
     # Configure system-wide known hosts
-    programs.ssh.knownHosts = lib.mkIf config.stars.ssh-known-hosts.enableSystemWideKnownHosts
+    programs.ssh.knownHosts =
+      lib.mkIf config.stars.ssh-known-hosts.enableSystemWideKnownHosts
       config.stars.ssh-known-hosts.hosts;
   };
 }

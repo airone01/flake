@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   networking.hostName = "cassiopeia";
   system.stateVersion = "24.05";
   time.timeZone = "Europe/Paris";
@@ -20,7 +24,7 @@
     ../../stars/hard/asusd.nix
   ];
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   # NVIDIA PRIME setup
   hardware.nvidia = {

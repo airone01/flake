@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   sops.secrets."cloudflare/cert" = {
     sopsFile = ../../secrets/cloudflare.yaml;
     owner = "traefik";

@@ -16,8 +16,8 @@ _: {
     enable = true;
     permitRootLogin = "prohibit-password";
     passwordAuthentication = false;
-    ports = [ 22 ];
-    allowGroups = [ "wheel" ];
+    ports = [22];
+    allowGroups = ["wheel"];
   };
 
   imports = [

@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.stars.ssh-server;
 in {
   config = lib.mkIf cfg.enable {
