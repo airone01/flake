@@ -2,6 +2,7 @@
   imports = [
     # Network core
     ../stars/core/direnv.nix
+    ../stars/core/lix.nix
     ../stars/core/sops.nix
 
     # Cli

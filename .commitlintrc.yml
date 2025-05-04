@@ -58,7 +58,8 @@ rules:
       - firefox
       - hercules-ci
       - kitty
-      - loclasend
+      - lix
+      - localsend
       - nvim
       - obsidian
       - ollama
