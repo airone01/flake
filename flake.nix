@@ -2,7 +2,6 @@
   description = "r1's increasingly-less-simple NixOS config";
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
