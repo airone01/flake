@@ -25,17 +25,11 @@ iso system="ursamajor" format="install-iso":
     set -euo pipefail
     nom build {{flake_dir}}#{{system}}-{{format}}
 
-# Update all flake inputs
-update:
+# Update one or all flake inputs
+update input="":
     #!/usr/bin/env bash
     set -euo pipefail
-    nix flake update --flake {{flake_dir}}|& nom
-
-# Update specific flake input
-update-input input:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    nix flake lock {{flake_dir}} --update-input {{input}}|& nom
+    nix flake update --flake {{flake_dir}} {{input}}|& nom
 
 # Format all nix files
 fmt:
@@ -55,7 +49,7 @@ check:
     set -euo pipefail
     nix flake check {{flake_dir}}|& nom
 
-# Clean old generations
+# Clean unused derivations
 clean:
     #!/usr/bin/env bash
     set -euo pipefail
