@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.stars.ssh-server;
 in {
   imports = [
@@ -13,7 +16,7 @@ in {
     enable = lib.mkEnableOption "Enable SSH server with enhanced configuration";
 
     permitRootLogin = lib.mkOption {
-      type = lib.types.enum [ "yes" "prohibit-password" "forced-commands-only" "no" ];
+      type = lib.types.enum ["yes" "prohibit-password" "forced-commands-only" "no"];
       default = "prohibit-password";
       description = "Whether and how root can log in via SSH";
     };
@@ -39,19 +42,31 @@ in {
         };
       });
       default = [
-        { addr = "0.0.0.0"; port = 22; }
-        { addr = "::"; port = 22; }
+        {
+          addr = "0.0.0.0";
+          port = 22;
+        }
+        {
+          addr = "::";
+          port = 22;
+        }
       ];
       description = "Addresses and ports on which the SSH server should listen";
       example = [
-        { addr = "192.168.1.1"; port = 22; }
-        { addr = "10.77.1.1"; port = 2222; }
+        {
+          addr = "192.168.1.1";
+          port = 22;
+        }
+        {
+          addr = "10.77.1.1";
+          port = 2222;
+        }
       ];
     };
 
     ports = lib.mkOption {
       type = lib.types.listOf lib.types.port;
-      default = [ 22 ];
+      default = [22];
       description = "Additional ports on which the SSH server should listen (simplified alternative to listenAddresses)";
     };
 
@@ -63,7 +78,15 @@ in {
 
     logLevel = lib.mkOption {
       type = lib.types.enum [
-        "QUIET" "FATAL" "ERROR" "INFO" "VERBOSE" "DEBUG" "DEBUG1" "DEBUG2" "DEBUG3"
+        "QUIET"
+        "FATAL"
+        "ERROR"
+        "INFO"
+        "VERBOSE"
+        "DEBUG"
+        "DEBUG1"
+        "DEBUG2"
+        "DEBUG3"
       ];
       default = "VERBOSE";
       description = "Logging level of the SSH daemon";
@@ -79,12 +102,12 @@ in {
       type = lib.types.listOf lib.types.str;
       default = [];
       description = "List of users allowed to connect via SSH";
-      example = [ "rack" "admin" ];
+      example = ["rack" "admin"];
     };
 
     allowGroups = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ "wheel" ];
+      default = ["wheel"];
       description = "List of groups allowed to connect via SSH";
     };
 
@@ -186,13 +209,18 @@ in {
 
     # If mosh is enabled, open its UDP ports
     networking.firewall.allowedUDPPortRanges = lib.mkIf (cfg.mosh.enable && cfg.openFirewall) [
-      { from = 60000; to = 61000; }
+      {
+        from = 60000;
+        to = 61000;
+      }
     ];
 
     # Add convenient SSH client tools
-    environment.systemPackages = with pkgs; [
-      openssh
-      sshfs
-    ] ++ lib.optional cfg.mosh.enable cfg.mosh.package;
+    environment.systemPackages = with pkgs;
+      [
+        openssh
+        sshfs
+      ]
+      ++ lib.optional cfg.mosh.enable cfg.mosh.package;
   };
 }

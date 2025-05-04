@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   # TODO: use better firefox here
 
   home-manager.users.${config.stars.mainUser} = {

@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.stars.ssh-server;
   hostname = config.networking.hostName;
 
@@ -39,7 +41,8 @@ in {
 
     # Configure SSH host keys
     # The new format uses a list of attribute sets with path and type
-    services.openssh.hostKeys = lib.mapAttrsToList
+    services.openssh.hostKeys =
+      lib.mapAttrsToList
       (type: path: {
         inherit path;
         inherit type;
@@ -47,7 +50,8 @@ in {
       config.stars.ssh-keys.hostKeys;
 
     # Configure SSH authorized keys for users
-    users.users = lib.mapAttrs
+    users.users =
+      lib.mapAttrs
       (username: keys: {
         openssh.authorizedKeys.keys = keys;
       })

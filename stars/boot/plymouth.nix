@@ -1,5 +1,4 @@
-{pkgs, ...}:
-let
+{pkgs, ...}: let
   theme = "spinner_alt";
 in {
   boot = {
@@ -11,7 +10,7 @@ in {
       themePackages = with pkgs; [
         # collection of Plymouth themes
         # we only fetch a single theme from there
-        (adi1090x-plymouth-themes.override {selected_themes = [ theme ];})
+        (adi1090x-plymouth-themes.override {selected_themes = [theme];})
       ];
     };
   };

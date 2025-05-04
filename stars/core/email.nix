@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   home-manager.users.${config.stars.mainUser}.accounts.email.accounts = {
     main = {
       realName = "Erwann Lagouche";
@@ -18,4 +22,3 @@
     };
   };
 }
-
