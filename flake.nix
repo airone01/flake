@@ -15,16 +15,14 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    schizofox = {
-      url = "github:schizofox/schizofox";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # schizofox = {
+    #   url = "github:schizofox/schizofox";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    systems.url = "github:nix-systems/default";
-    systems-linux.url = "github:nix-systems/default-linux";
   };
 
   outputs = {
@@ -35,9 +33,18 @@
   } @ inputs: let
     inherit (nixpkgs) lib;
 
+    defaultLinuxSystems = [
+      "aarch64-linux"
+      "x86_64-linux"
+    ];
+    defaultSystems = [
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ] ++ defaultLinuxSystems;
+
     # Systems definition
-    eachSystem = f: lib.genAttrs (import inputs.systems) (system: f system);
-    eachLinuxSystem = f: lib.genAttrs (import inputs.systems-linux) (system: f system);
+    eachSystem = f: lib.genAttrs (defaultSystems) (system: f system);
+    eachLinuxSystem = f: lib.genAttrs (defaultLinuxSystems) (system: f system);
 
     # Packages list
     outImages = ["ursamajor"];
