@@ -46,10 +46,6 @@ in {
           addr = "0.0.0.0";
           port = 22;
         }
-        {
-          addr = "::";
-          port = 22;
-        }
       ];
       description = "Addresses and ports on which the SSH server should listen";
       example = [
