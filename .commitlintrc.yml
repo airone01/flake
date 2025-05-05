@@ -73,6 +73,7 @@ rules:
       - qemu/kvm
       - qbittorrent
       - qflipper
+      - searchix
       - switcheroo
       - thunderbird
       - typer
