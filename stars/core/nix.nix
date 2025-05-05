@@ -1,13 +1,22 @@
-_: {
+{config, ...}: {
+  # Most of these settings yanked from @sioodmy's dotfiles
+  # https://github.com/sioodmy/dotfiles/blob/d82f7db5080d0ff4d4920a11378e08df365aeeec/system/nix/default.nix
+
   nix = {
     settings = {
-      # Parallel operations
       builders-use-substitutes = true;
-
-      # Cache settings
       keep-derivations = true;
       keep-outputs = true;
       auto-optimise-store = true;
+      eval-cache = true;
+      warn-dirty = false;
+
+      sandbox = true;
+      max-jobs = "auto";
+      # continue building derivations if one fails
+      keep-going = true;
+      log-lines = 20;
+      extra-experimental-features = ["flakes" "nix-command" "recursive-nix" "ca-derivations"];
 
       # Binary caches
       substituters = [
@@ -17,36 +26,24 @@ _: {
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
-
-      # Evaluation cache
-      eval-cache = true;
     };
 
-    # Daemon CPU scheduling
-    daemonCPUSchedPolicy = "batch";
-    daemonIOSchedPriority = 5;
+    # gc kills ssds
+    gc.automatic = false;
 
-    # Garbage collection
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-
-    # Store optimization
-    optimise = {
-      automatic = true;
-      dates = ["weekly"];
-    };
+    # Make builds run with low priority so my system stays responsive
+    daemonCPUSchedPolicy = "idle";
+    daemonIOSchedClass = "idle";
   };
 
-  # Systemd service optimization
-  systemd.services.nix-daemon = {
-    serviceConfig = {
-      CPUSchedulingPolicy = "batch";
-      IOSchedulingClass = "best-effort";
-      IOSchedulingPriority = 5;
-      MemoryMax = "8G";
-    };
+  programs.nh = {
+    enable = true;
+    flake = "/home/${config.stars.mainUser}/.config/nixos";
+  };
+
+  # This makes rebuilds a little faster
+  system.switch = {
+    enable = false;
+    enableNg = true;
   };
 }
