@@ -52,6 +52,6 @@
     ../stars/net/tools.nix
 
     # Self-hosted servers
-    ../stars/srv/ollama.nix
+    #../stars/srv/ollama.nix
   ];
 }
