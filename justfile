@@ -20,16 +20,16 @@ test host=hostname *args="":
     nh os test -a -H {{host}} {{flake_dir}} {{args}}
 
 # Build an ISO image
-iso system="ursamajor" format="install-iso":
+iso system="ursamajor" format="install-iso" *args="":
     #!/usr/bin/env bash
     set -euo pipefail
-    nom build {{flake_dir}}#{{system}}-{{format}}
+    nom build {{flake_dir}}#{{system}}-{{format}} {{args}}
 
 # Update one or all flake inputs
-update input="":
+update *args="":
     #!/usr/bin/env bash
     set -euo pipefail
-    nix flake update --flake {{flake_dir}} {{input}}|& nom
+    nix flake update --flake {{flake_dir}} {{args}}|& nom
 
 # Format all nix files
 fmt:
@@ -44,23 +44,23 @@ fmt-check:
     find . -name "*.nix" -exec alejandra --check {} +
 
 # Run checks on the flake
-check:
+check *args="":
     #!/usr/bin/env bash
     set -euo pipefail
-    nix flake check {{flake_dir}}|& nom
+    nix flake check {{flake_dir}} {{args}}|& nom
 
-# Clean unused derivations
+# Clean unused derivations with NH
 clean:
     #!/usr/bin/env bash
     set -euo pipefail
     nh clean -a
 
 # Enter a development shell
-develop shell="commitlint":
+develop shell="commitlint" *args="":
     #!/usr/bin/env bash
     set -euo pipefail
     echo "🚀 Launching {{shell}} development environment..."
-    nom develop {{flake_dir}}#{{shell}}
+    nom develop {{flake_dir}}#{{shell}} {{args}}
 
 # Show the diff of staged nix files
 show-diff:

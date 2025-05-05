@@ -15,6 +15,7 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    searchix.url = "git+https://codeberg.org/alanpearce/searchix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +26,8 @@
     home-manager,
     nixpkgs,
     nixos-generators,
+    searchix,
+    sops-nix,
     ...
   } @ inputs: let
     inherit (nixpkgs) lib;
@@ -40,8 +43,8 @@
     defaultSystems = defaultDarwinSystems ++ defaultLinuxSystems;
 
     # Systems definition
-    eachSystem = f: lib.genAttrs (defaultSystems) (system: f system);
-    eachLinuxSystem = f: lib.genAttrs (defaultLinuxSystems) (system: f system);
+    eachSystem = f: lib.genAttrs defaultSystems (system: f system);
+    eachLinuxSystem = f: lib.genAttrs defaultLinuxSystems (system: f system);
 
     # Packages list
     outImages = ["ursamajor"];
@@ -68,7 +71,7 @@
         modules = [
           # Libraries
           home-manager.nixosModules.default
-          inputs.sops-nix.nixosModules.sops
+          sops-nix.nixosModules.sops
           ./lib/core.nix
           # Actual modules
           ./constellations/${hostName}/configuration.nix
@@ -89,7 +92,8 @@
           modules = [
             # Libraries
             home-manager.nixosModules.home-manager
-            inputs.sops-nix.nixosModules.sops
+            sops-nix.nixosModules.sops
+            searchix.nixosModules.web
             ./lib/core.nix
             # Actual modules
             ./constellations/${name}/configuration.nix
