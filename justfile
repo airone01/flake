@@ -8,16 +8,16 @@ default:
     @just --list
 
 # Build and switch to a new configuration
-switch host=hostname *args="": check-dirty
+switch host=hostname *args="":
     #!/usr/bin/env bash
     set -euo pipefail
-    nh os switch -aH {{host}} {{flake_dir}} {{args}}
+    nh os switch -a -H {{host}} {{flake_dir}} {{args}}
 
 # Build and test configuration without switching
-test host=hostname *args="": check-dirty
+test host=hostname *args="":
     #!/usr/bin/env bash
     set -euo pipefail
-    nh os test -aH {{host}} {{flake_dir}} {{args}}
+    nh os test -a -H {{host}} {{flake_dir}} {{args}}
 
 # Build an ISO image
 iso system="ursamajor" format="install-iso":
@@ -65,20 +65,6 @@ develop shell="commitlint":
 # Show the diff of staged nix files
 show-diff:
     git diff -U0 *.nix
-
-# Internal recipe to check for dirty git state
-[private]
-check-dirty:
-    #!/usr/bin/env bash
-    if [ -n "$(git status --porcelain)" ]; then
-        echo "⚠️  Warning: Working directory is dirty. Uncommitted changes may be lost."
-        echo "Continue? [y/N]"
-        read -r response
-        if [[ ! "$response" =~ ^[Yy]$ ]]; then
-            echo "Operation cancelled."
-            exit 1
-        fi
-    fi
 
 # Generate an initial SOPS key
 sops-key:

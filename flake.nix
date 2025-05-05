@@ -15,10 +15,6 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # schizofox = {
-    #   url = "github:schizofox/schizofox";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,14 +29,15 @@
   } @ inputs: let
     inherit (nixpkgs) lib;
 
+    defaultDarwinSystems = [
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
     defaultLinuxSystems = [
       "aarch64-linux"
       "x86_64-linux"
     ];
-    defaultSystems = [
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ] ++ defaultLinuxSystems;
+    defaultSystems = defaultDarwinSystems ++ defaultLinuxSystems;
 
     # Systems definition
     eachSystem = f: lib.genAttrs (defaultSystems) (system: f system);
