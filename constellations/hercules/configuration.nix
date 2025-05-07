@@ -18,14 +18,6 @@ _: {
     passwordAuthentication = false;
     ports = [22];
     allowGroups = ["wheel"];
-
-    # Optional: Enable Mosh for better mobile connections
-    mosh.enable = true;
-
-    # Any extra configuration
-    extraConfig = ''
-      # Add any custom sshd_config entries here
-    '';
   };
 
   imports = [
