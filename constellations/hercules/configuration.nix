@@ -41,11 +41,4 @@ _: {
   # Booting
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.firewall.allowedTCPPorts = [
-    22 # SSH
-    # 80 # HTTP
-    443 # HTTPS
-    # 3001 # Gitea
-  ];
 }

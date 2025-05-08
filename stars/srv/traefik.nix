@@ -57,10 +57,16 @@
             tls = {};
           };
 
-          # Hydra router
           hydra = {
             rule = "Host(`hydra.air1.one`)";
             service = "hydra";
+            entryPoints = ["websecure"];
+            tls = {};
+          };
+
+          searchix = {
+            rule = "Host(`searchix.air1.one`)";
+            service = "searchix";
             entryPoints = ["websecure"];
             tls = {};
           };
@@ -74,10 +80,15 @@
             }
           ];
 
-          # Hydra service
           hydra.loadBalancer.servers = [
             {
               url = "http://127.0.0.1:3000";
+            }
+          ];
+
+          searchix.loadBalancer.servers = [
+            {
+              url = "http://127.0.0.1:51313";
             }
           ];
         };
@@ -104,6 +115,7 @@
     };
   };
 
-  # Open necessary ports
-  networking.firewall.allowedTCPPorts = [80 443 8000 3000];
+  # It's only here bc I test on my laptop and I need loopback there,
+  # so by default I don't set it in the searchix star :-)
+  services.searchix.settings.web.baseURL = "https://searchix.air1.one";
 }
