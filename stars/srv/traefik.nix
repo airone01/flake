@@ -55,7 +55,7 @@
           # Main site router
           mainsite = {
             rule = "Host(`air1.one`)";
-            service = "zola-site";
+            service = "mainsite";
             entryPoints = ["websecure"];
             tls = {};
           };
