@@ -29,6 +29,7 @@ rules:
       - network
       - security
       - virtualization
+      - web
       # NixOS-specific
       - nixos
       - flake
