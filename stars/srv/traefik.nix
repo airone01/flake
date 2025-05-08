@@ -16,6 +16,8 @@
     mode = "0400";
   };
 
+  networking.firewall.allowedTCPPorts = [ 443 ];
+
   services.traefik = {
     enable = true;
 
