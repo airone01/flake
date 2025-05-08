@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  zolaWebsite,
   ...
 }: {
   sops.secrets."cloudflare/cert" = {
@@ -16,7 +17,7 @@
     mode = "0400";
   };
 
-  networking.firewall.allowedTCPPorts = [ 443 ];
+  networking.firewall.allowedTCPPorts = [443];
 
   services.traefik = {
     enable = true;
@@ -54,7 +55,7 @@
           # Main site router
           mainsite = {
             rule = "Host(`air1.one`)";
-            service = "mainsite";
+            service = "zola-site";
             entryPoints = ["websecure"];
             tls = {};
           };
@@ -78,13 +79,13 @@
           # Main site service
           mainsite.loadBalancer.servers = [
             {
-              url = "http://127.0.0.1:8000";
+              url = "http://127.0.0.1:5972";
             }
           ];
 
           hydra.loadBalancer.servers = [
             {
-              url = "http://127.0.0.1:3000";
+              url = "http://127.0.0.1:6430";
             }
           ];
 
@@ -99,21 +100,30 @@
   };
 
   # Main website service
+  # TODO: make a prettier landing page
   services.nginx = {
     enable = true;
     virtualHosts."_" = {
       listen = [
         {
           addr = "127.0.0.1";
-          port = 8000;
+          port = 5972;
         }
       ];
-      root = pkgs.writeTextDir "index.html" ''
-        <h1>Welcome to air1.one.</h1><hr><pre>
-        <a href="https://git.air1.one/">Gitea</a>
-        <a href="https://hydra.air1.one/">Hydra</a>
-        </pre><hr>
-      '';
+      # root = config.packages.zola-website;
+      root = zolaWebsite;
+      locations."/" = {
+        extraConfig = ''
+          autoindex off;
+        '';
+      };
+      # root = pkgs.writeTextDir "index.html" ''
+      #   <h1>Welcome to air1.one.</h1><hr><pre>
+      #   <a href="https://git.air1.one/">Gitea</a>
+      #   <a href="https://hydra.air1.one/">Hydra</a>
+      #   <a href="https://searchix.air1.one/">Searchix</a>
+      #   </pre><hr>
+      # '';
     };
   };
 

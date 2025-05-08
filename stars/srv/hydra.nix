@@ -10,7 +10,7 @@ _: {
     useSubstitutes = true;
 
     # Configure Hydra to listen on localhost:3000
-    port = 3000;
+    port = 6430;
     listenHost = "127.0.0.1";
   };
 }

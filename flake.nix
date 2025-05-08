@@ -81,6 +81,7 @@
     mkConstellationForNixosConfiguration = {
       constellations,
       system ? "x86_64-linux",
+      extraModules ? [],
     }:
       lib.genAttrs constellations (name:
         nixpkgs.lib.nixosSystem {
@@ -89,15 +90,17 @@
           };
           inherit system;
 
-          modules = [
-            # Libraries
-            home-manager.nixosModules.home-manager
-            sops-nix.nixosModules.sops
-            searchix.nixosModules.web
-            ./lib/core.nix
-            # Actual modules
-            ./constellations/${name}/configuration.nix
-          ];
+          modules =
+            [
+              # Libraries
+              home-manager.nixosModules.home-manager
+              sops-nix.nixosModules.sops
+              searchix.nixosModules.web
+              ./lib/core.nix
+              # Actual modules
+              ./constellations/${name}/configuration.nix
+            ]
+            ++ extraModules;
         });
 
     mkPackages = system:
@@ -110,14 +113,40 @@
     nixosConfigurations =
       mkConstellationForNixosConfiguration {
         constellations = ["cassiopeia" "cetus"];
+        extraModules = [
+          ({pkgs, ...}: {
+            _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;
+          })
+        ];
       }
       // mkConstellationForNixosConfiguration {
         system = "aarch64-linux";
         constellations = ["hercules"];
+        extraModules = [
+          ({pkgs, ...}: {
+            _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;
+          })
+        ];
       };
-
     # Packages, including temporary setups (ISO images)
-    packages = eachLinuxSystem (system: mkPackages system);
+    # packages = eachLinuxSystem (system: mkPackages system);
+
+    packages = eachLinuxSystem (system: let
+      pkgs = import nixpkgs {inherit system;};
+    in {
+      zola-website = pkgs.stdenv.mkDerivation {
+        pname = "zola-website";
+        version = "1.0.0";
+        src = ./web;
+        nativeBuildInputs = [pkgs.zola];
+
+        buildPhase = "zola build";
+        installPhase = ''
+          mkdir -p $out
+          cp -r public/* $out/
+        '';
+      };
+    });
 
     # Rockets
     devShells = eachSystem (system: {
