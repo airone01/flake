@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="content-section">
+    <h1>{{ section.title }}</h1>
+    {{ section.content | safe }}
+
+    <ul class="content-list">
+        {# Use paginator if it exists, else regular pages #}
+        {% for page in paginator.pages | default(value=section.pages) %}
+            {% include "partials/content-listing-item.html" %}
+        {% endfor %}
+    </ul>
+
+    {% if paginator %}
+        {% include "partials/pagination.html" %}
+    {% endif %}
+</section>
+{% endblock %}
