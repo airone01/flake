@@ -38,6 +38,7 @@ rules:
       # Constellation names
       - cassiopeia
       - cetus
+      - cygnus
       - hercules
       - ursamajor
       # Core components
