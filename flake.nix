@@ -10,6 +10,7 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nvf = {
       url = "github:notashelf/nvf";
@@ -26,6 +27,7 @@
     home-manager,
     nixpkgs,
     nixos-generators,
+    nixos-wsl,
     searchix,
     sops-nix,
     ...
@@ -92,6 +94,8 @@
 
           modules =
             [
+              # NixOS WSL
+              nixos-wsl.nixosModules.default
               # Libraries
               home-manager.nixosModules.home-manager
               sops-nix.nixosModules.sops
@@ -112,7 +116,7 @@
     # NixOS configurations
     nixosConfigurations =
       mkConstellationForNixosConfiguration {
-        constellations = ["cassiopeia" "cetus"];
+        constellations = ["cassiopeia" "cetus" "cygnus"];
         extraModules = [
           ({pkgs, ...}: {
             _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;
