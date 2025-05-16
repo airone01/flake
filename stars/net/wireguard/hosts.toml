@@ -18,7 +18,7 @@ gua = "2001:db8"
 # Host definitions
 [hosts.hercules]
 network = "cloud"
-ip_addr = "10.77.1.1"
+ip_addr = "84.235.228.86"
 ssh_pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHlRI2ynQ1ZAJWVWlk/Obhcbl+IIBDnMjvZDlWqSMvw8 rack@hercules"
 
 [hosts.hercules.wireguard]
@@ -28,7 +28,7 @@ addrs = { v4 = "10.77.1.1", v6 = "fd7d:76ee:835a:1::1" }
 
 [hosts.cetus]
 network = "homelab"
-ip_addr = "10.77.2.1"
+ip_addr = "192.168.1.29"
 ssh_pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILrsNjp641wst+zLOMlTFqQTIEUi08D5yM3AKp5+LpYL r1@cassiopeia"
 
 [hosts.cetus.wireguard]

@@ -8,6 +8,10 @@
   metadata = pkgs.callPackage ./peers.nix {};
   hostname = config.networking.hostName;
 in {
+  imports = [
+    ./routing.nix
+  ];
+
   options.stars.wireguard = {
     enable = lib.mkEnableOption "Enable Wireguard site-to-site VPN";
 

@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   services.vaultwarden = {
     enable = true;
     dbBackend = "sqlite";
@@ -14,8 +17,7 @@
     };
   };
 
-  environment.systemPackages = [ pkgs.vaultwarden ];
+  environment.systemPackages = [pkgs.vaultwarden];
 
-  networking.firewall.allowedTCPPorts = [ 8222 ];
+  networking.firewall.allowedTCPPorts = [8222];
 }
-
