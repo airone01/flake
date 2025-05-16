@@ -73,6 +73,13 @@
             entryPoints = ["websecure"];
             tls = {};
           };
+
+          vaultwarden = {
+            rule = "Host(`vault.air1.one`)";
+            service = "vaultwarden";
+            entryPoints = ["websecure"];
+            tls = {};
+          };
         };
 
         services = {
@@ -92,6 +99,12 @@
           searchix.loadBalancer.servers = [
             {
               url = "http://127.0.0.1:51313";
+            }
+          ];
+
+          vaultwarden.loadBalancer.servers = [
+            {
+              url = "http://10.77.2.2:8222";
             }
           ];
         };

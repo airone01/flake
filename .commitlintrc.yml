@@ -79,6 +79,7 @@ rules:
       - switcheroo
       - thunderbird
       - typer
+      - vaultwarden
       - vlc
       - zsh
       # Subsystems
