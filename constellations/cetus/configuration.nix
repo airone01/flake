@@ -28,7 +28,10 @@ _: {
     ../../stars/core/cachix.nix
     ../../stars/net/ssh-server
     ../../stars/net/wireguard
+
+    # Server stars
     ../../stars/srv/hercules.nix
+    ../../stars/srv/vaultwarden.nix
 
     # Hardware
     ./hardware-configuration.nix
