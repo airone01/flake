@@ -17,6 +17,7 @@
     ../stars/gui/qFlipper.nix
     ../stars/gui/steam.nix
     ../stars/gui/thunderbird.nix
+    ../stars/gui/vlc.nix
 
     # Core components
     ../stars/core/email.nix
