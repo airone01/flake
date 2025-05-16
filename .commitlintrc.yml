@@ -79,6 +79,7 @@ rules:
       - switcheroo
       - thunderbird
       - typer
+      - vlc
       - zsh
       # Subsystems
       - audio
