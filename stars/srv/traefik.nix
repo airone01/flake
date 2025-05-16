@@ -104,7 +104,7 @@
 
           vaultwarden.loadBalancer.servers = [
             {
-              url = "http://10.77.2.2:8222";
+              url = "http://10.77.2.1:8222";
             }
           ];
         };
