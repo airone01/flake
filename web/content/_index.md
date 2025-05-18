@@ -23,11 +23,11 @@ The services detailed below are available freely, just help yourself.
 ## Data
 
 - [Gitea](https://git.air1.one) (mainly contains mirrors of my repos and repos I like)
-
+- [VaultWarden](https://vault.air1.one) (Rust implementation of Bitwarden)
 
 ---
 
 <p align=center>
-<a href="https://github.com/airone01">GitHub</a><br/>
+<a href="https://github.com/airone01/flake">Source code on GitHub</a><br/>
 ᓚᘏᗢ
 </p>
