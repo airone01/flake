@@ -2,6 +2,10 @@
   description = "r1's increasingly-less-simple NixOS config";
 
   inputs = {
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +28,7 @@
   };
 
   outputs = {
+    disko,
     home-manager,
     nixpkgs,
     nixos-generators,
@@ -94,12 +99,11 @@
 
           modules =
             [
-              # NixOS WSL
-              nixos-wsl.nixosModules.default
-              # Libraries
+              disko.nixosModules.disko
               home-manager.nixosModules.home-manager
-              sops-nix.nixosModules.sops
+              nixos-wsl.nixosModules.default
               searchix.nixosModules.web
+              sops-nix.nixosModules.sops
               ./lib/core.nix
               # Actual modules
               ./constellations/${name}/configuration.nix

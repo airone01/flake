@@ -6,3 +6,5 @@
 *.lock
 .direnv/
 repomix-output.txt
+**/LICENSE
+
