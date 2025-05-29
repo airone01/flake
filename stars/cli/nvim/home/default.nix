@@ -5,7 +5,6 @@
   ];
 
   imports = [
-    # ./base16.nix
     ./binds.nix
     ./dashboard.nix
     ./filetree.nix
