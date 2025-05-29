@@ -6,10 +6,6 @@
   environment.systemPackages = with pkgs; [
     gnome-tweaks
     dconf-editor
-    # themes
-    # flat-remix-gtk
-    # kora-icon-theme
-    # bibata-cursors
     # additional software
     themechanger
   ];
@@ -38,8 +34,8 @@
         name = "Bibata-Modern-Ice";
       };
       theme = {
-        package = pkgs.flat-remix-gtk;
-        name = "Flat-Remix-GTK-Orange-Light";
+        package = pkgs.orchis-theme;
+        name = "Orchis-Orange-Light-Compact";
       };
       iconTheme = {
         package = pkgs.kora-icon-theme;

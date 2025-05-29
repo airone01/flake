@@ -18,7 +18,6 @@ _: {
         '';
       };
       numbers = "none";
-      separator_style = "slant";
     };
   };
 }

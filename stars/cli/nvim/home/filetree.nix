@@ -4,9 +4,8 @@ _: {
 
     setupOpts = {
       enable_cursor_hijack = true;
-
-      # For big repos
-      git_status_async = true;
+      # git_status_async = true; # for big repos
+      auto_clean_after_session_restore = true;
     };
   };
 }
