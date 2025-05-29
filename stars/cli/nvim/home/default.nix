@@ -12,7 +12,7 @@
     ./languages.nix
     ./lsp.nix
     # ./statusline.nix
-    # ./tabline.nix
+    ./tabline.nix
     ./telescope.nix
     ./treesitter.nix
     ./ui.nix
