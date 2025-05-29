@@ -1,17 +1,17 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # Lightbulb requires an emoji font
-    noto-fonts-color-emoji
+    noto-fonts-color-emoji # lightbulb requires an emoji font
     twemoji-color-font
   ];
 
   imports = [
+    # ./base16.nix
     ./binds.nix
     ./dashboard.nix
     ./filetree.nix
     ./languages.nix
     ./lsp.nix
-    # ./statusline.nix
+    ./statusline.nix
     ./tabline.nix
     ./telescope.nix
     ./treesitter.nix

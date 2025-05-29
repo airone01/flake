@@ -2,7 +2,7 @@ _: {
   programs.nvf.settings.vim.statusline.lualine = {
     enable = true;
 
-    theme = "horizon";
+    theme = "16color";
 
     activeSection = {
       a = [
@@ -93,7 +93,7 @@ _: {
               end
 
               -- Get the name of the LSP server active in the current buffer
-              local clients = vim.lsp.get_active_clients()
+              local clients = vim.lsp.get_clients()
               local msg = 'No Active Lsp'
 
               -- if no lsp client is attached then return the msg
