@@ -7,7 +7,9 @@
 
   imports = [
     ./binds.nix
+    ./dashboard.nix
     ./filetree.nix
+    ./languages.nix
     ./lsp.nix
     # ./statusline.nix
     # ./tabline.nix

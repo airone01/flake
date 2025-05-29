@@ -4,21 +4,15 @@ _: {
       enable = true;
 
       formatOnSave = true;
-
       # show code actions even when there are no lsp warns/errors
       lightbulb.enable = true;
-
       # "signature": box that appears when e.g. you start typing args of a function
       lspSignature.enable = true;
-
       lspconfig.enable = true;
-
       # pictograms
       lspkind.enable = true;
-
       # advanced lsp framework
       lspsaga.enable = true;
-
       # Language-in-language
       otter-nvim.enable = true;
     };

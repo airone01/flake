@@ -1,18 +1,24 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{config, ...}: {
   home-manager.users.${config.stars.mainUser} = {
     programs.zellij = {
       enable = true;
 
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
-
       settings = {
-        theme = "tokyo-night";
+        show_startup_tips = false;
+        theme = "rose-pine-moon";
+        themes.rose-pine-moon = {
+          bg = "#44415a";
+          fg = "#e0def4";
+          red = "#eb6f92";
+          green = "#3e8fb0";
+          blue = "#9ccfd8";
+          yellow = "#f6c177";
+          magenta = "#c4a7e7";
+          orange = "#fe640b";
+          cyan = "#ea9a97";
+          black = "#393552";
+          white = "#e0def4";
+        };
       };
     };
   };

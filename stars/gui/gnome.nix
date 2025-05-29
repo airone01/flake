@@ -7,8 +7,9 @@
     gnome-tweaks
     dconf-editor
     # themes
-    flat-remix-gtk
-    kora-icon-theme
+    # flat-remix-gtk
+    # kora-icon-theme
+    # bibata-cursors
     # additional software
     themechanger
   ];
@@ -32,13 +33,17 @@
     gtk = {
       enable = true;
 
+      cursorTheme = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Ice";
+      };
       theme = {
         package = pkgs.flat-remix-gtk;
-        name = "Flat Remix GTK Light";
+        name = "Flat-Remix-GTK-Orange-Light";
       };
       iconTheme = {
         package = pkgs.kora-icon-theme;
-        name = "Kora";
+        name = "kora";
       };
     };
   };
