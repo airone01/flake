@@ -93,7 +93,7 @@ _: {
       enable = true;
 
       name = "rose-pine";
-      style = "main";
+      style = "moon";
     };
   };
 }
