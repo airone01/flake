@@ -85,10 +85,6 @@ _: {
       noice.enable = true;
     };
 
-    # minimap (braille map of the document on the right-side of the screen)
-    # using `codewindow` bc more customization than `minimap-vim`
-    minimap.codewindow.enable = true;
-
     # notification library
     notify.nvim-notify.enable = true;
 

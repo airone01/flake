@@ -1,10 +1,9 @@
-{pkgs, ...}: {
+_: {
   programs.nvf.settings.vim.languages = {
     # for each enabled language below:
     enableDAP = true;
     enableExtraDiagnostics = true;
     enableFormat = true;
-    enableLSP = true;
     enableTreesitter = true;
 
     # programming/scripting/configuration languages list
@@ -25,13 +24,17 @@
     python.enable = true;
     rust = {
       enable = true;
-
-      crates_nvim.enable = true;
+      crates.enable = true;
     };
     sql.enable = true;
-    svelte.enable = true;
+    svelte = {
+      enable = true;
+      format.type = "biome";
+    };
     tailwind.enable = true;
-    ts.enable = true;
-    zig.enable = true;
+    ts = {
+      enable = true;
+      format.type = "biome";
+    };
   };
 }

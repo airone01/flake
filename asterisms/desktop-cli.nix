@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+_: {
   imports = [
     ./base.nix
 
@@ -25,6 +21,8 @@
 
     # Dev stuff
     ../stars/dev/c.nix
+    ../stars/dev/cmake.nix
+    ../stars/dev/python.nix
 
     # Networking
     ../stars/cli/atac.nix
