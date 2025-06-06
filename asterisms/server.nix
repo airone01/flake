@@ -1,18 +1,8 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+_: {
   imports = [
-    # Asterism-unspecific stuff
-    ./base.nix
+    ./desktop-cli.nix
 
-    # CLI tools/apps
-    ../stars/cli/btop.nix
-    #../stars/cli/zellij.nix
-    ../stars/cli/zsh.nix
-
-    # Core components
-    ../stars/core/gh.nix
+    # Docker
+    ../stars/virt/docker.nix
   ];
 }

@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   config,
   ...
@@ -14,14 +15,13 @@
     ../../asterisms/desktop.nix
 
     # Additional stars
-    #../../stars/boot/plymouth.nix
-    ../../stars/game/prismlauncher.nix
-    ../../stars/kbd/fr.nix
-    ../../stars/virt/qemu.nix
+    #../../stars/sys/boot/plymouth.nix
+    ../../stars/game/all.nix
+    ../../stars/sys/kbd/fr.nix
 
     # Hardware
     ./hardware-configuration.nix
-    ../../stars/hard/asusd.nix
+    ../../stars/sys/vendor/asusd.nix
   ];
 
   services.xserver.videoDrivers = ["nvidia"];
@@ -53,6 +53,11 @@
     # Nvidia settings app
     nvidiaSettings = true;
   };
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+    ];
 
   environment.systemPackages = with pkgs; [
     glxinfo # Nvidia settings
