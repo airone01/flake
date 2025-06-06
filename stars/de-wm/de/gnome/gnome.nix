@@ -51,7 +51,14 @@
     epiphany # web browser
     totem # video player
     geary # email client
-    gnome-music # music player
+    gnome-music
+    gnome-tour
+    gnome-console
+    gnome-maps
+    gnome-weather
+    gnome-calendar
+    gnome-contacts
+    gnome-text-editor
   ];
 
   users.users.${config.stars.mainUser} = {

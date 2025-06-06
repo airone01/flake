@@ -2,30 +2,13 @@ _: {
   imports = [
     ./base.nix
 
-    # CLI tools/apps
-    ../stars/cli/act.nix
-    ../stars/cli/btop.nix
-    ../stars/cli/dust.nix
-    ../stars/cli/nvim/default.nix
-    ../stars/cli/oh-my-posh
-    ../stars/cli/onefetch.nix
-    ../stars/cli/pfetch.nix
-    ../stars/cli/typer.nix
-    ../stars/cli/zellij.nix
-    ../stars/cli/zsh.nix
+    # Development
+    ../stars/dev/lang/all.nix
+    ../stars/dev/tools/all.nix
+    ../stars/dev/ide/nvim
 
-    # Core components
-    ../stars/core/docker.nix
-    ../stars/core/gh.nix
-    ../stars/core/manual.nix
-
-    # Dev stuff
-    ../stars/dev/c.nix
-    ../stars/dev/cmake.nix
-    ../stars/dev/python.nix
-
-    # Networking
-    ../stars/cli/atac.nix
-    ../stars/net/tools.nix
+    # Shell
+    ../stars/sh/zsh.nix
+    ../stars/sh/oh-my-posh
   ];
 }

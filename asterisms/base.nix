@@ -1,28 +1,16 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+_: {
   imports = [
-    # Network core
-    ../stars/core/cachix.nix
-    ../stars/core/direnv.nix
-    ../stars/core/garnix.nix
-    ../stars/core/lix.nix
-    ../stars/core/nix.nix
-    ../stars/core/sops.nix
+    # Nix
+    ../stars/nix/all.nix
 
-    # Cli
-    ../stars/cli/eza.nix
-
-    # Dev core
-    ../stars/dev/core.nix
+    # Secrets
+    ../stars/sys/secret/sops.nix
 
     # Hardware settings
-    ../stars/hard/graphics.nix
+    ../stars/sys/graphics/graphics.nix
 
-    # my specific configs
+    # My specific stuff
+    ../stars/r1/email.nix
     ../stars/r1/git.nix
   ];
 }

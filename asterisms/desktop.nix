@@ -1,34 +1,27 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+_: {
   imports = [
     ./desktop-cli.nix
 
     # GUI tools/apps
-    ../stars/gui/arduino.nix
-    ../stars/gui/cursor.nix
-    ../stars/gui/discord.nix
-    ../stars/gui/firefox.nix
-    ../stars/gui/gnome.nix
-    ../stars/gui/kitty.nix
-    ../stars/gui/obsidian.nix
-    ../stars/gui/qFlipper.nix
-    ../stars/gui/steam.nix
-    ../stars/gui/thunderbird.nix
-    ../stars/gui/vlc.nix
+    ../stars/apps/all.nix
 
-    # Core components
-    ../stars/core/email.nix
-    ../stars/core/font.nix
-    ../stars/core/gnupg.nix
-    ../stars/core/localsend.nix
-    ../stars/core/pipewire.nix
+    # System
+    ../stars/sys/audio/pipewire.nix
+    ../stars/sys/net/network-manager.nix
 
-    # Networking
-    ../stars/net/network-manager.nix
-    ../stars/net/qbittorrent.nix
-    ../stars/net/protonvpn.nix
+    # Secrets
+    ../stars/sys/secret/gnupg.nix
+
+    # DE
+    ../stars/de-wm/de/gnome/gnome.nix
+
+    # Virtualization & Docker
+    ../stars/virt/docker.nix
+    ../stars/virt/qemu.nix
+
+    # Misc
+    ../stars/de-wm/font.nix
   ];
+
+  nixpkgs.config.allowUnfree = true;
 }

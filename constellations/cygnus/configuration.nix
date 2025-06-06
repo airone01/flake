@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+_: {
   networking.hostName = "cygnus";
   system.stateVersion = "24.05";
   time.timeZone = "Europe/Paris";

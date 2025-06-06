@@ -25,9 +25,8 @@ _: {
     ../../asterisms/server.nix
 
     # Additional stars
-    ../../stars/core/cachix.nix
-    ../../stars/net/ssh-server
-    ../../stars/net/wireguard
+    ../../stars/srv/ssh-server
+    ../../stars/srv/wireguard
     ../../stars/srv/gitea.nix
     ../../stars/srv/hercules.nix
     ../../stars/srv/hydra.nix
