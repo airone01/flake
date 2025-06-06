@@ -4,6 +4,11 @@
   ...
 }: {
   home-manager.users.${config.stars.mainUser} = {
+    home.packages = with pkgs; [
+      thefuck
+      zoxide
+    ];
+
     home.shellAliases = {
       f = "fuck";
       l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons=auto";
@@ -11,6 +16,7 @@
       neofetch = "pfetch";
       zz = "zellij -l compact";
     };
+
     programs = {
       zsh = {
         enable = true;
@@ -18,24 +24,13 @@
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
 
-        oh-my-zsh = {
-          enable = true;
-          plugins = [
-            "eza"
-            "git"
-            "sudo"
-            "thefuck"
-            "web-search"
-            "zoxide"
-          ];
-        };
+        initContent = ''
+          compdef l=eza
+          compdef ll=eza
+          compdef zz=zellij
+        '';
       };
     };
-
-    home.packages = with pkgs; [
-      thefuck
-      zoxide
-    ];
   };
 
   users.users.${config.stars.mainUser}.shell = pkgs.zsh;
