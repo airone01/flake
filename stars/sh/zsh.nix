@@ -5,12 +5,12 @@
 }: {
   home-manager.users.${config.stars.mainUser} = {
     home.packages = with pkgs; [
-      thefuck
+      pay-respects # thefuck replacement
       zoxide
     ];
 
     home.shellAliases = {
-      f = "fuck";
+      # f = "fuck";
       l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons=auto";
       ll = "eza -laab --icons=auto --git --group";
       neofetch = "pfetch";
