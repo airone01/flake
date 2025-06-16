@@ -34,6 +34,5 @@ _: {
 
     # Hardware
     ./hardware-configuration.nix
-    ./disks.nix
   ];
 }
