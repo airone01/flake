@@ -71,11 +71,12 @@
       enable = true;
 
       windowManager.xmonad.enable = false;
-      desktopManager.gnome.enable = true;
-      displayManager.gdm = {
-        wayland = false;
-        enable = true;
-      };
+    };
+
+    desktopManager.gnome.enable = true;
+    displayManager.gdm = {
+      wayland = false;
+      enable = true;
     };
 
     # UDEV rules
