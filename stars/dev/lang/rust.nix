@@ -14,6 +14,11 @@
     rust-analyzer
     clippy
 
-    cc-wrapper
+    # Needed for compilation
+    gcc
+    alsa-lib
+    pkg-config
+    zlib
+    systemdLibs # libudev
   ];
 }
