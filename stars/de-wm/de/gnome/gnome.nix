@@ -81,6 +81,7 @@
 
     # UDEV rules
     udev.packages = with pkgs; [gnome-settings-daemon];
+
     # Patch for GNOME2 applications
     dbus = {
       enable = true;
