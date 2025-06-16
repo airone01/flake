@@ -110,12 +110,6 @@
             ]
             ++ extraModules;
         });
-
-    mkPackages = system:
-      combineArrays outImages outFormats (
-        hostName: format:
-          mkConstellationForPackage system format hostName
-      );
   in {
     # NixOS configurations
     nixosConfigurations =
@@ -136,25 +130,18 @@
           })
         ];
       };
-    # Packages, including temporary setups (ISO images)
-    # packages = eachLinuxSystem (system: mkPackages system);
 
-    packages = eachLinuxSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
-    in {
-      zola-website = pkgs.stdenv.mkDerivation {
-        pname = "zola-website";
-        version = "1.0.0";
-        src = ./web;
-        nativeBuildInputs = [pkgs.zola];
-
-        buildPhase = "zola build";
-        installPhase = ''
-          mkdir -p $out
-          cp -r public/* $out/
-        '';
-      };
-    });
+    packages = eachLinuxSystem (
+      system: let
+        pkgs = import nixpkgs {inherit system;};
+        customPackages = import ./packages {inherit pkgs lib;};
+        isoPackages = combineArrays outImages outFormats (
+          hostName: format:
+            mkConstellationForPackage system format hostName
+        );
+      in
+        customPackages // isoPackages
+    );
 
     # Rockets
     devShells = eachSystem (system: {
