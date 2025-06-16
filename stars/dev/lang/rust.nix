@@ -13,5 +13,7 @@
     rustfmt
     rust-analyzer
     clippy
+
+    cc-wrapper
   ];
 }
