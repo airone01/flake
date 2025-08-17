@@ -59,7 +59,7 @@ check *args="":
 clean:
     #!/usr/bin/env bash
     set -euo pipefail
-    nh clean -a
+    nh clean all
 
 # Enter a development shell
 develop shell="commitlint" *args="":
