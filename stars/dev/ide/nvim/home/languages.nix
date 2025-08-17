@@ -14,7 +14,10 @@ _: {
     };
     bash.enable = true;
     clang.enable = true;
-    css.enable = true;
+    css = {
+      enable = true;
+      format.type = "biome";
+    };
     go.enable = true;
     html.enable = true;
     lua.enable = true;

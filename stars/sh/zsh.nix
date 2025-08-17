@@ -10,7 +10,6 @@
     ];
 
     home.shellAliases = {
-      # f = "fuck";
       l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons=auto";
       ll = "eza -laab --icons=auto --git --group";
       neofetch = "pfetch";
