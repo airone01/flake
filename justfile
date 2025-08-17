@@ -7,6 +7,12 @@ flake_url := env_var_or_default("FLAKE_URL", "github:airone01/flake")
 default:
     @just --list
 
+# Build a new configuration
+boot host=hostname *args="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    nh os boot -a -H {{host}} {{flake_dir}} {{args}}
+
 # Build and switch to a new configuration
 switch host=hostname *args="":
     #!/usr/bin/env bash

@@ -44,6 +44,6 @@
   # This makes rebuilds a little faster
   system.switch = {
     enable = false;
-    enableNg = true;
+    # enableNg = true; # No effect since 25
   };
 }
