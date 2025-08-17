@@ -60,6 +60,7 @@ rules:
       - dust
       - firefox
       - hercules-ci
+      - jq
       - just
       - kitty
       - lix

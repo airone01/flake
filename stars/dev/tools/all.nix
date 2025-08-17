@@ -2,6 +2,8 @@ _: {
   imports = [
     ./cicd/act.nix
 
+    ./data/jq.nix
+
     ./docs/manual.nix
 
     ./fs/bat.nix
