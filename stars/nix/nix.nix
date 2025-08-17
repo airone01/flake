@@ -41,9 +41,9 @@
     flake = "/home/${config.stars.mainUser}/.config/nixos";
   };
 
-  # This makes rebuilds a little faster
   system.switch = {
-    enable = false;
+    # Disabling this makes rebuilds supposedly a little faster, but it breaks stuff
+    enable = true;
     # enableNg = true; # No effect since 25
   };
 }
