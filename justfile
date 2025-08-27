@@ -9,62 +9,42 @@ default:
 
 # Build a new configuration
 boot host=hostname *args="":
-    #!/usr/bin/env bash
-    set -euo pipefail
     nh os boot -a -H {{host}} {{flake_dir}} {{args}}
 
 # Build and switch to a new configuration
 switch host=hostname *args="":
-    #!/usr/bin/env bash
-    set -euo pipefail
     nh os switch -a -H {{host}} {{flake_dir}} {{args}}
 
 # Build and test configuration without switching
 test host=hostname *args="":
-    #!/usr/bin/env bash
-    set -euo pipefail
     nh os test -a -H {{host}} {{flake_dir}} {{args}}
 
 # Build an ISO image
 iso system="ursamajor" format="install-iso" *args="":
-    #!/usr/bin/env bash
-    set -euo pipefail
     nom build {{flake_dir}}#{{system}}-{{format}} {{args}}
 
 # Update one or all flake inputs
 update *args="":
-    #!/usr/bin/env bash
-    set -euo pipefail
     nix flake update --flake {{flake_dir}} {{args}}|& nom
 
 # Format all nix files
 fmt:
-    #!/usr/bin/env bash
-    set -euo pipefail
     find . -name "*.nix" -exec alejandra {} +
 
 # Check nix file formatting
 fmt-check:
-    #!/usr/bin/env bash
-    set -euo pipefail
     find . -name "*.nix" -exec alejandra --check {} +
 
 # Run checks on the flake
 check *args="":
-    #!/usr/bin/env bash
-    set -euo pipefail
     nix flake check {{flake_dir}} {{args}}|& nom
 
 # Clean unused derivations with NH
 clean:
-    #!/usr/bin/env bash
-    set -euo pipefail
     nh clean all
 
 # Enter a development shell
 develop shell="commitlint" *args="":
-    #!/usr/bin/env bash
-    set -euo pipefail
     echo "🚀 Launching {{shell}} development environment..."
     nom develop {{flake_dir}}#{{shell}} {{args}}
 
@@ -74,8 +54,6 @@ show-diff:
 
 # Generate an initial SOPS key
 sops-key:
-    #!/usr/bin/env bash
-    set -euo pipefail
     echo "🔑 Generating SOPS age key..."
     mkdir -p ~/.config/sops/age
     if [ ! -f ~/.config/sops/age/keys.txt ]; then
@@ -87,8 +65,6 @@ sops-key:
 
 # Generate Wireguard keys for a host
 wg-keygen host:
-    #!/usr/bin/env bash
-    set -euo pipefail
     echo "🔑 Generating Wireguard keys for {{host}}..."
     mkdir -p secrets/wireguard
     chmod +x ./stars/net/wireguard/generate-keys.sh
@@ -97,8 +73,6 @@ wg-keygen host:
 
 # Test Wireguard connection to another host
 wg-test peer:
-    #!/usr/bin/env bash
-    set -euo pipefail
     echo "🧪 Testing Wireguard connection to {{peer}}..."
     PEER_IP=$(grep -A 2 "\[hosts.{{peer}}.wireguard\]" ./stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
     echo "Attempting to ping ${PEER_IP}..."
@@ -110,23 +84,17 @@ wg-test peer:
 
 # Show Wireguard status
 wg-status:
-    #!/usr/bin/env bash
-    set -euo pipefail
     echo "📊 Wireguard Status:"
     sudo wg show
 
 # Debug Wireguard setup
 wg-debug:
-    #!/usr/bin/env bash
-    set -euo pipefail
     echo "🔍 Running Wireguard diagnostics..."
     chmod +x ./stars/net/wireguard/debug.sh
     sudo ./stars/net/wireguard/debug.sh
 
 # Rotate SSH host keys
 ssh-rotate-keys host:
-    #!/usr/bin/env bash
-    set -euo pipefail
     echo "🔄 Rotating SSH keys for {{host}}..."
     chmod +x ./stars/net/ssh-server/rotate-keys.sh
     sudo ./stars/net/ssh-server/rotate-keys.sh {{host}}
@@ -134,8 +102,6 @@ ssh-rotate-keys host:
 
 # Add an SSH key to a host
 ssh-add-key host user key_file:
-    #!/usr/bin/env bash
-    set -euo pipefail
     echo "🔑 Adding SSH key from {{key_file}} for {{user}} on {{host}}..."
     KEY_FILE="./stars/net/ssh-server/ssh-keys/{{host}}.nix"
     KEY=$(cat {{key_file}})
@@ -200,8 +166,6 @@ ssh-add-key host user key_file:
 
 # Print SSH configuration for a host
 ssh-config host:
-    #!/usr/bin/env bash
-    set -euo pipefail
     echo "📋 SSH configuration for {{host}}:"
     echo ""
     if [[ -f "./stars/net/ssh-server/ssh-keys/{{host}}.nix" ]]; then
@@ -221,8 +185,6 @@ ssh-config host:
 
 # SSH to a host using Wireguard IP
 ssh-wg host:
-    #!/usr/bin/env bash
-    set -euo pipefail
     IP=$(grep -A 3 "\[hosts.{{host}}.wireguard\]" ./stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
     USER=$(if [[ "{{host}}" == "cassiopeia" ]]; then echo "r1"; else echo "rack"; fi)
     echo "🔌 Connecting to {{host}} (${IP}) as ${USER}..."
