@@ -54,6 +54,7 @@ show-diff:
 
 # Generate an initial SOPS key
 sops-key:
+    #!/usr/bin/env bash
     echo "🔑 Generating SOPS age key..."
     mkdir -p ~/.config/sops/age
     if [ ! -f ~/.config/sops/age/keys.txt ]; then
@@ -73,6 +74,7 @@ wg-keygen host:
 
 # Test Wireguard connection to another host
 wg-test peer:
+    #!/usr/bin/env bash
     echo "🧪 Testing Wireguard connection to {{peer}}..."
     PEER_IP=$(grep -A 2 "\[hosts.{{peer}}.wireguard\]" ./stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
     echo "Attempting to ping ${PEER_IP}..."
@@ -102,6 +104,7 @@ ssh-rotate-keys host:
 
 # Add an SSH key to a host
 ssh-add-key host user key_file:
+    #!/usr/bin/env bash
     echo "🔑 Adding SSH key from {{key_file}} for {{user}} on {{host}}..."
     KEY_FILE="./stars/net/ssh-server/ssh-keys/{{host}}.nix"
     KEY=$(cat {{key_file}})
@@ -166,6 +169,7 @@ ssh-add-key host user key_file:
 
 # Print SSH configuration for a host
 ssh-config host:
+    #!/usr/bin/env bash
     echo "📋 SSH configuration for {{host}}:"
     echo ""
     if [[ -f "./stars/net/ssh-server/ssh-keys/{{host}}.nix" ]]; then
