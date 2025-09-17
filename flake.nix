@@ -50,7 +50,7 @@
 
     # Packages list
     outImages = ["ursamajor"];
-    outFormats = ["install-iso"];
+    outFormats = ["install-iso" "iso"];
 
     # Utility functions
     combineArrays = arr1: arr2: f:
@@ -73,7 +73,7 @@
         modules = [
           # Libraries
           home-manager.nixosModules.default
-          sops-nix.nixosModules.sops
+          # sops-nix.nixosModules.sops
           ./lib/core.nix
           # Actual modules
           ./constellations/${hostName}/configuration.nix

@@ -20,7 +20,7 @@ test host=hostname *args="":
     nh os test -a -H {{host}} {{flake_dir}} {{args}}
 
 # Build an ISO image
-iso system="ursamajor" format="install-iso" *args="":
+iso system="ursamajor" format="iso" *args="":
     nom build {{flake_dir}}#{{system}}-{{format}} {{args}}
 
 # Update one or all flake inputs

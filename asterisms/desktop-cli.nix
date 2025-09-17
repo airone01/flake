@@ -1,3 +1,4 @@
+# CLI part of the main desktop preset. Personal as well
 _: {
   imports = [
     ./base.nix

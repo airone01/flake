@@ -16,7 +16,7 @@
       # continue building derivations if one fails
       keep-going = true;
       log-lines = 20;
-      extra-experimental-features = ["flakes" "nix-command" "recursive-nix" "ca-derivations"];
+      extra-experimental-features = ["flakes" "nix-command"];
 
       # Binary caches
       substituters = [
