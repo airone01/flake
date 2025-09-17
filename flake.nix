@@ -2,6 +2,10 @@
   description = "r1's increasingly-less-simple NixOS config";
 
   inputs = {
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +28,7 @@
   };
 
   outputs = {
+    disko,
     home-manager,
     nixpkgs,
     nixos-generators,
@@ -71,11 +76,8 @@
         inherit system format;
 
         modules = [
-          # Libraries
           home-manager.nixosModules.default
-          # sops-nix.nixosModules.sops
           ./lib/core.nix
-          # Actual modules
           ./constellations/${hostName}/configuration.nix
         ];
       };
@@ -94,12 +96,12 @@
 
           modules =
             [
+              disko.nixosModules.disko
               home-manager.nixosModules.home-manager
               nixos-wsl.nixosModules.default
               searchix.nixosModules.web
               sops-nix.nixosModules.sops
               ./lib/core.nix
-              # Actual modules
               ./constellations/${name}/configuration.nix
             ]
             ++ extraModules;
