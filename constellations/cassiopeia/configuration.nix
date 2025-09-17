@@ -18,6 +18,7 @@
     #../../stars/sys/boot/plymouth.nix
     ../../stars/game/all.nix
     ../../stars/sys/kbd/fr.nix
+    ../../stars/de-wm/hyprland.nix
 
     # Hardware
     ./hardware-configuration.nix

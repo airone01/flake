@@ -1,24 +1,27 @@
-# My usual personal desktop preset
+# More generic desktop preset - used for Ursa Major
 _: {
   imports = [
-    ./desktop-cli.nix
-    ./specific.nix
+    # CLI tools
+    ../stars/dev/tools/all.nix
+    ../stars/dev/ide/nvim
+
+    # Shell
+    ../stars/sh/zsh.nix
+    ../stars/sh/oh-my-posh
 
     # GUI tools/apps
-    ../stars/apps/all.nix
+    ../stars/apps/video-recorder/obs.nix
+    ../stars/apps/video-viewer/vlc.nix
+    ../stars/apps/web-browser/firefox.nix
 
     # System
     ../stars/sys/audio/pipewire.nix
     ../stars/sys/net/network-manager.nix
 
-    # Secrets
-    ../stars/sys/secret/gnupg.nix
-
     # DE
     ../stars/de-wm/gnome.nix
 
     # Virtualization & Docker
-    ../stars/virt/docker.nix
     ../stars/virt/qemu.nix
 
     # Misc
