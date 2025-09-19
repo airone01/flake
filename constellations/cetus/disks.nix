@@ -1,11 +1,9 @@
 # Complete Disko config for:
 # - 256GB SSD for system
 # - 4 HDDs (8TB + 2x2TB + 1TB) with LUKS encryption + ZFS
-# No keyfiles, hence manual passphrase at boot
-{
+_: {
   disko.devices = {
     disk = {
-      # System SSD (LUKS -> ext4).
       system-ssd = {
         device = "/dev/disk/by-id/wwn-0x690b11c00656e70017f8aa9716e57358";
         type = "disk";
@@ -27,10 +25,8 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypt-root"; # /dev/mapper/crypt-root
-                settings = {
-                  allowDiscards = true;
-                };
+                name = "crypt-root";
+                settings = {allowDiscards = true;};
                 content = {
                   type = "filesystem";
                   format = "ext4";
@@ -42,7 +38,6 @@
         };
       };
 
-      # HDDs -> LUKS -> ZFS pool=tank
       large_disk = {
         device = "/dev/disk/by-id/wwn-0x5000c500e7051021";
         type = "disk";
@@ -53,7 +48,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypt-8tb"; # /dev/mapper/crypt-8tb
+                name = "crypt-8tb";
                 settings = {allowDiscards = true;};
                 content = {
                   type = "zfs";
@@ -75,7 +70,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypt-2tb-1"; # /dev/mapper/crypt-2tb-1
+                name = "crypt-2tb-1";
                 settings = {allowDiscards = true;};
                 content = {
                   type = "zfs";
@@ -97,7 +92,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypt-2tb-2"; # /dev/mapper/crypt-2tb-2
+                name = "crypt-2tb-2";
                 settings = {allowDiscards = true;};
                 content = {
                   type = "zfs";
@@ -119,7 +114,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypt-1tb"; # /dev/mapper/crypt-1tb
+                name = "crypt-1tb";
                 settings = {allowDiscards = true;};
                 content = {
                   type = "zfs";
@@ -133,7 +128,7 @@
     };
   };
 
-  disko.zpools = {
+  disko.zpool = {
     tank = {
       type = "zpool";
 
@@ -145,7 +140,7 @@
 
       datasets = {
         tank = {
-          type = "dataset";
+          type = "zfs_fs";
           options = {
             mountpoint = "/tank";
             compression = "lz4";
