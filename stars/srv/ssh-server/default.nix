@@ -173,7 +173,6 @@ in {
         PrintLastLog = true;
 
         # Privilege separation and security
-        UsePrivilegeSeparation = "sandbox";
         StrictModes = true;
 
         # Feature settings
