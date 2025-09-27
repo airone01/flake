@@ -34,7 +34,7 @@ _: {
     ../../stars/srv/wireguard
 
     # Server stars
-    ../../stars/core/cachix.nix
+    ../../stars/nix/cachix.nix
     ../../stars/srv/hercules.nix
 
     # Hardware
