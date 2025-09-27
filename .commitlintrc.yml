@@ -59,6 +59,7 @@ rules:
       - disko
       - dust
       - firefox
+      - godot
       - hercules-ci
       - jq
       - just
