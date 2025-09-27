@@ -1,6 +1,6 @@
 _: {
   networking.hostName = "cetus";
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
   time.timeZone = "Europe/Paris";
 
   stars.mainUser = "rack";
@@ -20,6 +20,11 @@ _: {
     allowGroups = ["wheel"];
   };
 
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+
   imports = [
     # Asterisms
     ../../asterisms/server.nix
@@ -29,11 +34,10 @@ _: {
     ../../stars/srv/wireguard
 
     # Server stars
+    ../../stars/core/cachix.nix
     ../../stars/srv/hercules.nix
-    ../../stars/srv/vaultwarden.nix
 
     # Hardware
     ./hardware-configuration.nix
-    # ./disks.nix
   ];
 }
