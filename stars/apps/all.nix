@@ -3,6 +3,8 @@ _: {
     ./file-transfer/localsend.nix
     ./file-transfer/qbittorrent.nix
 
+    ./game-editor/godot.nix
+
     ./messaging/discord.nix
     ./messaging/thunderbird.nix
 
