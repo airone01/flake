@@ -25,7 +25,7 @@ iso system="ursamajor" format="iso" *args="":
 
 # Update one or all flake inputs
 update *args="":
-    nix flake update --flake {{flake_dir}} {{args}}|& nom
+    nix flake update --all-systems --flake {{flake_dir}} {{args}}|& nom
 
 # Format all nix files
 fmt:
