@@ -1,0 +1,554 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+4. Repository files, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+<additional_info>
+
+</additional_info>
+
+</file_summary>
+
+<directory_structure>
+home/
+  binds.nix
+  dashboard.nix
+  default.nix
+  filetree.nix
+  git.nix
+  languages.nix
+  lsp.nix
+  statusline.nix
+  tabline.nix
+  telescope.nix
+  treesitter.nix
+  ui.nix
+  utility.nix
+  vim.nix
+  wrappers.nix
+default.nix
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="home/binds.nix">
+_: {
+  programs.nvf.settings.vim = {
+    binds = {
+      # cheat sheet with all binds
+      cheatsheet.enable = true;
+      # shows menu with corresponding keys when typing
+      whichKey.enable = true;
+    };
+
+    # Custom keymaps
+    maps = {
+      # jk to escape insert mode
+      insert = {
+        "jk" = {
+          action = "<Esc>";
+          silent = true;
+          desc = "Exit insert mode";
+        };
+      };
+
+      # Code actions, format
+      normal = {
+        "<leader>ca" = {
+          action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
+          silent = true;
+          desc = "Code actions";
+        };
+        "<leader>fm" = {
+          action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>";
+          silent = true;
+          desc = "Format buffer";
+        };
+      };
+    };
+  };
+}
+</file>
+
+<file path="home/dashboard.nix">
+_: {
+  programs.nvf.settings.vim.dashboard.startify = {
+    enable = true;
+  };
+}
+</file>
+
+<file path="home/default.nix">
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    noto-fonts-color-emoji # lightbulb requires an emoji font
+    twemoji-color-font
+  ];
+
+  imports = [
+    ./binds.nix
+    ./dashboard.nix
+    ./filetree.nix
+    ./git.nix
+    ./languages.nix
+    ./lsp.nix
+    ./statusline.nix
+    ./tabline.nix
+    ./telescope.nix
+    ./treesitter.nix
+    ./ui.nix
+    ./utility.nix
+    ./vim.nix
+    ./wrappers.nix
+  ];
+
+  programs.nvf = {
+    enable = true;
+  };
+}
+</file>
+
+<file path="home/filetree.nix">
+_: {
+  programs.nvf.settings.vim.filetree.neo-tree = {
+    enable = true;
+    setupOpts = {
+      enable_cursor_hijack = true;
+      git_status_async = true; # for big repos
+      auto_clean_after_session_restore = true;
+
+      window = {
+        width = 30; # default is 40
+        mappings = {
+          "<" = "none"; # Disable default shrink
+          ">" = "none"; # Disable default expand
+        };
+      };
+    };
+  };
+}
+</file>
+
+<file path="home/git.nix">
+_: {
+  programs.nvf.settings.vim.git = {
+    enable = true;
+    gitsigns.enable = true;
+    gitsigns.mappings = {
+      nextHunk = "]c";
+      previousHunk = "[c";
+      stageHunk = "<leader>hs";
+      resetHunk = "<leader>hr";
+      previewHunk = "<leader>hp";
+    };
+  };
+}
+</file>
+
+<file path="home/languages.nix">
+_: {
+  programs.nvf.settings.vim.languages = {
+    # for each enabled language below:
+    enableDAP = true;
+    enableExtraDiagnostics = true;
+    enableFormat = true;
+    enableTreesitter = true;
+
+    # programming/scripting/configuration languages list
+    assembly.enable = true;
+    astro = {
+      enable = true;
+      format.type = "biome";
+    };
+    bash.enable = true;
+    clang.enable = true;
+    css = {
+      enable = true;
+      format.type = "biome";
+    };
+    go.enable = true;
+    html.enable = true;
+    lua.enable = true;
+    markdown.enable = true;
+    nix.enable = true;
+    php.enable = true;
+    python.enable = true;
+    rust = {
+      enable = true;
+      crates.enable = true;
+    };
+    sql.enable = true;
+    svelte = {
+      enable = true;
+      format.type = "biome";
+    };
+    tailwind.enable = true;
+    ts = {
+      enable = true;
+      format.type = "biome";
+    };
+  };
+}
+</file>
+
+<file path="home/lsp.nix">
+_: {
+  programs.nvf.settings.vim = {
+    lsp = {
+      enable = true;
+
+      formatOnSave = true;
+      # show code actions even when there are no lsp warns/errors
+      lightbulb.enable = true;
+      # "signature": box that appears when e.g. you start typing args of a function
+      lspSignature.enable = true;
+      lspconfig.enable = true;
+      # pictograms
+      lspkind.enable = true;
+      # advanced lsp framework
+      lspsaga.enable = true;
+      # Language-in-language
+      otter-nvim.enable = true;
+    };
+
+    maps.normal = {
+      # Quickfix navigation
+      "<leader>qn" = {
+        action = "<cmd>cnext<CR>";
+        desc = "Next quickfix item";
+      };
+      "<leader>qp" = {
+        action = "<cmd>cprev<CR>";
+        desc = "Previous quickfix item";
+      };
+      "<leader>qo" = {
+        action = "<cmd>copen<CR>";
+        desc = "Open quickfix list";
+      };
+      "<leader>qc" = {
+        action = "<cmd>cclose<CR>";
+        desc = "Close quickfix list";
+      };
+    };
+
+    luaConfigRC.suppress-null-ls-warning = ''
+      -- Suppress null-ls deprecation warnings
+      local notify = vim.notify
+      vim.notify = function(msg, ...)
+        if msg:match("null%-ls") then
+          return
+        end
+        notify(msg, ...)
+      end
+    '';
+
+    diagnostics = {
+      enable = true;
+      config = {
+        signs.text = {
+          "vim.diagnostic.severity.ERROR" = "󰅚 ";
+          "vim.diagnostic.severity.WARN" = "󰀪 ";
+        };
+      };
+    };
+
+    # spoken/written languages
+    spellcheck = {
+      enable = true;
+
+      languages = [
+        "en"
+        # TODO add "fr" here and configure dictionary
+      ];
+    };
+  };
+}
+</file>
+
+<file path="home/statusline.nix">
+_: {
+  programs.nvf.settings.vim.statusline.lualine = {
+    enable = true;
+    theme = "everforest";
+  };
+}
+</file>
+
+<file path="home/tabline.nix">
+_: {
+  programs.nvf.settings.vim.tabline.nvimBufferline = {
+    enable = true;
+
+    mappings = {
+      closeCurrent = "<leader>x";
+      cycleNext = "<tab>";
+      cyclePrevious = "<shift><tab>";
+    };
+
+    setupOpts.options = {
+      middle_mouse_command = {
+        _type = "lua-inline";
+        expr = ''
+          function(bufnum)
+            require("bufdelete").bufdelete(bufnum, false)
+          end
+        '';
+      };
+
+      numbers = "none";
+      separator_style = "thin";
+      modified_icon = "●";
+
+      indicator = {
+        style = "none"; # This removes the underline/icon indicator
+      };
+    };
+  };
+}
+</file>
+
+<file path="home/telescope.nix">
+_: {
+  programs.nvf.settings.vim.telescope = {
+    enable = true;
+
+    mappings = {
+      findFiles = "<leader>ff";
+      liveGrep = "<leader>fw";
+      buffers = "<leader>fb";
+      helpTags = "<leader>fh";
+      gitCommits = "<leader>gc";
+      lspReferences = "<leader>lr";
+      lspDefinitions = "<leader>ld";
+    };
+  };
+}
+</file>
+
+<file path="home/treesitter.nix">
+_: {
+  programs.nvf.settings.vim.treesitter = {
+    enable = true;
+
+    # (x?)html tag auto rename
+    autotagHtml = true;
+
+    context = {
+      enable = true;
+    };
+  };
+}
+</file>
+
+<file path="home/ui.nix">
+_: {
+  programs.nvf.settings.vim = {
+    visuals = {
+      # Smooth scrolling
+      cinnamon-nvim.enable = true;
+
+      # notification widget
+      fidget-nvim.enable = true;
+
+      # indent blankline
+      indent-blankline = {
+        enable = true;
+
+        setupOpts = {
+          scope.enabled = true;
+        };
+      };
+
+      # highlight cursor
+      nvim-cursorline = {
+        enable = true;
+
+        setupOpts = {
+          cursorline.enable = true;
+          cursorword.enable = true;
+        };
+      };
+
+      # Scroll bar
+      nvim-scrollbar.enable = true;
+
+      # icons
+      nvim-web-devicons.enable = true;
+    };
+
+    ui = {
+      # borders for compatible plugins
+      borders = {
+        enable = true;
+
+        globalStyle = "rounded";
+
+        # plugins and integrations
+        plugins = {
+          lsp-signature.enable = true;
+          lspsaga.enable = true;
+          nvim-cmp.enable = true;
+          which-key.enable = true;
+        };
+      };
+
+      # lsp path indication below the tab bar
+      breadcrumbs = {
+        enable = true;
+        navbuddy.enable = true;
+      };
+
+      # render written colors e.g. `#f00`
+      colorizer.enable = true;
+
+      # simple line decorator
+      modes-nvim.enable = true;
+    };
+
+    # notification library
+    notify.nvim-notify.enable = true;
+
+    # main theme (doesn't apply to status bar)
+    theme = {
+      enable = true;
+
+      name = "everforest";
+      style = "medium";
+    };
+  };
+}
+</file>
+
+<file path="home/utility.nix">
+_: {
+  programs.nvf.settings.vim.utility = {
+    # NF icon picker
+    icon-picker.enable = true;
+
+    # markdown preview with glow
+    preview.glow = {
+      enable = true;
+      # "<leader>p"
+    };
+
+    # images support
+    images.image-nvim = {
+      enable = true;
+
+      setupOpts = {
+        backend = "kitty";
+        integrations.markdown.downloadRemoteImages = true;
+      };
+    };
+  };
+}
+</file>
+
+<file path="home/vim.nix">
+_: {
+  programs.nvf.settings.vim = {
+    # Autocomplete
+    autocomplete.nvim-cmp.enable = true;
+
+    # Auto pairs
+    autopairs.nvim-autopairs.enable = true;
+
+    # Syntax highlighting
+    syntaxHighlighting = true;
+
+    # Show static line, not relative number
+    lineNumberMode = "number";
+
+    options = {
+      termguicolors = true;
+    };
+
+    # Better jk escape with timeout
+    luaConfigRC.better-escape = ''
+      vim.o.timeoutlen = 300
+      vim.o.ttimeoutlen = 10
+    '';
+
+    # Make winbar follow theme
+    luaConfigRC.winbar-theme = ''
+      vim.api.nvim_set_hl(0, 'WinBar', { link = 'Normal' })
+      vim.api.nvim_set_hl(0, 'WinBarNC', { link = 'Comment' })
+    '';
+
+    luaConfigRC.visual-high-contrast = ''
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = function()
+          vim.api.nvim_set_hl(0, 'Visual', {
+            bg = '#3a515d',  -- More blue-tinted, higher contrast
+            fg = 'NONE',
+            reverse = false
+          })
+        end,
+      })
+    '';
+  };
+}
+</file>
+
+<file path="home/wrappers.nix">
+_: {
+  programs.nvf.settings.vim = {
+    # withNodeJs = true;
+    withPython3 = true;
+    withRuby = true;
+  };
+}
+</file>
+
+<file path="default.nix">
+{
+  inputs,
+  config,
+  ...
+}: {
+  home-manager.users.${config.stars.mainUser} = {
+    imports = [
+      inputs.nvf.homeManagerModules.default
+      ./home
+    ];
+  };
+}
+</file>
+
+</files>

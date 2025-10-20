@@ -17,6 +17,37 @@ _: {
       otter-nvim.enable = true;
     };
 
+    maps.normal = {
+      # Quickfix navigation
+      "<leader>qn" = {
+        action = "<cmd>cnext<CR>";
+        desc = "Next quickfix item";
+      };
+      "<leader>qp" = {
+        action = "<cmd>cprev<CR>";
+        desc = "Previous quickfix item";
+      };
+      "<leader>qo" = {
+        action = "<cmd>copen<CR>";
+        desc = "Open quickfix list";
+      };
+      "<leader>qc" = {
+        action = "<cmd>cclose<CR>";
+        desc = "Close quickfix list";
+      };
+    };
+
+    luaConfigRC.suppress-null-ls-warning = ''
+      -- Suppress null-ls deprecation warnings
+      local notify = vim.notify
+      vim.notify = function(msg, ...)
+        if msg:match("null%-ls") then
+          return
+        end
+        notify(msg, ...)
+      end
+    '';
+
     diagnostics = {
       enable = true;
       config = {

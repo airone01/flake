@@ -17,7 +17,14 @@ _: {
           end
         '';
       };
+
       numbers = "none";
+      separator_style = "thin";
+      modified_icon = "●";
+
+      indicator = {
+        style = "none"; # This removes the underline/icon indicator
+      };
     };
   };
 }

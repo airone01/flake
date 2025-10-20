@@ -1,16 +1,6 @@
 _: {
   programs.nvf.settings.vim = {
     visuals = {
-      # enable = true;
-
-      # hmm...
-      cellular-automaton = {
-        enable = true;
-
-        # bind is "<leader>fml" for "fuck my life"
-        mappings.makeItRain = "<leader>fml";
-      };
-
       # Smooth scrolling
       cinnamon-nvim.enable = true;
 
@@ -52,37 +42,24 @@ _: {
 
         # plugins and integrations
         plugins = {
-          # code-action-menu.enable = true; # Recently removed (maybe)
           lsp-signature.enable = true;
           lspsaga.enable = true;
           nvim-cmp.enable = true;
-          which-key = {
-            enable = true;
-
-            style = "single";
-          };
+          which-key.enable = true;
         };
       };
 
       # lsp path indication below the tab bar
       breadcrumbs = {
         enable = true;
-
-        lualine.winbar.alwaysRender = true;
         navbuddy.enable = true;
       };
 
       # render written colors e.g. `#f00`
       colorizer.enable = true;
 
-      # highlighting of the cursor
-      illuminate.enable = true;
-
       # simple line decorator
       modes-nvim.enable = true;
-
-      # replaces some of the ui elements
-      noice.enable = true;
     };
 
     # notification library
@@ -92,8 +69,8 @@ _: {
     theme = {
       enable = true;
 
-      name = "rose-pine";
-      style = "moon";
+      name = "everforest";
+      style = "medium";
     };
   };
 }

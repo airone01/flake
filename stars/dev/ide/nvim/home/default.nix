@@ -8,6 +8,7 @@
     ./binds.nix
     ./dashboard.nix
     ./filetree.nix
+    ./git.nix
     ./languages.nix
     ./lsp.nix
     ./statusline.nix
