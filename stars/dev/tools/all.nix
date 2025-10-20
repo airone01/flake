@@ -8,6 +8,7 @@ _: {
 
     ./fs/bat.nix
     ./fs/dust.nix
+    ./fs/fd.nix
     ./fs/eza.nix
     ./fs/ripgrep.nix
 
