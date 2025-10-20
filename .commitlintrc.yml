@@ -89,6 +89,7 @@ rules:
       - audio
       - video
       - nvidia
+      - home-manager
       # Development
       - dev
       - python
