@@ -1,15 +1,11 @@
 _: {
   imports = [
-    ./file-transfer.nix
-
-    ./game-editor/godot.nix
-
-    ./messaging/discord.nix
-    ./messaging/thunderbird.nix
-
     ./misc/qFlipper.nix
 
-    ./note-taking/obsidian.nix
+    ./file-transfer.nix
+    ./game-editing.nix
+    ./messaging.nix
+    ./note-taking.nix
 
     ./term/kitty.nix
 
