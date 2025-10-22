@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/airone01/flake/compare/v2.1.0...v2.1.1) (2025-10-22)
+
+
+### Code Refactoring
+
+* **flake:** definitely a good pr ([#28](https://github.com/airone01/flake/issues/28)) ([419926e](https://github.com/airone01/flake/commit/419926e7708795286665d0f8fb74d77d7168be3f))
+
 ## [2.1.0](https://github.com/airone01/flake/compare/v2.0.0...v2.1.0) (2025-04-26)
 
 
