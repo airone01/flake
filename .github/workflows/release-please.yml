@@ -15,6 +15,7 @@ jobs:
       pr_number: ${{ steps.release.outputs.pr && fromJSON(steps.release.outputs.pr).number }}
       prs_created: ${{ steps.release.outputs.prs_created }}
     steps:
+      - uses: actions/checkout@v4
       - uses: googleapis/release-please-action@v4
         id: release
         with:
