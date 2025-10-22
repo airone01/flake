@@ -14,13 +14,7 @@ _: {
         };
       };
 
-      filesystem = {
-        filetered_items = {
-          hide_dotfiles = false;
-          hide_gitignored = false;
-          hide_hidden = false;
-        };
-      };
+      # note: to toggle on/off hidden files, press H in neo-tree
     };
   };
 }
