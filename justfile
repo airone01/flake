@@ -19,10 +19,6 @@ switch host=hostname *args="":
 test host=hostname *args="":
     nh os test -a -H {{host}} {{flake_dir}} {{args}}
 
-# Build an ISO image
-iso system="ursamajor" format="iso" *args="":
-    nom build {{flake_dir}}#{{system}}-{{format}} {{args}}
-
 # Update one or all flake inputs
 update *args="":
     nix flake update --flake {{flake_dir}} {{args}}|& nom
