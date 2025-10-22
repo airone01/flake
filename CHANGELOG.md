@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/airone01/flake/compare/nixos-config-v4.0.0...nixos-config-v4.0.1) (2025-10-22)
+
+
+### Documentation
+
+* **readme:** simplify ([#35](https://github.com/airone01/flake/issues/35)) ([b26a83d](https://github.com/airone01/flake/commit/b26a83d19087ddfd0a78eb3ad14a9aece638c0d8))
+
 ## [4.0.0](https://github.com/airone01/flake/compare/nixos-config-v3.0.0...nixos-config-v4.0.0) (2025-10-22)
 
 
