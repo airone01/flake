@@ -1,7 +1,6 @@
 _: {
   imports = [
-    ./file-transfer/localsend.nix
-    ./file-transfer/qbittorrent.nix
+    ./file-transfer.nix
 
     ./game-editor/godot.nix
 
