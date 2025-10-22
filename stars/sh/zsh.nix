@@ -21,11 +21,15 @@
       gtaa = "git add .";
       gtc = "git commit";
       gtcc = "git checkout";
+      gtccb = "git checkout -b";
       gtd = "git diff";
       gtdc = "git diff --cached";
       gtrm = "git rm --cached";
       gtp = "git push";
+      gtpu = "git push -u $(git remote) $(git rev-parse --abbrev-ref HEAD)";
       gtpl = "git pull";
+      gtl = "git log --all --oneline --graph";
+      gtlo = "git log --oneline";
 
       # just
       jts = "just switch";
