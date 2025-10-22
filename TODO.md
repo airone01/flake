@@ -2,7 +2,6 @@
 
 - images support for zellij/other terms
 - shift-tab previous tab
-- don't hide git ignored in filetree
 - find why highlights don't display in visual mode
 
 # other

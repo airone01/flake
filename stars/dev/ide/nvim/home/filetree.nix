@@ -13,6 +13,14 @@ _: {
           ">" = "none"; # Disable default expand
         };
       };
+
+      filesystem = {
+        filetered_items = {
+          hide_dotfiles = false;
+          hide_gitignored = false;
+          hide_hidden = false;
+        };
+      };
     };
   };
 }
