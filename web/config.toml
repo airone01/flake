@@ -1,0 +1,17 @@
+base_url = "https://air1.one"
+title = "r1's homelab"
+description = "A lost place on the Internet"
+default_language = "en"
+theme = "anemone"
+compile_sass = true
+minify_html = true
+
+[extra]
+header_nav = [
+  { url = "/", name_en = "/" },
+  { url = "https://github.com/airone01/flake", name_en = "/src" }
+]
+
+# Listing pages in the homepage
+list_pages = true
+

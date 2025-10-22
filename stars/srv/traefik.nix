@@ -1,4 +1,9 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  zolaWebsite,
+  ...
+}: {
   sops.secrets."cloudflare/cert" = {
     sopsFile = ../../secrets/cloudflare.yaml;
     owner = "traefik";
@@ -11,6 +16,8 @@
     group = "traefik";
     mode = "0400";
   };
+
+  networking.firewall.allowedTCPPorts = [443];
 
   services.traefik = {
     enable = true;
@@ -53,10 +60,23 @@
             tls = {};
           };
 
-          # Hydra router
           hydra = {
             rule = "Host(`hydra.air1.one`)";
             service = "hydra";
+            entryPoints = ["websecure"];
+            tls = {};
+          };
+
+          searchix = {
+            rule = "Host(`searchix.air1.one`)";
+            service = "searchix";
+            entryPoints = ["websecure"];
+            tls = {};
+          };
+
+          vaultwarden = {
+            rule = "Host(`vault.air1.one`)";
+            service = "vaultwarden";
             entryPoints = ["websecure"];
             tls = {};
           };
@@ -66,14 +86,25 @@
           # Main site service
           mainsite.loadBalancer.servers = [
             {
-              url = "http://127.0.0.1:8000";
+              url = "http://127.0.0.1:5972";
             }
           ];
 
-          # Hydra service
           hydra.loadBalancer.servers = [
             {
-              url = "http://127.0.0.1:3000";
+              url = "http://127.0.0.1:6430";
+            }
+          ];
+
+          searchix.loadBalancer.servers = [
+            {
+              url = "http://127.0.0.1:51313";
+            }
+          ];
+
+          vaultwarden.loadBalancer.servers = [
+            {
+              url = "http://10.77.2.1:8222";
             }
           ];
         };
@@ -82,24 +113,34 @@
   };
 
   # Main website service
+  # TODO: make a prettier landing page
   services.nginx = {
     enable = true;
     virtualHosts."_" = {
       listen = [
         {
           addr = "127.0.0.1";
-          port = 8000;
+          port = 5972;
         }
       ];
-      root = pkgs.writeTextDir "index.html" ''
-        <h1>Welcome to air1.one.</h1><hr><pre>
-        <a href="https://git.air1.one/">Gitea</a>
-        <a href="https://hydra.air1.one/">Hydra</a>
-        </pre><hr>
-      '';
+      # root = config.packages.zola-website;
+      root = zolaWebsite;
+      locations."/" = {
+        extraConfig = ''
+          autoindex off;
+        '';
+      };
+      # root = pkgs.writeTextDir "index.html" ''
+      #   <h1>Welcome to air1.one.</h1><hr><pre>
+      #   <a href="https://git.air1.one/">Gitea</a>
+      #   <a href="https://hydra.air1.one/">Hydra</a>
+      #   <a href="https://searchix.air1.one/">Searchix</a>
+      #   </pre><hr>
+      # '';
     };
   };
 
-  # Open necessary ports
-  networking.firewall.allowedTCPPorts = [80 443 8000 3000];
+  # It's only here bc I test on my laptop and I need loopback there,
+  # so by default I don't set it in the searchix star :-)
+  services.searchix.settings.web.baseURL = "https://searchix.air1.one";
 }

@@ -1,16 +1,43 @@
-# airone01/flake
+<h1 align="center">
+  airone01/flake
+</h2>
 
-A modular and extensible NixOS configuration system using a custom star-based architecture. This repository contains my personal NixOS configurations for multiple machines and deployments, managed with a comprehensive task runner.
+<h4 align="center">
+  <a href="https://profile.intra.42.fr/users/elagouch"><img alt="School 42 badge" src="https://img.shields.io/badge/-elagouch-020617?style=flat-square&labelColor=020617&color=5a45fe&logo=42"></a>
+  <img alt="Apache-2.0 license" src="https://img.shields.io/badge/License-Apache--2.0-ef00c7?style=flat-square&logo=creativecommons&logoColor=fff&labelColor=020617">
+  <img alt="Made with Nix" src="https://img.shields.io/badge/Made_with-Nix-ff2b89?style=flat-square&logo=nixos&logoColor=fff&labelColor=020617">
+  <img alt="Release version" src="https://img.shields.io/github/v/release/airone01/flake?style=flat-square&logo=nixos&logoColor=fff&label=Release&labelColor=020617&color=ff8059">
+  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/airone01/diem?style=flat-square&logo=github&labelColor=020617&color=ffc248&label=Contributors">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/airone01/diem?style=flat-square&logo=github&labelColor=020617&color=f9f871&label=Last%20commit">
+</h4>
 
-## 📚 Table of Contents
+A modular and extensible NixOS configuration system using a custom star-based
+architecture. This repository contains my personal NixOS configurations for
+multiple machines and deployments, managed with a comprehensive task runner.
 
-- [Features](#features)
-- [Structure](#structure)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Architecture](#architecture)
-- [Contributing](#contributing)
-- [Roadmap](#roadmap)
+---
+
+<div align="center"><p>
+
+[Features]: #features
+[Structure]: #structure
+[Getting Started]: #getting-started
+[Usage]: #usage
+[Architecture]: #architecture
+[Contributing]: #contributing
+[Roadmap]: #roadmap
+
+**[<kbd><br> Features <br></kbd>][Features]**
+**[<kbd><br> Structure <br></kbd>][Structure]**
+**[<kbd><br> Getting Started <br></kbd>][Getting Started]**
+**[<kbd><br> Usage <br></kbd>][Usage]**
+**[<kbd><br> Architecture <br></kbd>][Architecture]**
+**[<kbd><br> Contributing <br></kbd>][Contributing]**
+**[<kbd><br> Roadmap <br></kbd>][Roadmap]**
+
+</p></div>
+
+---
 
 ## ✨ Features
 
@@ -59,13 +86,13 @@ A modular and extensible NixOS configuration system using a custom star-based ar
 
 1. Install the `just` command runner:
 
-```bash
+```sh
 nix-env -iA nixpkgs.just
 ```
 
 2. Bootstrap a new system:
 
-```bash
+```sh
 just bootstrap <hostname>
 ```
 
@@ -78,7 +105,7 @@ This will:
 
 3. Generate SOPS key (if using secrets):
 
-```bash
+```sh
 just sops-key
 ```
 
@@ -90,7 +117,7 @@ just sops-key
 
 5. Deploy the configuration:
 
-```bash
+```sh
 just switch <hostname>
 ```
 
@@ -98,7 +125,7 @@ just switch <hostname>
 
 ### System Management
 
-```bash
+```sh
 # Build and switch to configuration
 just switch <hostname>
 
@@ -114,7 +141,7 @@ just clean [days]
 
 ### Development Tasks
 
-```bash
+```sh
 # Format nix files
 just fmt
 
@@ -133,7 +160,7 @@ just show-diff
 
 ### Update Management
 
-```bash
+```sh
 # Update all flake inputs
 just update
 
@@ -150,7 +177,8 @@ just update-input <input-name>
 
 ### The Star System
 
-Stars are the fundamental building blocks of this configuration. Each star is a self-contained NixOS module that can be composed with others.
+Stars are the fundamental building blocks of this configuration. Each star is a
+self-contained NixOS module that can be composed with others.
 
 ```nix
 # Example star structure
@@ -207,7 +235,9 @@ Secrets are managed using sops-nix with age encryption:
 
 ### Commit Message Convention
 
-This repository uses [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). Each commit message should be structured as:
+This repository uses
+[conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). Each
+commit message should be structured as:
 
 ```
 <type>(<scope>)[!]: <description>
@@ -217,8 +247,8 @@ This repository uses [conventional commits](https://www.conventionalcommits.org/
 [BREAKING CHANGE: ][footer]
 ```
 
-Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`
-Scopes: See `.commitlintrc.yml` for valid scopes
+Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`,
+`ci`, `chore` Scopes: See `.commitlintrc.yml` for valid scopes
 
 ## 📋 Roadmap
 

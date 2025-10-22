@@ -29,14 +29,18 @@ rules:
       - network
       - security
       - virtualization
+      - web
       # NixOS-specific
       - nixos
       - flake
       - pkgs
       - module
+      - direnv
+      - home-manager
       # Constellation names
       - cassiopeia
       - cetus
+      - cygnus
       - hercules
       - ursamajor
       # Core components
@@ -49,15 +53,23 @@ rules:
       - hyprland
       # Applications
       - arduino
+      - asusd
       - atac
       - cachix
       - btop
       - discord
+      - disko
       - dust
       - firefox
+      - godot
       - hercules-ci
+      - jq
+      - just
       - kitty
-      - loclasend
+      - lix
+      - localsend
+      - nh
+      - nom
       - nvim
       - obsidian
       - ollama
@@ -68,9 +80,12 @@ rules:
       - qemu/kvm
       - qbittorrent
       - qflipper
+      - searchix
       - switcheroo
       - thunderbird
       - typer
+      - vaultwarden
+      - vlc
       - zsh
       # Subsystems
       - audio

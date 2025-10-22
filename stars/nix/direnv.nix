@@ -1,0 +1,16 @@
+{config, ...}: {
+  home-manager.users.${config.stars.mainUser}.programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+    enableNushellIntegration = true;
+    enableZshIntegration = true;
+
+    config = {
+      global = {
+        hide_env_diff = true;
+      };
+    };
+  };
+}

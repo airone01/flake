@@ -2,7 +2,6 @@
   description = "r1's increasingly-less-simple NixOS config";
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,41 +10,47 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    schizofox = {
-      url = "github:schizofox/schizofox";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    searchix.url = "git+https://codeberg.org/alanpearce/searchix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    systems.url = "github:nix-systems/default";
-    systems-linux.url = "github:nix-systems/default-linux";
   };
 
   outputs = {
     home-manager,
     nixpkgs,
     nixos-generators,
+    nixos-wsl,
+    searchix,
+    sops-nix,
     ...
   } @ inputs: let
     inherit (nixpkgs) lib;
 
-    # Systems definition
-    eachSystem = f: lib.genAttrs (import inputs.systems) (system: f system);
-    eachLinuxSystem = f: lib.genAttrs (import inputs.systems-linux) (system: f system);
+    defaultDarwinSystems = [
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    defaultLinuxSystems = [
+      "aarch64-linux"
+      "x86_64-linux"
+    ];
+    defaultSystems = defaultDarwinSystems ++ defaultLinuxSystems;
 
-    # Performance and caching
-    optimizations = import ./lib/optimizations.nix {inherit (inputs.nixpkgs) lib;};
+    # Systems definition
+    eachSystem = f: lib.genAttrs defaultSystems (system: f system);
+    eachLinuxSystem = f: lib.genAttrs defaultLinuxSystems (system: f system);
 
     # Packages list
     outImages = ["ursamajor"];
-    outFormats = ["install-iso"];
+    outFormats = ["install-iso" "iso"];
 
     # Utility functions
     combineArrays = arr1: arr2: f:
@@ -66,13 +71,8 @@
         inherit system format;
 
         modules = [
-          # Optimization module
-          optimizations.mkOptimizationConfig
-            # Libraries
           home-manager.nixosModules.default
-          inputs.sops-nix.nixosModules.sops
           ./lib/core.nix
-          # Actual modules
           ./constellations/${hostName}/configuration.nix
         ];
       };
@@ -80,6 +80,7 @@
     mkConstellationForNixosConfiguration = {
       constellations,
       system ? "x86_64-linux",
+      extraModules ? [],
     }:
       lib.genAttrs constellations (name:
         nixpkgs.lib.nixosSystem {
@@ -88,36 +89,49 @@
           };
           inherit system;
 
-          modules = [
-            # Optimization module
-            optimizations.mkOptimizationConfig
-            # Libraries
-            home-manager.nixosModules.home-manager
-            inputs.sops-nix.nixosModules.sops
-            ./lib/core.nix
-            # Actual modules
-            ./constellations/${name}/configuration.nix
-          ];
+          modules =
+            [
+              home-manager.nixosModules.home-manager
+              nixos-wsl.nixosModules.default
+              searchix.nixosModules.web
+              sops-nix.nixosModules.sops
+              ./lib/core.nix
+              ./constellations/${name}/configuration.nix
+            ]
+            ++ extraModules;
         });
-
-    mkPackages = system:
-      combineArrays outImages outFormats (
-        hostName: format:
-          mkConstellationForPackage system format hostName
-      );
   in {
     # NixOS configurations
     nixosConfigurations =
       mkConstellationForNixosConfiguration {
-        constellations = ["cassiopeia" "cetus"];
+        constellations = ["cassiopeia" "cetus" "cygnus"];
+        extraModules = [
+          ({pkgs, ...}: {
+            _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;
+          })
+        ];
       }
       // mkConstellationForNixosConfiguration {
         system = "aarch64-linux";
         constellations = ["hercules"];
+        extraModules = [
+          ({pkgs, ...}: {
+            _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;
+          })
+        ];
       };
 
-    # Packages, including temporary setups (ISO images)
-    packages = eachLinuxSystem (system: mkPackages system);
+    packages = eachLinuxSystem (
+      system: let
+        pkgs = import nixpkgs {inherit system;};
+        customPackages = import ./packages {inherit pkgs lib;};
+        isoPackages = combineArrays outImages outFormats (
+          hostName: format:
+            mkConstellationForPackage system format hostName
+        );
+      in
+        customPackages // isoPackages
+    );
 
     # Rockets
     devShells = eachSystem (system: {

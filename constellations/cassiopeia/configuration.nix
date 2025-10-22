@@ -1,6 +1,10 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   networking.hostName = "cassiopeia";
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
   time.timeZone = "Europe/Paris";
 
   stars.mainUser = "r1";
@@ -10,16 +14,17 @@
     ../../asterisms/desktop.nix
 
     # Additional stars
-    #../../stars/boot/plymouth.nix
-    ../../stars/game/prismlauncher.nix
-    ../../stars/kbd/fr.nix
-    ../../stars/virt/qemu.nix
+    #../../stars/sys/boot/plymouth.nix
+    ../../stars/game/all.nix
+    ../../stars/sys/kbd/fr.nix
+    ../../stars/de-wm/hyprland.nix
 
     # Hardware
     ./hardware-configuration.nix
+    ../../stars/sys/vendor/asusd.nix
   ];
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   # NVIDIA PRIME setup
   hardware.nvidia = {
