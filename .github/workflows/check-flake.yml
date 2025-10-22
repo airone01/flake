@@ -10,6 +10,7 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    if: github.event_name != 'push' || github.event.pull_request == null
     steps:
       - uses: actions/checkout@v4
       - name: Install Nix

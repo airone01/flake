@@ -11,20 +11,26 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      pr_number: ${{ steps.release.outputs.pr && fromJSON(steps.release.outputs.pr).number }}
+      prs_created: ${{ steps.release.outputs.prs_created }}
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - uses: googleapis/release-please-action@v4
+        id: release
         with:
-          release-type: simple
-          package-name: nixos-config
-          default-branch: main
-          include-v-in-tag: true
-          pull-request-title-pattern: "chore(main): release ${version}"
-          changelog-types: |
-            [
-              {"type":"feat","section":"Features","hidden":false},
-              {"type":"fix","section":"Bug Fixes","hidden":false},
-              {"type":"docs","section":"Documentation","hidden":false},
-              {"type":"refactor","section":"Code Refactoring","hidden":false},
-              {"type":"perf","section":"Performance Improvements","hidden":false},
-              {"type":"build","section":"Build System","hidden":false}
-            ]
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+      - name: Auto-approve release PR
+        if: ${{ steps.release.outputs.prs_created == 'true' }}
+        run: gh pr review --approve "$PR_NUMBER"
+        env:
+          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr).number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Enable auto-merge
+        if: ${{ steps.release.outputs.prs_created == 'true' }}
+        run: gh pr merge --auto --squash "$PR_NUMBER"
+        env:
+          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr).number }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+
