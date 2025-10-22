@@ -5,7 +5,6 @@
     ./fs/ripgrep.nix
     ./mux/zellij.nix
     ./monitor/btop.nix
-    ./versioning/git.nix
     ./versioning/gh.nix
   ];
 

@@ -1,7 +1,10 @@
-_: {
+{pkgs, ...}: {
   imports = [
-    ./prismlauncher.nix
     ./steam.nix
-    ./typer.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    prismlauncher
+    typer
   ];
 }
