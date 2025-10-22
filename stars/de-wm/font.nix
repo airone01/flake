@@ -22,7 +22,7 @@
     fonts.fontconfig = {
       enable = true;
 
-      defaultFonts.monospace = ["ShureTechMono Nerd"];
+      defaultFonts.monospace = ["ShureTechMono Nerd Font"];
     };
   };
 }
