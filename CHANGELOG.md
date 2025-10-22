@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/airone01/flake/compare/v2.1.1...v3.0.0) (2025-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **flake:** remove support for iso packages
+
+### Bug Fixes
+
+* **flake:** remove ursamajor ([#31](https://github.com/airone01/flake/issues/31)) ([80e60f9](https://github.com/airone01/flake/commit/80e60f921dafaff7514c7f1917509f29ec7a849b))
+
 ## [2.1.1](https://github.com/airone01/flake/compare/v2.1.0...v2.1.1) (2025-10-22)
 
 
