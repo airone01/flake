@@ -11,4 +11,3 @@
 - f alias for pay-respects
 - stylix for colors
   - wallpapers are declarative
-- github actions
