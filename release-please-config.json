@@ -3,7 +3,7 @@
   "packages": {
     ".": {
       "release-type": "simple",
-      "package-name": "nixos-config",
+      "package-name": "flake",
       "include-v-in-tag": true,
       "pull-request-title-pattern": "chore(main): release ${version}",
       "changelog-sections": [
