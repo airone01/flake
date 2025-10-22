@@ -11,10 +11,8 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
-    outputs:
-      pr_number: ${{ steps.release.outputs.pr && fromJSON(steps.release.outputs.pr).number }}
-      prs_created: ${{ steps.release.outputs.prs_created }}
     steps:
+      - uses: actions/checkout@v4
       - uses: googleapis/release-please-action@v4
         id: release
         with:
@@ -22,15 +20,20 @@ jobs:
           manifest-file: .release-please-manifest.json
           token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
       - name: Auto-approve release PR
-        if: ${{ steps.release.outputs.prs_created == 'true' }}
+        if: steps.release.outputs.prs_created == 'true'
         run: gh pr review --approve "$PR_NUMBER"
         env:
-          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr).number }}
+          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr || '{}').number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Enable auto-merge
-        if: ${{ steps.release.outputs.prs_created == 'true' }}
-        run: gh pr merge --auto --squash "$PR_NUMBER"
+        if: steps.release.outputs.prs_created == 'true'
+        run: |
+          if [ -z "$PR_NUMBER" ]; then
+            echo "No PR number found"
+            exit 0
+          fi
+          gh pr merge --auto --squash "$PR_NUMBER"
         env:
-          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr).number }}
+          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr || '{}').number }}
           GITHUB_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN }}
 
