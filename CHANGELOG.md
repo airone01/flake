@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/airone01/flake/compare/nixos-config-v4.0.1...nixos-config-v4.1.0) (2025-10-22)
+
+
+### Features
+
+* **home-manager:** add more git aliases ([#38](https://github.com/airone01/flake/issues/38)) ([c32c19d](https://github.com/airone01/flake/commit/c32c19d7478b905ae7a4ce988a27d900328b7c18))
+
 ## [4.0.1](https://github.com/airone01/flake/compare/nixos-config-v4.0.0...nixos-config-v4.0.1) (2025-10-22)
 
 
