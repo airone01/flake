@@ -23,7 +23,7 @@
       gtcc = "git checkout";
       gtd = "git diff";
       gtdc = "git diff --cached";
-      gtrm = "git remove --cached";
+      gtrm = "git rm --cached";
       gtp = "git push";
       gtpl = "git pull";
 
