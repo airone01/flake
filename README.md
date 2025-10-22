@@ -7,197 +7,41 @@
   <img alt="Apache-2.0 license" src="https://img.shields.io/badge/License-Apache--2.0-ef00c7?style=flat-square&logo=creativecommons&logoColor=fff&labelColor=020617">
   <img alt="Made with Nix" src="https://img.shields.io/badge/Made_with-Nix-ff2b89?style=flat-square&logo=nixos&logoColor=fff&labelColor=020617">
   <img alt="Release version" src="https://img.shields.io/github/v/release/airone01/flake?style=flat-square&logo=nixos&logoColor=fff&label=Release&labelColor=020617&color=ff8059">
-  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/airone01/diem?style=flat-square&logo=github&labelColor=020617&color=ffc248&label=Contributors">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/airone01/diem?style=flat-square&logo=github&labelColor=020617&color=f9f871&label=Last%20commit">
+  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/airone01/flake?style=flat-square&logo=github&labelColor=020617&color=ffc248&label=Contributors">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/airone01/flake?style=flat-square&logo=github&labelColor=020617&color=f9f871&label=Last%20commit">
 </h4>
 
-A modular and extensible NixOS configuration system using a custom star-based
-architecture. This repository contains my personal NixOS configurations for
-multiple machines and deployments, managed with a comprehensive task runner.
+This repository contains my personal NixOS configurations for multiple machines
+and deployments. It's very faulty to say the least, but I love it.
 
----
+## Key Components
 
-<div align="center"><p>
-
-[Features]: #features
-[Structure]: #structure
-[Getting Started]: #getting-started
-[Usage]: #usage
-[Architecture]: #architecture
-[Contributing]: #contributing
-[Roadmap]: #roadmap
-
-**[<kbd><br> Features <br></kbd>][Features]**
-**[<kbd><br> Structure <br></kbd>][Structure]**
-**[<kbd><br> Getting Started <br></kbd>][Getting Started]**
-**[<kbd><br> Usage <br></kbd>][Usage]**
-**[<kbd><br> Architecture <br></kbd>][Architecture]**
-**[<kbd><br> Contributing <br></kbd>][Contributing]**
-**[<kbd><br> Roadmap <br></kbd>][Roadmap]**
-
-</p></div>
-
----
-
-## ✨ Features
-
-- 🌟 Modular "star" system for composable configurations
-- 🛠️ Comprehensive task runner using Just
-- 🔒 Secret management with sops-nix
-- 🚀 Development shells for various tasks
-- 📦 Multiple machine configurations
-- 🔄 Automated formatting and checks
-- 💾 ISO generation capabilities
-- 📁 Direnv support
-
-## 🏗️ Structure
-
-```
-.
-├── asterisms/        # High-level configuration combinations
-├── constellations/   # Machine-specific configurations
-│   ├── aquarius/    # Server configuration
-│   ├── cassiopeia/  # Desktop configuration
-│   └── ursamajor/   # ISO configuration
-├── lib/             # Helper functions and core modules
-├── rockets/         # Development shells
-├── secrets/         # Encrypted secrets (using sops-nix)
-└── stars/           # Modular configuration units
-```
-
-### Key Components
-
-- **Stars**: Individual configuration modules that can be composed together
+- **Stars**: Individual configuration parts. Can vary from a HM config to a list
+  of packages
 - **Asterisms**: Predefined combinations of stars for specific use cases
 - **Constellations**: Complete system configurations for specific machines
 - **Rockets**: Development environments for specific tasks
 - **Secrets**: Encrypted configuration secrets managed with sops-nix
 
-## 🚀 Getting Started
-
-### Prerequisites
+## Prerequisites
 
 - NixOS or Nix with flakes enabled
 - Git
-- `just` command runner
-- (Optional) sops for secret management
+- (Optional) `just` command runner
 
-### Installation
-
-1. Install the `just` command runner:
-
-```sh
-nix-env -iA nixpkgs.just
-```
-
-2. Bootstrap a new system:
-
-```sh
-just bootstrap <hostname>
-```
-
-This will:
-
-- Set up the nix channels
-- Install required tools
-- Clone the repository
-- Prepare the system for configuration
-
-3. Generate SOPS key (if using secrets):
-
-```sh
-just sops-key
-```
-
-4. Review and modify the configuration:
-
-   - Choose or create a constellation in `constellations/`
-   - Modify `flake.nix` to include your system
-   - Adjust hardware configuration as needed
-
-5. Deploy the configuration:
-
-```sh
-just switch <hostname>
-```
-
-## 🛠️ Usage
-
-### System Management
-
-```sh
-# Build and switch to configuration
-just switch <hostname>
-
-# Test configuration without applying
-just test <hostname>
-
-# Build ISO image
-just iso [system] [format]
-
-# Clean old generations
-just clean [days]
-```
-
-### Development Tasks
-
-```sh
-# Format nix files
-just fmt
-
-# Check formatting
-just fmt-check
-
-# Run flake checks
-just check
-
-# Enter development shell
-just develop [shell-name]
-
-# Show changes to nix files
-just show-diff
-```
-
-### Update Management
-
-```sh
-# Update all flake inputs
-just update
-
-# Update specific input
-just update-input <input-name>
-```
-
-### Available Development Shells
+## Development Shells
 
 - `commitlint`: For commit message linting
 - `default`: Contains tools to program in this repo
 
-## 🏛️ Architecture
-
-### The Star System
-
-Stars are the fundamental building blocks of this configuration. Each star is a
-self-contained NixOS module that can be composed with others.
-
-```nix
-# Example star structure
-stars/
-├── gui/             # GUI-related configurations
-│   ├── gnome.nix
-│   └── hyprland.nix
-├── cli/             # CLI tool configurations
-│   └── nvim/
-└── core/            # Core system configurations
-    └── sound.nix
-```
+## Architecture
 
 ### Flake Structure
 
 The `flake.nix` provides:
 
 - **nixosConfigurations**: System configurations for each machine
-- **packages**: Installable packages and ISO images
+- **packages**: Installable packages
 - **devShells**: Development environments
 
 ### Secret Management
@@ -209,7 +53,7 @@ Secrets are managed using sops-nix with age encryption:
 - Each constellation can access only its required secrets
 - Generate keys with `just sops-key`
 
-## 📦 Machines
+## Machines
 
 ### aquarius
 
@@ -218,85 +62,31 @@ Secrets are managed using sops-nix with age encryption:
 ### cassiopeia
 
 - Purpose: Desktop workstation
-- Features: GNOME desktop, development tools
 - Status: Active
 
 ### cetus
 
 - Purpose: Home server
-- Services: Traefik, planned hosting for various services
 - Status: Active
 
 ### ursamajor
 
-- Purpose: Installation ISO
-- Features: Basic system for testing and installation
-- Status: In Development
+- Status: Abandonned
 
 ### Commit Message Convention
 
 This repository uses
-[conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). Each
-commit message should be structured as:
+[conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). See
+[`.commitlintrc.yml`](.commitlintrc.yml) for the config.
 
-```
-<type>(<scope>)[!]: <description>
+## License
 
-[body]
+This project is open source and available under the
+[Apache v2 license](/LICENSE).
 
-[BREAKING CHANGE: ][footer]
-```
-
-Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`,
-`ci`, `chore` Scopes: See `.commitlintrc.yml` for valid scopes
-
-## 📋 Roadmap
-
-| Category       | Task                                           | Priority | Status             |
-| -------------- | ---------------------------------------------- | -------- | ------------------ |
-| Documentation  | Add installation guides for each constellation | High     | 🟡 Pending         |
-| Testing        | Add GitHub Actions workflows                   | High     | 🟢 Complete        |
-| Testing        | Implement basic system tests                   | Medium   | 🔴 Not Started     |
-| Testing        | Add Nix formatting checks                      | High     | 🟢 Complete        |
-| Security       | Implement firewall configuration               | High     | 🔴 Not Started     |
-| Security       | Add fail2ban configuration                     | Medium   | 🔴 Not Started     |
-| Security       | Configure automatic security updates           | High     | 🔴 Not Started     |
-| Security       | Implement SSH hardening                        | High     | 🔴 Not Started     |
-| Backup         | Add restic/borgbackup configuration            | High     | 🔴 Not Started     |
-| Monitoring     | Set up Prometheus + Grafana                    | Medium   | 🔴 Not Started     |
-| Infrastructure | Add Hydra instance                             | Low      | 🟢 Complete        |
-| Infrastructure | Add TeamCity instance                          | Low      | 🔴 Not Started     |
-| Infrastructure | Add Attic binary cache                         | Medium   | 🔴 Not Started     |
-| Infrastructure | Add Mastodon frontend                          | Low      | 🟢 Complete        |
-| Infrastructure | Add Lemmy instance                             | Low      | 🔴 Not Started     |
-| Infrastructure | Add Invidious instance                         | Low      | 🔴 Not Started     |
-| Infrastructure | Add SearXNG instance                           | Medium   | 🔴 Not Started     |
-| Infrastructure | Add Gitea instance                             | Medium   | 🟢 Complete        |
-| Infrastructure | Add Jellyfin instance                          | Low      | 🔴 Not Started     |
-| Infrastructure | Add Vaultwarden instance                       | Low      | 🔴 Not Started     |
-| Infrastructure | Add Home Assistant instance                    | Low      | 🔴 Not Started     |
-| Infrastructure | Add Paperless-ngx instance                     | Low      | 🔴 Not Started     |
-| Infrastructure | Add Syncthing instance                         | Low      | 🔴 Not Started     |
-| Infrastructure | Add Calibre-Web instance                       | Low      | 🔴 Not Started     |
-| Infrastructure | Add Photoprism instance                        | Low      | 🔴 Not Started     |
-| Architecture   | Task runner implementation                     | High     | 🟢 Complete        |
-| Architecture   | Figuring all of this out                       | High     | 🟣 Always going on |
-
-Legend:
-
-- 🟢 Complete
-- 🟡 In Progress/Partial
-- 🔴 Not Started
-- 🟣 Special
-
-## 📄 License
-
-This project is open source and available under the Apache v2 license.
-
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [NixOS](https://nixos.org/) for the amazing Linux distribution
 - All the fantastic Nix community members who share their configurations
 - [NotAShelf](https://github.com/NotAShelf) for inspiration
-- [casey/just](https://github.com/casey/just) for the fantastic command runner
 - Contributors to all the tools and packages used in this configuration
