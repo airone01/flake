@@ -26,6 +26,10 @@
       gtrm = "git remove --cached";
       gtp = "git push";
       gtpl = "git pull";
+
+      # just
+      jts = "just switch";
+      jtc = "just check";
     };
 
     programs = {
