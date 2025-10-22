@@ -39,5 +39,6 @@ _: {
       enable = true;
       format.type = "biome";
     };
+    yaml.enable = true;
   };
 }
