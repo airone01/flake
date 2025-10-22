@@ -1,7 +1,9 @@
-_: {
+{pkgs, ...}: {
   imports = [
     ./nvim
-    ./arduino.nix
-    # ./cursor.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    arduino
   ];
 }

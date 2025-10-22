@@ -1,8 +1,16 @@
-_: {
+{pkgs, ...}: {
   imports = [
-    ./c.nix
-    ./cmake.nix
-    ./python.nix
     ./rust.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    # C/C++
+    gnumake
+    cmake
+
+    # Python
+    pipx
+    python313
+    python313Packages.pip
   ];
 }
