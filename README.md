@@ -25,23 +25,12 @@ and deployments. It's very faulty to say the least, but I love it.
 
 ## Machines
 
-**aquarius**
-
-- Status: Abandonned
-
-**cassiopeia**
-
-- Purpose: Desktop workstation
-- Status: Active
-
-**cetus**
-
-- Purpose: Home server
-- Status: Active
-
-**ursamajor**
-
-- Status: Abandonned
+| **Name**   | **Purpose** | **Status** |
+| ---------- | ----------- | ---------- |
+| aquarius   |             | Abandoned  |
+| cassiopeia | Laptop      | Active     |
+| cetus      | Homelab     | Active     |
+| ursamajor  |             | Abandoned  |
 
 ### Commit Message Convention
 
