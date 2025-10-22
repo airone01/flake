@@ -16,9 +16,16 @@
       zz = "zellij";
 
       # git
-      gts = "git status";
+      gts = "git status -s";
       gta = "git add";
+      gtaa = "git add .";
       gtc = "git commit";
+      gtcc = "git checkout";
+      gtd = "git diff";
+      gtdc = "git diff --cached";
+      gtrm = "git remove --cached";
+      gtp = "git push";
+      gtpl = "git pull";
     };
 
     programs = {
@@ -27,12 +34,6 @@
         enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
-
-        initContent = ''
-          compdef l=eza
-          compdef ll=eza
-          compdef zz=zellij
-        '';
 
         plugins = [
           {
