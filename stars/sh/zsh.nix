@@ -13,7 +13,12 @@
       l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons=auto";
       ll = "eza -laab --icons=auto --git --group";
       neofetch = "pfetch";
-      zz = "zellij -l compact";
+      zz = "zellij";
+
+      # git
+      gts = "git status";
+      gta = "git add";
+      gtc = "git commit";
     };
 
     programs = {
@@ -28,6 +33,18 @@
           compdef ll=eza
           compdef zz=zellij
         '';
+
+        plugins = [
+          {
+            name = "fzf-tab";
+            src = pkgs.fetchFromGitHub {
+              owner = "Aloxaf";
+              repo = "fzf-tab";
+              rev = "v1.1.2";
+              sha256 = "sha256-Qv8zAiMtrr67CbLRrFjGaPzFZcOiMVEFLg1Z+N6VMhg=";
+            };
+          }
+        ];
       };
     };
   };

@@ -8,6 +8,7 @@
       nerd-fonts.jetbrains-mono
       nerd-fonts.fira-code
       nerd-fonts.fira-mono
+      nerd-fonts.shure-tech-mono
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
@@ -21,7 +22,7 @@
     fonts.fontconfig = {
       enable = true;
 
-      defaultFonts.monospace = ["JetBrainsMono Nerd"];
+      defaultFonts.monospace = ["ShureTechMono Nerd"];
     };
   };
 }

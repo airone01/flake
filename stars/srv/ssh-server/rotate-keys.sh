@@ -5,14 +5,14 @@ set -euo pipefail
 
 # Check if running as root
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root"
-   exit 1
+  echo "This script must be run as root"
+  exit 1
 fi
 
 # Make sure we have an argument
 if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <hostname>"
-    exit 1
+  echo "Usage: $0 <hostname>"
+  exit 1
 fi
 
 HOSTNAME="$1"
@@ -50,7 +50,7 @@ RSA_FP=$(ssh-keygen -lf ${SSH_DIR}/ssh_host_rsa_key.pub | awk '{print $2}')
 ED25519_FP=$(ssh-keygen -lf ${SSH_DIR}/ssh_host_ed25519_key.pub | awk '{print $2}')
 
 # Create or update the key file
-cat > "$KEY_FILE" << EOF
+cat >"$KEY_FILE" <<EOF
 {
   # Host-specific SSH key configuration for $HOSTNAME
   # Generated on $(date)

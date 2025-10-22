@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # Get the commit message (first argument is the file containing the message)
 MSG_FILE=$1

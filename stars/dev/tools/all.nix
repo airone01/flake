@@ -2,6 +2,7 @@ _: {
   imports = [
     ./cicd/act.nix
 
+    ./data/fzf.nix
     ./data/jq.nix
 
     ./docs/manual.nix

@@ -37,12 +37,11 @@ ip route
 
 echo -e "\n=== Testing connection to peer ==="
 if [ "$(hostname)" == "hercules" ]; then
-    PEER_IP=$(grep -A 3 "\[hosts.cetus.wireguard\]" $NIXOS_CONFIG_PATH/stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
-    echo "Attempting to ping cetus at ${PEER_IP}..."
+  PEER_IP=$(grep -A 3 "\[hosts.cetus.wireguard\]" $NIXOS_CONFIG_PATH/stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
+  echo "Attempting to ping cetus at ${PEER_IP}..."
 else
-    PEER_IP=$(grep -A 3 "\[hosts.hercules.wireguard\]" $NIXOS_CONFIG_PATH/stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
-    echo "Attempting to ping hercules at ${PEER_IP}..."
+  PEER_IP=$(grep -A 3 "\[hosts.hercules.wireguard\]" $NIXOS_CONFIG_PATH/stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
+  echo "Attempting to ping hercules at ${PEER_IP}..."
 fi
 
 ping -c 3 -W 2 ${PEER_IP} || echo "Ping failed!"
-
