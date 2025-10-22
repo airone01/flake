@@ -1,5 +1,16 @@
 # Changelog
 
+## [6.0.0](https://github.com/airone01/flake/compare/flake-v5.0.0...flake-v6.0.0) (2025-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **stars:** stars are not atomic anymore.
+
+### Bug Fixes
+
+* **stars:** patch most apps being in home-manager ([#42](https://github.com/airone01/flake/issues/42)) ([19029b9](https://github.com/airone01/flake/commit/19029b91be0b74f5c572d52450dc66f88e15c071))
+
 ## [5.0.0](https://github.com/airone01/flake/compare/flake-v4.1.0...flake-v5.0.0) (2025-10-22)
 
 
