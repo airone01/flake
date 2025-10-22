@@ -35,6 +35,8 @@ rules:
       - flake
       - pkgs
       - module
+      - direnv
+      - home-manager
       # Constellation names
       - cassiopeia
       - cetus
@@ -89,7 +91,6 @@ rules:
       - audio
       - video
       - nvidia
-      - home-manager
       # Development
       - dev
       - python
