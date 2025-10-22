@@ -3,8 +3,6 @@
   config,
   ...
 }: {
-  # TODO: use better firefox here
-
   home-manager.users.${config.stars.mainUser} = {
     programs.firefox = {
       enable = true;
@@ -13,4 +11,8 @@
       nativeMessagingHosts = with pkgs; [gnome-browser-connector];
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    firefox
+  ];
 }

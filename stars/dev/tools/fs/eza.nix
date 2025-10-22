@@ -112,4 +112,8 @@
       broken_path_overlay: { foreground: "#ff007c" }
     '';
   };
+
+  environment.systemPackages = with pkgs; [
+    eza
+  ];
 }

@@ -1,26 +1,18 @@
-_: {
+{pkgs, ...}: {
   imports = [
-    ./file-transfer/localsend.nix
-    ./file-transfer/qbittorrent.nix
-
-    ./game-editor/godot.nix
-
-    ./messaging/discord.nix
-    ./messaging/thunderbird.nix
-
-    ./misc/qFlipper.nix
-
-    ./note-taking/obsidian.nix
-
-    ./term/kitty.nix
-
-    ./video-recorder/obs.nix
-
-    ./video-viewer/vlc.nix
-
-    ./vpn/protonvpn.nix
+    ./file-transfer.nix
+    ./messaging.nix
+    ./note-taking.nix
 
     # ./web-browser/schizofox
     ./web-browser/firefox.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    godot
+    kitty
+    protonvpn-gui
+    qFlipper
+    vlc
   ];
 }

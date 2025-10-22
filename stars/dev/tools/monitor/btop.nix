@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   home-manager.users.${config.stars.mainUser} = {
     programs.btop = {
       enable = true;
@@ -104,4 +108,8 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    btop
+  ];
 }
