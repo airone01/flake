@@ -23,53 +23,23 @@ and deployments. It's very faulty to say the least, but I love it.
 - **Rockets**: Development environments for specific tasks
 - **Secrets**: Encrypted configuration secrets managed with sops-nix
 
-## Prerequisites
-
-- NixOS or Nix with flakes enabled
-- Git
-- (Optional) `just` command runner
-
-## Development Shells
-
-- `commitlint`: For commit message linting
-- `default`: Contains tools to program in this repo
-
-## Architecture
-
-### Flake Structure
-
-The `flake.nix` provides:
-
-- **nixosConfigurations**: System configurations for each machine
-- **packages**: Installable packages
-- **devShells**: Development environments
-
-### Secret Management
-
-Secrets are managed using sops-nix with age encryption:
-
-- Secrets are stored in `secrets/`
-- Keys are configured in `.sops.yaml`
-- Each constellation can access only its required secrets
-- Generate keys with `just sops-key`
-
 ## Machines
 
-### aquarius
+**aquarius**
 
 - Status: Abandonned
 
-### cassiopeia
+**cassiopeia**
 
 - Purpose: Desktop workstation
 - Status: Active
 
-### cetus
+**cetus**
 
 - Purpose: Home server
 - Status: Active
 
-### ursamajor
+**ursamajor**
 
 - Status: Abandonned
 
