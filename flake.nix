@@ -6,10 +6,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nvf = {
@@ -26,7 +22,6 @@
   outputs = {
     home-manager,
     nixpkgs,
-    nixos-generators,
     nixos-wsl,
     searchix,
     sops-nix,
@@ -47,35 +42,6 @@
     # Systems definition
     eachSystem = f: lib.genAttrs defaultSystems (system: f system);
     eachLinuxSystem = f: lib.genAttrs defaultLinuxSystems (system: f system);
-
-    # Packages list
-    outImages = ["ursamajor"];
-    outFormats = ["install-iso" "iso"];
-
-    # Utility functions
-    combineArrays = arr1: arr2: f:
-      builtins.listToAttrs (builtins.concatMap
-        (x:
-          map (y: {
-            name = "${x}-${y}";
-            value = f x y;
-          })
-          arr2)
-        arr1);
-
-    mkConstellationForPackage = system: format: hostName:
-      nixos-generators.nixosGenerate {
-        specialArgs = {
-          inherit inputs;
-        };
-        inherit system format;
-
-        modules = [
-          home-manager.nixosModules.default
-          ./lib/core.nix
-          ./constellations/${hostName}/configuration.nix
-        ];
-      };
 
     mkConstellationForNixosConfiguration = {
       constellations,
@@ -125,12 +91,8 @@
       system: let
         pkgs = import nixpkgs {inherit system;};
         customPackages = import ./packages {inherit pkgs lib;};
-        isoPackages = combineArrays outImages outFormats (
-          hostName: format:
-            mkConstellationForPackage system format hostName
-        );
       in
-        customPackages // isoPackages
+        customPackages
     );
 
     # Rockets
