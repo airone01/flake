@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.1](https://github.com/airone01/flake/compare/flake-v6.0.0...flake-v6.0.1) (2025-11-02)
+
+
+### Bug Fixes
+
+* **flake:** implement stylix ([3590c06](https://github.com/airone01/flake/commit/3590c0650ac40ed40f8cfb3b54161fb3be53756d))
+* **flake:** patch some hyprland ([45de529](https://github.com/airone01/flake/commit/45de529cb86e46ea548682c737a2ed95a07fa3d0))
+
 ## [6.0.0](https://github.com/airone01/flake/compare/flake-v5.0.0...flake-v6.0.0) (2025-10-22)
 
 
