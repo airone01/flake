@@ -70,7 +70,7 @@ _: {
       enable = true;
 
       # name = "everforest";
-      style = "medium";
+      # style = "medium";
     };
   };
 }
