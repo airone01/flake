@@ -18,11 +18,5 @@
       mplus-outline-fonts.githubRelease
       dina-font
     ];
-
-    fonts.fontconfig = {
-      enable = true;
-
-      defaultFonts.monospace = ["ShureTechMono Nerd Font"];
-    };
   };
 }

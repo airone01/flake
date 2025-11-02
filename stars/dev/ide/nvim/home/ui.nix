@@ -69,7 +69,7 @@ _: {
     theme = {
       enable = true;
 
-      name = "everforest";
+      # name = "everforest";
       style = "medium";
     };
   };

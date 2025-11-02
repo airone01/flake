@@ -17,30 +17,21 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {
-    home-manager,
-    nixpkgs,
-    nixos-wsl,
-    searchix,
-    sops-nix,
-    ...
-  } @ inputs: let
+  outputs = {nixpkgs, ...} @ inputs: let
     inherit (nixpkgs) lib;
 
-    defaultDarwinSystems = [
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
     defaultLinuxSystems = [
       "aarch64-linux"
       "x86_64-linux"
     ];
-    defaultSystems = defaultDarwinSystems ++ defaultLinuxSystems;
 
     # Systems definition
-    eachSystem = f: lib.genAttrs defaultSystems (system: f system);
     eachLinuxSystem = f: lib.genAttrs defaultLinuxSystems (system: f system);
 
     mkConstellationForNixosConfiguration = {
@@ -57,10 +48,11 @@
 
           modules =
             [
-              home-manager.nixosModules.home-manager
-              nixos-wsl.nixosModules.default
-              searchix.nixosModules.web
-              sops-nix.nixosModules.sops
+              inputs.home-manager.nixosModules.home-manager
+              inputs.nixos-wsl.nixosModules.default
+              inputs.searchix.nixosModules.web
+              inputs.sops-nix.nixosModules.sops
+              inputs.stylix.nixosModules.stylix
               ./lib/core.nix
               ./constellations/${name}/configuration.nix
             ]
@@ -96,7 +88,7 @@
     );
 
     # Rockets
-    devShells = eachSystem (system: {
+    devShells = eachLinuxSystem (system: {
       commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
       default = import ./rockets {inherit system nixpkgs;};
     });

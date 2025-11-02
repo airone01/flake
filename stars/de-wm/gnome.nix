@@ -33,10 +33,6 @@
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Ice";
       };
-      theme = {
-        package = pkgs.orchis-theme;
-        name = "Orchis-Orange-Light-Compact";
-      };
       iconTheme = {
         package = pkgs.kora-icon-theme;
         name = "kora";
@@ -74,11 +70,11 @@
     };
 
     desktopManager.gnome.enable = true;
-    # displayManager.gdm = {
-    #   wayland = false;
-    #   enable = true;
-    # };
-    displayManager.ly.enable = true;
+    displayManager.gdm = {
+      wayland = false;
+      enable = true;
+    };
+    # displayManager.ly.enable = true;
 
     # UDEV rules
     udev.packages = with pkgs; [gnome-settings-daemon];
