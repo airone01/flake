@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.1.0](https://github.com/airone01/flake/compare/flake-v6.0.1...flake-v6.1.0) (2025-12-05)
+
+
+### Features
+
+* **lyra:** implement ([0044e40](https://github.com/airone01/flake/commit/0044e400201609ab5cba510bd93824badf739373))
+
 ## [6.0.1](https://github.com/airone01/flake/compare/flake-v6.0.0...flake-v6.0.1) (2025-11-02)
 
 
