@@ -43,6 +43,7 @@ rules:
       - cygnus
       - hercules
       - ursamajor
+      - lyra
       # Core components
       - sops
       - stars

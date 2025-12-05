@@ -66,7 +66,7 @@
     # NixOS configurations
     nixosConfigurations =
       mkConstellationForNixosConfiguration {
-        constellations = ["cassiopeia" "cetus" "cygnus"];
+        constellations = ["cassiopeia" "cetus" "cygnus" "lyra"];
         extraModules = [
           ({pkgs, ...}: {
             _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;

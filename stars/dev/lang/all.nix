@@ -12,5 +12,9 @@
     pipx
     python313
     python313Packages.pip
+
+    # JS/TS
+    bun
+    nodejs
   ];
 }
