@@ -42,38 +42,23 @@
 
   security.rtkit.enable = true;
 
-  # Exclude some default GNOME apps
-  environment.gnome.excludePackages = with pkgs; [
-    epiphany # web browser
-    totem # video player
-    geary # email client
-    gnome-music
-    gnome-tour
-    gnome-console
-    gnome-maps
-    gnome-weather
-    gnome-calendar
-    gnome-contacts
-    gnome-text-editor
-  ];
+  # Enable/disable some default GNOME services and apps
+  environment.gnome.excludePackages = with pkgs; [gnome-tour gnome-user-docs];
+  services.gnome = {
+    core-apps.enable = false;
+    core-developer-tools.enable = false;
+    games.enable = false;
+
+    gnome-keyring.enable = true;
+    gnome-settings-daemon.enable = true;
+  };
 
   users.users.${config.stars.mainUser} = {
     extraGroups = ["networkmanager" "video"];
   };
 
   services = {
-    # X11 config
-    xserver = {
-      enable = true;
-
-      windowManager.xmonad.enable = false;
-    };
-
     desktopManager.gnome.enable = true;
-    # displayManager.gdm = {
-    #   wayland = false;
-    #   enable = true;
-    # };
     displayManager.ly.enable = true;
 
     # UDEV rules
@@ -83,13 +68,6 @@
     dbus = {
       enable = true;
       packages = with pkgs; [gnome2.GConf];
-    };
-
-    # Enable GNOME-specific services
-    gnome = {
-      gnome-keyring.enable = true;
-      gnome-online-accounts.enable = true;
-      gnome-settings-daemon.enable = true;
     };
   };
 }
