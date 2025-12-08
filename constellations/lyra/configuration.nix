@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   networking.hostName = "lyra";
   system.stateVersion = "25.11"; # never change this
   time.timeZone = "Europe/Paris";
@@ -17,6 +13,7 @@
     #../../stars/sys/boot/plymouth.nix
     ../../stars/game/all.nix
     # ../../stars/de-wm/hyprland.nix
+    # ../../stars/r1/stylix.nix
 
     # Hardware
     ./hardware-configuration.nix

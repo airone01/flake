@@ -70,11 +70,11 @@
     };
 
     desktopManager.gnome.enable = true;
-    displayManager.gdm = {
-      wayland = false;
-      enable = true;
-    };
-    # displayManager.ly.enable = true;
+    # displayManager.gdm = {
+    #   wayland = false;
+    #   enable = true;
+    # };
+    displayManager.ly.enable = true;
 
     # UDEV rules
     udev.packages = with pkgs; [gnome-settings-daemon];

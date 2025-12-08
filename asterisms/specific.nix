@@ -7,6 +7,5 @@ _: {
     # My specific stuff
     # ../stars/r1/email.nix
     ../stars/r1/git.nix
-    ../stars/r1/stylix.nix
   ];
 }
