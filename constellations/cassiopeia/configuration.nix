@@ -18,6 +18,7 @@
     ../../stars/game/all.nix
     ../../stars/sys/kbd/fr.nix
     # ../../stars/de-wm/hyprland.nix
+    ../../stars/r1/stylix.nix
 
     # Hardware
     ./hardware-configuration.nix
@@ -55,6 +56,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    glxinfo # Nvidia settings
+    mesa-demos # Nvidia settings
   ];
 }
