@@ -30,6 +30,7 @@ and deployments. It's very faulty to say the least, but I love it.
 | aquarius   |             | Abandoned  |
 | cassiopeia | Laptop      | Active     |
 | cetus      | Homelab     | Active     |
+| lyra       | Main PC     | Active     |
 | ursamajor  |             | Abandoned  |
 
 ### Commit Message Convention
