@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.1.1](https://github.com/airone01/flake/compare/flake-v6.1.0...flake-v6.1.1) (2025-12-08)
+
+
+### Bug Fixes
+
+* update flake.lock ([a814b56](https://github.com/airone01/flake/commit/a814b56acf2ff37e6974b087e6b8b42c5dc75978))
+
 ## [6.1.0](https://github.com/airone01/flake/compare/flake-v6.0.1...flake-v6.1.0) (2025-12-05)
 
 
