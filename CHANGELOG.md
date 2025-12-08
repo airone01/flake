@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.1.2](https://github.com/airone01/flake/compare/flake-v6.1.1...flake-v6.1.2) (2025-12-08)
+
+
+### Documentation
+
+* **readme:** document lyra ([8e6f497](https://github.com/airone01/flake/commit/8e6f497895b155f70a10a32be7d9dc49345251b7))
+
 ## [6.1.1](https://github.com/airone01/flake/compare/flake-v6.1.0...flake-v6.1.1) (2025-12-08)
 
 
