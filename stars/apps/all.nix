@@ -14,5 +14,7 @@
     protonvpn-gui
     qFlipper
     vlc
+    mc # midnight commander file manager
+    ranger # file manager
   ];
 }

@@ -13,7 +13,7 @@
     #../../stars/sys/boot/plymouth.nix
     ../../stars/game/all.nix
     # ../../stars/de-wm/hyprland.nix
-    ../../stars/r1/stylix.nix
+    # ../../stars/r1/stylix.nix
 
     # Hardware
     ./hardware-configuration.nix
