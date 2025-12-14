@@ -27,6 +27,12 @@
     xfce.thunar-volman # Manage USB sticks
     xfce.thunar-archive-plugin # Right-click -> Extract
     yazi
+
+    networkmanagerapplet # might changer later
+
+    brightnessctl
+    playerctl
+    pamixer # or wireplumber might change later
   ];
 
   programs.hyprland = {
@@ -43,25 +49,28 @@
     # extraPortals = with pkgs; [xdg-desktop-portal-hyprland];
   };
 
-  # hardware.graphics = {
-  #   package = pkgs.mesa;
-  #
-  #   # if you also want 32-bit support (e.g for Steam)
-  #   enable32Bit = true;
-  #   package32 = pkgs.pkgsi686Linux.mesa;
-  # };
-
-  # services.displayManager.gdm = {
-  #   wayland = false;
-  #   enable = true;
-  # };
-
   home-manager.users.${config.stars.mainUser} = {
-    # wayland and hyprland
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
         "$mod" = "SUPER";
+
+        exec-once = [
+          # notification daemon
+          "dunst"
+          # wallpaper daemon
+          "swww-daemon"
+          # widget bar ('bar') is the widget name
+          "eww open bar"
+          # network manager icon
+          "nm-applet --indicator"
+          # ui for pasword auth
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+          # clipboard
+          "wl-paste --type text --watch cliphist store"
+          "wl-paste --type image --watch cliphist store"
+        ];
+
         bind =
           [
             # compositor
@@ -69,9 +78,8 @@
             "$mod, F, fullscreen,"
             "$mod, G, togglegroup,"
             "$mod SHIFT, E, exit," # exit hyprland to DM
-            "$mod, E, exec, thunar"
-            "$mod, R, exec, kitty -e yazi"
             "$mod SHIFT, M, exec, hyprctl reload"
+            "$mod, L, exec, hyprlock"
 
             # apps
             ## terminal
@@ -82,6 +90,13 @@
             "$mod SHIFT, F, exec, ${pkgs.firefox}/bin/firefox"
             ## screenshot tool screen
             ", print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
+            ## file managers
+            "$mod, E, exec, thunar"
+            "$mod, R, exec, kitty -e yazi"
+
+            # other
+            ## view clipboard history
+            "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
           ]
           ++
           # workspaces
@@ -96,6 +111,22 @@
               ]
             )
             10);
+
+        # bindel = bind with repeat
+        bindel = [
+          # system controls
+          ## volume
+          ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+          ", XF86AudioLowerVolume, exec, pamixer -d 5"
+          ", XF86AudioMute, exec, pamixer -t"
+          ## brightness
+          ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
+          ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+          ## media player
+          ", XF86AudioPlay, exec, playerctl play-pause"
+          ", XF86AudioNext, exec, playerctl next"
+          ", XF86AudioPrev, exec, playerctl previous"
+        ];
 
         # input config
         input = {
