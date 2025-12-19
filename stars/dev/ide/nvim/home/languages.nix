@@ -40,5 +40,6 @@ _: {
       format.type = "biome";
     };
     yaml.enable = true;
+    zig.enable = true;
   };
 }

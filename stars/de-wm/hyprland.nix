@@ -7,6 +7,7 @@
   environment.systemPackages = with pkgs; [
     # diy rust widgets
     eww
+    quickshell
 
     # notifications
     libnotify
@@ -60,8 +61,6 @@
           "dunst"
           # wallpaper daemon
           "swww-daemon"
-          # widget bar ('bar') is the widget name
-          "eww open bar"
           # network manager icon
           "nm-applet --indicator"
           # ui for pasword auth
@@ -137,6 +136,13 @@
 
         debug.disable_logs = false;
       };
+    };
+
+    xdg.configFile = {
+      "eww/eww.yuck".source = ./eww/eww.yuck;
+      "eww/eww.scss".source = ./eww/eww.scss;
+
+      "quickshell/shell.qml".source = ./qshell/shell.qml;
     };
   };
 }

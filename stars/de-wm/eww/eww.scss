@@ -1,0 +1,47 @@
+$background: #1A1B26;
+$foreground: #A9B1D6;
+$border: #2E2E2E;
+
+$black: #24283B;
+$gray: #565F89;
+$red: #F7768E;
+$green: #73DACA;
+$yellow: #E0AF68;
+$blue: #7AA2F7;
+$magenta: #BB9AF7;
+$cyan: #7DCFFF;
+$white: $foreground;
+
+// Global
+* {
+  all: unset;
+  border-color: $border;
+  border-style: solid;
+  border-radius: 200rem;
+  padding: 0;
+}
+
+// EWW BAR
+.eww_bar {
+  background-color: $background;
+  border-width: 2px;
+  padding: .2rem;
+  margin: 1.4rem;
+}
+
+.genicon {
+  background-repeat: no-repeat;
+  background-size: 30px;
+  min-height: 20px;
+  min-width: 20px;
+}
+
+.icon_wifi {
+  background-image: url("./mingcute--wifi-line.png");
+  background-position: center;
+}
+
+.btn_wifi {
+  font-size: 1.3rem;
+  padding-right: 9px;
+}
