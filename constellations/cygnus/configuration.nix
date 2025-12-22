@@ -1,6 +1,6 @@
 _: {
   networking.hostName = "cygnus";
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.05"; # never change this
   time.timeZone = "Europe/Paris";
 
   stars.mainUser = "r1";

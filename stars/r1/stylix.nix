@@ -1,9 +1,13 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}: {
   stylix = {
     enable = true;
-    autoEnable = true;
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/isotope.yaml";
     # base16Scheme = pkgs.fetchurl {
     #   url = "https://raw.githubusercontent.com/tinted-theming/schemes/317a5e10c35825a6c905d912e480dfe8e71c7559/base16/everforest-dark-medium.yaml";
     #   sha256 = "02vlzcp4nckql0vj8jjyz75vkkgflii6g3m3pjbml04m79sp64ll";
@@ -31,6 +35,28 @@
         package = pkgs.noto-fonts;
         name = "Noto Color Emoji";
       };
+    };
+
+    targets = {
+      console.enable = true;
+      nixos-icons.enable = true;
+    };
+  };
+
+  home-manager.users.${config.stars.mainUser} = {
+    imports = [inputs.stylix.homeModules.stylix];
+
+    stylix.targets = {
+      # firefox = {
+      #   enable = true;
+      #   profilesNames = ["default"];
+      # };
+      nvf.enable = true;
+      vim.enable = true;
+      gnome.enable = true;
+      fzf.enable = true;
+      zellij.enable = true;
+      bat.enable = true;
     };
   };
 }

@@ -4,7 +4,7 @@
   ...
 }: {
   networking.hostName = "cassiopeia";
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.05"; # never change this
   time.timeZone = "Europe/Paris";
 
   stars.mainUser = "r1";
@@ -17,20 +17,20 @@
     #../../stars/sys/boot/plymouth.nix
     ../../stars/game/all.nix
     ../../stars/sys/kbd/fr.nix
-    # ../../stars/de-wm/hyprland.nix
-    ../../stars/r1/stylix.nix
+    ../../stars/de-wm/hyprland.nix
+    # ../../stars/r1/stylix.nix
 
     # Hardware
     ./hardware-configuration.nix
     ../../stars/sys/vendor/asusd.nix
   ];
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = ["nvidia" "amdgpu"];
 
   # NVIDIA PRIME setup
   hardware.nvidia = {
     modesetting.enable = true;
-    open = true;
+    open = false; # might change later
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     # Enable this if you have graphical corruption issues or application crashes after waking
@@ -58,4 +58,35 @@
   environment.systemPackages = with pkgs; [
     mesa-demos # Nvidia settings
   ];
+
+  networking.hosts = {
+    "127.0.0.1" = ["localhost" "elagouch.42.fr"];
+  };
+
+  # services.displayManager.ly = {
+  #   enable = true;
+  #   settings = {
+  #     animate = true;
+  #     animation = "colormix";
+  #     bigclock = "en";
+  #     bigclock_12hr = true;
+  #     bigclock_seconds = true;
+  #     clear_password = true;
+  #     numlock = true;
+  #   };
+  # };
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd Hyprland";
+        user = "greeter";
+      };
+    };
+  };
+
+  home-manager.users.${config.stars.mainUser} = {
+    programs.quickshell.enable = true;
+  };
 }

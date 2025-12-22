@@ -59,7 +59,6 @@
 
   services = {
     desktopManager.gnome.enable = true;
-    displayManager.ly.enable = true;
 
     # UDEV rules
     udev.packages = with pkgs; [gnome-settings-daemon];

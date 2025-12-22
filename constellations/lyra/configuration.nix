@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   networking.hostName = "lyra";
   system.stateVersion = "25.11"; # never change this
   time.timeZone = "Europe/Paris";
@@ -12,8 +16,8 @@
     # Additional stars
     #../../stars/sys/boot/plymouth.nix
     ../../stars/game/all.nix
-    # ../../stars/de-wm/hyprland.nix
-    ../../stars/r1/stylix.nix
+    ../../stars/de-wm/hyprland.nix
+    # ../../stars/r1/stylix.nix
 
     # Hardware
     ./hardware-configuration.nix
@@ -29,6 +33,20 @@
   hardware.amdgpu.opencl.enable = true;
   # LACT: Linux AMDGPU Controller
   services.lact.enable = true;
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd Hyprland";
+        user = "greeter";
+      };
+    };
+  };
+
+  home-manager.users.${config.stars.mainUser} = {
+    programs.quickshell.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     clinfo # to check opencl

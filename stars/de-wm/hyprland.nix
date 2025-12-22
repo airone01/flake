@@ -20,6 +20,19 @@
 
     # screen sharing
     xdg-desktop-portal-hyprland
+
+    kitty
+
+    xfce.thunar
+    xfce.thunar-volman # Manage USB sticks
+    xfce.thunar-archive-plugin # Right-click -> Extract
+    yazi
+
+    networkmanagerapplet # might changer later
+
+    brightnessctl
+    playerctl
+    pamixer # or wireplumber might change later
   ];
 
   programs.hyprland = {
@@ -28,7 +41,6 @@
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # make sure to also set the portal package, so that they are in sync
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    withUWSM = true;
     xwayland.enable = true;
   };
 
@@ -37,62 +49,93 @@
     # extraPortals = with pkgs; [xdg-desktop-portal-hyprland];
   };
 
-  hardware.graphics = {
-    package = pkgs.mesa;
-
-    # if you also want 32-bit support (e.g for Steam)
-    enable32Bit = true;
-    package32 = pkgs.pkgsi686Linux.mesa;
-  };
-
-  services.displayManager.gdm = {
-    wayland = false;
-    enable = true;
-  };
-
   home-manager.users.${config.stars.mainUser} = {
-    # wayland and hyprland
-    wayland.windowManager.hyprland.settings = {
-      "$mainMod" = "SUPER";
-      bind =
-        [
-          # compositor
-          "$mainMod SHIFT, A, killactive,"
-          "$mainMod, F, fullscreen,"
-          "$mainMod, G, togglegroup,"
-          "$mainMod SHIFT, M, exec, ${pkgs.hyprland} reload"
-          #"$mainmod SHIFT, E, exec, pkill hyprland"
+    wayland.windowManager.hyprland = {
+      enable = true;
+      settings = {
+        "$mod" = "SUPER";
 
-          # apps
-          ## terminal
-          "$mainMod, return, exec, ${pkgs.kitty}"
-          ## rofi
-          "$mainMod, S, exec, ${pkgs.rofi-wayland} -show drun -show-icons"
-          ## web browser
-          "$mainMod SHIFT, F, exec, ${pkgs.firefox}"
-          ## screenshot tool screen
-          ", print, exec, ${pkgs.grimblast} copy area"
-        ]
-        ++
-        # workspaces
-        # binds $mainMod + [shift +] {1..10} to [move to] workspace {1..10}
-        builtins.concatLists (builtins.genList (
-            x: let
-              ws = let
-                c = (x + 1) / 10;
-              in
-                builtins.toString (x + - (c * 10));
-            in [
-              "$mainMod, code:${ws}, workspace, ${toString (x + 1)}"
-              "$mainMod SHIFT, code:${ws}, movetoworkspace, ${toString (x + 1)}"
-            ]
-          )
-          10);
+        exec-once = [
+          # notification daemon
+          "dunst"
+          # wallpaper daemon
+          "swww-daemon"
+          # widget bar ('bar') is the widget name
+          "eww open bar"
+          # network manager icon
+          "nm-applet --indicator"
+          # ui for pasword auth
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+          # clipboard
+          "wl-paste --type text --watch cliphist store"
+          "wl-paste --type image --watch cliphist store"
+        ];
 
-      # input config
-      input = {
-        kb_layout = "fr,us";
-        kb_options = "grp:caps_toggle";
+        bind =
+          [
+            # compositor
+            "$mod SHIFT, A, killactive,"
+            "$mod, F, fullscreen,"
+            "$mod, G, togglegroup,"
+            "$mod SHIFT, E, exit," # exit hyprland to DM
+            "$mod SHIFT, M, exec, hyprctl reload"
+            "$mod, L, exec, hyprlock"
+
+            # apps
+            ## terminal
+            "$mod, return, exec, ${pkgs.kitty}/bin/kitty"
+            ## rofi
+            "$mod, S, exec, ${pkgs.rofi}/bin/rofi -show drun -show-icons"
+            ## web browser
+            "$mod SHIFT, F, exec, ${pkgs.firefox}/bin/firefox"
+            ## screenshot tool screen
+            ", print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
+            ## file managers
+            "$mod, E, exec, thunar"
+            "$mod, R, exec, kitty -e yazi"
+
+            # other
+            ## view clipboard history
+            "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+          ]
+          ++
+          # workspaces
+          # binds $mod + [shift +] {1..9,0} to [move to] workspace {1..10}
+          builtins.concatLists (builtins.genList (
+              x: let
+                ws = x + 1;
+                c = x + 10;
+              in [
+                "$mod, code:${toString c}, workspace, ${toString ws}"
+                "$mod SHIFT, code:${toString c}, movetoworkspace, ${toString ws}"
+              ]
+            )
+            10);
+
+        # bindel = bind with repeat
+        bindel = [
+          # system controls
+          ## volume
+          ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+          ", XF86AudioLowerVolume, exec, pamixer -d 5"
+          ", XF86AudioMute, exec, pamixer -t"
+          ## brightness
+          ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
+          ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+          ## media player
+          ", XF86AudioPlay, exec, playerctl play-pause"
+          ", XF86AudioNext, exec, playerctl next"
+          ", XF86AudioPrev, exec, playerctl previous"
+        ];
+
+        # input config
+        input = {
+          kb_layout = "fr,us";
+          kb_options = "grp:caps_toggle"; # caps lock switches layout
+          follow_mouse = 1; # focus follow mouse
+        };
+
+        debug.disable_logs = false;
       };
     };
   };
