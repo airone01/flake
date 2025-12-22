@@ -1,5 +1,16 @@
 # Changelog
 
+## [7.0.0](https://github.com/airone01/flake/compare/flake-v6.1.2...flake-v7.0.0) (2025-12-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **hyprland:** implement ([#49](https://github.com/airone01/flake/issues/49))
+
+### Features
+
+* **hyprland:** implement ([#49](https://github.com/airone01/flake/issues/49)) ([76a458b](https://github.com/airone01/flake/commit/76a458ba0fd3974679c4d522497fdb9bf7b037ee))
+
 ## [6.1.2](https://github.com/airone01/flake/compare/flake-v6.1.1...flake-v6.1.2) (2025-12-08)
 
 
