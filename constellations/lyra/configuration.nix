@@ -29,7 +29,6 @@
   # patches low resolution during initramfs boot stage
   hardware.amdgpu.initrd.enable = true;
   hardware.amdgpu.overdrive.enable = true; # overclocking
-  # OpenCL
   hardware.amdgpu.opencl.enable = true;
   # LACT: Linux AMDGPU Controller
   services.lact.enable = true;
@@ -45,7 +44,29 @@
   };
 
   home-manager.users.${config.stars.mainUser} = {
+    home.packages = with pkgs; [
+      blockbench
+    ];
+
     programs.quickshell.enable = true;
+
+    wayland.windowManager.hyprland.settings = {
+      monitor = [", highrr, auto, 1"];
+      windowrulev2 = [
+        # very specific fixes for raylib
+        "float, title:(game_test)"
+        "size 800 450, title:(game_test)"
+        "center, title:(game_test)"
+      ];
+    };
+
+    programs.obs-studio = {
+      enable = true;
+
+      plugins = with pkgs.obs-studio-plugins; [
+        input-overlay
+      ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
