@@ -57,10 +57,6 @@
 
   environment.systemPackages = with pkgs; [
     mesa-demos # Nvidia settings
-    pegasus-frontend
-    retroarch
-    retroarch-assets
-    retroarch-cores.all
   ];
 
   networking.hosts = {
@@ -88,19 +84,6 @@
         user = "greeter";
       };
     };
-  };
-
-  fileSystems."/mnt/romm" = {
-    device = "//truenas/romm";
-    fsType = "cifs";
-    options = [
-      "credentials=/etc/nixos/smb-romm"
-      "iocharset=utf8"
-      "x-systemd.automount"
-      "nofail"
-      "uid=1000"
-      "gid=100"
-    ];
   };
 
   home-manager.users.${config.stars.mainUser} = {
