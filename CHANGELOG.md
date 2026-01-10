@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.1.0](https://github.com/airone01/flake/compare/flake-v7.0.1...flake-v7.1.0) (2026-01-10)
+
+
+### Features
+
+* **lyra:** gaming ([#53](https://github.com/airone01/flake/issues/53)) ([133b3fa](https://github.com/airone01/flake/commit/133b3fa5d070d645e0d980b6fa07da134a7d1764))
+
 ## [7.0.1](https://github.com/airone01/flake/compare/flake-v7.0.0...flake-v7.0.1) (2026-01-08)
 
 
