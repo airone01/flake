@@ -92,6 +92,7 @@ rules:
       - audio
       - video
       - nvidia
+      - gaming
       # Development
       - dev
       - python

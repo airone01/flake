@@ -69,8 +69,25 @@
     };
   };
 
+  fileSystems."/mnt/romm" = {
+    device = "//192.168.1.142/romm";
+    fsType = "cifs";
+    options = [
+      "credentials=/etc/nixos/smb-romm"
+      "iocharset=utf8"
+      "x-systemd.automount"
+      "nofail"
+      "uid=1000"
+      "gid=100"
+    ];
+  };
+
   environment.systemPackages = with pkgs; [
     clinfo # to check opencl
     lact # see above
+    # gaming & emulation
+    lutris
+    retroarch-full
+    retroarch-assets
   ];
 }
