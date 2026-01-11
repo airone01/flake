@@ -7,6 +7,7 @@
   environment.systemPackages = with pkgs; [
     # diy rust widgets
     eww
+    quickshell
 
     # notifications
     libnotify
@@ -34,6 +35,10 @@
     playerctl
     pamixer # or wireplumber might change later
   ];
+
+  # Thunar extra
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
 
   programs.hyprland = {
     enable = true;
@@ -137,6 +142,13 @@
 
         debug.disable_logs = false;
       };
+    };
+
+    xdg.configFile = {
+      "eww/eww.yuck".source = ./eww/eww.yuck;
+      "eww/eww.scss".source = ./eww/eww.scss;
+
+      "quickshell/shell.qml".source = ./qshell/shell.qml;
     };
   };
 }

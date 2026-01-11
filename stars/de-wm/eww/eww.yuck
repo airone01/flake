@@ -1,0 +1,23 @@
+(defwidget bar []
+  (box
+    :orientation "v"
+    :class "eww_bar"
+    (label :text "A")
+    (label :text "B")
+    (button :class "btn_wifi" "")
+  )
+)
+
+;; bar window ;;
+(defwindow bar
+	:geometry (geometry :x "0"
+						:y "0"
+						:height "100%"
+						:width "80px")
+	:monitor 0
+	:reserve (struts :distance "35px"
+					 :side "left")
+	:wm-ignore false
+	:hexpand "false"
+	:vexpand "false"
+(bar))
