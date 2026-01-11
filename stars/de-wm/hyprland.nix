@@ -36,6 +36,10 @@
     pamixer # or wireplumber might change later
   ];
 
+  # Thunar extra
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
+
   programs.hyprland = {
     enable = true;
     # set the flake package

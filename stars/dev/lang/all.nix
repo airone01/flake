@@ -16,5 +16,16 @@
     # JS/TS
     bun
     nodejs
+
+    # Zig
+    zig
+    zls
+
+    # headers and libs
+    pkg-config
+    vulkan-headers
+    vulkan-loader
+    opencl-headers
+    SDL2
   ];
 }
