@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.2.0](https://github.com/airone01/flake/compare/flake-v7.1.0...flake-v7.2.0) (2026-01-11)
+
+
+### Features
+
+* **flake:** misc changes ([#56](https://github.com/airone01/flake/issues/56)) ([37e2c6e](https://github.com/airone01/flake/commit/37e2c6e834edb9d55cbdc6c36b3092d4c05bb518))
+
 ## [7.1.0](https://github.com/airone01/flake/compare/flake-v7.0.1...flake-v7.1.0) (2026-01-10)
 
 
