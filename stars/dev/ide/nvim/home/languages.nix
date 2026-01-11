@@ -10,16 +10,17 @@ _: {
     assembly.enable = true;
     astro = {
       enable = true;
-      format.type = "biome";
+      format.type = ["biome"];
     };
     bash.enable = true;
     clang.enable = true;
     css = {
       enable = true;
-      format.type = "biome";
+      format.type = ["biome"];
     };
     go.enable = true;
     html.enable = true;
+    json.enable = true;
     lua.enable = true;
     markdown.enable = true;
     nix.enable = true;
@@ -27,17 +28,17 @@ _: {
     python.enable = true;
     rust = {
       enable = true;
-      crates.enable = true;
+      extensions.crates-nvim.enable = true;
     };
     sql.enable = true;
     svelte = {
       enable = true;
-      format.type = "biome";
+      format.type = ["biome"];
     };
     tailwind.enable = true;
     ts = {
       enable = true;
-      format.type = "biome";
+      format.type = ["biome"];
     };
     yaml.enable = true;
     zig.enable = true;

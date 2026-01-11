@@ -65,6 +65,8 @@
           "dunst"
           # wallpaper daemon
           "swww-daemon"
+          # widget bar ('bar') is the widget name
+          "eww open bar"
           # network manager icon
           "nm-applet --indicator"
           # ui for pasword auth

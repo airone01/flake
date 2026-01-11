@@ -1,5 +1,30 @@
 # Changelog
 
+## [7.1.0](https://github.com/airone01/flake/compare/flake-v7.0.1...flake-v7.1.0) (2026-01-10)
+
+
+### Features
+
+* **lyra:** gaming ([#53](https://github.com/airone01/flake/issues/53)) ([133b3fa](https://github.com/airone01/flake/commit/133b3fa5d070d645e0d980b6fa07da134a7d1764))
+
+## [7.0.1](https://github.com/airone01/flake/compare/flake-v7.0.0...flake-v7.0.1) (2026-01-08)
+
+
+### Bug Fixes
+
+* **hyprland:** various fixes ([#51](https://github.com/airone01/flake/issues/51)) ([16e8f0f](https://github.com/airone01/flake/commit/16e8f0f874da6cb9462e1a2f959dd974a9e7d1ef))
+
+## [7.0.0](https://github.com/airone01/flake/compare/flake-v6.1.2...flake-v7.0.0) (2025-12-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **hyprland:** implement ([#49](https://github.com/airone01/flake/issues/49))
+
+### Features
+
+* **hyprland:** implement ([#49](https://github.com/airone01/flake/issues/49)) ([76a458b](https://github.com/airone01/flake/commit/76a458ba0fd3974679c4d522497fdb9bf7b037ee))
+
 ## [6.1.2](https://github.com/airone01/flake/compare/flake-v6.1.1...flake-v6.1.2) (2025-12-08)
 
 
