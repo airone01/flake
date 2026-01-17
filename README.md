@@ -27,10 +27,12 @@ and deployments. It's very faulty to say the least, but I love it.
 
 | **Name**   | **Purpose** | **Status** |
 | ---------- | ----------- | ---------- |
-| aquarius   |             | Abandoned  |
 | cassiopeia | Laptop      | Active     |
-| cetus      | Homelab     | Active     |
+| hercules   | VPS         | Active     |
 | lyra       | Main PC     | Active     |
+| aquarius   |             | Abandoned  |
+| cetus      | Homelab     | Abandonned |
+| cygnus     |             | Abandoned  |
 | ursamajor  |             | Abandoned  |
 
 ### Commit Message Convention

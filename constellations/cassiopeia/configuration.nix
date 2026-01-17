@@ -25,7 +25,10 @@
     ../../stars/sys/vendor/asusd.nix
   ];
 
-  services.xserver.videoDrivers = ["nvidia" "amdgpu"];
+  services.xserver.videoDrivers = [
+    "nvidia"
+    "amdgpu"
+  ];
 
   # NVIDIA PRIME setup
   hardware.nvidia = {
@@ -60,7 +63,10 @@
   ];
 
   networking.hosts = {
-    "127.0.0.1" = ["localhost" "elagouch.42.fr"];
+    "127.0.0.1" = [
+      "localhost"
+      "elagouch.42.fr"
+    ];
   };
 
   # services.displayManager.ly = {
@@ -86,7 +92,12 @@
     };
   };
 
-  home-manager.users.${config.stars.mainUser} = {
-    programs.quickshell.enable = true;
+  wayland.windowManager.hyprland.settings = {
+    # input config
+    input = {
+      kb_layout = "fr,us";
+      kb_options = "grp:caps_toggle"; # caps lock switches layout
+      follow_mouse = 1; # focus follow mouse
+    };
   };
 }
