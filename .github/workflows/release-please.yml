@@ -19,7 +19,7 @@ jobs:
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
-          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Auto-approve release PR
         if: steps.release.outputs.prs_created == 'true'
         run: gh pr review --approve "$PR_NUMBER"
@@ -36,5 +36,5 @@ jobs:
           gh pr merge --auto --squash "$PR_NUMBER"
         env:
           PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr || '{}').number }}
-          GITHUB_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
