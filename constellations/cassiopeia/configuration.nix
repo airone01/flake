@@ -92,12 +92,13 @@
     };
   };
 
-  wayland.windowManager.hyprland.settings = {
-    # input config
-    input = {
-      kb_layout = "fr,us";
-      kb_options = "grp:caps_toggle"; # caps lock switches layout
-      follow_mouse = 1; # focus follow mouse
+  home-manager.users.${config.stars.mainUser} = {
+    wayland.windowManager.hyprland.settings = {
+      input = {
+        kb_layout = "fr,us";
+        kb_options = "grp:caps_toggle"; # caps lock switches layout
+        follow_mouse = 1; # focus follow mouse
+      };
     };
   };
 }

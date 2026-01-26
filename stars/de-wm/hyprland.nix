@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   inputs,
   config,
@@ -18,9 +19,9 @@ in {
     # rofi # app launcher
     xdg-desktop-portal-hyprland # screen sharing
     # kitty # terminal emulator
-    xfce.thunar # file manager
-    xfce.thunar-volman # manage USB sticks
-    xfce.thunar-archive-plugin # right-click -> extract
+    thunar # file manager
+    thunar-volman # manage USB sticks
+    thunar-archive-plugin # right-click -> extract
     yazi # another file manager
     networkmanagerapplet # network manager applet; might changer later
     brightnessctl # brightness controller
@@ -146,7 +147,7 @@ in {
 
         # input config
         input = {
-          kb_layout = "us";
+          kb_layout = lib.mkDefault "us";
           follow_mouse = 1; # focus follow mouse
         };
 
