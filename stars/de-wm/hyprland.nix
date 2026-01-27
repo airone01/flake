@@ -1,39 +1,36 @@
 {
+  lib,
   pkgs,
   inputs,
   config,
   ...
-}: {
+}: let
+  wallpaperImg = pkgs.fetchurl {
+    # https://wallhaven.cc/w/6llz6l
+    # wallpaper uploaded by Gone65478
+    url = "https://w.wallhaven.cc/full/6l/wallhaven-6llz6l.jpg";
+    sha256 = "1xwi8cbgx08b83g9f560yyzssb42yab62hlvnr78cjkrdyxapbwf";
+  };
+in {
   environment.systemPackages = with pkgs; [
-    # diy rust widgets
-    eww
-    quickshell
-
-    # notifications
-    libnotify
-    dunst
-
-    # wallpaper deamon
-    swww
-
-    # app launcher
-    rofi
-
-    # screen sharing
-    xdg-desktop-portal-hyprland
-
-    kitty
-
-    xfce.thunar
-    xfce.thunar-volman # Manage USB sticks
-    xfce.thunar-archive-plugin # Right-click -> Extract
-    yazi
-
-    networkmanagerapplet # might changer later
-
-    brightnessctl
-    playerctl
+    # libnotify # notifications
+    # dunst # notifications
+    # swww # wallpaper deamon
+    # rofi # app launcher
+    xdg-desktop-portal-hyprland # screen sharing
+    # kitty # terminal emulator
+    thunar # file manager
+    thunar-volman # manage USB sticks
+    thunar-archive-plugin # right-click -> extract
+    yazi # another file manager
+    networkmanagerapplet # network manager applet; might changer later
+    brightnessctl # brightness controller
+    playerctl # media players controller
     pamixer # or wireplumber might change later
+    wl-clipboard # Wayland clipboard
+    # cliphist # clipboard manager
+    # hyprlock # lock screen
+    pavucontrol # used by waybar
   ];
 
   # Thunar extra
@@ -42,10 +39,12 @@
 
   programs.hyprland = {
     enable = true;
-    # set the flake package
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # Use the system package instead of the flake input to avoid build failures
+    # caused by sandbox restrictions (git clone) and cache misses.
+    # This also ensures OpenGL/Mesa drivers stay in sync with the system.
+    package = pkgs.hyprland;
     # make sure to also set the portal package, so that they are in sync
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage = pkgs.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
   };
 
@@ -55,25 +54,40 @@
   };
 
   home-manager.users.${config.stars.mainUser} = {
+    programs = {
+      hyprlock.enable = true;
+      kitty.enable = true;
+      rofi.enable = true;
+      waybar.enable = true;
+    };
+
+    services = {
+      cliphist.enable = true;
+      dunst.enable = true;
+      playerctld.enable = true;
+      swww.enable = true;
+    };
+
+    home.pointerCursor = {
+      enable = true;
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+    };
+
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
         "$mod" = "SUPER";
 
         exec-once = [
-          # notification daemon
-          "dunst"
-          # wallpaper daemon
-          "swww-daemon"
-          # widget bar ('bar') is the widget name
-          "eww open bar"
-          # network manager icon
-          "nm-applet --indicator"
-          # ui for pasword auth
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-          # clipboard
-          "wl-paste --type text --watch cliphist store"
-          "wl-paste --type image --watch cliphist store"
+          "dunst" # open notification deamon
+          # "swww-daemon" # open wallpaper deamon
+          "swww img ${wallpaperImg}" # change wallpaper
+          "waybar" # bar
+          # "nm-applet --indicator" # open network manager icon
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1" # ui for pasword auth
+          "wl-paste --type text --watch cliphist store" # clipboard
+          "wl-paste --type image --watch cliphist store" # clipboard
         ];
 
         bind =
@@ -135,8 +149,7 @@
 
         # input config
         input = {
-          kb_layout = "fr,us";
-          kb_options = "grp:caps_toggle"; # caps lock switches layout
+          kb_layout = lib.mkDefault "us";
           follow_mouse = 1; # focus follow mouse
         };
 

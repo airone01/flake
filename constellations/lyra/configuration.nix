@@ -48,8 +48,6 @@
       blockbench
     ];
 
-    programs.quickshell.enable = true;
-
     wayland.windowManager.hyprland.settings = {
       monitor = [", highrr, auto, 1"];
       windowrulev2 = [

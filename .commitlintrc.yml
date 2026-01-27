@@ -39,10 +39,7 @@ rules:
       - home-manager
       # Constellation names
       - cassiopeia
-      - cetus
-      - cygnus
       - hercules
-      - ursamajor
       - lyra
       # Core components
       - sops
@@ -87,6 +84,7 @@ rules:
       - typer
       - vaultwarden
       - vlc
+      - waybar
       - zsh
       # Subsystems
       - audio
