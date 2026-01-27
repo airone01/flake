@@ -39,10 +39,12 @@ in {
 
   programs.hyprland = {
     enable = true;
-    # set the flake package
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # Use the system package instead of the flake input to avoid build failures
+    # caused by sandbox restrictions (git clone) and cache misses.
+    # This also ensures OpenGL/Mesa drivers stay in sync with the system.
+    package = pkgs.hyprland;
     # make sure to also set the portal package, so that they are in sync
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage = pkgs.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
   };
 

@@ -6,10 +6,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nvf = {
@@ -66,7 +62,7 @@
     # NixOS configurations
     nixosConfigurations =
       mkConstellationForNixosConfiguration {
-        constellations = ["cassiopeia" "cetus" "cygnus" "lyra"];
+        constellations = ["cassiopeia" "lyra"];
         extraModules = [
           ({pkgs, ...}: {
             _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;
