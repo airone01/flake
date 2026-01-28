@@ -160,8 +160,6 @@ in {
     xdg.configFile = {
       "eww/eww.yuck".source = ./eww/eww.yuck;
       "eww/eww.scss".source = ./eww/eww.scss;
-
-      "quickshell/shell.qml".source = ./qshell/shell.qml;
     };
   };
 }

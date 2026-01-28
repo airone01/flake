@@ -5,12 +5,6 @@ _: {
 
   stars.mainUser = "rack";
 
-  # Enable Wireguard
-  stars.wireguard = {
-    enable = true;
-    interfaceName = "wg0";
-  };
-
   # Enable SSH server with custom configuration
   stars.ssh-server = {
     enable = true;
@@ -26,10 +20,9 @@ _: {
 
     # Additional stars
     ../../stars/srv/ssh-server
-    ../../stars/srv/wireguard
+    # ../../stars/srv/wireguard
     ../../stars/srv/gitea.nix
-    ../../stars/srv/hercules.nix
-    ../../stars/srv/hydra.nix
+    # ../../stars/srv/hercules.nix
     ../../stars/srv/searchix.nix
     ../../stars/srv/traefik.nix
 
