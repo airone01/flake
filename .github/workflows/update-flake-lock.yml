@@ -44,11 +44,12 @@ jobs:
             automerge
 
       - name: Enable auto-merge
+        if: steps.update.outputs.pull-request-operation == 'created'
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           echo "Targeting PR #${{ steps.update.outputs.pull-request-number }}"
           gh pr merge ${{ steps.update.outputs.pull-request-number }} \
             --repo ${{ github.repository }} \
-            --auto --squash
+            --auto --squash -t "chore(flake): update inputs"
 
