@@ -11,6 +11,10 @@ default:
 boot host=hostname *args="":
     nh os boot -a -H {{host}} {{flake_dir}} {{args}}
 
+# Build a system (tests full system compilation)
+build-any-system host=hostname *args="":
+    nix build --show-trace {{flake_dir}}#nixosConfigurations.{{host}}.config.system.build.toplevel {{args}}|&nom
+
 # Build and switch to a new configuration
 switch host=hostname *args="":
     nh os switch -a -H {{host}} {{flake_dir}} {{args}}
