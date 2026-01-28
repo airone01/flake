@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   zolaWebsite,
   ...
@@ -60,23 +59,9 @@
             tls = {};
           };
 
-          hydra = {
-            rule = "Host(`hydra.air1.one`)";
-            service = "hydra";
-            entryPoints = ["websecure"];
-            tls = {};
-          };
-
           searchix = {
             rule = "Host(`searchix.air1.one`)";
             service = "searchix";
-            entryPoints = ["websecure"];
-            tls = {};
-          };
-
-          vaultwarden = {
-            rule = "Host(`vault.air1.one`)";
-            service = "vaultwarden";
             entryPoints = ["websecure"];
             tls = {};
           };
@@ -90,21 +75,9 @@
             }
           ];
 
-          hydra.loadBalancer.servers = [
-            {
-              url = "http://127.0.0.1:6430";
-            }
-          ];
-
           searchix.loadBalancer.servers = [
             {
               url = "http://127.0.0.1:51313";
-            }
-          ];
-
-          vaultwarden.loadBalancer.servers = [
-            {
-              url = "http://10.77.2.1:8222";
             }
           ];
         };
@@ -130,13 +103,6 @@
           autoindex off;
         '';
       };
-      # root = pkgs.writeTextDir "index.html" ''
-      #   <h1>Welcome to air1.one.</h1><hr><pre>
-      #   <a href="https://git.air1.one/">Gitea</a>
-      #   <a href="https://hydra.air1.one/">Hydra</a>
-      #   <a href="https://searchix.air1.one/">Searchix</a>
-      #   </pre><hr>
-      # '';
     };
   };
 

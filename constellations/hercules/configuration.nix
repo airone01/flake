@@ -23,7 +23,6 @@ _: {
     # ../../stars/srv/wireguard
     ../../stars/srv/gitea.nix
     # ../../stars/srv/hercules.nix
-    ../../stars/srv/hydra.nix
     ../../stars/srv/searchix.nix
     ../../stars/srv/traefik.nix
 

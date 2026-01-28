@@ -100,7 +100,6 @@ rules:
       - srv
       - traefik
       - nginx
-      - hydra
       # Documentation
       - readme
       - changelog
