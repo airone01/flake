@@ -1,1 +1,21 @@
-* @airone01
+.github/         @airone01
+asterisms/       @airone01
+constellations/  @airone01
+lib/             @airone01
+packages/        @airone01
+rockets/         @airone01
+secrets/         @airone01
+stars/           @airone01
+web/             @airone01
+
+.gitignore                 @airone01
+.repomixignore             @airone01
+.sops.yaml                 @airone01
+LICENSE                    @airone01
+README.md                  @airone01
+TODO.md                    @airone01
+flake.nix                  @airone01
+justfile                   @airone01
+release-please-config.json @airone01
+repomix.config.json        @airone01
+
