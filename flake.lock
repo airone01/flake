@@ -208,6 +208,24 @@
         "type": "github"
       }
     },
+    "garnix-incrementalize": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1731087957,
+        "narHash": "sha256-aMKxrcQr6CZlBhtrmOC1GS6gcHacxE71HmBrUTnBngg=",
+        "owner": "garnix-io",
+        "repo": "incrementalize",
+        "rev": "3b21460ce172091482946ea20ef3dcaa4fc0047f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "garnix-io",
+        "repo": "incrementalize",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -334,7 +352,7 @@
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1769217863,
@@ -353,6 +371,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1730386274,
+        "narHash": "sha256-Zbo4r6br2aedx1JL6m+zZmTbUm3Z1T5Zhq1cabtQA6o=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2cf8505dcc63e0db2b88841d59b3e827aaeb1e87",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "release-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1768564909,
         "narHash": "sha256-Kell/SpJYVkHWMvnhqJz/8DqQg2b6PguxVWOuadbHCc=",
         "owner": "NixOS",
@@ -367,7 +401,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1769170682,
         "narHash": "sha256-oMmN1lVQU0F0W2k6OI3bgdzp2YOHWYUAw79qzDSjenU=",
@@ -383,7 +417,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1762361079,
         "narHash": "sha256-lz718rr1BDpZBYk7+G8cE6wee3PiBUpn8aomG/vLLiY=",
@@ -474,9 +508,10 @@
     },
     "root": {
       "inputs": {
+        "garnix-incrementalize": "garnix-incrementalize",
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nvf": "nvf",
         "searchix": "searchix",
         "sops-nix": "sops-nix",
@@ -487,7 +522,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "gomod2nix": "gomod2nix",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "pre-commit-hooks": "pre-commit-hooks",
         "simple-css": "simple-css",
         "treefmt-nix": "treefmt-nix"

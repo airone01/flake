@@ -2,6 +2,7 @@
   description = "r1's increasingly-less-simple NixOS config";
 
   inputs = {
+    garnix-incrementalize.url = "github:garnix-io/incrementalize";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -58,39 +59,39 @@
             ]
             ++ extraModules;
         });
-  in {
-    # NixOS configurations
-    nixosConfigurations =
-      mkConstellationForNixosConfiguration {
-        constellations = ["cassiopeia" "lyra"];
-        extraModules = [
-          ({pkgs, ...}: {
-            _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;
-          })
-        ];
-      }
-      // mkConstellationForNixosConfiguration {
-        system = "aarch64-linux";
-        constellations = ["hercules"];
-        extraModules = [
-          ({pkgs, ...}: {
-            _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;
-          })
-        ];
-      };
+  in
+    inputs.garnix-incrementalize.lib.withCaches {
+      nixosConfigurations =
+        mkConstellationForNixosConfiguration {
+          constellations = ["cassiopeia" "lyra"];
+          extraModules = [
+            ({pkgs, ...}: {
+              _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;
+            })
+          ];
+        }
+        // mkConstellationForNixosConfiguration {
+          system = "aarch64-linux";
+          constellations = ["hercules"];
+          extraModules = [
+            ({pkgs, ...}: {
+              _module.args.zolaWebsite = inputs.self.packages.${pkgs.system}.zola-website;
+            })
+          ];
+        };
 
-    packages = eachLinuxSystem (
-      system: let
-        pkgs = import nixpkgs {inherit system;};
-        customPackages = import ./packages {inherit pkgs lib;};
-      in
-        customPackages
-    );
+      packages = eachLinuxSystem (
+        system: let
+          pkgs = import nixpkgs {inherit system;};
+          customPackages = import ./packages {inherit pkgs lib;};
+        in
+          customPackages
+      );
 
-    # Rockets
-    devShells = eachLinuxSystem (system: {
-      commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
-      default = import ./rockets {inherit system nixpkgs;};
-    });
-  };
+      # Rockets
+      devShells = eachLinuxSystem (system: {
+        commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
+        default = import ./rockets {inherit system nixpkgs;};
+      });
+    };
 }
