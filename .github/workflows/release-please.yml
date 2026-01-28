@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Generate GitHub App Token
+      - name: Generate GitHub app token
         uses: actions/create-github-app-token@v2
         id: app-token
         with:
@@ -25,7 +25,7 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
-      - name: Enable auto-merge on release PR
+      - name: Enable auto-merge
         if: ${{ steps.release.outputs.pr }}
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
