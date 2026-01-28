@@ -1,40 +1,39 @@
 name: release-please
+
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
-
-permissions:
-  contents: write
-  pull-requests: write
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+
+      - name: Generate GitHub App Token
+        uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: googleapis/release-please-action@v4
         id: release
         with:
+          token: ${{ steps.app-token.outputs.token }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Auto-approve release PR
-        if: steps.release.outputs.prs_created == 'true'
-        run: gh pr review --approve "$PR_NUMBER"
+
+      - name: Enable auto-merge on release PR
+        if: ${{ steps.release.outputs.pr }}
         env:
-          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr || '{}').number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Enable auto-merge
-        if: steps.release.outputs.prs_created == 'true'
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_JSON: ${{ steps.release.outputs.pr }}
         run: |
-          if [ -z "$PR_NUMBER" ]; then
-            echo "No PR number found"
-            exit 0
-          fi
-          gh pr merge --auto --squash "$PR_NUMBER"
-        env:
-          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr || '{}').number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER=$(echo "$PR_JSON" | jq -r .number)
+          echo "Targeting PR #$PR_NUMBER"
+          gh pr merge $PR_NUMBER \
+            --repo ${{ github.repository }} \
+            --auto --squash
 
