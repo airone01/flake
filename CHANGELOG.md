@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.3.1](https://github.com/airone01/flake/compare/flake-v7.3.0...flake-v7.3.1) (2026-01-28)
+
+
+### Bug Fixes
+
+* **hyprland:** remove qshell ([#62](https://github.com/airone01/flake/issues/62)) ([951180f](https://github.com/airone01/flake/commit/951180f28c02b52be01df6e5ca4752a09551bc04))
+
 ## [7.3.0](https://github.com/airone01/flake/compare/flake-v7.2.0...flake-v7.3.0) (2026-01-27)
 
 
