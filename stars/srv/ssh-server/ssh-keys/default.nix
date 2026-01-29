@@ -52,7 +52,7 @@ in {
     # Configure SSH authorized keys for users
     users.users =
       lib.mapAttrs
-      (username: keys: {
+      (_username: keys: {
         openssh.authorizedKeys.keys = keys;
       })
       config.stars.ssh-keys.userKeys;

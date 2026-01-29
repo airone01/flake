@@ -33,6 +33,7 @@ theme = "anemone"
 This release introduces a **complete rewrite** of the project: simplified, improved, and optimized across the board.
 
 **If you are updating from an older release:**
+
 1. Open your `config.toml` file and update it as needed (compare with the latest release for reference).
 2. Remove the following line from `content/blog/_index.md`:
    ```toml
@@ -40,6 +41,7 @@ This release introduces a **complete rewrite** of the project: simplified, impro
    ```
 
 #### 2024-03-02
+
 This release brings several improvements and enhancements, focusing mainly on optimizing performance and user experience. Here's a summary of the key changes:
 
 - **suCSS Integration:** The core CSS now leverages the lightweight [suCSS framework](https://speyll.github.io/suCSS/) made by yours truly, providing better maintainability, robustness, and scalability. With suCSS, the theme should maintain consistent appearance across different browsers.
@@ -51,7 +53,6 @@ This release brings several improvements and enhancements, focusing mainly on op
 - **Class Names and Shortcodes Update:** Some class names and shortcodes have been modified for better organization and clarity. I apologize for any inconvenience this may cause.
 
 - **Slight change in Color Choice:** Some dark mode colors have been changed for the sake of readability, still using [veqev](https://github.com/Speyll/veqev).
-
 
 ## Options
 
@@ -86,6 +87,7 @@ title = "anemone"
 languageName = "Français"
 languageCode = "fr"
 ```
+
 #### Multilanguage-Ready Navigation Bar
 
 Customize the header navigation links with the following code in the `extra` section of `config.toml`:
@@ -132,7 +134,6 @@ Add a webring with a shortcode:
 - Set the `author` in both the main config and in pages metadata.
 - Similarly, set `favicon` in the main config, and it will be used as the site icon.
 - Set `footer_content_license` and `footer_content_license_link` if you wish to display content license information in the footer.
-
 
 ### License
 

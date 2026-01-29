@@ -1,15 +1,15 @@
 :root {
-    --icon-size: 1.3rem;
-    --icon-color: var(--text);
+  --icon-size: 1.3rem;
+  --icon-color: var(--text);
 }
 
 #nav-bar {
-    padding: 0.625rem 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-    justify-content: flex-end;
-    align-items: center;
+  padding: 0.625rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 #footer-container {
@@ -24,7 +24,9 @@
 }
 
 .theme-transition {
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .tags-data {
@@ -33,50 +35,50 @@
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: flex-start;
-  align-content: flex-end
+  align-content: flex-end;
 }
 
 .title-list li {
-  margin-bottom: .375rem;
+  margin-bottom: 0.375rem;
 }
 
 /* icons settings */
 .icon {
-    width: var(--icon-size);
-    height: var(--icon-size);
-    display: inline-block;
-    vertical-align: middle;
-    color: var(--icon-color);
-    fill: currentColor;
-    transition: color 0.3s ease;
-    cursor: pointer;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: inline-block;
+  vertical-align: middle;
+  color: var(--icon-color);
+  fill: currentColor;
+  transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .icon:hover {
-    --icon-color: var(--accent);
+  --icon-color: var(--accent);
 }
 
 /* Theme toggle specific styles */
 .theme-toggle {
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-    background: none;
-    border: none;
-    display: inline-flex;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  display: inline-flex;
 }
 
 .theme-toggle:hover .icon {
-    --icon-color: var(--accent);
+  --icon-color: var(--accent);
 }
 
 .theme-toggle:active {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 /* footnotes */
 .footnote-definition {
-  margin: 0 0 0 .125rem;
+  margin: 0 0 0 0.125rem;
 }
 
 .footnote-definition-label {
@@ -85,29 +87,29 @@
 
 .footnote-definition p {
   display: inline;
-  margin: .625rem 0 0 .625rem;
+  margin: 0.625rem 0 0 0.625rem;
 }
 
 /* general classes */
 /* Cleaned no-style class */
 .no-style {
-    all: unset;
-    background: none !important;
-    border: none !important;
+  all: unset;
+  background: none !important;
+  border: none !important;
 }
 
 .no-style:hover {
-    background: transparent;
-    color: inherit;
+  background: transparent;
+  color: inherit;
 }
 
 /* Modern float replacement */
 .float-right {
-    margin-inline-start: auto;
+  margin-inline-start: auto;
 }
 
 .float-left {
-    margin-inline-end: auto;
+  margin-inline-end: auto;
 }
 
 .center {
@@ -121,5 +123,5 @@
 
 /* shortcodes css */
 .webring {
-  margin: .375rem;
+  margin: 0.375rem;
 }

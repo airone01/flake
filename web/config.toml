@@ -9,9 +9,8 @@ minify_html = true
 [extra]
 header_nav = [
   { url = "/", name_en = "/" },
-  { url = "https://github.com/airone01/flake", name_en = "/src" }
+  { url = "https://github.com/airone01/flake", name_en = "/src" },
 ]
 
 # Listing pages in the homepage
 list_pages = true
-

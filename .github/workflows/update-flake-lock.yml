@@ -3,7 +3,7 @@ name: Update flake lock
 on:
   workflow_dispatch:
   schedule:
-    - cron: '42 */2 * * *' # At minute 42 past every 2nd hour
+    - cron: "42 */2 * * *" # At minute 42 past every 2nd hour
 
 permissions:
   contents: write
@@ -24,7 +24,7 @@ jobs:
         uses: cachix/cachix-action@v15
         with:
           name: airone01
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Generate GitHub app token
         uses: actions/create-github-app-token@v2
@@ -52,4 +52,3 @@ jobs:
           gh pr merge ${{ steps.update.outputs.pull-request-number }} \
             --repo ${{ github.repository }} \
             --auto --squash -t "chore(flake): update inputs"
-

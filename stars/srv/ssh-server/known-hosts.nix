@@ -75,7 +75,7 @@
           hostsTOML.hosts
         else {};
     in
-      lib.filterAttrs (n: v: v.publicKey != "") wgHosts;
+      lib.filterAttrs (_n: v: v.publicKey != "") wgHosts;
 
     # Configure system-wide known hosts
     programs.ssh.knownHosts =
