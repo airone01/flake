@@ -6,9 +6,7 @@ generate_feeds = true
 generate_sitemap = true
 
 # Taxonomies
-taxonomies = [
-    {name = "tags", feed = true, paginate_by = 10},
-]
+taxonomies = [{ name = "tags", feed = true, paginate_by = 10 }]
 
 # Language
 default_language = "en"
@@ -51,5 +49,5 @@ header_nav = [
   { url = "/", name_en = "/home/", name_fr = "/accueil/" },
   { url = "/about", name_en = "/about/", name_fr = "/concernant/" },
   { url = "/journal", name_en = "/journal/", name_fr = "/journal/" },
-  { url = "/blog", name_en = "/blog/", name_fr = "/blog/" }
+  { url = "/blog", name_en = "/blog/", name_fr = "/blog/" },
 ]

@@ -31,15 +31,17 @@
     self,
     nixpkgs,
     flake-parts,
+    treefmt-nix,
     ...
   }:
     inputs.garnix-incrementalize.lib.withCaches (flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
 
+      imports = [
+        treefmt-nix.flakeModule
+      ];
+
       perSystem = {
-        config,
-        self',
-        inputs',
         pkgs,
         system,
         ...
@@ -54,7 +56,17 @@
           commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
         };
 
-        formatter = pkgs.alejandra;
+        treefmt = {
+          projectRootFile = "flake.nix";
+
+          programs = {
+            alejandra.enable = true;
+            deadnix.enable = true; # dead vard
+            prettier.enable = true; # MD, JSON, YAML
+            biome.enable = true; # JS, TS
+            taplo.enable = true; # TOML
+          };
+        };
       };
 
       flake = let

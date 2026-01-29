@@ -1,15 +1,15 @@
-$background: #1A1B26;
-$foreground: #A9B1D6;
-$border: #2E2E2E;
+$background: #1a1b26;
+$foreground: #a9b1d6;
+$border: #2e2e2e;
 
-$black: #24283B;
-$gray: #565F89;
-$red: #F7768E;
-$green: #73DACA;
-$yellow: #E0AF68;
-$blue: #7AA2F7;
-$magenta: #BB9AF7;
-$cyan: #7DCFFF;
+$black: #24283b;
+$gray: #565f89;
+$red: #f7768e;
+$green: #73daca;
+$yellow: #e0af68;
+$blue: #7aa2f7;
+$magenta: #bb9af7;
+$cyan: #7dcfff;
 $white: $foreground;
 
 // Global
@@ -25,7 +25,7 @@ $white: $foreground;
 .eww_bar {
   background-color: $background;
   border-width: 2px;
-  padding: .2rem;
+  padding: 0.2rem;
   margin: 1.4rem;
 }
 

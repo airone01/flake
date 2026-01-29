@@ -8,10 +8,15 @@ toc = false
 Lorem ipsum[^1] dolor sit amet, consectetur adipiscing elit. Pellentesque vel lacinia neque. Praesent nulla quam, ullamcorper in sollicitudin ac, molestie sed justo. Cras aliquam, sapien id consectetur accumsan, augue magna faucibus ex, ut ultricies turpis tortor vel ante. In at rutrum tellus.
 
 # Sample heading 1
+
 ## Sample heading 2
+
 ### Sample heading 3
+
 #### Sample heading 4
+
 ##### Sample heading 5
+
 ###### Sample heading 6
 
 Mauris viverra dictum ultricies. Vestibulum quis ipsum euismod, facilisis metus sed, varius ipsum. Donec scelerisque lacus libero, eu dignissim sem venenatis at. Etiam id nisl ut lorem gravida euismod.
@@ -42,7 +47,7 @@ The following is a blockquote:
 Now some code:
 
 ```js
-const ultimateTruth = 'this theme is the best!';
+const ultimateTruth = "this theme is the best!";
 console.log(ultimateTruth);
 ```
 
@@ -52,11 +57,11 @@ And here is some `inline code`!
 
 Now a table:
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
+| Tables        |      Are      |  Cool |
+| ------------- | :-----------: | ----: |
 | col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| col 2 is      |   centered    |   $12 |
+| zebra stripes |   are neat    |    $1 |
 
 ## Images
 
@@ -65,10 +70,12 @@ Now a table:
 random image of a dog[^4]
 
 ## Multilanguage support
+
 - 🥣 [This site but in french (only this page and the homepage is translated)](/fr)
 
 ## Webrings
-  - 🈯 {{ webring(prev="#", webring="#", webringName="Random Webring", next="#") }}
+
+- 🈯 {{ webring(prev="#", webring="#", webringName="Random Webring", next="#") }}
 
 ---
 

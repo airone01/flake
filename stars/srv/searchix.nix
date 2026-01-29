@@ -1,6 +1,4 @@
 {
-  lib,
-  pkgs,
   ...
 }:
 # Hey! Go check out Searchix, it's pretty dope!

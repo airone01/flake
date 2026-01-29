@@ -5,7 +5,7 @@
 
 Le thème anemone est conçu pour offrir une expérience quasi sans JavaScript, efficace et minimaliste pour votre site web. Adoptant la simplicité, le thème met l'accent sur le contenu et la lisibilité, garantissant une expérience utilisateur fluide sans distractions inutiles.
 
-> *"Bloc de citation inutile"*
+> _"Bloc de citation inutile"_
 
 ## Articles de Blog
 

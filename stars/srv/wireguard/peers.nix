@@ -1,10 +1,8 @@
 {
   pkgs,
-  lib,
   ...
 }: let
   # Read and parse the hosts.toml file
-  toml = pkgs.formats.toml {};
   metadata = builtins.fromTOML (builtins.readFile ./hosts.toml);
 
   # Function to generate roaming peer configuration
@@ -17,15 +15,6 @@
   };
 
   # Function to generate server peer configuration
-  serverPeer = host: {
-    publicKey = metadata.hosts.${host}.wireguard.pubkey;
-    allowedIPs = [
-      "${metadata.hosts.${host}.wireguard.addrs.v4}/32"
-      "${metadata.hosts.${host}.wireguard.addrs.v6}/128"
-    ];
-    endpoint = "${metadata.hosts.${host}.ip_addr}:${toString metadata.hosts.${host}.wireguard.port}";
-    persistentKeepalive = 25; # Keep connection alive through NAT
-  };
 
   # Define peer lists based on network location
   peerLists = {
@@ -44,7 +33,6 @@
   interfaceInfo = host: let
     hostData = metadata.hosts.${host};
     wireguardData = hostData.wireguard;
-    network = metadata.networks.${hostData.network};
     peerList =
       if hostData.network == "cloud"
       then peerLists.cloud
