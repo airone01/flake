@@ -1,5 +1,26 @@
 # Changelog
 
+## [8.0.0](https://github.com/airone01/flake/compare/flake-v7.3.1...flake-v8.0.0) (2026-01-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* **flake:** Change the whole layout of flake.nix in profit of flake-parts
+
+### Features
+
+* **flake:** add git-hooks flake part ([#70](https://github.com/airone01/flake/issues/70)) ([a74b986](https://github.com/airone01/flake/commit/a74b986df563440e61aff4a484e11f40c6f5e3f6))
+
+
+### Bug Fixes
+
+* **flake:** patch treefmt flagging changelog file ([#71](https://github.com/airone01/flake/issues/71)) ([c7dd1c0](https://github.com/airone01/flake/commit/c7dd1c0fce3ed07b60284a5514d98f57b822dfda))
+
+
+### Code Refactoring
+
+* **flake:** implement flake-parts ([#68](https://github.com/airone01/flake/issues/68)) ([d9cfee9](https://github.com/airone01/flake/commit/d9cfee9dc7df0c497428b8dc1951bb720f6416d9))
+
 ## [7.3.1](https://github.com/airone01/flake/compare/flake-v7.3.0...flake-v7.3.1) (2026-01-28)
 
 ### Bug Fixes
