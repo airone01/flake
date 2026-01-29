@@ -56,6 +56,19 @@
           inherit (nixpkgs) lib;
         };
 
+        pre-commit = {
+          check.enable = true;
+          settings.hooks = {
+            # auto-format commit
+            treefmt.enable = true;
+            # lint shell scripts
+            shellcheck.enable = true;
+            # prevent committing broken Nix code
+            deadnix.enable = true;
+            statix.enable = true;
+          };
+        };
+
         devShells = {
           default = pkgs.mkShell {
             shellHook = config.pre-commit.installationScript;
@@ -75,6 +88,7 @@
           programs = {
             alejandra.enable = true;
             deadnix.enable = true; # dead vard
+            statix.enable = true;
             prettier.enable = true; # MD, JSON, YAML
             biome.enable = true; # JS, TS
             taplo.enable = true; # TOML

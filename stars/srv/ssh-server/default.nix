@@ -152,14 +152,14 @@ in {
     # Basic SSH server configuration
     services.openssh = {
       enable = true;
-      startWhenNeeded = cfg.startWhenNeeded;
-      openFirewall = cfg.openFirewall;
-      banner = cfg.banner;
-      allowSFTP = cfg.allowSFTP;
-      ports = cfg.ports;
+      inherit (cfg) startWhenNeeded;
+      inherit (cfg) openFirewall;
+      inherit (cfg) banner;
+      inherit (cfg) allowSFTP;
+      inherit (cfg) ports;
 
       # Configure listen addresses
-      listenAddresses = cfg.listenAddresses;
+      inherit (cfg) listenAddresses;
 
       settings = {
         # Authentication settings
@@ -193,13 +193,13 @@ in {
       };
 
       # Additional configuration
-      extraConfig = cfg.extraConfig;
+      inherit (cfg) extraConfig;
     };
 
     # Mosh support (if enabled)
     programs.mosh = lib.mkIf cfg.mosh.enable {
       enable = true;
-      package = cfg.mosh.package;
+      inherit (cfg.mosh) package;
     };
 
     # If mosh is enabled, open its UDP ports

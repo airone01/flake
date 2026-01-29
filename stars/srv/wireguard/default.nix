@@ -42,8 +42,8 @@ in {
 
     # Enable Wireguard
     networking.wireguard.interfaces.${cfg.interfaceName} = {
-      ips = metadata.hosts.${hostname}.ips;
-      listenPort = metadata.hosts.${hostname}.listenPort;
+      inherit (metadata.hosts.${hostname}) ips;
+      inherit (metadata.hosts.${hostname}) listenPort;
       privateKeyFile = "/root/wireguard-keys/private";
 
       # Configure peers with subnet routing
@@ -90,41 +90,43 @@ in {
         else [];
     };
 
-    # Add custom routes for subnets (as a safety net)
-    networking.localCommands = ''
-      # Add static routes for the subnets
-      ${
-        if hostname == "hercules"
-        then "ip route add 10.77.2.0/24 dev ${cfg.interfaceName} || true"
-        else ""
-      }
-      ${
-        if hostname == "cetus"
-        then "ip route add 10.77.1.0/24 dev ${cfg.interfaceName} || true"
-        else ""
-      }
-    '';
-
-    # Open firewall for Wireguard
-    networking.firewall = {
-      allowedUDPPorts = [(metadata.hosts.${hostname}.listenPort or 51820)];
-
-      # Allow forwarded traffic
-      extraCommands = ''
-        # Accept forwarded packets
-        iptables -A FORWARD -i ${cfg.interfaceName} -j ACCEPT || true
-        iptables -A FORWARD -o ${cfg.interfaceName} -j ACCEPT || true
-
-        # NAT
-        iptables -t nat -A POSTROUTING -s 10.77.0.0/16 ! -o ${cfg.interfaceName} -j MASQUERADE || true
+    networking = {
+      # Add custom routes for subnets (as a safety net)
+      localCommands = ''
+        # Add static routes for the subnets
+        ${
+          if hostname == "hercules"
+          then "ip route add 10.77.2.0/24 dev ${cfg.interfaceName} || true"
+          else ""
+        }
+        ${
+          if hostname == "cetus"
+          then "ip route add 10.77.1.0/24 dev ${cfg.interfaceName} || true"
+          else ""
+        }
       '';
 
-      extraStopCommands = ''
-        # Clean up rules when stopping firewall
-        iptables -D FORWARD -i ${cfg.interfaceName} -j ACCEPT 2>/dev/null || true
-        iptables -D FORWARD -o ${cfg.interfaceName} -j ACCEPT 2>/dev/null || true
-        iptables -t nat -D POSTROUTING -s 10.77.0.0/16 ! -o ${cfg.interfaceName} -j MASQUERADE 2>/dev/null || true
-      '';
+      # Open firewall for Wireguard
+      firewall = {
+        allowedUDPPorts = [(metadata.hosts.${hostname}.listenPort or 51820)];
+
+        # Allow forwarded traffic
+        extraCommands = ''
+          # Accept forwarded packets
+          iptables -A FORWARD -i ${cfg.interfaceName} -j ACCEPT || true
+          iptables -A FORWARD -o ${cfg.interfaceName} -j ACCEPT || true
+
+          # NAT
+          iptables -t nat -A POSTROUTING -s 10.77.0.0/16 ! -o ${cfg.interfaceName} -j MASQUERADE || true
+        '';
+
+        extraStopCommands = ''
+          # Clean up rules when stopping firewall
+          iptables -D FORWARD -i ${cfg.interfaceName} -j ACCEPT 2>/dev/null || true
+          iptables -D FORWARD -o ${cfg.interfaceName} -j ACCEPT 2>/dev/null || true
+          iptables -t nat -D POSTROUTING -s 10.77.0.0/16 ! -o ${cfg.interfaceName} -j MASQUERADE 2>/dev/null || true
+        '';
+      };
     };
 
     environment.systemPackages = with pkgs; [
