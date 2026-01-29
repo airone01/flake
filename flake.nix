@@ -83,6 +83,7 @@
           projectRootFile = "flake.nix";
           settings.global.excludes = [
             "CHANGELOG.md"
+            ".release-please-manifest.json"
           ];
 
           programs = {
