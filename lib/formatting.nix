@@ -1,11 +1,11 @@
-{
-  inputs,
-  lib,
-  ...
-}: let
-  excludes = [
+{inputs, ...}: let
+  treefmtExcludes = [
     "CHANGELOG.md"
     ".release-please-manifest.json"
+  ];
+  preCommitExcludes = [
+    "CHANGELOG\\.md$"
+    "\\.release-please-manifest\\.json$"
   ];
 in {
   imports = [
@@ -23,7 +23,7 @@ in {
         check.enable = true;
         settings = {
           # filename shenanigans
-          excludes = map (s: "^" + lib.strings.escapeRegex s + "$") excludes;
+          excludes = preCommitExcludes;
 
           hooks = {
             treefmt.enable = true; # formatting and deadnix/statix fixes
@@ -33,7 +33,7 @@ in {
 
       treefmt = {
         projectRootFile = "flake.nix";
-        settings.global.excludes = excludes;
+        settings.global.excludes = treefmtExcludes;
 
         programs = {
           alejandra.enable = true;
