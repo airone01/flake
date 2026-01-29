@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: let
+{ ...}: let
   # Read and parse the hosts.toml file
   metadata = builtins.fromTOML (builtins.readFile ./hosts.toml);
 
