@@ -1,5 +1,5 @@
 {
-  description = "r1's increasingly-less-simple NixOS config";
+  description = "r1's increasingly-less-simple Nix configs";
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
