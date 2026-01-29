@@ -43,57 +43,13 @@
       imports = [
         treefmt-nix.flakeModule
         inputs.git-hooks.flakeModule
+        ./lib/formatting.nix
       ];
 
-      perSystem = {
-        pkgs,
-        system,
-        config,
-        ...
-      }: {
+      perSystem = {pkgs, ...}: {
         packages = import ./packages {
           inherit pkgs;
           inherit (nixpkgs) lib;
-        };
-
-        pre-commit = {
-          check.enable = true;
-          settings.hooks = {
-            # auto-format commit
-            treefmt.enable = true;
-            # lint shell scripts
-            shellcheck.enable = true;
-            # prevent committing broken Nix code
-            deadnix.enable = true;
-            statix.enable = true;
-          };
-        };
-
-        devShells = {
-          default = pkgs.mkShell {
-            shellHook = config.pre-commit.installationScript;
-            inputsFrom = [
-              (import ./rockets {inherit system nixpkgs;})
-            ];
-          };
-          commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
-        };
-
-        treefmt = {
-          projectRootFile = "flake.nix";
-          settings.global.excludes = [
-            "CHANGELOG.md"
-            ".release-please-manifest.json"
-          ];
-
-          programs = {
-            alejandra.enable = true;
-            deadnix.enable = true; # dead vard
-            statix.enable = true;
-            prettier.enable = true; # MD, JSON, YAML
-            biome.enable = true; # JS, TS
-            taplo.enable = true; # TOML
-          };
         };
       };
 
