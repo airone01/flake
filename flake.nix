@@ -3,7 +3,10 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    git-hooks.url = "github:cachix/git-hooks.nix";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     garnix-incrementalize.url = "github:garnix-io/incrementalize";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -39,11 +42,13 @@
 
       imports = [
         treefmt-nix.flakeModule
+        inputs.git-hooks.flakeModule
       ];
 
       perSystem = {
         pkgs,
         system,
+        config,
         ...
       }: {
         packages = import ./packages {
@@ -52,7 +57,12 @@
         };
 
         devShells = {
-          default = import ./rockets {inherit system nixpkgs;};
+          default = pkgs.mkShell {
+            shellHook = config.pre-commit.installationScript;
+            inputsFrom = [
+              (import ./rockets {inherit system nixpkgs;})
+            ];
+          };
           commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
         };
 

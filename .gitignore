@@ -31,3 +31,6 @@ repomix-output.txt
 # NodeJS
 node_modules/
 
+# git-hooks
+.pre-commit-config.yaml
+
