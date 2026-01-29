@@ -68,6 +68,9 @@
 
         treefmt = {
           projectRootFile = "flake.nix";
+          settings.global.excludes = [
+            "CHANGELOG.md"
+          ];
 
           programs = {
             alejandra.enable = true;
