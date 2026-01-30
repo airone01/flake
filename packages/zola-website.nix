@@ -11,6 +11,7 @@ pkgs.stdenv.mkDerivation {
 
   preBuild = ''
     mkdir -p themes
+    rm -rf themes/anemone
     ln -s ${anemone-theme} themes/anemone
   '';
 

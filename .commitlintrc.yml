@@ -86,6 +86,7 @@ rules:
       - vlc
       - waybar
       - zsh
+      - zola
       # Subsystems
       - audio
       - video
