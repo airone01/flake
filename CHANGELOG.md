@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.1.2](https://github.com/airone01/flake/compare/flake-v8.1.1...flake-v8.1.2) (2026-01-30)
+
+
+### Bug Fixes
+
+* **hercules:** patchs ([#78](https://github.com/airone01/flake/issues/78)) ([6b80c4e](https://github.com/airone01/flake/commit/6b80c4e367c16c7309bcf8464421730fe33f456a))
+
 ## [8.1.1](https://github.com/airone01/flake/compare/flake-v8.1.0...flake-v8.1.1) (2026-01-30)
 
 
