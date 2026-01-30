@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   networking.hostName = "hercules";
   system.stateVersion = "24.05"; # never change this
   time.timeZone = "Europe/Paris";
@@ -28,6 +28,10 @@ _: {
 
     # Hardware
     ./hardware-configuration.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    kitty # for ssh TERM type
   ];
 
   # Booting
