@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.1.1](https://github.com/airone01/flake/compare/flake-v8.1.0...flake-v8.1.1) (2026-01-30)
+
+
+### Bug Fixes
+
+* **flake:** patch bad token in update-flake-lock action ([#75](https://github.com/airone01/flake/issues/75)) ([7a94b20](https://github.com/airone01/flake/commit/7a94b20093f798e9486cbb323ec9e3c6518e82a8))
+
 ## [8.1.0](https://github.com/airone01/flake/compare/flake-v8.0.0...flake-v8.1.0) (2026-01-30)
 
 
