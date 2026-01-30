@@ -10,9 +10,11 @@ pkgs.stdenv.mkDerivation {
   nativeBuildInputs = [pkgs.zola];
 
   preBuild = ''
+    set -x # enable shell trace
     mkdir -p themes
     rm -rf themes/anemone
-    ln -s ${anemone-theme} themes/anemone
+    cp -r --no-preserve=mode,ownership ${anemone-theme} themes/anemone
+    ls -la themes/anemone
   '';
 
   buildPhase = "zola build";
