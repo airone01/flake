@@ -8,7 +8,6 @@ _:
 
     settings = {
       dataPath = "/var/lib/searchix/data";
-      logLevel = "info";
 
       importer = {
         batchSize = 10000;
