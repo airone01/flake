@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.1.0](https://github.com/airone01/flake/compare/flake-v8.0.0...flake-v8.1.0) (2026-01-30)
+
+
+### Features
+
+* **flake:** enable true git hooks and statix ([#73](https://github.com/airone01/flake/issues/73)) ([986bb18](https://github.com/airone01/flake/commit/986bb18c45e61185f1960af3c78f5a3d993395ac))
+
 ## [8.0.0](https://github.com/airone01/flake/compare/flake-v7.3.1...flake-v8.0.0) (2026-01-29)
 
 
