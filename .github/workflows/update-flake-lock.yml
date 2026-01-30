@@ -36,7 +36,7 @@ jobs:
       - uses: DeterminateSystems/update-flake-lock@main
         id: update
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
           pr-title: "chore(flake): update inputs"
           pr-labels: |
             dependencies
