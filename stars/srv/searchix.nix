@@ -1,19 +1,22 @@
-_:
+{pkgs, ...}:
 # Hey! Go check out Searchix, it's pretty dope!
 # Note for myself: config reference at time of writing:
 # https://git.sr.ht/~alanpearce/searchix/tree/b7de525d7fe617674030c493ec4214f2f5a4b887
 {
+  systemd.services.searchix.environment = {
+    NIX_PATH = "nixpkgs=${pkgs.path}";
+  };
+
   services.searchix = {
     enable = true;
 
     settings = {
       dataPath = "/var/lib/searchix/data";
-      logLevel = "info";
 
       importer = {
         batchSize = 10000;
         lowMemory = true;
-        timeout = "30m";
+        timeout = "2h";
         updateAt = "03:00:00";
 
         sources = {
@@ -28,7 +31,7 @@ _:
             url = "https://github.com/LnL7/nix-darwin/archive/master.tar.gz";
             attribute = "docs.optionsJSON";
             importPath = "release.nix";
-            timeout = "5m0s";
+            timeout = "30m";
             outputPath = "share/doc/darwin";
             jsonDepth = 1;
 
@@ -49,54 +52,44 @@ _:
             # };
           };
 
-          # home-manager = {
-          #   enable = true;
-          #   key = "home-manager";
-          #   attribute = "docs.json";
-          #   channel = "home-manager";
-          #   fetcher = "channel";
-          #   importPath = "default.nix";
-          #   importer = "options";
-          #   jsonDepth = 1;
-          #   name = "Home Manager";
-          #   order = 2;
-          #   outputPath = "share/doc/home-manager";
-          #   timeout = "5m";
-          #   url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-          #   repo = {
-          #     owner = "nix-community";
-          #     repo = "home-manager";
-          #     type = "github";
-          #   };
-          #   programs = {
-          #     attribute = "";
-          #     enable = false;
-          #   };
-          # };
+          home-manager = {
+            enable = true;
+            name = "Home Manager";
+            key = "home-manager";
+            order = 2;
+            fetcher = "channel";
+            channel = "home-manager";
+            url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+            importPath = "default.nix";
+            attribute = "docs.json";
+            importer = "options";
+            repo = {
+              type = "github";
+              owner = "nix-community";
+              repo = "home-manager";
+            };
+          };
 
           nixos = {
             enable = true;
             key = "nixos";
-            attribute = "options";
-            channel = "nixpkgs";
-            fetcher = "channel";
-            importPath = "nixos/release.nix";
-            importer = "options";
-            jsonDepth = 1;
+            fetcher = "download";
             name = "NixOS";
             order = 0;
             outputPath = "share/doc/nixos";
-            timeout = "5m";
-            url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+            timeout = "30m";
+            url = "https://channels.nixos.org/nixos-unstable/options.json.br";
+
             repo = {
               owner = "NixOS";
               repo = "nixpkgs";
               type = "github";
             };
-            programs = {
-              attribute = "";
-              enable = false;
-            };
+
+            # programs = {
+            #   attribute = "";
+            #   enable = false;
+            # };
           };
 
           nixpkgs = {
@@ -111,7 +104,7 @@ _:
             name = "Nix Packages";
             order = 3;
             outputPath = "packages.json.br";
-            timeout = "15m";
+            timeout = "30m";
             url = "";
             repo = {
               owner = "NixOS";
@@ -124,55 +117,51 @@ _:
             };
           };
 
-          nur = {
-            enable = true;
-            key = "nur";
-            attribute = "";
-            channel = "";
-            fetcher = "download";
-            importPath = "";
-            importer = "packages";
-            jsonDepth = 1;
-            name = "NUR";
-            order = 4;
-            outputPath = "";
-            timeout = "5m";
-            url = "https://alanpearce.github.io/nix-options/nur";
-            repo = {
-              owner = "nix-community";
-              repo = "nur";
-              type = "github";
-            };
-            programs = {
-              attribute = "";
-              enable = false;
-            };
-          };
-
-          # # Custom NVF source
-          # nvf = {
+          # The 'download' fetcher in Searchix strictly requires a 'revision' file
+          # to exist at the URL (e.g. .../data/revision). The official NUR endpoint
+          # only provides 'packages.json', so Searchix errors out. Hence must be
+          # disabled.
+          # nur = {
           #   enable = true;
-          #   key = "nvf";
-          #   name = "NVF";
-          #   order = 5;
-          #
-          #   # ✅ Use the proper GitHub-style channel fetcher
-          #   fetcher = "channel";
-          #   channel = "main";
-          #   timeout = "5m";
-          #
-          #   importer = "options";
-          #   importPath = "docs/default.nix";
-          #   attribute = "docs.json";
+          #   key = "nur";
+          #   attribute = "";
+          #   channel = "";
+          #   fetcher = "download";
+          #   importPath = "";
+          #   importer = "packages";
           #   jsonDepth = 1;
-          #   outputPath = "share/doc/nvf";
-          #
+          #   name = "NUR";
+          #   order = 4;
+          #   outputPath = "";
+          #   timeout = "30m";
+          #   url = "https://nur.nix-community.org/data/packages.json";
           #   repo = {
-          #     owner = "NotAShelf";
-          #     repo = "nvf";
+          #     owner = "nix-community";
+          #     repo = "nur";
           #     type = "github";
           #   };
+          #   programs = {
+          #     attribute = "";
+          #     enable = false;
+          #   };
           # };
+
+          nvf = {
+            enable = true;
+            name = "NVF";
+            key = "nvf";
+            order = 5;
+            fetcher = "channel";
+            url = "https://github.com/airone01/flake/archive/fix/hercules-patches.tar.gz";
+            importPath = "lib/nvf-searchix.nix";
+            attribute = "";
+            importer = "options";
+            repo = {
+              type = "github";
+              owner = "NotAShelf";
+              repo = "nvf";
+            };
+          };
         };
       };
 
