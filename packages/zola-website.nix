@@ -1,12 +1,18 @@
 {
   pkgs,
   lib,
+  anemone-theme,
 }:
 pkgs.stdenv.mkDerivation {
   pname = "zola-website";
   version = "1.0.0";
   src = ../web;
   nativeBuildInputs = [pkgs.zola];
+
+  preBuild = ''
+    mkdir -p themes
+    ln -s ${anemone-theme} themes/anemone
+  '';
 
   buildPhase = "zola build";
   installPhase = ''

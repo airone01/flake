@@ -2,6 +2,10 @@
   description = "r1's increasingly-less-simple Nix configs";
 
   inputs = {
+    anemone-theme = {
+      url = "github:Speyll/anemone";
+      flake = false; # just source code
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
@@ -48,7 +52,7 @@
 
       perSystem = {pkgs, ...}: {
         packages = import ./packages {
-          inherit pkgs;
+          inherit pkgs inputs;
           inherit (nixpkgs) lib;
         };
       };

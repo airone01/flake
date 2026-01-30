@@ -40,7 +40,6 @@ in {
           deadnix.enable = true;
           statix.enable = true;
           prettier.enable = true;
-          biome.enable = true;
           taplo.enable = true;
         };
       };
