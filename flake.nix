@@ -1,7 +1,11 @@
 {
-  description = "r1's increasingly-less-simple NixOS config";
+  description = "r1's increasingly-less-simple Nix configs";
 
   inputs = {
+    anemone-theme = {
+      url = "github:Speyll/anemone";
+      flake = false; # just source code
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
@@ -43,42 +47,13 @@
       imports = [
         treefmt-nix.flakeModule
         inputs.git-hooks.flakeModule
+        ./lib/formatting.nix
       ];
 
-      perSystem = {
-        pkgs,
-        system,
-        config,
-        ...
-      }: {
+      perSystem = {pkgs, ...}: {
         packages = import ./packages {
-          inherit pkgs;
+          inherit pkgs inputs;
           inherit (nixpkgs) lib;
-        };
-
-        devShells = {
-          default = pkgs.mkShell {
-            shellHook = config.pre-commit.installationScript;
-            inputsFrom = [
-              (import ./rockets {inherit system nixpkgs;})
-            ];
-          };
-          commitlint = import ./rockets/commitlint.nix {inherit system nixpkgs;};
-        };
-
-        treefmt = {
-          projectRootFile = "flake.nix";
-          settings.global.excludes = [
-            "CHANGELOG.md"
-          ];
-
-          programs = {
-            alejandra.enable = true;
-            deadnix.enable = true; # dead vard
-            prettier.enable = true; # MD, JSON, YAML
-            biome.enable = true; # JS, TS
-            taplo.enable = true; # TOML
-          };
         };
       };
 

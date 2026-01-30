@@ -16,29 +16,31 @@ _: {
       termguicolors = true;
     };
 
-    # Better jk escape with timeout
-    luaConfigRC.better-escape = ''
-      vim.o.timeoutlen = 300
-      vim.o.ttimeoutlen = 10
-    '';
+    luaConfigRC = {
+      # Better jk escape with timeout
+      better-escape = ''
+        vim.o.timeoutlen = 300
+        vim.o.ttimeoutlen = 10
+      '';
 
-    # Make winbar follow theme
-    luaConfigRC.winbar-theme = ''
-      vim.api.nvim_set_hl(0, 'WinBar', { link = 'Normal' })
-      vim.api.nvim_set_hl(0, 'WinBarNC', { link = 'Comment' })
-    '';
+      # Make winbar follow theme
+      winbar-theme = ''
+        vim.api.nvim_set_hl(0, 'WinBar', { link = 'Normal' })
+        vim.api.nvim_set_hl(0, 'WinBarNC', { link = 'Comment' })
+      '';
 
-    luaConfigRC.visual-high-contrast = ''
-      vim.api.nvim_create_autocmd("ColorScheme", {
-        pattern = "*",
-        callback = function()
-          vim.api.nvim_set_hl(0, 'Visual', {
-            bg = '#3a515d',  -- More blue-tinted, higher contrast
-            fg = 'NONE',
-            reverse = false
-          })
-        end,
-      })
-    '';
+      visual-high-contrast = ''
+        vim.api.nvim_create_autocmd("ColorScheme", {
+          pattern = "*",
+          callback = function()
+            vim.api.nvim_set_hl(0, 'Visual', {
+              bg = '#3a515d',  -- More blue-tinted, higher contrast
+              fg = 'NONE',
+              reverse = false
+            })
+          end,
+        })
+      '';
+    };
   };
 }

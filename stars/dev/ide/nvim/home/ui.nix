@@ -69,8 +69,8 @@ _: {
     theme = {
       enable = true;
 
-      # name = "everforest";
-      # style = "medium";
+      name = "everforest";
+      style = "medium";
     };
   };
 }

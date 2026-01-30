@@ -23,13 +23,17 @@
     ./hardware-configuration.nix
   ];
 
-  ### Graphics
-  # recommended for AMD GPU
-  hardware.graphics.enable32Bit = true;
-  # patches low resolution during initramfs boot stage
-  hardware.amdgpu.initrd.enable = true;
-  hardware.amdgpu.overdrive.enable = true; # overclocking
-  hardware.amdgpu.opencl.enable = true;
+  hardware = {
+    ### Graphics
+    # recommended for AMD GPU
+    graphics.enable32Bit = true;
+    amdgpu = {
+      # load amdgpu kernel module resolution during initramfs boot stage
+      initrd.enable = true;
+      overdrive.enable = true; # overclocking
+      opencl.enable = true;
+    };
+  };
   # LACT: Linux AMDGPU Controller
   services.lact.enable = true;
 

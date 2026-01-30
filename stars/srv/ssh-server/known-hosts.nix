@@ -68,9 +68,7 @@
               ++ lib.optional (host ? wireguard && host.wireguard ? addrs && host.wireguard.addrs ? v4)
               "${host.wireguard.addrs.v4}";
             publicKey =
-              if host ? ssh_pubkey
-              then host.ssh_pubkey
-              else "";
+              host.ssh_pubkey or "";
           })
           hostsTOML.hosts
         else {};
