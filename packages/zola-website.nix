@@ -16,7 +16,10 @@ pkgs.stdenv.mkDerivation {
     cp -r --no-preserve=mode,ownership ${anemone-theme}/. themes/anemone/
   '';
 
-  buildPhase = "zola build";
+  buildPhase = ''
+    runHook preBuild
+    zola build
+  '';
   installPhase = ''
     mkdir -p $out
     cp -r public/* $out/
