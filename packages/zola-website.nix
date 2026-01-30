@@ -12,8 +12,7 @@ pkgs.stdenv.mkDerivation {
   preBuild = ''
     mkdir -p themes
     rm -rf themes/anemone
-    mkdir -p themes/anemone
-    cp -r --no-preserve=mode,ownership ${anemone-theme}/. themes/anemone/
+    ln -s ${anemone-theme} themes/anemone
   '';
 
   buildPhase = ''
