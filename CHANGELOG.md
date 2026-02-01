@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.1.3](https://github.com/airone01/flake/compare/flake-v8.1.2...flake-v8.1.3) (2026-02-01)
+
+
+### Bug Fixes
+
+* **hyprland:** remve windowrulev2 call ([#89](https://github.com/airone01/flake/issues/89)) ([f851040](https://github.com/airone01/flake/commit/f851040d1ea49226f57257470c0c33280adf64d6))
+
 ## [8.1.2](https://github.com/airone01/flake/compare/flake-v8.1.1...flake-v8.1.2) (2026-01-30)
 
 
