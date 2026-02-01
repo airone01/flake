@@ -52,15 +52,7 @@
       blockbench
     ];
 
-    wayland.windowManager.hyprland.settings = {
-      monitor = [", highrr, auto, 1"];
-      windowrulev2 = [
-        # very specific fixes for raylib
-        "float, title:(game_test)"
-        "size 800 450, title:(game_test)"
-        "center, title:(game_test)"
-      ];
-    };
+    wayland.windowManager.hyprland.settings.monitor = [", highrr, auto, 1"];
 
     programs.obs-studio = {
       enable = true;
