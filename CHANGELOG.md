@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.1.4](https://github.com/airone01/flake/compare/flake-v8.1.3...flake-v8.1.4) (2026-02-05)
+
+
+### Bug Fixes
+
+* random patches ([#104](https://github.com/airone01/flake/issues/104)) ([8a1305f](https://github.com/airone01/flake/commit/8a1305f0866a4e73c7632e6b3f1f24e93db564b0))
+
 ## [8.1.3](https://github.com/airone01/flake/compare/flake-v8.1.2...flake-v8.1.3) (2026-02-01)
 
 
