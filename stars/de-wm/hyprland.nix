@@ -81,7 +81,7 @@ in {
         exec-once = [
           "dunst" # open notification deamon
           # "swww-daemon" # open wallpaper deamon
-          "swww img ${wallpaperImg}" # change wallpaper
+          "swww img -t none ${wallpaperImg}" # change wallpaper
           "waybar" # bar
           # "nm-applet --indicator" # open network manager icon
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1" # ui for pasword auth
