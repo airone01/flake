@@ -63,17 +63,28 @@
     };
   };
 
-  fileSystems."/mnt/romm" = {
-    device = "//192.168.1.142/romm";
-    fsType = "cifs";
-    options = [
-      "credentials=/etc/nixos/smb-romm"
-      "iocharset=utf8"
-      "x-systemd.automount"
-      "nofail"
-      "uid=1000"
-      "gid=100"
-    ];
+  # fileSystems."/mnt/romm" = {
+  #   device = "//192.168.1.142/romm";
+  #   fsType = "cifs";
+  #   options = [
+  #     "credentials=/etc/nixos/smb-romm"
+  #     "iocharset=utf8"
+  #     "x-systemd.automount"
+  #     "nofail"
+  #     "uid=1000"
+  #     "gid=100"
+  #   ];
+  # };
+
+  # Some game I play (Arkgnights: Endfield), crashes dwproton. The fix is
+  # to load the `ntsync` kernel module.
+  # Fix source: https://dawn.wine/dawn-winery/dwproton/issues/3
+  # I'm also using Zen as this is a gaming machine. `ntsync` should be built
+  # into Zen and hence not require modprobe/kernelModules, but just in case I
+  # call it below.
+  boot = {
+    kernelPackages = pkgs.linuxPackages_zen;
+    kernelModules = ["ntsync"];
   };
 
   environment.systemPackages = with pkgs; [

@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   modulesPath,
   ...
@@ -10,11 +9,7 @@
   ];
 
   boot = {
-    # Some game I play (Arkgnights: Endfield), crashes dwproton. The fix is
-    # to load the `ntsync` kernel module.
-    # I'm also using Zen as this is a gaming machine.
-    kernelPackages = pkgs.linuxPackages_zen;
-    kernelModules = ["kvm-intel" "ntsync"];
+    kernelModules = ["kvm-intel"];
     extraModulePackages = [];
 
     initrd = {
