@@ -1,0 +1,71 @@
+---
+import BlogCard from "@/components/BlogCard.astro";
+import Link from "@/components/Link.astro";
+import PageHead from "@/components/PageHead.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { SITE } from "@/consts";
+import Layout from "@/layouts/Layout.astro";
+import { getRecentPosts } from "@/lib/data-utils";
+
+const blog = await getRecentPosts(SITE.featuredPostCount);
+---
+
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="Home" />
+  <section class="rounded-lg border">
+    <div class="flex flex-col space-y-1.5 p-6">
+      <h3 class="text-3xl leading-none font-medium">Welcome to my humble abode</h3>
+    </div>
+    <div class="p-6 pt-0">
+      <p class="text-muted-foreground mb-2 text-sm">
+        Hi! You are currently browsing the landing page of my homelab.
+        I provide the following listed services freely, just help yourself.
+        I sometimes also write about myself here. Stay tuned :-)
+
+        <ul class="text-muted-foreground text-sm">
+          <li>
+            <Link
+              href="https://searchix.air1.one/"
+              class="text-foreground"
+              external
+              underline>Searchix</Link
+            >
+            — Nix search engine, with support for NixOS and Home Manager options as well as nixpkgs packages.
+          </li>
+          <li>
+            <Link
+              href="https://gitea.air1.one/"
+              class="text-foreground"
+              external
+              underline>Gitea</Link
+            >
+            — Gitea instance I mainly use to mirror/backup repositories I like.
+          </li>
+        </ul>
+      </p>
+    </div>
+  </section>
+  <section class="flex flex-col gap-y-4">
+    <h2 class="text-2xl font-medium">Latest posts</h2>
+    <ul class="flex flex-col gap-y-4">
+      {
+        blog.map((post) => (
+          <li>
+            <BlogCard entry={post} />
+          </li>
+        ))
+      }
+    </ul>
+    <div class="flex justify-center">
+      <Link
+        href="/blog"
+        class={buttonVariants({ variant: 'ghost' }) + ' group'}
+      >
+        See all posts <span
+          class="ml-1.5 transition-transform group-hover:translate-x-1"
+          >&rarr;</span
+        >
+      </Link>
+    </div>
+  </section>
+</Layout>

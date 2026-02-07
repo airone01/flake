@@ -51,6 +51,7 @@ rules:
       - hyprland
       # Applications
       - arduino
+      - astro
       - asusd
       - atac
       - cachix
