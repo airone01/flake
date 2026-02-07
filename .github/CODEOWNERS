@@ -13,7 +13,6 @@ web/             @airone01
 .sops.yaml                 @airone01
 LICENSE                    @airone01
 README.md                  @airone01
-TODO.md                    @airone01
 flake.nix                  @airone01
 justfile                   @airone01
 release-please-config.json @airone01
