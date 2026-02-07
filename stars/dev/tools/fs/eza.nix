@@ -1,9 +1,5 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
-  home-manager.users.${config.stars.mainUser} = {
+{pkgs, ...}: {
+  stars.home = {
     programs.eza.enable = true;
   };
 

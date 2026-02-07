@@ -10,7 +10,7 @@
     themechanger
   ];
 
-  home-manager.users.${config.stars.mainUser} = {
+  stars.home = {
     programs.gnome-shell = {
       enable = true;
 

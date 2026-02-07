@@ -9,15 +9,21 @@
       type = lib.types.str;
       description = "Name of the main user";
     };
+
+    home = lib.mkOption {
+      description = "Alias for the main user's Home Manager configuration";
+      type = lib.types.attrs;
+      default = {};
+    };
   };
 
   config = {
     users.users.${config.stars.mainUser} = {
       # UID > 1000
       isNormalUser = true;
-      # Gives sudo access
+      # gives super user access
       extraGroups = ["wheel" "dialout"];
-      # Other groups will be added to the user in the respective stars
+      # other groups are added to the user in the respective stars
     };
 
     environment.systemPackages = with pkgs; [git wget curl];
@@ -27,16 +33,17 @@
       useUserPackages = true;
       backupFileExtension = "backup";
 
-      users.${config.stars.mainUser} = {
-        # Add home-manager configurations for the main user here
-        home = {
-          username = config.stars.mainUser;
-          homeDirectory = "/home/${config.stars.mainUser}";
-
-          # This is dangerous but fuck it
-          inherit (config.system) stateVersion;
-        };
-      };
+      users.${config.stars.mainUser} = lib.mkMerge [
+        {
+          # Add home-manager configurations for the main user here
+          home = {
+            username = config.stars.mainUser;
+            homeDirectory = "/home/${config.stars.mainUser}";
+            inherit (config.system) stateVersion;
+          };
+        }
+        config.stars.home
+      ];
     };
 
     nix.settings.experimental-features = ["nix-command" "flakes"];

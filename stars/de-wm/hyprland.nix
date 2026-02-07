@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  config,
   ...
 }: let
   wallpaperImg = pkgs.fetchurl {
@@ -52,7 +51,7 @@ in {
     # extraPortals = with pkgs; [xdg-desktop-portal-hyprland];
   };
 
-  home-manager.users.${config.stars.mainUser} = {
+  stars.home = {
     programs = {
       hyprlock.enable = true;
       kitty.enable = true;

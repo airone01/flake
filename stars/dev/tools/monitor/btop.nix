@@ -1,9 +1,5 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  home-manager.users.${config.stars.mainUser} = {
+{pkgs, ...}: {
+  stars.home = {
     programs.btop = {
       enable = true;
 

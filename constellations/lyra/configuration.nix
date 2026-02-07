@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   networking.hostName = "lyra";
   system.stateVersion = "25.11"; # never change this
   time.timeZone = "Europe/Paris";
@@ -47,7 +43,7 @@
     };
   };
 
-  home-manager.users.${config.stars.mainUser} = {
+  stars.home = {
     home.packages = with pkgs; [
       blockbench
     ];

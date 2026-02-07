@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  config,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -14,7 +13,7 @@
       "discord"
     ];
 
-  home-manager.users.${config.stars.mainUser}.programs.thunderbird = {
+  stars.home.programs.thunderbird = {
     enable = true;
     profiles.main.isDefault = true;
   };
