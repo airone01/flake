@@ -1,5 +1,5 @@
-{config, ...}: {
-  home-manager.users.${config.stars.mainUser}.programs.direnv = {
+_: {
+  stars.home.programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
     enableBashIntegration = true;

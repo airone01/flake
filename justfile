@@ -27,14 +27,6 @@ test host=hostname *args="":
 update *args="":
     nix flake update --flake {{flake_dir}} {{args}}|& nom
 
-# Format all nix files
-fmt:
-    find . -name "*.nix" -exec alejandra {} +
-
-# Check nix file formatting
-fmt-check:
-    find . -name "*.nix" -exec alejandra --check {} +
-
 # Run checks on the flake
 check *args="":
     nix flake check --all-systems {{flake_dir}} {{args}}|& nom

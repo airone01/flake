@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  home-manager.users.${config.stars.mainUser} = {
+  stars.home = {
     home.packages = with pkgs; [
       pay-respects # thefuck replacement
       zoxide

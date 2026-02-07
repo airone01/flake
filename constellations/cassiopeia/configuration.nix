@@ -92,7 +92,7 @@
     };
   };
 
-  home-manager.users.${config.stars.mainUser} = {
+  stars.home = {
     wayland.windowManager.hyprland.settings = {
       input = {
         kb_layout = "fr,us";

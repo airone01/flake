@@ -1,9 +1,5 @@
-{
-  inputs,
-  config,
-  ...
-}: {
-  home-manager.users.${config.stars.mainUser} = {
+{inputs, ...}: {
+  stars.home = {
     imports = [
       inputs.nvf.homeManagerModules.default
       ./home

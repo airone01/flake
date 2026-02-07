@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "anemone-theme": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1753053308,
-        "narHash": "sha256-vyB7gLKzTFLSEPPD4ylc3Uyj3WeKRFFklEnE58jn5JA=",
-        "owner": "Speyll",
-        "repo": "anemone",
-        "rev": "47b2085cb01f0e82fd83221aad79ab0b3d1702e0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Speyll",
-        "repo": "anemone",
-        "type": "github"
-      }
-    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -632,7 +616,6 @@
     },
     "root": {
       "inputs": {
-        "anemone-theme": "anemone-theme",
         "flake-parts": "flake-parts",
         "garnix-incrementalize": "garnix-incrementalize",
         "git-hooks": "git-hooks",

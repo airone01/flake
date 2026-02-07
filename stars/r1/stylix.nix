@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   inputs,
   ...
 }: {
@@ -43,7 +42,7 @@
     };
   };
 
-  home-manager.users.${config.stars.mainUser} = {
+  stars.home = {
     imports = [inputs.stylix.homeModules.stylix];
 
     stylix.targets = {

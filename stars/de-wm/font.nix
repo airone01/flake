@@ -1,9 +1,5 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
-  home-manager.users.${config.stars.mainUser} = {
+{pkgs, ...}: {
+  stars.home = {
     home.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
       nerd-fonts.fira-code

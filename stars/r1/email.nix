@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  home-manager.users.${config.stars.mainUser}.accounts.email.accounts = {
+  stars.home.accounts.email.accounts = {
     main = {
       realName = "Erwann Lagouche";
       address = "popgthyrd@gmail.com";

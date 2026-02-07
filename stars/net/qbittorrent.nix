@@ -1,7 +1,3 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
-  home-manager.users.${config.stars.mainUser}.home.packages = with pkgs; [qbittorrent];
+{pkgs, ...}: {
+  stars.home.home.packages = with pkgs; [qbittorrent];
 }

@@ -2,10 +2,6 @@
   description = "r1's increasingly-less-simple Nix configs";
 
   inputs = {
-    anemone-theme = {
-      url = "github:Speyll/anemone";
-      flake = false; # just source code
-    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
@@ -35,8 +31,6 @@
   };
 
   outputs = inputs @ {
-    self,
-    nixpkgs,
     flake-parts,
     treefmt-nix,
     ...
@@ -47,58 +41,12 @@
       imports = [
         treefmt-nix.flakeModule
         inputs.git-hooks.flakeModule
+
+        # flake parts
         ./lib/formatting.nix
+        ./lib/constellations.nix
+        ./lib/packages.nix
+        ./lib/rockets.nix
       ];
-
-      perSystem = {pkgs, ...}: {
-        packages = import ./packages {
-          inherit pkgs;
-          inherit (nixpkgs) lib;
-        };
-      };
-
-      flake = let
-        mkConstellation = {
-          constellations,
-          system ? "x86_64-linux",
-          extraModules ? [],
-        }:
-          nixpkgs.lib.genAttrs constellations (
-            name:
-              nixpkgs.lib.nixosSystem {
-                inherit system;
-                specialArgs = {inherit inputs;};
-                modules =
-                  [
-                    inputs.home-manager.nixosModules.home-manager
-                    inputs.nixos-wsl.nixosModules.default
-                    inputs.searchix.nixosModules.web
-                    inputs.sops-nix.nixosModules.sops
-                    inputs.stylix.nixosModules.stylix
-                    ./lib/core.nix
-                    ./constellations/${name}/configuration.nix
-                  ]
-                  ++ extraModules;
-              }
-          );
-      in {
-        nixosConfigurations =
-          # x86_64 systems
-          (mkConstellation {
-            constellations = ["cassiopeia" "lyra"];
-            system = "x86_64-linux";
-          })
-          //
-          # aarch64 systems
-          (mkConstellation {
-            constellations = ["hercules"];
-            system = "aarch64-linux";
-            extraModules = [
-              ({pkgs, ...}: {
-                _module.args.websitePackage = self.packages.${pkgs.system}.astro-website;
-              })
-            ];
-          });
-      };
     });
 }

@@ -1,5 +1,5 @@
-{config, ...}: {
-  home-manager.users.${config.stars.mainUser}.home.keyboard.layout = "fr";
+_: {
+  stars.home.home.keyboard.layout = "fr";
 
   console.keyMap = "fr";
 
