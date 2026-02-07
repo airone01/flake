@@ -51,6 +51,7 @@ rules:
       - hyprland
       # Applications
       - arduino
+      - astro
       - asusd
       - atac
       - cachix
@@ -86,7 +87,6 @@ rules:
       - vlc
       - waybar
       - zsh
-      - zola
       # Subsystems
       - audio
       - video
