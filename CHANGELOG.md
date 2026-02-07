@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.1.0](https://github.com/airone01/flake/compare/flake-v9.0.0...flake-v9.1.0) (2026-02-07)
+
+
+### Features
+
+* **hercules:** implement Anubis AI firewall protection ([#125](https://github.com/airone01/flake/issues/125)) ([c7a5907](https://github.com/airone01/flake/commit/c7a59073a0a4ee9daf3478f1953b156df88c3a29))
+
 ## [9.0.0](https://github.com/airone01/flake/compare/flake-v8.2.0...flake-v9.0.0) (2026-02-07)
 
 
