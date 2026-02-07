@@ -8,4 +8,7 @@
     inherit lib;
     inherit (inputs) anemone-theme;
   };
+  astro-website = pkgs.callPackage ./astro-website.nix {
+    inherit lib;
+  };
 }

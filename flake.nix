@@ -95,7 +95,7 @@
             system = "aarch64-linux";
             extraModules = [
               ({pkgs, ...}: {
-                _module.args.zolaWebsite = self.packages.${pkgs.system}.zola-website;
+                _module.args.websitePackage = self.packages.${pkgs.system}.astro-website;
               })
             ];
           });

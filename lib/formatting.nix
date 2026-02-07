@@ -2,10 +2,12 @@
   treefmtExcludes = [
     "CHANGELOG.md"
     ".release-please-manifest.json"
+    "packages/website/**"
   ];
   preCommitExcludes = [
     "CHANGELOG\\.md$"
     "\\.release-please-manifest\\.json$"
+    "packages/website/.*$"
   ];
 in {
   imports = [

@@ -1,6 +1,6 @@
 {
   config,
-  zolaWebsite,
+  websitePackage,
   ...
 }: {
   sops.secrets."cloudflare/cert" = {
@@ -96,11 +96,12 @@
             port = 5972;
           }
         ];
-        # root = config.packages.zola-website;
-        root = zolaWebsite;
+        root = websitePackage;
         locations."/" = {
+          # 'try_files' ensures 404s work correctly
           extraConfig = ''
             autoindex off;
+            try_files $uri $uri/index.html $uri.html =404;
           '';
         };
       };

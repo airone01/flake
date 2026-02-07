@@ -23,7 +23,7 @@ export default defineConfig({
   site: "https://air1.one",
   integrations: [mdx(), react(), sitemap(), icon()],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss() as any],
   },
   server: {
     port: 1234,
