@@ -66,19 +66,32 @@
               entryPoints = ["websecure"];
               tls = {};
             };
+
+            gitea = {
+              rule = "Host(`git.air1.one`)";
+              service = "gitea";
+              entryPoints = ["websecure"];
+              tls = {};
+            };
           };
 
           services = {
-            # Main site service
+            # Main site service - routed through Anubis
             mainsite.loadBalancer.servers = [
               {
-                url = "http://127.0.0.1:5972";
+                url = "unix:/run/anubis/anubis-mainsite.sock";
               }
             ];
 
             searchix.loadBalancer.servers = [
               {
-                url = "http://127.0.0.1:51313";
+                url = "unix:/run/anubis/anubis-searchix.sock";
+              }
+            ];
+
+            gitea.loadBalancer.servers = [
+              {
+                url = "unix:/run/anubis/anubis-git.sock";
               }
             ];
           };
