@@ -21,6 +21,7 @@
     # Additional stars
     ../../stars/srv/ssh-server
     # ../../stars/srv/wireguard
+    ../../stars/srv/anubis.nix
     ../../stars/srv/gitea.nix
     # ../../stars/srv/hercules.nix
     ../../stars/srv/searchix.nix

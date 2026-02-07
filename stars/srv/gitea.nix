@@ -47,19 +47,4 @@
       sopsFile = ../../secrets/secrets.yaml;
     };
   };
-
-  # Add gitea to traefik config
-  services.traefik.dynamicConfigOptions.http = {
-    routers.gitea = {
-      rule = "Host(`git.air1.one`)";
-      service = "gitea";
-      entryPoints = ["websecure"];
-      tls = {};
-    };
-    services.gitea.loadBalancer.servers = [
-      {
-        url = "http://127.0.0.1:3001";
-      }
-    ];
-  };
 }
