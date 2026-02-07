@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.2.0](https://github.com/airone01/flake/compare/flake-v8.1.4...flake-v8.2.0) (2026-02-07)
+
+
+### Features
+
+* **hercules:** implement astro website ([#120](https://github.com/airone01/flake/issues/120)) ([ae2ac7a](https://github.com/airone01/flake/commit/ae2ac7af0f0168e606e62f1d658034da0cbbefd9))
+
 ## [8.1.4](https://github.com/airone01/flake/compare/flake-v8.1.3...flake-v8.1.4) (2026-02-05)
 
 
