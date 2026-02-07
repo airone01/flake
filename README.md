@@ -1,6 +1,6 @@
 <h1 align="center">
   airone01/flake
-  <img src="./assets/gradient-bar.svg" width="100%" alt="Gradient separator" />
+  <img src="./.github/assets/gradient-bar.svg" width="100%" alt="Gradient separator" />
 </h2>
 
 <h4 align="center">
