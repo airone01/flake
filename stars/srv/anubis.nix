@@ -14,6 +14,8 @@
           TARGET = "http://127.0.0.1:5972";
           PUBLIC_URL = "https://air1.one";
           ED25519_PRIVATE_KEY_HEX_FILE = config.sops.secrets."anubis/mainsite_key".path;
+          BIND_NETWORK = "tcp";
+          BIND = ":3032";
         };
       };
 
@@ -23,6 +25,8 @@
           TARGET = "http://127.0.0.1:3001";
           PUBLIC_URL = "https://git.air1.one";
           ED25519_PRIVATE_KEY_HEX_FILE = config.sops.secrets."anubis/git_key".path;
+          BIND_NETWORK = "tcp";
+          BIND = ":3031";
         };
       };
 
@@ -32,12 +36,15 @@
           TARGET = "http://127.0.0.1:51313";
           PUBLIC_URL = "https://searchix.air1.one";
           ED25519_PRIVATE_KEY_HEX_FILE = config.sops.secrets."anubis/searchix_key".path;
+          BIND_NETWORK = "tcp";
+          BIND = ":3033";
         };
       };
     };
   };
 
-  # Define secrets for Anubis instances
+  users.users.traefik.extraGroups = ["anubis"];
+
   sops.secrets = {
     "anubis/mainsite_key" = {
       owner = "anubis";
@@ -56,6 +63,11 @@
       group = "anubis";
       mode = "0400";
       sopsFile = ../../secrets/secrets.yaml;
+    };
+    "anubis/cookie_secret" = {
+      owner = "anubis";
+      group = "anubis";
+      mode = "0400";
     };
   };
 }

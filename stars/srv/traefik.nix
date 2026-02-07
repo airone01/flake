@@ -36,6 +36,8 @@
           };
         };
 
+        log.level = "DEBUG";
+
         api = {
           dashboard = true;
           insecure = false;
@@ -79,19 +81,19 @@
             # Main site service - routed through Anubis
             mainsite.loadBalancer.servers = [
               {
-                url = "unix:/run/anubis/anubis-mainsite.sock";
+                url = "http://127.0.0.1:3032";
               }
             ];
 
             searchix.loadBalancer.servers = [
               {
-                url = "unix:/run/anubis/anubis-searchix.sock";
+                url = "http://127.0.0.1:3033";
               }
             ];
 
             gitea.loadBalancer.servers = [
               {
-                url = "unix:/run/anubis/anubis-git.sock";
+                url = "http://127.0.0.1:3031";
               }
             ];
           };
