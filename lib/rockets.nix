@@ -18,9 +18,5 @@
       inherit (pkgs) system;
       inherit (inputs) nixpkgs;
     };
-    website = import ../rockets/zola.nix {
-      inherit pkgs;
-      zolaWebsite = config.packages.zola-website;
-    };
   };
 }

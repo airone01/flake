@@ -52,7 +52,7 @@
 
       perSystem = {pkgs, ...}: {
         packages = import ./packages {
-          inherit pkgs inputs;
+          inherit pkgs;
           inherit (nixpkgs) lib;
         };
       };
