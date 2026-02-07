@@ -1,5 +1,16 @@
 # Changelog
 
+## [9.0.0](https://github.com/airone01/flake/compare/flake-v8.2.0...flake-v9.0.0) (2026-02-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* **flake:** remove weird glue code and properly implement flake-parts ([#123](https://github.com/airone01/flake/issues/123))
+
+### Code Refactoring
+
+* **flake:** remove weird glue code and properly implement flake-parts ([#123](https://github.com/airone01/flake/issues/123)) ([5087f1f](https://github.com/airone01/flake/commit/5087f1ffffd8432fc29cc6cd829248f6c6756550))
+
 ## [8.2.0](https://github.com/airone01/flake/compare/flake-v8.1.4...flake-v8.2.0) (2026-02-07)
 
 
