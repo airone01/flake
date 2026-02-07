@@ -15,36 +15,30 @@ in {
     inputs.git-hooks.flakeModule
   ];
 
-  perSystem = {
-    config,
-    pkgs,
-    ...
-  }:
-    {
-      pre-commit = {
-        check.enable = true;
-        settings = {
-          # filename shenanigans
-          excludes = preCommitExcludes;
+  perSystem = _: {
+    pre-commit = {
+      check.enable = true;
+      settings = {
+        # filename shenanigans
+        excludes = preCommitExcludes;
 
-          hooks = {
-            treefmt.enable = true; # formatting and deadnix/statix fixes
-          };
+        hooks = {
+          treefmt.enable = true; # formatting and deadnix/statix fixes
         };
       };
+    };
 
-      treefmt = {
-        projectRootFile = "flake.nix";
-        settings.global.excludes = treefmtExcludes;
+    treefmt = {
+      projectRootFile = "flake.nix";
+      settings.global.excludes = treefmtExcludes;
 
-        programs = {
-          alejandra.enable = true;
-          deadnix.enable = true;
-          statix.enable = true;
-          prettier.enable = true;
-          taplo.enable = true;
-        };
+      programs = {
+        alejandra.enable = true;
+        deadnix.enable = true;
+        statix.enable = true;
+        prettier.enable = true;
+        taplo.enable = true;
       };
-    }
-    // import ./rockets.nix {inherit pkgs config inputs;};
+    };
+  };
 }
