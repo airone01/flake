@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.1.1](https://github.com/airone01/flake/compare/flake-v9.1.0...flake-v9.1.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* **traefik:** abandon cloudflare ([#137](https://github.com/airone01/flake/issues/137)) ([7f362f4](https://github.com/airone01/flake/commit/7f362f47d07a6dc1d056d12085d60fa32f6cf031))
+
 ## [9.1.0](https://github.com/airone01/flake/compare/flake-v9.0.0...flake-v9.1.0) (2026-02-07)
 
 
