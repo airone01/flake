@@ -44,16 +44,16 @@
           dashboard = true;
           insecure = false;
         };
-      };
 
-      certificatesResolvers = {
-        # LE = Let's Encrypt
-        le = {
-          acme = {
-            email = "popgthyrd@gmail.com";
-            storage = "/var/lib/traefik/acme.json";
-            httpChallenge = {
-              entryPoint = "web";
+        certificatesResolvers = {
+          # LE = Let's Encrypt
+          le = {
+            acme = {
+              email = "popgthyrd@gmail.com";
+              storage = "/var/lib/traefik/acme.json";
+              httpChallenge = {
+                entryPoint = "web";
+              };
             };
           };
         };
