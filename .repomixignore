@@ -4,6 +4,7 @@
 # tmp/
 *.log
 *.lock
+*.astro
 .direnv/
 repomix-output.txt
 **/LICENSE

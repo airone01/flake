@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   websitePackage,
   ...
@@ -115,6 +116,7 @@
         locations."/" = {
           # 'try_files' ensures 404s work correctly
           extraConfig = ''
+            include ${pkgs.nginx}/conf/mime.types;
             autoindex off;
             try_files $uri $uri/index.html $uri.html =404;
           '';
