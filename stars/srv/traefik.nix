@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   websitePackage,
   ...
 }: {
@@ -17,7 +16,9 @@
     mode = "0400";
   };
 
-  networking.firewall.allowedTCPPorts = [443];
+  # 443 for HTTPS
+  # 80 for HTTP, used by Let's Encrypt to verify ownership
+  networking.firewall.allowedTCPPorts = [443 80];
 
   services = {
     traefik = {
@@ -45,29 +46,41 @@
         };
       };
 
-      dynamicConfigOptions = {
-        tls = {
-          stores.default.defaultCertificate = {
-            certFile = config.sops.secrets."cloudflare/cert".path;
-            keyFile = config.sops.secrets."cloudflare/key".path;
+      certificatesResolvers = {
+        # LE = Let's Encrypt
+        le = {
+          acme = {
+            email = "popgthyrd@gmail.com";
+            storage = "/var/lib/traefik/acme.json";
+            httpChallenge = {
+              entryPoint = "web";
+            };
           };
         };
+      };
+
+      dynamicConfigOptions = {
+        # tls = {
+        #   stores.default.defaultCertificate = {
+        #     certFile = config.sops.secrets."cloudflare/cert".path;
+        #     keyFile = config.sops.secrets."cloudflare/key".path;
+        #   };
+        # };
 
         http = {
           routers = {
-            # Main site router
             mainsite = {
               rule = "Host(`air1.one`)";
               service = "mainsite";
               entryPoints = ["websecure"];
-              tls = {};
+              tls.certResolver = "le";
             };
 
             searchix = {
               rule = "Host(`searchix.air1.one`)";
               service = "searchix";
               entryPoints = ["websecure"];
-              tls = {};
+              tls.certResolver = "le";
             };
 
             gitea = {
