@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   networking.hostName = "lyra";
   system.stateVersion = "25.11"; # never change this
   time.timeZone = "Europe/Paris";
@@ -86,58 +90,69 @@
       {
         name = "zen-r1s-custom-config";
         patch = null;
-        extraConfig = ''
+        structuredExtraConfig = with lib.kernel; {
           # --- FileSystems ---
-          CONFIG_XFS_FS=n
-          CONFIG_F2FS_FS=n
-          CONFIG_JFS_FS=n
-          CONFIG_OCFS2_FS=n
+          XFS_FS = lib.mkForce no;
+          F2FS_FS = lib.mkForce no;
+          JFS_FS = lib.mkForce no;
+          OCFS2_FS = lib.mkForce no;
+
+          F2FS_FS_COMPRESSION = lib.mkForce unset;
+          F2FS_FS_SECURITY = lib.mkForce unset;
+          F2FS_FS_ENCRYPTION = lib.mkForce unset;
 
           # --- Networking ---
-          CONFIG_HAMRADIO=n
-          CONFIG_CAN=n
-          CONFIG_NET_9P=n
+          HAMRADIO = lib.mkForce no;
+          CAN = lib.mkForce no;
+          NET_9P = lib.mkForce no;
+
+          AX25 = lib.mkForce unset;
+          NET_SCH_BPF = lib.mkForce unset;
 
           # --- Graphics (Aggressive Pruning) ---
-          CONFIG_VGA_SWITCHEROO=n
-          CONFIG_DRM_NOUVEAU=n
-          CONFIG_DRM_I915=n
-          CONFIG_DRM_XE=n
-          CONFIG_DRM_VMWGFX=n
-          CONFIG_DRM_GMA500=n
-          CONFIG_DRM_MGAG200=n
-          CONFIG_DRM_ETNAVIV=n
-          CONFIG_DRM_HISI_HIBMC=n
-          CONFIG_DRM_APPLETBDRM=n
-          CONFIG_DRM_GM12U320=n
-          CONFIG_DRM_PANEL_MIPI_DBI=n
-          CONFIG_DRM_PIXPAPER=n
-          CONFIG_TINYDRM_HX8357D=n
-          CONFIG_TINYDRM_ILI9163=n
-          CONFIG_TINYDRM_ILI9225=n
-          CONFIG_TINYDRM_ILI9341=n
-          CONFIG_TINYDRM_ILI9486=n
-          CONFIG_TINYDRM_MI0283QT=n
-          CONFIG_TINYDRM_REPAPER=n
-          CONFIG_TINYDRM_SHARP_MEMORY=n
-          CONFIG_DRM_VBOXVIDEO=n
-          CONFIG_DRM_GUD=n
-          CONFIG_DRM_ST7571_I2C=n
-          CONFIG_DRM_ST7586=n
-          CONFIG_DRM_ST7735R=n
-          CONFIG_DRM_SSD130X=n
+          VGA_SWITCHEROO = lib.mkForce no;
+          DRM_NOUVEAU = lib.mkForce no;
+          DRM_I915 = lib.mkForce no;
+          DRM_XE = lib.mkForce no;
+          DRM_VMWGFX = lib.mkForce no;
+          DRM_GMA500 = lib.mkForce no;
+          DRM_MGAG200 = lib.mkForce no;
+          DRM_ETNAVIV = lib.mkForce no;
+          DRM_HISI_HIBMC = lib.mkForce no;
+          DRM_APPLETBDRM = lib.mkForce no;
+          DRM_GM12U320 = lib.mkForce no;
+          DRM_PANEL_MIPI_DBI = lib.mkForce no;
+          DRM_PIXPAPER = lib.mkForce no;
+          TINYDRM_HX8357D = lib.mkForce no;
+          TINYDRM_ILI9163 = lib.mkForce no;
+          TINYDRM_ILI9225 = lib.mkForce no;
+          TINYDRM_ILI9341 = lib.mkForce no;
+          TINYDRM_ILI9486 = lib.mkForce no;
+          TINYDRM_MI0283QT = lib.mkForce no;
+          TINYDRM_REPAPER = lib.mkForce no;
+          TINYDRM_SHARP_MEMORY = lib.mkForce no;
+          DRM_VBOXVIDEO = lib.mkForce no;
+          DRM_GUD = lib.mkForce no;
+          DRM_ST7571_I2C = lib.mkForce no;
+          DRM_ST7586 = lib.mkForce no;
+          DRM_ST7735R = lib.mkForce no;
+          DRM_SSD130X = lib.mkForce no;
+
+          DRM_I915_GVT = lib.mkForce unset;
+          DRM_I915_GVT_KVMGT = lib.mkForce unset;
+          DRM_NOUVEAU_SVM = lib.mkForce unset;
 
           # --- Misc ---
-          CONFIG_LOGO=y
-          CONFIG_LOGO_LINUX_CLUT224=y
+          LOGO = lib.mkForce yes;
+          LOGO_LINUX_CLUT224 = lib.mkForce yes;
+          SCHED_CLASS_EXT = lib.mkForce no;
 
           # --- Build & Debug ---
-          CONFIG_DEBUG_INFO=n
-          CONFIG_DEBUG_INFO_NONE=y
-
-          # Note: NixOS might append its own version string after this
-          CONFIG_LOCALVERSION="-r1"
-        '';
+          # DEBUG_INFO = lib.mkForce no;
+          # DEBUG_INFO_NONE = lib.mkForce yes;
+          #
+          # DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT = lib.mkForce unset;
+        };
       }
     ];
   };
