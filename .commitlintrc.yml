@@ -64,6 +64,7 @@ rules:
       - hercules-ci
       - jq
       - just
+      - kernel
       - kitty
       - lix
       - localsend

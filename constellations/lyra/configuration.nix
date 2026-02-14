@@ -81,6 +81,65 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = ["ntsync"];
+
+    kernelPatches = [
+      {
+        name = "zen-r1s-custom-config";
+        patch = null;
+        extraConfig = ''
+          # --- FileSystems ---
+          CONFIG_XFS_FS=n
+          CONFIG_F2FS_FS=n
+          CONFIG_JFS_FS=n
+          CONFIG_OCFS2_FS=n
+
+          # --- Networking ---
+          CONFIG_HAMRADIO=n
+          CONFIG_CAN=n
+          CONFIG_NET_9P=n
+
+          # --- Graphics (Aggressive Pruning) ---
+          CONFIG_VGA_SWITCHEROO=n
+          CONFIG_DRM_NOUVEAU=n
+          CONFIG_DRM_I915=n
+          CONFIG_DRM_XE=n
+          CONFIG_DRM_VMWGFX=n
+          CONFIG_DRM_GMA500=n
+          CONFIG_DRM_MGAG200=n
+          CONFIG_DRM_ETNAVIV=n
+          CONFIG_DRM_HISI_HIBMC=n
+          CONFIG_DRM_APPLETBDRM=n
+          CONFIG_DRM_GM12U320=n
+          CONFIG_DRM_PANEL_MIPI_DBI=n
+          CONFIG_DRM_PIXPAPER=n
+          CONFIG_TINYDRM_HX8357D=n
+          CONFIG_TINYDRM_ILI9163=n
+          CONFIG_TINYDRM_ILI9225=n
+          CONFIG_TINYDRM_ILI9341=n
+          CONFIG_TINYDRM_ILI9486=n
+          CONFIG_TINYDRM_MI0283QT=n
+          CONFIG_TINYDRM_REPAPER=n
+          CONFIG_TINYDRM_SHARP_MEMORY=n
+          CONFIG_DRM_VBOXVIDEO=n
+          CONFIG_DRM_GUD=n
+          CONFIG_DRM_ST7571_I2C=n
+          CONFIG_DRM_ST7586=n
+          CONFIG_DRM_ST7735R=n
+          CONFIG_DRM_SSD130X=n
+
+          # --- Misc ---
+          CONFIG_LOGO=y
+          CONFIG_LOGO_LINUX_CLUT224=y
+
+          # --- Build & Debug ---
+          CONFIG_DEBUG_INFO=n
+          CONFIG_DEBUG_INFO_NONE=y
+
+          # Note: NixOS might append its own version string after this
+          CONFIG_LOCALVERSION="-r1"
+        '';
+      }
+    ];
   };
 
   environment.systemPackages = with pkgs; [
