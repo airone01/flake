@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.1.3](https://github.com/airone01/flake/compare/flake-v9.1.2...flake-v9.1.3) (2026-02-15)
+
+
+### Bug Fixes
+
+* patch core.nix and add some customization to hyprland ([acc39e6](https://github.com/airone01/flake/commit/acc39e608372a4b6f574cccbf6e77835dfd84a73))
+
 ## [9.1.2](https://github.com/airone01/flake/compare/flake-v9.1.1...flake-v9.1.2) (2026-02-15)
 
 
