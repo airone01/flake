@@ -5,7 +5,9 @@
 *.log
 *.lock
 *.astro
+*.svg
 .direnv/
-repomix-output.txt
-**/LICENSE
+repomix-output*
+LICENSE*
+CHANGELOG*
 
