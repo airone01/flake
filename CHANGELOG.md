@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.1.2](https://github.com/airone01/flake/compare/flake-v9.1.1...flake-v9.1.2) (2026-02-15)
+
+
+### Bug Fixes
+
+* **home-manager:** patch a bug in lib/core.nix ([#139](https://github.com/airone01/flake/issues/139)) ([550c7a2](https://github.com/airone01/flake/commit/550c7a2632cd7fd1907d9bc8f082be26706a68fa))
+
 ## [9.1.1](https://github.com/airone01/flake/compare/flake-v9.1.0...flake-v9.1.1) (2026-02-11)
 
 
