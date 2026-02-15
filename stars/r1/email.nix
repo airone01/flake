@@ -3,16 +3,18 @@
   config,
   ...
 }: {
-  stars.home.accounts.email.accounts = {
-    main = {
-      realName = "Erwann Lagouche";
-      address = "popgthyrd@gmail.com";
-      flavor = "gmail.com";
-      passwordCommand = "${pkgs.cat} ${config.sops.secrets."google_apps/main".path}";
-      thunderbird.enable = true;
-      primary = true;
-    };
-  };
+  stars.home = [
+    {
+      accounts.email.accounts.main = {
+        realName = "Erwann Lagouche";
+        address = "popgthyrd@gmail.com";
+        flavor = "gmail.com";
+        passwordCommand = "${pkgs.cat} ${config.sops.secrets."google_apps/main".path}";
+        thunderbird.enable = true;
+        primary = true;
+      };
+    }
+  ];
 
   sops.secrets = {
     "google_apps/main" = {

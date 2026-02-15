@@ -12,9 +12,7 @@
 
     home = lib.mkOption {
       description = "Alias for the main user's Home Manager configuration";
-      type = lib.types.submodule {
-        freeformType = lib.types.attrs;
-      };
+      type = lib.types.listOf lib.types.deferredModule;
       default = {};
     };
   };
@@ -35,16 +33,15 @@
       useUserPackages = true;
       backupFileExtension = "backup";
 
-      users.${config.stars.mainUser} = lib.mkMerge [
-        {
-          home = {
-            username = config.stars.mainUser;
-            homeDirectory = "/home/${config.stars.mainUser}";
-            inherit (config.system) stateVersion;
-          };
-        }
-        config.stars.home
-      ];
+      users.${config.stars.mainUser} = {
+        imports = config.stars.home;
+
+        home = {
+          username = config.stars.mainUser;
+          homeDirectory = "/home/${config.stars.mainUser}";
+          inherit (config.system) stateVersion;
+        };
+      };
     };
 
     nix.settings.experimental-features = ["nix-command" "flakes"];

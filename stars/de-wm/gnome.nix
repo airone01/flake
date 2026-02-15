@@ -10,35 +10,37 @@
     themechanger
   ];
 
-  stars.home = {
-    programs.gnome-shell = {
-      enable = true;
+  stars.home = [
+    {
+      programs.gnome-shell = {
+        enable = true;
 
-      extensions = [
-        {package = pkgs.gnomeExtensions.blur-my-shell;}
-        {package = pkgs.gnomeExtensions.dash-to-dock;}
-        {package = pkgs.gnomeExtensions.appindicator;}
+        extensions = [
+          {package = pkgs.gnomeExtensions.blur-my-shell;}
+          {package = pkgs.gnomeExtensions.dash-to-dock;}
+          {package = pkgs.gnomeExtensions.appindicator;}
+        ];
+      };
+
+      home.packages = with pkgs; [
+        switcheroo
       ];
-    };
 
-    home.packages = with pkgs; [
-      switcheroo
-    ];
+      # GTK themes
+      gtk = {
+        enable = true;
 
-    # GTK themes
-    gtk = {
-      enable = true;
-
-      cursorTheme = {
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Ice";
+        cursorTheme = {
+          package = pkgs.bibata-cursors;
+          name = "Bibata-Modern-Ice";
+        };
+        iconTheme = {
+          package = pkgs.kora-icon-theme;
+          name = "kora";
+        };
       };
-      iconTheme = {
-        package = pkgs.kora-icon-theme;
-        name = "kora";
-      };
-    };
-  };
+    }
+  ];
 
   security.rtkit.enable = true;
 

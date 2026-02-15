@@ -51,113 +51,145 @@ in {
     # extraPortals = with pkgs; [xdg-desktop-portal-hyprland];
   };
 
-  stars.home = {
-    programs = {
-      hyprlock.enable = true;
-      kitty.enable = true;
-      rofi.enable = true;
-      waybar.enable = true;
-    };
-
-    services = {
-      cliphist.enable = true;
-      dunst.enable = true;
-      playerctld.enable = true;
-      swww.enable = true;
-    };
-
-    home.pointerCursor = {
-      enable = true;
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
-    };
-
-    wayland.windowManager.hyprland = {
-      enable = true;
-      settings = {
-        "$mod" = "SUPER";
-
-        exec-once = [
-          "dunst" # open notification deamon
-          # "swww-daemon" # open wallpaper deamon
-          "swww img -t none ${wallpaperImg}" # change wallpaper
-          "waybar" # bar
-          # "nm-applet --indicator" # open network manager icon
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1" # ui for pasword auth
-          "wl-paste --type text --watch cliphist store" # clipboard
-          "wl-paste --type image --watch cliphist store" # clipboard
-        ];
-
-        bind =
-          [
-            # compositor
-            "$mod SHIFT, A, killactive,"
-            "$mod, F, fullscreen,"
-            "$mod, G, togglegroup,"
-            "$mod SHIFT, E, exit," # exit hyprland to DM
-            "$mod SHIFT, M, exec, hyprctl reload"
-            "$mod, L, exec, hyprlock"
-
-            # apps
-            ## terminal
-            "$mod, return, exec, ${pkgs.kitty}/bin/kitty"
-            ## rofi
-            "$mod, S, exec, ${pkgs.rofi}/bin/rofi -show drun -show-icons"
-            ## web browser
-            "$mod SHIFT, F, exec, ${pkgs.firefox}/bin/firefox"
-            ## screenshot tool screen
-            ", print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
-            ## file managers
-            "$mod, E, exec, thunar"
-            "$mod, R, exec, kitty -e yazi"
-
-            # other
-            ## view clipboard history
-            "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
-          ]
-          ++
-          # workspaces
-          # binds $mod + [shift +] {1..9,0} to [move to] workspace {1..10}
-          builtins.concatLists (builtins.genList (
-              x: let
-                ws = x + 1;
-                c = x + 10;
-              in [
-                "$mod, code:${toString c}, workspace, ${toString ws}"
-                "$mod SHIFT, code:${toString c}, movetoworkspace, ${toString ws}"
-              ]
-            )
-            10);
-
-        # bindel = bind with repeat
-        bindel = [
-          # system controls
-          ## volume
-          ", XF86AudioRaiseVolume, exec, pamixer -i 5"
-          ", XF86AudioLowerVolume, exec, pamixer -d 5"
-          ", XF86AudioMute, exec, pamixer -t"
-          ## brightness
-          ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
-          ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
-          ## media player
-          ", XF86AudioPlay, exec, playerctl play-pause"
-          ", XF86AudioNext, exec, playerctl next"
-          ", XF86AudioPrev, exec, playerctl previous"
-        ];
-
-        # input config
-        input = {
-          kb_layout = lib.mkDefault "us";
-          follow_mouse = 1; # focus follow mouse
-        };
-
-        debug.disable_logs = false;
+  stars.home = [
+    {
+      programs = {
+        hyprlock.enable = true;
+        kitty.enable = true;
+        rofi.enable = true;
+        waybar.enable = true;
       };
-    };
 
-    xdg.configFile = {
-      "eww/eww.yuck".source = ./eww/eww.yuck;
-      "eww/eww.scss".source = ./eww/eww.scss;
-    };
-  };
+      services = {
+        cliphist.enable = true;
+        dunst.enable = true;
+        playerctld.enable = true;
+        swww.enable = true;
+      };
+
+      home.pointerCursor = {
+        enable = true;
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Ice";
+      };
+
+      wayland.windowManager.hyprland = {
+        enable = true;
+        settings = {
+          "$mod" = "SUPER";
+
+          exec-once = [
+            "dunst" # open notification deamon
+            # "swww-daemon" # open wallpaper deamon
+            "swww img -t none ${wallpaperImg}" # change wallpaper
+            "waybar" # bar
+            # "nm-applet --indicator" # open network manager icon
+            "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1" # ui for pasword auth
+            "wl-paste --type text --watch cliphist store" # clipboard
+            "wl-paste --type image --watch cliphist store" # clipboard
+          ];
+
+          bind =
+            [
+              # compositor
+              "$mod SHIFT, A, killactive,"
+              "$mod, F, fullscreen,"
+              "$mod, G, togglegroup,"
+              "$mod SHIFT, E, exit," # exit hyprland to DM
+              "$mod SHIFT, M, exec, hyprctl reload"
+              "$mod, L, exec, hyprlock"
+
+              # apps
+              ## terminal
+              "$mod, return, exec, ${pkgs.kitty}/bin/kitty"
+              ## rofi
+              "$mod, S, exec, ${pkgs.rofi}/bin/rofi -show drun -show-icons"
+              ## web browser
+              "$mod SHIFT, F, exec, ${pkgs.firefox}/bin/firefox"
+              ## screenshot tool screen
+              ", print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
+              ## file managers
+              "$mod, E, exec, thunar"
+              "$mod, R, exec, kitty -e yazi"
+
+              # other
+              ## view clipboard history
+              "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+            ]
+            ++
+            # workspaces
+            # binds $mod + [shift +] {1..9,0} to [move to] workspace {1..10}
+            builtins.concatLists (builtins.genList (
+                x: let
+                  ws = x + 1;
+                  c = x + 10;
+                in [
+                  "$mod, code:${toString c}, workspace, ${toString ws}"
+                  "$mod SHIFT, code:${toString c}, movetoworkspace, ${toString ws}"
+                ]
+              )
+              10);
+
+          # bindel = bind with repeat
+          bindel = [
+            # system controls
+            ## volume
+            ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+            ", XF86AudioLowerVolume, exec, pamixer -d 5"
+            ", XF86AudioMute, exec, pamixer -t"
+            ## brightness
+            ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
+            ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+            ## media player
+            ", XF86AudioPlay, exec, playerctl play-pause"
+            ", XF86AudioNext, exec, playerctl next"
+            ", XF86AudioPrev, exec, playerctl previous"
+          ];
+
+          input = {
+            kb_layout = lib.mkDefault "us";
+            follow_mouse = 1; # focus follow mouse
+          };
+
+          # appearance
+          general = {
+            border_size = 2;
+
+            "col.active_border" = "rgba(ffa500ee) rgba(ff8c00ee) 45deg";
+            "col.inactive_border" = "rgba(595959aa)";
+
+            layout = "dwindle";
+          };
+
+          decoration = {
+            rounding = 10;
+
+            # drop shadow?
+            active_opacity = 1.0;
+            inactive_opacity = 1.0;
+
+            shadow = {
+              enabled = true;
+              range = 4;
+              render_power = 3;
+              color = "rgba(1a1a1aee)";
+            };
+
+            blur = {
+              enabled = true;
+              size = 3;
+              passes = 1;
+            };
+          };
+
+          debug.disable_logs = false;
+        };
+      };
+
+      xdg.configFile = {
+        "eww/eww.yuck".source = ./eww/eww.yuck;
+        "eww/eww.scss".source = ./eww/eww.scss;
+      };
+    }
+  ];
 }
