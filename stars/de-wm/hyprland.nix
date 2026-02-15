@@ -99,6 +99,18 @@ in {
               "$mod SHIFT, M, exec, hyprctl reload"
               "$mod, L, exec, hyprlock"
 
+              # windows
+              ## change focus
+              "SUPER, left, movefocus, l"
+              "SUPER, right, movefocus, r"
+              "SUPER, up, movefocus, u"
+              "SUPER, down, movefocus, d"
+              ## move window
+              "SUPER SHIFT, left, movewindow, l"
+              "SUPER SHIFT, right, movewindow, r"
+              "SUPER SHIFT, up, movewindow, u"
+              "SUPER SHIFT, down, movewindow, d"
+
               # apps
               ## terminal
               "$mod, return, exec, ${pkgs.kitty}/bin/kitty"
@@ -130,7 +142,21 @@ in {
               )
               10);
 
-          # bindel = bind with repeat
+          # bind mouse
+          bindm = [
+            "SUPER, mouse:272, movewindow"
+            "SUPER, mouse:273, resizewindow"
+          ];
+
+          # bind with repeat
+          binde = [
+            "SUPER CTRL, right, resizeactive, 20 0"
+            "SUPER CTRL, left, resizeactive, -20 0"
+            "SUPER CTRL, up, resizeactive, 0 -20"
+            "SUPER CTRL, down, resizeactive, 0 20"
+          ];
+
+          # bind with repeat
           bindel = [
             # system controls
             ## volume
@@ -144,6 +170,13 @@ in {
             ", XF86AudioPlay, exec, playerctl play-pause"
             ", XF86AudioNext, exec, playerctl next"
             ", XF86AudioPrev, exec, playerctl previous"
+
+            # windows
+            ## resize
+            "SUPER CTRL, right, resizeactive, 20 0"
+            "SUPER CTRL, left, resizeactive, -20 0"
+            "SUPER CTRL, up, resizeactive, 0 -20"
+            "SUPER CTRL, down, resizeactive, 0 20"
           ];
 
           input = {
