@@ -1,16 +1,20 @@
 _: {
-  stars.home.programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-    enableNushellIntegration = true;
-    enableZshIntegration = true;
+  stars.home = [
+    {
+      programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        enableNushellIntegration = true;
+        enableZshIntegration = true;
 
-    config = {
-      global = {
-        hide_env_diff = true;
+        config = {
+          global = {
+            hide_env_diff = true;
+          };
+        };
       };
-    };
-  };
+    }
+  ];
 }

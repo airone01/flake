@@ -42,20 +42,22 @@
     };
   };
 
-  stars.home = {
-    imports = [inputs.stylix.homeModules.stylix];
+  stars.home = [
+    {
+      imports = [inputs.stylix.homeModules.stylix];
 
-    stylix.targets = {
-      # firefox = {
-      #   enable = true;
-      #   profilesNames = ["default"];
-      # };
-      nvf.enable = true;
-      vim.enable = true;
-      gnome.enable = true;
-      fzf.enable = true;
-      zellij.enable = true;
-      bat.enable = true;
-    };
-  };
+      stylix.targets = {
+        # firefox = {
+        #   enable = true;
+        #   profilesNames = ["default"];
+        # };
+        nvf.enable = true;
+        vim.enable = true;
+        gnome.enable = true;
+        fzf.enable = true;
+        zellij.enable = true;
+        bat.enable = true;
+      };
+    }
+  ];
 }

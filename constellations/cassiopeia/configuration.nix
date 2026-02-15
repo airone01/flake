@@ -92,13 +92,15 @@
     };
   };
 
-  stars.home = {
-    wayland.windowManager.hyprland.settings = {
-      input = {
-        kb_layout = "fr,us";
-        kb_options = "grp:caps_toggle"; # caps lock switches layout
-        follow_mouse = 1; # focus follow mouse
+  stars.home = [
+    {
+      wayland.windowManager.hyprland.settings = {
+        input = {
+          kb_layout = "fr,us";
+          kb_options = "grp:caps_toggle"; # caps lock switches layout
+          follow_mouse = 1; # focus follow mouse
+        };
       };
-    };
-  };
+    }
+  ];
 }

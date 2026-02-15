@@ -1,5 +1,5 @@
 _: {
-  stars.home.home.keyboard.layout = "fr";
+  stars.home = [{home.keyboard.layout = "fr";}];
 
   console.keyMap = "fr";
 

@@ -43,21 +43,23 @@
     };
   };
 
-  stars.home = {
-    home.packages = with pkgs; [
-      blockbench
-    ];
-
-    wayland.windowManager.hyprland.settings.monitor = [", highrr, auto, 1"];
-
-    programs.obs-studio = {
-      enable = true;
-
-      plugins = with pkgs.obs-studio-plugins; [
-        input-overlay
+  stars.home = [
+    {
+      home.packages = with pkgs; [
+        blockbench
       ];
-    };
-  };
+
+      wayland.windowManager.hyprland.settings.monitor = [", highrr, auto, 1"];
+
+      programs.obs-studio = {
+        enable = true;
+
+        plugins = with pkgs.obs-studio-plugins; [
+          input-overlay
+        ];
+      };
+    }
+  ];
 
   # fileSystems."/mnt/romm" = {
   #   device = "//192.168.1.142/romm";

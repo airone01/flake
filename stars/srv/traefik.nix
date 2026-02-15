@@ -24,6 +24,9 @@
     traefik = {
       enable = true;
 
+      # needed for traefik
+      dynamic.dir = "/var/lib/traefik/dynamic";
+
       staticConfigOptions = {
         entryPoints = {
           web = {

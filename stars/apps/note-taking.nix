@@ -1,3 +1,3 @@
 _: {
-  stars.home.programs.obsidian.enable = true;
+  stars.home = [{programs.obsidian.enable = true;}];
 }

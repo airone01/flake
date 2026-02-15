@@ -13,8 +13,12 @@
       "discord"
     ];
 
-  stars.home.programs.thunderbird = {
-    enable = true;
-    profiles.main.isDefault = true;
-  };
+  stars.home = [
+    {
+      programs.thunderbird = {
+        enable = true;
+        profiles.main.isDefault = true;
+      };
+    }
+  ];
 }
