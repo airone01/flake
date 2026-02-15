@@ -12,7 +12,9 @@
 
     home = lib.mkOption {
       description = "Alias for the main user's Home Manager configuration";
-      type = lib.types.attrs;
+      type = lib.types.submodule {
+        freeformType = lib.types.attrs;
+      };
       default = {};
     };
   };
@@ -35,7 +37,6 @@
 
       users.${config.stars.mainUser} = lib.mkMerge [
         {
-          # Add home-manager configurations for the main user here
           home = {
             username = config.stars.mainUser;
             homeDirectory = "/home/${config.stars.mainUser}";
