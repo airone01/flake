@@ -155,8 +155,8 @@ in {
           general = {
             border_size = 2;
 
-            "col.active_border" = "rgba(ffa500ee) rgba(ff8c00ee) 45deg";
-            "col.inactive_border" = "rgba(595959aa)";
+            "col.active_border" = "rgba(f59e0bee) rgba(d97706ee) 45deg";
+            "col.inactive_border" = "rgba(525252aa)";
 
             layout = "dwindle";
           };
