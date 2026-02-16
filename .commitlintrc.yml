@@ -39,6 +39,7 @@ rules:
       - home-manager
       # Constellation names
       - cassiopeia
+      - cetus
       - hercules
       - lyra
       # Core components
