@@ -51,6 +51,16 @@ in {
     # extraPortals = with pkgs; [xdg-desktop-portal-hyprland];
   };
 
+  boot.kernelParams = [
+    "quiet"
+    "splash"
+    "boot.shell_on_fail"
+    "loglevel=3"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=3"
+    "udev.log_level=3"
+  ];
+
   stars.home = [
     {
       programs = {
@@ -214,6 +224,16 @@ in {
               passes = 1;
             };
           };
+
+          windowrule = [
+            # prevent steam from stealing focus when it launches or updates
+            "suppress_event activatefocus, match:class ^(steam)$"
+            # prevent steam notifications from stealing focus
+            "no_focus 1, match:class ^(steam)$, match:title ^(notificationtoasts_.*_desktop)$"
+            # keep games fullscreen even if steam tries to pop up
+            "stay_focused 1, match:title ^()$, match:class ^(steam)$"
+            # "minimize_to_tray 1, match:title ^(Steam)$"
+          ];
 
           debug.disable_logs = false;
         };
