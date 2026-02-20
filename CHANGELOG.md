@@ -1,5 +1,13 @@
 # Changelog
 
+## [9.2.0](https://github.com/airone01/flake/compare/flake-v9.1.3...flake-v9.2.0) (2026-02-20)
+
+
+### Features
+
+* a ton of changes ([#147](https://github.com/airone01/flake/issues/147)) ([dc0d299](https://github.com/airone01/flake/commit/dc0d29965c17d99553ce55ff5b479ddf1010464c))
+* hyprland binds and hm fixes ([#142](https://github.com/airone01/flake/issues/142)) ([19bfdb8](https://github.com/airone01/flake/commit/19bfdb8afd2bce7b9266cfa5286b651d0356616b))
+
 ## [9.1.3](https://github.com/airone01/flake/compare/flake-v9.1.2...flake-v9.1.3) (2026-02-15)
 
 
