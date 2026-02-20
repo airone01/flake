@@ -56,49 +56,18 @@ sops-key:
         echo "⚠️  Key already exists at ~/.config/sops/age/keys.txt"
     fi
 
-# Generate Wireguard keys for a host
-wg-keygen host:
-    echo "🔑 Generating Wireguard keys for {{host}}..."
-    mkdir -p secrets/wireguard
-    chmod +x ./stars/net/wireguard/generate-keys.sh
-    ./stars/net/wireguard/generate-keys.sh {{host}}
-    echo "✅ Wireguard keys generated for {{host}}"
-
-# Test Wireguard connection to another host
-wg-test peer:
-    #!/usr/bin/env sh
-    echo "🧪 Testing Wireguard connection to {{peer}}..."
-    PEER_IP=$(grep -A 2 "\[hosts.{{peer}}.wireguard\]" ./stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
-    echo "Attempting to ping ${PEER_IP}..."
-    if ping -c 3 ${PEER_IP}; then
-        echo "✅ Connection successful!"
-    else
-        echo "❌ Connection failed!"
-    fi
-
-# Show Wireguard status
-wg-status:
-    echo "📊 Wireguard Status:"
-    sudo wg show
-
-# Debug Wireguard setup
-wg-debug:
-    echo "🔍 Running Wireguard diagnostics..."
-    chmod +x ./stars/net/wireguard/debug.sh
-    sudo ./stars/net/wireguard/debug.sh
-
 # Rotate SSH host keys
 ssh-rotate-keys host:
     echo "🔄 Rotating SSH keys for {{host}}..."
-    chmod +x ./stars/net/ssh-server/rotate-keys.sh
-    sudo ./stars/net/ssh-server/rotate-keys.sh {{host}}
+    chmod +x ./stars/srv/ssh-server/rotate-keys.sh
+    sudo ./stars/srv/ssh-server/rotate-keys.sh {{host}}
     echo "✅ SSH keys rotated for {{host}}"
 
 # Add an SSH key to a host
 ssh-add-key host user key_file:
     #!/usr/bin/env sh
     echo "🔑 Adding SSH key from {{key_file}} for {{user}} on {{host}}..."
-    KEY_FILE="./stars/net/ssh-server/ssh-keys/{{host}}.nix"
+    KEY_FILE="./stars/srv/ssh-server/ssh-keys/{{host}}.nix"
     KEY=$(cat {{key_file}})
 
     # Create a temporary file for the updated keys
@@ -164,9 +133,9 @@ ssh-config host:
     #!/usr/bin/env sh
     echo "📋 SSH configuration for {{host}}:"
     echo ""
-    if [[ -f "./stars/net/ssh-server/ssh-keys/{{host}}.nix" ]]; then
+    if [[ -f "./stars/srv/ssh-server/ssh-keys/{{host}}.nix" ]]; then
       echo "=== AUTHORIZED KEYS ==="
-      grep -A 20 "userKeys = {" "./stars/net/ssh-server/ssh-keys/{{host}}.nix" | sed 's/^/  /'
+      grep -A 20 "userKeys = {" "./stars/srv/ssh-server/ssh-keys/{{host}}.nix" | sed 's/^/  /'
       echo ""
     else
       echo "No SSH key configuration found for {{host}}"
@@ -178,11 +147,4 @@ ssh-config host:
     else
       echo "No SSH server configuration found for {{host}}"
     fi
-
-# SSH to a host using Wireguard IP
-ssh-wg host:
-    IP=$(grep -A 3 "\[hosts.{{host}}.wireguard\]" ./stars/net/wireguard/hosts.toml | grep "v4" | cut -d'"' -f2)
-    USER=$(if [[ "{{host}}" == "cassiopeia" ]]; then echo "r1"; else echo "rack"; fi)
-    echo "🔌 Connecting to {{host}} (${IP}) as ${USER}..."
-    ssh ${USER}@${IP}
 
