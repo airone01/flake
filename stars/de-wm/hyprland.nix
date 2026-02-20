@@ -108,6 +108,7 @@ in {
               "$mod SHIFT, E, exit," # exit hyprland to DM
               "$mod SHIFT, M, exec, hyprctl reload"
               "$mod, L, exec, hyprlock"
+              "$mod, P, pin"
 
               # windows
               ## change focus
@@ -239,10 +240,10 @@ in {
         };
       };
 
-      xdg.configFile = {
-        "eww/eww.yuck".source = ./eww/eww.yuck;
-        "eww/eww.scss".source = ./eww/eww.scss;
-      };
+      # xdg.configFile = {
+      #   "eww/eww.yuck".source = ./eww/eww.yuck;
+      #   "eww/eww.scss".source = ./eww/eww.scss;
+      # };
     }
   ];
 }

@@ -20,6 +20,8 @@
         gts = "git status -s";
         gta = "git add";
         gtaa = "git add .";
+        gtaan = "git add -N .";
+        gtaac = "git add . && git commit";
         gtc = "git commit";
         gtcc = "git checkout";
         gtccb = "git checkout -b";
