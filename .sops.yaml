@@ -2,7 +2,7 @@ keys:
   - &primary age15ptmy54dcgrz7aa5k6jjutgrkj9x8cfcecnmy6uqkp2l7m5muvzskdtsnf
   - &c_hercules age1gawacww0wxtfxuaajx0lvnnzfpe9x7ghf4694pgzc2fgn5hwngzq38v2nd
   - &c_cetus age1lw73ydjttuaxyzlx6tez8jcxakt62yxf5q84swk6ut6sq36p3qqqra67v3
-  - &c_lyra age1ukcra6jhf2dd3dtgukyy2qr73lz5fgy90h3jwlxszyv5taz935csz4q4n8
+  - &c_lyra age1u27xlvk5slpyeryp7h5st6surn87rvlz0zsjvr9utn0p98kjw43qf68dql
 creation_rules:
   # General rule for most secrets
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
