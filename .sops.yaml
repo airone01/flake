@@ -1,7 +1,8 @@
 keys:
   - &primary age15ptmy54dcgrz7aa5k6jjutgrkj9x8cfcecnmy6uqkp2l7m5muvzskdtsnf
   - &c_hercules age1gawacww0wxtfxuaajx0lvnnzfpe9x7ghf4694pgzc2fgn5hwngzq38v2nd
-  - &c_cetus age19s7de78yk0gepty2vmu7qm6y0hgcunkyuvy096kudpqv4a47ef5sfhtxt3
+  - &c_cetus age1lw73ydjttuaxyzlx6tez8jcxakt62yxf5q84swk6ut6sq36p3qqqra67v3
+  - &c_lyra age1u27xlvk5slpyeryp7h5st6surn87rvlz0zsjvr9utn0p98kjw43qf68dql
 creation_rules:
   # General rule for most secrets
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
@@ -10,6 +11,7 @@ creation_rules:
           - *primary
           - *c_hercules
           - *c_cetus
+          - *c_lyra
 
   # Hercules-specific Wireguard key
   - path_regex: secrets/wireguard/hercules\.yaml$

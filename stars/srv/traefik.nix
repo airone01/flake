@@ -3,19 +3,6 @@
   websitePackage,
   ...
 }: {
-  sops.secrets."cloudflare/cert" = {
-    sopsFile = ../../secrets/cloudflare.yaml;
-    owner = "traefik";
-    group = "traefik";
-    mode = "0400";
-  };
-  sops.secrets."cloudflare/key" = {
-    sopsFile = ../../secrets/cloudflare.yaml;
-    owner = "traefik";
-    group = "traefik";
-    mode = "0400";
-  };
-
   # 443 for HTTPS
   # 80 for HTTP, used by Let's Encrypt to verify ownership
   networking.firewall.allowedTCPPorts = [443 80];
@@ -63,13 +50,6 @@
       };
 
       dynamicConfigOptions = {
-        # tls = {
-        #   stores.default.defaultCertificate = {
-        #     certFile = config.sops.secrets."cloudflare/cert".path;
-        #     keyFile = config.sops.secrets."cloudflare/key".path;
-        #   };
-        # };
-
         http = {
           routers = {
             mainsite = {

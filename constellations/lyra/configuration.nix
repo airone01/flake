@@ -14,6 +14,7 @@
     ../../stars/game/all.nix
     ../../stars/de-wm/hyprland.nix
     # ../../stars/r1/stylix.nix
+    ../../stars/vid/chatterino.nix
 
     # Hardware
     ./hardware-configuration.nix
@@ -50,14 +51,6 @@
       ];
 
       wayland.windowManager.hyprland.settings.monitor = [", highrr, auto, 1"];
-
-      programs.obs-studio = {
-        enable = true;
-
-        plugins = with pkgs.obs-studio-plugins; [
-          input-overlay
-        ];
-      };
     }
   ];
 

@@ -33,6 +33,7 @@
   in {
     # x86_64 systems
     cassiopeia = mkSystem "cassiopeia" {system = "x86_64-linux";};
+    cetus = mkSystem "cetus" {system = "x86_64-linux";};
     lyra = mkSystem "lyra" {system = "x86_64-linux";};
 
     # aarch64 systems
