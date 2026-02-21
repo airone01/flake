@@ -3,23 +3,23 @@ hostname := `hostname`
 flake_dir := env_var_or_default("FLAKE_DIR", "~/.config/nixos")
 flake_url := env_var_or_default("FLAKE_URL", "github:airone01/flake")
 
-# Default recipe to display help
+# help
 default:
     @just --list
 
-# Build a new configuration
+# build a new conf
 boot host=hostname *args="":
-    nh os boot -a -H {{host}} {{flake_dir}} {{args}}
+    nh os boot --no-update-lock-file -a -H {{host}} {{flake_dir}} {{args}}
 
-# Build a system (tests full system compilation)
+# build a system (tests full system compilation)
 build-any-system host=hostname *args="":
-    nix build --show-trace {{flake_dir}}#nixosConfigurations.{{host}}.config.system.build.toplevel {{args}}|&nom
+    nix build --no-update-lock-file --show-trace {{flake_dir}}#nixosConfigurations.{{host}}.config.system.build.toplevel {{args}}|&nom
 
-# Build and switch to a new configuration
+# Build and switch to a new conf
 switch host=hostname *args="":
-    nh os switch -a -H {{host}} {{flake_dir}} {{args}}
+    nh os switch --no-update-lock-file -a -H {{host}} {{flake_dir}} {{args}}
 
-# Build and test configuration without switching
+# build and test conf without switching
 test host=hostname *args="":
     nh os test -a -H {{host}} {{flake_dir}} {{args}}
 
@@ -29,22 +29,22 @@ update *args="":
 
 # Run checks on the flake
 check *args="":
-    nix flake check --all-systems {{flake_dir}} {{args}}|& nom
+    nix flake check --all-systems --no-update-lock-file {{flake_dir}} {{args}}|& nom
 
-# Clean unused derivations with NH
+# clean unused derivations with nh
 clean:
     nh clean all
 
-# Enter a development shell
+# enter a devshell
 develop shell="commitlint" *args="":
     echo "🚀 Launching {{shell}} development environment..."
-    nom develop {{flake_dir}}#{{shell}} {{args}}
+    nom develop --no-update-lock-file {{flake_dir}}#{{shell}} {{args}}
 
-# Show the diff of staged nix files
-show-diff:
+# diff staged nix files
+diff:
     git diff -U0 *.nix
 
-# Generate an initial SOPS key
+# generate an initial SOPS key
 sops-key:
     #!/usr/bin/env sh
     echo "🔑 Generating SOPS age key..."
@@ -56,24 +56,24 @@ sops-key:
         echo "⚠️  Key already exists at ~/.config/sops/age/keys.txt"
     fi
 
-# Rotate SSH host keys
+# rotate SSH host keys
 ssh-rotate-keys host:
     echo "🔄 Rotating SSH keys for {{host}}..."
     chmod +x ./modules/srv/ssh-server/rotate-keys.sh
     sudo ./modules/srv/ssh-server/rotate-keys.sh {{host}}
     echo "✅ SSH keys rotated for {{host}}"
 
-# Add an SSH key to a host
+# add an SSH key to a host
 ssh-add-key host user key_file:
     #!/usr/bin/env sh
     echo "🔑 Adding SSH key from {{key_file}} for {{user}} on {{host}}..."
     KEY_FILE="./modules/srv/ssh-server/ssh-keys/{{host}}.nix"
     KEY=$(cat {{key_file}})
 
-    # Create a temporary file for the updated keys
+    # temp file for the updated keys
     TMP_FILE=$(mktemp)
 
-    # Extract the current keys
+    # extract current keys
     awk -v user="{{user}}" -v key="$KEY" '
       BEGIN { in_user = 0; found = 0; }
 
@@ -107,7 +107,7 @@ ssh-add-key host user key_file:
       { print $0; }
     ' "$KEY_FILE" > "$TMP_FILE"
 
-    # If the key was not found and user section not found, we need to add it
+    # if the key was not found and user section not found, we need to add it
     if ! grep -q "{{user}} = \[" "$TMP_FILE"; then
       awk -v user="{{user}}" -v key="$KEY" '
         /userKeys = {/ {
@@ -121,14 +121,14 @@ ssh-add-key host user key_file:
       ' "$KEY_FILE" > "$TMP_FILE"
     fi
 
-    # Replace the original file
+    # replace original file
     cp "$TMP_FILE" "$KEY_FILE"
     rm "$TMP_FILE"
 
     echo "✅ SSH key added successfully"
     echo "Remember to rebuild your system with: just switch {{host}}"
 
-# Print SSH configuration for a host
+# print SSH configuration for a host
 ssh-config host:
     #!/usr/bin/env sh
     echo "📋 SSH configuration for {{host}}:"
