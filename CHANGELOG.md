@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.0.2](https://github.com/airone01/flake/compare/flake-v10.0.1...flake-v10.0.2) (2026-02-21)
+
+
+### Code Refactoring
+
+* srv again ([#165](https://github.com/airone01/flake/issues/165)) ([d45e410](https://github.com/airone01/flake/commit/d45e410ac02514e9c9007d0b4371f961eec84f82))
+
 ## [10.0.1](https://github.com/airone01/flake/compare/flake-v10.0.0...flake-v10.0.1) (2026-02-21)
 
 
