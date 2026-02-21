@@ -1,5 +1,16 @@
 # Changelog
 
+## [10.0.0](https://github.com/airone01/flake/compare/flake-v9.2.0...flake-v10.0.0) (2026-02-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **flake:** drop astrological naming convention arrange modules as nix options instead of conditional imports
+
+### Code Refactoring
+
+* **flake:** flake parts for real ([#159](https://github.com/airone01/flake/issues/159)) ([d0df9fd](https://github.com/airone01/flake/commit/d0df9fd6fc7aac8e4df3dcc2242ed3e28b32803a))
+
 ## [9.2.0](https://github.com/airone01/flake/compare/flake-v9.1.3...flake-v9.2.0) (2026-02-20)
 
 
