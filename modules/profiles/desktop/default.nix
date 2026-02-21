@@ -41,26 +41,30 @@ in {
       ranger
       switcheroo
       vlc
-
-      # fonts
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.fira-code
-      nerd-fonts.fira-mono
-      nerd-fonts.shure-tech-mono
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-color-emoji
-      liberation_ttf
-      fira-code
-      fira-code-symbols
-      mplus-outline-fonts.githubRelease
-      dina-font
     ];
 
-    fonts.fontconfig.defaultFonts = {
-      serif = ["Noto Serif"];
-      sansSerif = ["Noto Sans"];
-      monospace = ["ShureTechMono Nerd Font"];
+    fonts = {
+      packages = with pkgs; [
+        nerd-fonts.jetbrains-mono
+        nerd-fonts.fira-code
+        nerd-fonts.fira-mono
+        nerd-fonts.shure-tech-mono
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-color-emoji
+        liberation_ttf
+        fira-code
+        fira-code-symbols
+        mplus-outline-fonts.githubRelease
+        dina-font
+      ];
+
+      fontconfig.defaultFonts = {
+        serif = ["Noto Serif"];
+        sansSerif = ["Noto Sans"];
+        monospace = ["ShureTechMono Nerd Font"];
+        emoji = ["Noto Color Emoji"];
+      };
     };
 
     nixpkgs.config.allowUnfreePredicate = pkg:

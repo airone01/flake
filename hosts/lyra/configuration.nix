@@ -16,6 +16,7 @@
         enable = true;
         dualsensePatches = true;
         hyprRatePatches = true;
+        # firefox.flavour = "schizofox";
       };
       development.enable = true;
       gaming.enable = true;

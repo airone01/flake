@@ -9,13 +9,13 @@ in {
     lib.mkIf
     (cfg.enable && cfg.firefox.enable && cfg.firefox.flavour == "schizofox")
     {
-      home-manager.users.${config.stars.mainUser}.home = {
+      home-manager.users.${config.stars.mainUser} = {
         programs.schizofox = {
           enable = true;
 
           security = {
-            sanitizeOnShutdown = false;
-            sandbox = true;
+            sanitizeOnShutdown.enable = true;
+            sandbox.enable = true;
             # fetched from https://cdn.jsdelivr.net/gh/microlinkhq/top-user-agents@master/src/desktop.json
             userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0";
           };
@@ -29,7 +29,7 @@ in {
 
           extensions = {
             # > Schizofox only provides uBlock Origin out of the box
-            siplefox.enable = true;
+            simplefox.enable = true;
 
             extraExtensions = {
               "skipredirect@sblask".install_url = "https://addons.mozilla.org/firefox/downloads/latest/skip-redirect/latest.xpi";
@@ -43,8 +43,8 @@ in {
           };
 
           misc = {
-            drmFix = true;
-            disableWebgl = false;
+            drm.enable = true;
+            disableWebgl = true;
             startPageURL = "file://${builtins.readFile ./index.html}";
             contextMenu.enable = true;
           };
