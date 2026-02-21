@@ -5,7 +5,7 @@
 
   stars.mainUser = "rack";
 
-  # Enable SSH server with custom configuration
+  # enable SSH server with custom configuration
   stars.ssh-server = {
     enable = true;
     permitRootLogin = "prohibit-password";

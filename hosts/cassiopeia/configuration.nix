@@ -7,23 +7,26 @@
   system.stateVersion = "25.05"; # never change this
   time.timeZone = "Europe/Paris";
 
-  stars.mainUser = "r1";
+  stars = {
+    mainUser = "r1";
 
-  imports = [
-    # Asterisms
-    ../../asterisms/desktop.nix
+    core = {
+      enable = true;
 
-    # Additional modules
-    # ../../modules/sys/boot/plymouth.nix
-    ../../modules/game/all.nix
-    ../../modules/sys/kbd/fr.nix
-    ../../modules/de-wm/hyprland.nix
-    # ../../modules/r1/stylix.nix
+      profiles = {
+        desktop = {
+          enable = true;
 
-    # Hardware
-    ./hardware-configuration.nix
-    ../../modules/sys/vendor/asusd.nix
-  ];
+          asusPatches = true;
+          dualsensePatches = true;
+          frenchPatches = true;
+        };
+        development.enable = true;
+        gaming.enable = true;
+        virt.enable = true;
+      };
+    };
+  };
 
   services.xserver.videoDrivers = [
     "nvidia"
@@ -61,13 +64,6 @@
   environment.systemPackages = with pkgs; [
     mesa-demos # Nvidia settings
   ];
-
-  networking.hosts = {
-    "127.0.0.1" = [
-      "localhost"
-      "elagouch.42.fr"
-    ];
-  };
 
   # services.displayManager.ly = {
   #   enable = true;

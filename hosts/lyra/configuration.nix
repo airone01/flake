@@ -3,22 +3,27 @@
   system.stateVersion = "25.11"; # never change this
   time.timeZone = "Europe/Paris";
 
-  stars.mainUser = "user";
+  stars = {
+    mainUser = "user";
 
-  imports = [
-    # Asterisms
-    ../../asterisms/desktop.nix
+    core = {
+      enable = true;
+      shellConfig = true;
+    };
 
-    # Additional stars
-    #../../modules/sys/boot/plymouth.nix
-    ../../modules/game/all.nix
-    ../../modules/de-wm/hyprland.nix
-    # ../../modules/r1/stylix.nix
-    ../../modules/vid/chatterino.nix
+    profiles = {
+      desktop = {
+        enable = true;
+        dualsensePatches = true;
+        hyprRatePatches = true;
+      };
+      development.enable = true;
+      gaming.enable = true;
+      virt.enable = true;
+    };
+  };
 
-    # Hardware
-    ./hardware-configuration.nix
-  ];
+  imports = [./hardware-configuration.nix];
 
   hardware = {
     ### Graphics
@@ -44,16 +49,6 @@
     };
   };
 
-  stars.home = [
-    {
-      home.packages = with pkgs; [
-        blockbench
-      ];
-
-      wayland.windowManager.hyprland.settings.monitor = [", highrr, auto, 1"];
-    }
-  ];
-
   # fileSystems."/mnt/romm" = {
   #   device = "//192.168.1.142/romm";
   #   fsType = "cifs";
@@ -67,10 +62,10 @@
   #   ];
   # };
 
-  # Some game I play (Arkgnights: Endfield), crashes dwproton. The fix is
+  # some game I play (Arkgnights: Endfield), crashes dwproton. The fix is
   # to load the `ntsync` kernel module.
-  # Fix source: https://dawn.wine/dawn-winery/dwproton/issues/3
-  # I'm also using Zen as this is a gaming machine. `ntsync` should be built
+  # fix source: https://dawn.wine/dawn-winery/dwproton/issues/3
+  # i'm also using Zen as this is a gaming machine. `ntsync` should be built
   # into Zen and hence not require modprobe/kernelModules, but just in case I
   # call it below.
   boot = {
@@ -81,9 +76,5 @@
   environment.systemPackages = with pkgs; [
     clinfo # to check opencl
     lact # see above
-    # gaming & emulation
-    lutris
-    retroarch-full
-    retroarch-assets
   ];
 }

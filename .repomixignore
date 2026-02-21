@@ -6,6 +6,7 @@
 *.lock
 *.astro
 *.svg
+*.yaml
 .direnv/
 repomix-output*
 LICENSE*
