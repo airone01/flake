@@ -1,12 +1,10 @@
 .github/         @airone01
-asterisms/       @airone01
-constellations/  @airone01
+secrets/         @airone01
 lib/             @airone01
 packages/        @airone01
-rockets/         @airone01
-secrets/         @airone01
-stars/           @airone01
-web/             @airone01
+modules/         @airone01
+shells/          @airone01
+hosts/           @airone01
 
 .gitignore                 @airone01
 .repomixignore             @airone01

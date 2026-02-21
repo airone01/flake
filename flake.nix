@@ -18,6 +18,10 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    schizofox = {
+      url = "github:schizofox/schizofox";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     searchix.url = "git+https://codeberg.org/alanpearce/searchix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -43,10 +47,10 @@
         inputs.git-hooks.flakeModule
 
         # flake parts
+        ./hosts
         ./lib/formatting.nix
-        ./lib/constellations.nix
         ./lib/packages.nix
-        ./lib/rockets.nix
+        ./lib/shells.nix
       ];
     });
 }

@@ -16,11 +16,10 @@ and deployments. It's very faulty to say the least, but I love it.
 
 ## Key Components
 
-- **Stars**: Individual configuration parts. Can vary from a HM config to a list
-  of packages
-- **Asterisms**: Predefined combinations of stars for specific use cases
-- **Constellations**: Complete system configurations for specific machines
-- **Rockets**: Development environments for specific tasks
+- **Modules**: Individual configuration parts. Can vary from a HM config to a
+  list of packages
+- **Hosts**: Complete system configurations for specific machines
+- **Shells**: Development environments for specific tasks
 - **Secrets**: Encrypted configuration secrets managed with sops-nix
 
 ## Machines

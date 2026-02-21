@@ -59,15 +59,15 @@ sops-key:
 # Rotate SSH host keys
 ssh-rotate-keys host:
     echo "🔄 Rotating SSH keys for {{host}}..."
-    chmod +x ./stars/srv/ssh-server/rotate-keys.sh
-    sudo ./stars/srv/ssh-server/rotate-keys.sh {{host}}
+    chmod +x ./modules/srv/ssh-server/rotate-keys.sh
+    sudo ./modules/srv/ssh-server/rotate-keys.sh {{host}}
     echo "✅ SSH keys rotated for {{host}}"
 
 # Add an SSH key to a host
 ssh-add-key host user key_file:
     #!/usr/bin/env sh
     echo "🔑 Adding SSH key from {{key_file}} for {{user}} on {{host}}..."
-    KEY_FILE="./stars/srv/ssh-server/ssh-keys/{{host}}.nix"
+    KEY_FILE="./modules/srv/ssh-server/ssh-keys/{{host}}.nix"
     KEY=$(cat {{key_file}})
 
     # Create a temporary file for the updated keys
@@ -133,17 +133,17 @@ ssh-config host:
     #!/usr/bin/env sh
     echo "📋 SSH configuration for {{host}}:"
     echo ""
-    if [[ -f "./stars/srv/ssh-server/ssh-keys/{{host}}.nix" ]]; then
+    if [[ -f "./modules/srv/ssh-server/ssh-keys/{{host}}.nix" ]]; then
       echo "=== AUTHORIZED KEYS ==="
-      grep -A 20 "userKeys = {" "./stars/srv/ssh-server/ssh-keys/{{host}}.nix" | sed 's/^/  /'
+      grep -A 20 "userKeys = {" "./modules/srv/ssh-server/ssh-keys/{{host}}.nix" | sed 's/^/  /'
       echo ""
     else
       echo "No SSH key configuration found for {{host}}"
     fi
 
-    if grep -q "stars.ssh-server" "./constellations/{{host}}/configuration.nix"; then
+    if grep -q "stars.ssh-server" "./hosts/{{host}}/configuration.nix"; then
       echo "=== SSH SERVER CONFIGURATION ==="
-      grep -A 15 "stars.ssh-server" "./constellations/{{host}}/configuration.nix" | sed 's/^/  /'
+      grep -A 15 "stars.ssh-server" "./hosts/{{host}}/configuration.nix" | sed 's/^/  /'
     else
       echo "No SSH server configuration found for {{host}}"
     fi
