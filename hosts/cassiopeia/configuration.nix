@@ -11,7 +11,11 @@
 
   stars = {
     mainUser = "r1";
-    core.enable = true;
+
+    core = {
+      enable = true;
+      shellConfig = true;
+    };
 
     profiles = {
       desktop = {
