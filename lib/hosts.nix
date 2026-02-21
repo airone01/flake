@@ -26,7 +26,7 @@
         modules =
           baseModules
           ++ [
-            ../constellations/${name}/configuration.nix
+            ../hosts/${name}/configuration.nix
           ]
           ++ extraModules;
       };

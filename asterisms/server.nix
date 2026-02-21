@@ -4,6 +4,6 @@ _: {
     ./specific.nix
 
     # Docker
-    ../stars/virt/docker.nix
+    ../modules/virt/docker.nix
   ];
 }

@@ -1,9 +1,9 @@
 _: {
   imports = [
     # Nix
-    ../stars/nix/all.nix
+    ../modules/nix/all.nix
 
     # Hardware settings
-    ../stars/sys/graphics/graphics.nix
+    ../modules/sys/graphics/graphics.nix
   ];
 }

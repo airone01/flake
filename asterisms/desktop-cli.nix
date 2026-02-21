@@ -4,12 +4,12 @@ _: {
     ./base.nix
 
     # Development
-    ../stars/dev/lang/all.nix
-    ../stars/dev/tools/all.nix
-    ../stars/dev/ide/nvim
+    ../modules/dev/lang/all.nix
+    ../modules/dev/tools/all.nix
+    ../modules/dev/ide/nvim
 
     # Shell
-    ../stars/sh/zsh.nix
-    ../stars/sh/oh-my-posh
+    ../modules/sh/zsh.nix
+    ../modules/sh/oh-my-posh
   ];
 }

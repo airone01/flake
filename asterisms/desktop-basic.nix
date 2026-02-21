@@ -2,30 +2,30 @@
 _: {
   imports = [
     # CLI tools
-    ../stars/dev/tools/all.nix
-    ../stars/dev/ide/nvim
+    ../modules/dev/tools/all.nix
+    ../modules/dev/ide/nvim
 
     # Shell
-    ../stars/sh/zsh.nix
-    ../stars/sh/oh-my-posh
+    ../modules/sh/zsh.nix
+    ../modules/sh/oh-my-posh
 
     # GUI tools/apps
-    ../stars/apps/video-recorder/obs.nix
-    ../stars/apps/video-viewer/vlc.nix
-    ../stars/apps/web-browser/firefox.nix
+    ../modules/apps/video-recorder/obs.nix
+    ../modules/apps/video-viewer/vlc.nix
+    ../modules/apps/web-browser/firefox.nix
 
     # System
-    ../stars/sys/audio/pipewire.nix
-    ../stars/sys/net/network-manager.nix
+    ../modules/sys/audio/pipewire.nix
+    ../modules/sys/net/network-manager.nix
 
     # DE
-    ../stars/de-wm/gnome.nix
+    ../modules/de-wm/gnome.nix
 
     # Virtualization & Docker
-    ../stars/virt/qemu.nix
+    ../modules/virt/qemu.nix
 
     # Misc
-    ../stars/de-wm/font.nix
+    ../modules/de-wm/font.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

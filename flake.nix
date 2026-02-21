@@ -44,9 +44,9 @@
 
         # flake parts
         ./lib/formatting.nix
-        ./lib/constellations.nix
+        ./lib/hosts.nix
         ./lib/packages.nix
-        ./lib/rockets.nix
+        ./lib/shells.nix
       ];
     });
 }

@@ -7,7 +7,7 @@
     devShells = {
       default = pkgs.mkShell {
         inputsFrom = [
-          (import ../rockets {
+          (import ../shells {
             inherit (pkgs) system;
             inherit (inputs) nixpkgs;
           })
@@ -15,7 +15,7 @@
         shellHook = config.pre-commit.installationScript;
       };
 
-      commitlint = import ../rockets/commitlint.nix {
+      commitlint = import ../shells/commitlint.nix {
         inherit (pkgs) system;
         inherit (inputs) nixpkgs;
       };

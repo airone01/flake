@@ -37,16 +37,19 @@ rules:
       - module
       - direnv
       - home-manager
-      # Constellation names
+      # Host names
       - cassiopeia
       - cetus
       - hercules
       - lyra
       # Core components
       - sops
-      - stars
-      - rockets
-      - asterisms
+      - module
+      - modules
+      - host
+      - hosts
+      - shell
+      - shells
       # Desktop environments & WMs
       - gnome
       - hyprland

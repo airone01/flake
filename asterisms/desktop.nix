@@ -5,24 +5,24 @@ _: {
     ./specific.nix
 
     # GUI tools/apps
-    ../stars/apps/all.nix
+    ../modules/apps/all.nix
 
     # System
-    ../stars/sys/audio/pipewire.nix
-    ../stars/sys/net/network-manager.nix
+    ../modules/sys/audio/pipewire.nix
+    ../modules/sys/net/network-manager.nix
 
     # Secrets
-    ../stars/sys/secret/gnupg.nix
+    ../modules/sys/secret/gnupg.nix
 
     # DE
-    ../stars/de-wm/gnome.nix
+    ../modules/de-wm/gnome.nix
 
     # Virtualization & Docker
-    ../stars/virt/docker.nix
-    ../stars/virt/qemu.nix
+    ../modules/virt/docker.nix
+    ../modules/virt/qemu.nix
 
     # Misc
-    ../stars/de-wm/font.nix
+    ../modules/de-wm/font.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

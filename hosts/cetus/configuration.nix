@@ -1,6 +1,9 @@
 {pkgs, ...}: {
-  networking.hostName = "hercules";
-  system.stateVersion = "24.05"; # never change this
+  networking = {
+    hostName = "cetus";
+    hostId = "c2bd1785";
+  };
+  system.stateVersion = "25.05"; # never change this
   time.timeZone = "Europe/Paris";
 
   stars.mainUser = "rack";
@@ -14,18 +17,19 @@
     allowGroups = ["wheel"];
   };
 
+  # check for zfs errors periodically
+  services.zfs.autoScrub.enable = true;
+
   imports = [
     # Asterisms
     ../../asterisms/server.nix
 
-    # Additional stars
-    ../../stars/srv/ssh-server
-    # ../../stars/srv/wireguard
-    ../../stars/srv/anubis.nix
-    ../../stars/srv/gitea.nix
-    # ../../stars/srv/hercules.nix
-    ../../stars/srv/searchix.nix
-    ../../stars/srv/traefik.nix
+    # Additional modules
+    ../../modules/srv/ssh-server
+    # ../../modules/srv/anubis.nix
+    # ../../modules/srv/gitea.nix
+    # ../../modules/srv/searchix.nix
+    # ../../modules/srv/traefik.nix
 
     # Hardware
     ./hardware-configuration.nix

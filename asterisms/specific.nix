@@ -1,12 +1,12 @@
 _: {
   imports = [
     # Secrets
-    ../stars/sys/secret/gnupg.nix
-    ../stars/sys/secret/sops.nix
+    ../modules/sys/secret/gnupg.nix
+    ../modules/sys/secret/sops.nix
 
     # My specific stuff
-    # ../stars/r1/email.nix
-    ../stars/r1/git.nix
-    ../stars/r1/dualsense.nix
+    # ../modules/r1/email.nix
+    ../modules/r1/git.nix
+    ../modules/r1/dualsense.nix
   ];
 }

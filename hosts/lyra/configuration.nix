@@ -10,11 +10,11 @@
     ../../asterisms/desktop.nix
 
     # Additional stars
-    #../../stars/sys/boot/plymouth.nix
-    ../../stars/game/all.nix
-    ../../stars/de-wm/hyprland.nix
-    # ../../stars/r1/stylix.nix
-    ../../stars/vid/chatterino.nix
+    #../../modules/sys/boot/plymouth.nix
+    ../../modules/game/all.nix
+    ../../modules/de-wm/hyprland.nix
+    # ../../modules/r1/stylix.nix
+    ../../modules/vid/chatterino.nix
 
     # Hardware
     ./hardware-configuration.nix
