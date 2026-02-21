@@ -1,4 +1,4 @@
-{...}: {
+_: {
   imports = [./hardware-configuration.nix];
 
   networking.hostName = "hercules";
@@ -28,11 +28,6 @@
         ];
         allowGroups = ["wheel"];
       };
-
-      anubis.enable = true;
-      gitea.enable = true;
-      searchix.enable = true;
-      traefik.enable = true;
     };
   };
 

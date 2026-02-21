@@ -2,11 +2,12 @@
   lib,
   pkgs,
   config,
-  websitePackage,
+  inputs,
   ...
 }: let
   cfg = config.stars.server.traefik;
   scfg = config.stars.server.enable;
+  websitePackage = inputs.self.packages.${pkgs.system}.astro-website;
 in {
   options.stars.server.traefik.enable =
     lib.mkEnableOption "Traefik, a reverse proxy";
