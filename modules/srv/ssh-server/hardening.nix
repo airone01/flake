@@ -3,18 +3,16 @@
   lib,
   ...
 }: let
-  cfg = config.stars.ssh-server;
+  cfg = config.stars.server.ssh-server;
+  scfg = config.stars.server.enable;
 in {
-  config = lib.mkIf cfg.enable {
-    # Apply secure SSH defaults
+  config = lib.mkIf (scfg && cfg.enable) {
     services.openssh.settings = {
-      # Key exchange algorithms
       KexAlgorithms = [
         "curve25519-sha256@libssh.org"
         "diffie-hellman-group-exchange-sha256"
       ];
 
-      # Ciphers
       Ciphers = [
         "chacha20-poly1305@openssh.com"
         "aes256-gcm@openssh.com"
@@ -24,7 +22,7 @@ in {
         "aes128-ctr"
       ];
 
-      # MACs (message authentication codes)
+      # (message authentication codes)
       Macs = [
         "hmac-sha2-512-etm@openssh.com"
         "hmac-sha2-256-etm@openssh.com"
@@ -34,7 +32,7 @@ in {
         "umac-128@openssh.com"
       ];
 
-      # Additional hardening settings
+      # additional hardening settings
       IgnoreRhosts = true;
       MaxAuthTries = 3;
       MaxSessions = 5;
@@ -43,27 +41,27 @@ in {
       ClientAliveCountMax = 2;
     };
 
-    # Set up system-wide SSH client configuration
+    # set up system-wide SSH client configuration
     programs.ssh = {
-      knownHosts = config.stars.ssh-known-hosts.hosts;
+      knownHosts = config.stars.server.ssh-known-hosts.hosts;
 
       extraConfig = ''
-        # Client-side security settings
+        # client-side security settings
         HashKnownHosts yes
         StrictHostKeyChecking ask
 
-        # Reuse connections for better performance
+        # reuse connections for better performance
         ControlMaster auto
         ControlPath ~/.ssh/control/%r@%h:%p
         ControlPersist 10m
 
-        # Security settings
+        # security settings
         ForwardAgent no
         IdentitiesOnly yes
       '';
     };
 
-    # Create the SSH control directory for connection reuse
+    # create the SSH control directory for connection reuse
     system.activationScripts.sshControlDir = ''
       mkdir -p /home/${config.stars.mainUser}/.ssh/control
       chown ${config.stars.mainUser}:users /home/${config.stars.mainUser}/.ssh/control

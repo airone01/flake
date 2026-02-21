@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  imports = [./hardware-configuration.nix];
+
   networking.hostName = "lyra";
   system.stateVersion = "25.11"; # never change this
   time.timeZone = "Europe/Paris";
@@ -23,8 +25,6 @@
       virt.enable = true;
     };
   };
-
-  imports = [./hardware-configuration.nix];
 
   hardware = {
     ### Graphics

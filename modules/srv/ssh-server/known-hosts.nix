@@ -2,82 +2,55 @@
   config,
   lib,
   ...
-}: {
-  options.stars.ssh-known-hosts = {
+}: let
+  cfg = config.stars.server.ssh-server;
+  scfg = config.stars.server.enable;
+in {
+  options.stars.server.ssh-known-hosts = {
     hosts = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule {
         options = {
           hostNames = lib.mkOption {
             type = lib.types.listOf lib.types.str;
             default = [];
-            description = "List of host names and IP addresses for this host";
+            description = "List of host names and IP addresses for this host.";
           };
           publicKey = lib.mkOption {
             type = lib.types.str;
-            description = "Public host key";
+            description = "Public host key.";
           };
           publicKeyFile = lib.mkOption {
             type = lib.types.nullOr lib.types.path;
             default = null;
-            description = "Path to the public host key file";
+            description = "Path to the public host key file.";
           };
           certAuthority = lib.mkOption {
             default = false;
             type = lib.types.bool;
-            description = "Whether this key is a certificate authority";
+            description = "Whether this key is a certificate authority.";
           };
           extraHostNames = lib.mkOption {
             type = lib.types.listOf lib.types.str;
             default = [];
-            description = "Additional host names for this host";
+            description = "Additional host names for this host.";
           };
         };
       });
       default = {};
-      description = "Known hosts configuration";
+      description = "Known hosts configuration.";
     };
 
     enableSystemWideKnownHosts = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      description = "Whether to configure the known hosts system-wide";
+      description = "Whether to configure the known hosts system-wide.";
     };
   };
 
-  config = lib.mkIf config.stars.ssh-server.enable {
-    # Set up the Wireguard hosts as known hosts for easier access
-    stars.ssh-known-hosts.hosts = let
-      # Try to read hosts.toml if it exists
-      wireguardPath = ../../net/wireguard/hosts.toml;
-      hostsTOML =
-        if builtins.pathExists wireguardPath
-        then builtins.fromTOML (builtins.readFile wireguardPath)
-        else {};
-
-      # Extract hosts from Wireguard configuration if present
-      wgHosts =
-        if hostsTOML ? hosts
-        then
-          lib.mapAttrs
-          (name: host: {
-            hostNames =
-              [
-                name
-                "${host.ip_addr}"
-              ]
-              ++ lib.optional (host ? wireguard && host.wireguard ? addrs && host.wireguard.addrs ? v4)
-              "${host.wireguard.addrs.v4}";
-            publicKey =
-              host.ssh_pubkey or "";
-          })
-          hostsTOML.hosts
-        else {};
-    in
-      lib.filterAttrs (_n: v: v.publicKey != "") wgHosts;
-
-    # Configure system-wide known hosts
+  config = lib.mkIf (scfg && cfg.enable) {
+    # configure system-wide known hosts
     programs.ssh.knownHosts =
-      lib.mkIf config.stars.ssh-known-hosts.enableSystemWideKnownHosts
-      config.stars.ssh-known-hosts.hosts;
+      lib.mkIf config.stars.server.ssh-known-hosts.enableSystemWideKnownHosts
+      config.stars.server.ssh-known-hosts.hosts;
   };
 }
