@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.0.3](https://github.com/airone01/flake/compare/flake-v10.0.2...flake-v10.0.3) (2026-02-21)
+
+
+### Bug Fixes
+
+* **cassioeia:** patch an oversight in config ([#169](https://github.com/airone01/flake/issues/169)) ([717a30a](https://github.com/airone01/flake/commit/717a30aff0fed39476d0eb2b825635edd0d012b9))
+
 ## [10.0.2](https://github.com/airone01/flake/compare/flake-v10.0.1...flake-v10.0.2) (2026-02-21)
 
 
