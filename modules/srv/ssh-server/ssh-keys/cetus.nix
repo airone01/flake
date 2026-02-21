@@ -1,21 +1,21 @@
+# host-specific SSH key configuration for cetus
 {
-  # Host-specific SSH key configuration for cetus
   hostKeys = {
-    # You can specify custom paths to your SSH host keys if needed
-    # Default NixOS paths are typically used if not specified
+    # we can specify custom paths to your SSH host keys if needed
+    # default NixOS paths are typically used if not specified
     # "rsa" = "/etc/ssh/ssh_host_rsa_key";
     # "ed25519" = "/etc/ssh/ssh_host_ed25519_key";
   };
 
   userKeys = {
-    # Define authorized keys for the rack user
+    # define authorized keys for the rack user
     rack = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHlRI2ynQ1ZAJWVWlk/Obhcbl+IIBDnMjvZDlWqSMvw8 rack@hercules"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILrsNjp641wst+zLOMlTFqQTIEUi08D5yM3AKp5+LpYL r1@cassiopeia"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE8rcV4x9s3V8X4QbwRZFEdKX+ddRXBFGE2fnk68hoAn user@lyra"
     ];
 
-    # Define authorized keys for the root user
+    # define authorized keys for the root user
     root = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHlRI2ynQ1ZAJWVWlk/Obhcbl+IIBDnMjvZDlWqSMvw8 rack@hercules"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILrsNjp641wst+zLOMlTFqQTIEUi08D5yM3AKp5+LpYL r1@cassiopeia"

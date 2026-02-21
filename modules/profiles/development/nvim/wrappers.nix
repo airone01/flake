@@ -9,7 +9,7 @@ in {
     lib.mkIf (
       cfg.core.enable
       && cfg.profiles.development.enable
-      && cfg.profiles.development.enableNvimConfig
+      && cfg.profiles.development.enableNvf
     ) {
       home-manager.users.${config.stars.mainUser} = {
         programs.nvf.settings.vim = {

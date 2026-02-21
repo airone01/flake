@@ -14,9 +14,7 @@
   boot = {
     initrd = {
       availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod"];
-      kernelModules = [];
 
-      # LUKS
       luks.devices = {
         "luks-e09cac65-3a3d-4e19-9cc6-dcc0a23c66aa".device = "/dev/disk/by-uuid/e09cac65-3a3d-4e19-9cc6-dcc0a23c66aa";
         "luks-dc613ea7-9635-4b56-8434-53c81fb1cc27".device = "/dev/disk/by-uuid/dc613ea7-9635-4b56-8434-53c81fb1cc27";
@@ -24,7 +22,6 @@
     };
 
     kernelModules = ["kvm-amd"];
-    extraModulePackages = [];
 
     loader = {
       systemd-boot.enable = true;
@@ -56,5 +53,6 @@
   # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

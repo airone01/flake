@@ -23,10 +23,10 @@ in {
     ./wrappers.nix
   ];
 
-  options.stars.profiles.development.enableNvimConfig = lib.mkOption {
+  options.stars.profiles.development.enableNvf = lib.mkOption {
     default = true;
     example = true;
-    description = "Whether to enable the custom Neovim configuration.";
+    description = "Whether to enable the custom Neovim configuration with NVF.";
     relatedPackages = [pkgs.neovim];
     type = lib.types.bool;
   };
@@ -35,7 +35,7 @@ in {
     lib.mkIf (
       cfg.core.enable
       && cfg.profiles.development.enable
-      && cfg.profiles.development.enableNvimConfig
+      && cfg.profiles.development.enableNvf
     ) {
       home-manager.users.${cfg.mainUser} = {
         home.packages = with pkgs; [

@@ -38,6 +38,7 @@
       htop
       fzf
       nmap
+      openssh
       ripgrep
       sops
       ssh-to-age

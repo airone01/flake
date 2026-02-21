@@ -1,41 +1,43 @@
-{pkgs, ...}: {
+{...}: {
+  imports = [./hardware-configuration.nix];
+
   networking.hostName = "hercules";
   system.stateVersion = "24.05"; # never change this
   time.timeZone = "Europe/Paris";
 
-  stars.mainUser = "rack";
+  stars = {
+    mainUser = "rack";
 
-  # enable SSH server with custom configuration
-  stars.ssh-server = {
-    enable = true;
-    permitRootLogin = "prohibit-password";
-    passwordAuthentication = false;
-    ports = [22];
-    allowGroups = ["wheel"];
+    core = {
+      enable = true;
+      shellConfig = true;
+    };
+
+    server = {
+      enable = true;
+
+      ssh-server = {
+        enable = true;
+        permitRootLogin = "prohibit-password";
+        passwordAuthentication = false;
+        listenAddresses = [
+          {
+            addr = "0.0.0.0";
+            port = 22;
+          }
+        ];
+        allowGroups = ["wheel"];
+      };
+
+      anubis.enable = true;
+      gitea.enable = true;
+      searchix.enable = true;
+      traefik.enable = true;
+    };
   };
 
-  imports = [
-    # Asterisms
-    ../../asterisms/server.nix
-
-    # Additional stars
-    ../../modules/srv/ssh-server
-    # ../../modules/srv/wireguard
-    ../../modules/srv/anubis.nix
-    ../../modules/srv/gitea.nix
-    # ../../modules/srv/hercules.nix
-    ../../modules/srv/searchix.nix
-    ../../modules/srv/traefik.nix
-
-    # Hardware
-    ./hardware-configuration.nix
-  ];
-
-  environment.systemPackages = with pkgs; [
-    kitty # for ssh TERM type
-  ];
-
-  # Booting
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+  };
 }

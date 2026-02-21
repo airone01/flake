@@ -3,28 +3,27 @@
   config,
   ...
 }: {
+  imports = [./hardware-configuration.nix];
+
   networking.hostName = "cassiopeia";
   system.stateVersion = "25.05"; # never change this
   time.timeZone = "Europe/Paris";
 
   stars = {
     mainUser = "r1";
+    core.enable = true;
 
-    core = {
-      enable = true;
+    profiles = {
+      desktop = {
+        enable = true;
 
-      profiles = {
-        desktop = {
-          enable = true;
-
-          asusPatches = true;
-          dualsensePatches = true;
-          frenchPatches = true;
-        };
-        development.enable = true;
-        gaming.enable = true;
-        virt.enable = true;
+        asusPatches = true;
+        dualsensePatches = true;
+        frenchPatches = true;
       };
+      development.enable = true;
+      gaming.enable = true;
+      virt.enable = true;
     };
   };
 
@@ -54,15 +53,15 @@
       nvidiaBusId = "PCI:1:0:0";
     };
 
-    # Using stable drivers
+    # using stable drivers
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-    # Nvidia settings app
+    # NVIDIA settings app
     nvidiaSettings = true;
   };
 
   environment.systemPackages = with pkgs; [
-    mesa-demos # Nvidia settings
+    mesa-demos # NVIDIA settings
   ];
 
   # services.displayManager.ly = {
@@ -88,15 +87,13 @@
     };
   };
 
-  stars.home = [
-    {
-      wayland.windowManager.hyprland.settings = {
-        input = {
-          kb_layout = "fr,us";
-          kb_options = "grp:caps_toggle"; # caps lock switches layout
-          follow_mouse = 1; # focus follow mouse
-        };
+  home-manager.users.${config.stars.mainUser} = {
+    wayland.windowManager.hyprland.settings = {
+      input = {
+        kb_layout = "fr,us";
+        kb_options = "grp:caps_toggle"; # caps lock switches layout
+        follow_mouse = 1; # focus follow mouse
       };
-    }
-  ];
+    };
+  };
 }
