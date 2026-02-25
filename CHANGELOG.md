@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.1.0](https://github.com/airone01/flake/compare/flake-v10.0.3...flake-v10.1.0) (2026-02-25)
+
+
+### Features
+
+* **cetus:** server ([#181](https://github.com/airone01/flake/issues/181)) ([da088ef](https://github.com/airone01/flake/commit/da088efd1095e0574f2bc7b54bd46e52fc152095))
+
 ## [10.0.3](https://github.com/airone01/flake/compare/flake-v10.0.2...flake-v10.0.3) (2026-02-21)
 
 
