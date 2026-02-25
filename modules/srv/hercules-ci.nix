@@ -13,8 +13,8 @@ in {
     services.hercules-ci-agent = {
       enable = true;
       settings = {
-        # limit concurrency to avoid ram explosion
-        concurrentTasks = 2;
+        # # limit concurrency to avoid ram explosion
+        # concurrentTasks = 2;
 
         clusterJoinTokenPath = config.sops.templates."hercules-ci-agent-cluster-join-token.key".path;
         binaryCachesPath = config.sops.templates."hercules-ci-agent-binary-caches.json".path;
