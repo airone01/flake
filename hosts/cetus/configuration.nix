@@ -40,6 +40,11 @@ _: {
     };
   };
 
+  systemd.services.nix-daemon.serviceConfig = {
+    MemoryMax = "20G"; # prevent nix from killing server
+    MemorySwapMax = "2G";
+  };
+
   # check for zfs errors periodically
   services.zfs.autoScrub.enable = true;
 
