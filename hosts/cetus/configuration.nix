@@ -45,6 +45,12 @@ _: {
     MemorySwapMax = "2G";
   };
 
+  systemd.services.hercules-ci-agent = {
+    # tell the boehm GC to start with a tiny heap, forcing it to
+    # garbage collect continuously which saves RAM at the cost of some CPU time
+    environment.GC_INITIAL_HEAP_SIZE = "100000";
+  };
+
   # check for zfs errors periodically
   services.zfs.autoScrub.enable = true;
 
