@@ -10,7 +10,7 @@ _: {
     ./srv
     ./srv/anubis.nix
     ./srv/gitea.nix
-    # ./srv/hercules.nix
+    ./srv/hercules-ci.nix
     # ./srv/ollama.nix
     ./srv/searchix.nix
     ./srv/ssh-server

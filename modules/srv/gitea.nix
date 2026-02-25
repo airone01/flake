@@ -54,7 +54,7 @@ in {
         owner = "gitea";
         group = "gitea";
         mode = "0400";
-        sopsFile = ../../secrets/secrets.yaml;
+        sopsFile = ../../secrets/gitea.yaml;
       };
     };
   };

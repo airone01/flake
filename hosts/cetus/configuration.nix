@@ -1,4 +1,4 @@
-{...}: {
+_: {
   imports = [./hardware-configuration.nix];
 
   networking = {
@@ -31,6 +31,12 @@
         ];
         allowGroups = ["wheel"];
       };
+
+      anubis.enable = true;
+      hercules-ci.enable = true;
+      gitea.enable = true;
+      searchix.enable = true;
+      traefik.enable = true;
     };
   };
 

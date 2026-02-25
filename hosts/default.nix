@@ -1,8 +1,4 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   flake.nixosConfigurations = let
     mkSystem = name: {
       system,
@@ -30,15 +26,7 @@
     cassiopeia = mkSystem "cassiopeia" {system = "x86_64-linux";};
     cetus = mkSystem "cetus" {system = "x86_64-linux";};
     lyra = mkSystem "lyra" {system = "x86_64-linux";};
-
     # aarch64 systems
-    hercules = mkSystem "hercules" {
-      system = "aarch64-linux";
-      extraModules = [
-        ({pkgs, ...}: {
-          _module.args.websitePackage = self.packages.${pkgs.system}.astro-website;
-        })
-      ];
-    };
+    hercules = mkSystem "hercules" {system = "aarch64-linux";};
   };
 }

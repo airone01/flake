@@ -2,27 +2,28 @@
   lib,
   pkgs,
   config,
-  websitePackage,
   ...
 }: let
   cfg = config.stars.server.traefik;
   scfg = config.stars.server.enable;
+
+  anubisCfg = config.stars.server.anubis;
+  searchixCfg = config.stars.server.searchix;
+  giteaCfg = config.stars.server.gitea;
+
+  websitePackage = pkgs.callPackage ../../packages/astro-website.nix {};
 in {
   options.stars.server.traefik.enable =
     lib.mkEnableOption "Traefik, a reverse proxy";
 
-  config = lib.mkIf (scfg && cfg.enable) {
-    # 80 for HTTP is used by Let's Encrypt to verify ownership
-    networking.firewall.allowedTCPPorts = [443 80];
+  config = lib.mkIf (scfg && cfg.enable) (lib.mkMerge [
+    # base Traefik config (always applied if TRaefik is enabled)
+    {
+      # 80 for HTTP used by Let's Encrypt to verify ownership
+      networking.firewall.allowedTCPPorts = [443 80];
 
-    services = {
-      traefik = {
+      services.traefik = {
         enable = true;
-
-        # at time of writing, this has been removed
-        # will need to be kept up to date to how the traefik options evolve
-        # dynamic.dir = "/var/lib/traefik/dynamic";
-
         staticConfigOptions = {
           entryPoints = {
             web = {
@@ -45,7 +46,6 @@ in {
           };
 
           certificatesResolvers = {
-            # LE = Let's Encrypt
             le = {
               acme = {
                 email = "popgthyrd@gmail.com";
@@ -57,58 +57,25 @@ in {
             };
           };
         };
+      };
+    }
 
-        dynamicConfigOptions = {
-          http = {
-            routers = {
-              mainsite = {
-                rule = "Host(`air1.one`)";
-                service = "mainsite";
-                entryPoints = ["websecure"];
-                tls.certResolver = "le";
-              };
-
-              searchix = {
-                rule = "Host(`searchix.air1.one`)";
-                service = "searchix";
-                entryPoints = ["websecure"];
-                tls.certResolver = "le";
-              };
-
-              gitea = {
-                rule = "Host(`git.air1.one`)";
-                service = "gitea";
-                entryPoints = ["websecure"];
-                tls = {};
-              };
-            };
-
-            services = {
-              # main site service - routed through Anubis
-              mainsite.loadBalancer.servers = [
-                {
-                  url = "http://127.0.0.1:3032";
-                }
-              ];
-
-              searchix.loadBalancer.servers = [
-                {
-                  url = "http://127.0.0.1:3033";
-                }
-              ];
-
-              gitea.loadBalancer.servers = [
-                {
-                  url = "http://127.0.0.1:3031";
-                }
-              ];
-            };
-          };
+    # Main site / Anubis (only if Anubis is enabled)
+    (lib.mkIf anubisCfg.enable {
+      services.traefik.dynamicConfigOptions.http = {
+        routers.mainsite = {
+          rule = "Host(`air1.one`)";
+          service = "mainsite";
+          entryPoints = ["websecure"];
+          tls.certResolver = "le";
         };
+        services.mainsite.loadBalancer.servers = [
+          {url = "http://127.0.0.1:3032";}
+        ];
       };
 
-      # main website service
-      nginx = {
+      # The underlying NGINX server for the main site
+      services.nginx = {
         enable = true;
         virtualHosts."_" = {
           listen = [
@@ -119,7 +86,6 @@ in {
           ];
           root = websitePackage;
           locations."/" = {
-            # 'try_files' ensures 404s work correctly
             extraConfig = ''
               include ${pkgs.nginx}/conf/mime.types;
               autoindex off;
@@ -128,10 +94,38 @@ in {
           };
         };
       };
+    })
 
-      # it's only here bc I test on my laptop and I need loopback there,
-      # so by default I don't set it in the searchix star :-)
-      searchix.settings.web.baseURL = "https://searchix.air1.one";
-    };
-  };
+    # Searchix
+    (lib.mkIf searchixCfg.enable {
+      services.traefik.dynamicConfigOptions.http = {
+        routers.searchix = {
+          rule = "Host(`searchix.air1.one`)";
+          service = "searchix";
+          entryPoints = ["websecure"];
+          tls.certResolver = "le";
+        };
+        services.searchix.loadBalancer.servers = [
+          {url = "http://127.0.0.1:3033";}
+        ];
+      };
+
+      services.searchix.settings.web.baseURL = "https://searchix.air1.one";
+    })
+
+    # Gitea
+    (lib.mkIf giteaCfg.enable {
+      services.traefik.dynamicConfigOptions.http = {
+        routers.gitea = {
+          rule = "Host(`git.air1.one`)";
+          service = "gitea";
+          entryPoints = ["websecure"];
+          tls = {};
+        };
+        services.gitea.loadBalancer.servers = [
+          {url = "http://127.0.0.1:3031";}
+        ];
+      };
+    })
+  ]);
 }

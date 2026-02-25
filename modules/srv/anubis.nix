@@ -58,7 +58,7 @@ in {
         owner = "anubis";
         group = "anubis";
         mode = "0400";
-        sopsFile = ../../secrets/secrets.yaml;
+        sopsFile = ../../secrets/anubis.yaml;
       };
     };
   };
