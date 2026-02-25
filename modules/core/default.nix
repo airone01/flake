@@ -107,7 +107,8 @@
     sops = {
       defaultSopsFile = ../../secrets/secrets.yaml;
       defaultSopsFormat = "yaml";
-      age.keyFile = "${config.users.users.${config.stars.mainUser}.home}/.config/sops/age/keys.txt";
+      age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+      age.keyFile = null;
     };
 
     programs = {
