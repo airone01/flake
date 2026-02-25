@@ -56,7 +56,7 @@
     serviceConfig = {
       # kill service on too much mem use anyways
       MemoryMax = "16G";
-      MemorySwapMax = "0B";
+      MemorySwapMax = "0";
     };
   };
 
