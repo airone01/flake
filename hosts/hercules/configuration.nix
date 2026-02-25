@@ -28,6 +28,8 @@ _: {
         ];
         allowGroups = ["wheel"];
       };
+
+      hercules-ci.enable = true;
     };
   };
 
