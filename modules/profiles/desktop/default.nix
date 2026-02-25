@@ -9,7 +9,6 @@ in {
   imports = [
     ./asus.nix
     ./dualsense.nix
-    ./email.nix
     ./firefox.nix
     ./french.nix
     ./gnome.nix
