@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   imports = [./hardware-configuration.nix];
 
   networking = {
@@ -46,9 +46,18 @@ _: {
   };
 
   systemd.services.hercules-ci-agent = {
-    # tell the boehm GC to start with a tiny heap, forcing it to
-    # garbage collect continuously which saves RAM at the cost of some CPU time
-    environment.GC_INITIAL_HEAP_SIZE = "100000";
+    environment = {
+      # try to fix c++ mem fragmentation by injecting jemalloc to replace the
+      # glibc allocator
+      # https://github.com/jemalloc/jemalloc
+      LD_PRELOAD = "${pkgs.jemalloc}/lib/libjemalloc.so";
+    };
+
+    serviceConfig = {
+      # kill service on too much mem use anyways
+      MemoryMax = "16G";
+      MemorySwapMax = "0B";
+    };
   };
 
   # check for zfs errors periodically
