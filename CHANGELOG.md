@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.1.1](https://github.com/airone01/flake/compare/flake-v10.1.0...flake-v10.1.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* **hercules-ci:** patches ([#186](https://github.com/airone01/flake/issues/186)) ([dd97a65](https://github.com/airone01/flake/commit/dd97a657bbcdeffddaa2187b7892864300bf5228))
+
 ## [10.1.0](https://github.com/airone01/flake/compare/flake-v10.0.3...flake-v10.1.0) (2026-02-25)
 
 
