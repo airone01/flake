@@ -20,7 +20,10 @@ in {
           enableTreesitter = true;
 
           # programming/scripting/configuration languages list
-          assembly.enable = true;
+          assembly = {
+            enable = true;
+            lsp.enable = false;
+          };
           astro = {
             enable = true;
             format.type = ["biome"];
