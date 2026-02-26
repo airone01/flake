@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.1.2](https://github.com/airone01/flake/compare/flake-v10.1.1...flake-v10.1.2) (2026-02-26)
+
+
+### Bug Fixes
+
+* **nvim:** remove assembly lsp ([#188](https://github.com/airone01/flake/issues/188)) ([52a5a08](https://github.com/airone01/flake/commit/52a5a0880bc6de201ba84fe000998890d2e743cc))
+
 ## [10.1.1](https://github.com/airone01/flake/compare/flake-v10.1.0...flake-v10.1.1) (2026-02-26)
 
 
