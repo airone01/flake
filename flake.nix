@@ -7,7 +7,6 @@
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    garnix-incrementalize.url = "github:garnix-io/incrementalize";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,7 +38,7 @@
     treefmt-nix,
     ...
   }:
-    inputs.garnix-incrementalize.lib.withCaches (flake-parts.lib.mkFlake {inherit inputs;} {
+    flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
 
       imports = [
@@ -52,5 +51,5 @@
         ./lib/packages.nix
         ./lib/shells.nix
       ];
-    });
+    };
 }

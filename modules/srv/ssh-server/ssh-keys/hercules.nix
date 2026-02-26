@@ -1,10 +1,7 @@
 # host-specific SSH key configuration for hercules
 {
   hostKeys = {
-    # we can specify custom paths to your SSH host keys if needed
-    # default NixOS paths are typically used if not specified
-    # "rsa" = "/etc/ssh/ssh_host_rsa_key";
-    # "ed25519" = "/etc/ssh/ssh_host_ed25519_key";
+    "ed25519" = "/etc/ssh/ssh_host_ed25519_key";
   };
 
   userKeys = {

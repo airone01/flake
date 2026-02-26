@@ -76,7 +76,6 @@
           "https://nix-community.cachix.org"
           "https://airone01.cachix.org"
           "https://pre-commit-hooks.cachix.org"
-          "https://cache.garnix.io"
         ];
 
         trusted-public-keys = [
@@ -84,7 +83,6 @@
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "airone01.cachix.org-1:+HKTZmTKthiKMNQzABHWDSMEUFC233bbkKmrjh8C6sc="
           "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
-          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         ];
       };
 
@@ -109,7 +107,7 @@
     sops = {
       defaultSopsFile = ../../secrets/secrets.yaml;
       defaultSopsFormat = "yaml";
-      age.keyFile = "${config.users.users.${config.stars.mainUser}.home}/.config/sops/age/keys.txt";
+      age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
     };
 
     programs = {

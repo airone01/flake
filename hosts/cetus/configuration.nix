@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   imports = [./hardware-configuration.nix];
 
   networking = {
@@ -37,6 +37,26 @@ _: {
       gitea.enable = true;
       searchix.enable = true;
       traefik.enable = true;
+    };
+  };
+
+  systemd.services.nix-daemon.serviceConfig = {
+    MemoryMax = "20G"; # prevent nix from killing server
+    MemorySwapMax = "2G";
+  };
+
+  systemd.services.hercules-ci-agent = {
+    environment = {
+      # try to fix c++ mem fragmentation by injecting jemalloc to replace the
+      # glibc allocator
+      # https://github.com/jemalloc/jemalloc
+      LD_PRELOAD = "${pkgs.jemalloc}/lib/libjemalloc.so";
+    };
+
+    serviceConfig = {
+      # kill service on too much mem use anyways
+      MemoryMax = "16G";
+      MemorySwapMax = "0";
     };
   };
 

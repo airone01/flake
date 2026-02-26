@@ -7,8 +7,14 @@ keys:
   - &cetus age1lw73ydjttuaxyzlx6tez8jcxakt62yxf5q84swk6ut6sq36p3qqqra67v3
   - &lyra age1u27xlvk5slpyeryp7h5st6surn87rvlz0zsjvr9utn0p98kjw43qf68dql
 creation_rules:
-  - path_regex: secrets/(anubis|gitea|hercules-ci)\.yaml$
+  - path_regex: secrets/(anubis|gitea)\.yaml$
     key_groups:
       - age:
           - *backup
           - *cetus
+  - path_regex: secrets/hercules-ci\.yaml$
+    key_groups:
+      - age:
+          - *backup
+          - *cetus
+          - *hercules
