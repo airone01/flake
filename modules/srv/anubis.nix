@@ -5,40 +5,11 @@
 }: let
   cfg = config.stars.server.anubis;
   scfg = config.stars.server.enable;
-
-  sandbox = {
-    ProtectSystem = "strict";
-    ProtectHome = true;
-    PrivateTmp = true;
-    PrivateDevices = true;
-    ProtectClock = true;
-    ProtectKernelTunables = true;
-    ProtectKernelModules = true;
-    ProtectControlGroups = true;
-    RestrictNamespaces = true;
-    LockPersonality = true;
-  };
 in {
   options.stars.server.anubis.enable =
     lib.mkEnableOption "Anubis, an HTTP soul weighter";
 
   config = lib.mkIf (scfg && cfg.enable) {
-    users = {
-      users.anubis = {
-        isSystemUser = true;
-        group = "anubis";
-      };
-      groups.anubis = {};
-
-      users.traefik.extraGroups = ["anubis"];
-    };
-
-    systemd.services = {
-      "anubis-mainsite".serviceConfig = sandbox;
-      "anubis-git".serviceConfig = sandbox;
-      "anubis-searchix".serviceConfig = sandbox;
-    };
-
     services.anubis = {
       defaultOptions.settings = {
         OG_PASSTHROUGH = true;
