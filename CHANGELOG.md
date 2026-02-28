@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.3.1](https://github.com/airone01/flake/compare/flake-v10.3.0...flake-v10.3.1) (2026-02-28)
+
+
+### Bug Fixes
+
+* hardening ([#200](https://github.com/airone01/flake/issues/200)) ([5418c51](https://github.com/airone01/flake/commit/5418c513cc9b847d10e1d76fe2f0d6db93351ae7))
+
 ## [10.3.0](https://github.com/airone01/flake/compare/flake-v10.2.0...flake-v10.3.0) (2026-02-28)
 
 
