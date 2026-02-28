@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.3.0](https://github.com/airone01/flake/compare/flake-v10.2.0...flake-v10.3.0) (2026-02-28)
+
+
+### Features
+
+* add dig to default apps ([#198](https://github.com/airone01/flake/issues/198)) ([e2a05ee](https://github.com/airone01/flake/commit/e2a05ee9a47e50282703b864f4bec85f14fd0238))
+
 ## [10.2.0](https://github.com/airone01/flake/compare/flake-v10.1.2...flake-v10.2.0) (2026-02-28)
 
 
