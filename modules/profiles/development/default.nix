@@ -60,6 +60,7 @@ in {
         # tools
         atac
         act
+        dig
         man-pages
         jq
         onefetch
