@@ -12,19 +12,6 @@
   giteaCfg = config.stars.server.gitea;
 
   websitePackage = pkgs.callPackage ../../packages/astro-website.nix {};
-
-  sandbox = {
-    ProtectSystem = "strict";
-    ProtectHome = true;
-    PrivateTmp = true;
-    PrivateDevices = true;
-    ProtectClock = true;
-    ProtectKernelTunables = true;
-    ProtectKernelModules = true;
-    ProtectControlGroups = true;
-    RestrictNamespaces = true;
-    LockPersonality = true;
-  };
 in {
   options.stars.server.traefik.enable =
     lib.mkEnableOption "Traefik, a reverse proxy";
@@ -70,25 +57,6 @@ in {
             };
           };
         };
-      };
-
-      users = {
-        users.traefik = {
-          isSystemUser = true;
-          group = "traefik";
-        };
-        groups.traefik = {};
-      };
-
-      systemd.services.traefik = {
-        serviceConfig =
-          sandbox
-          // {
-            StateDirectory = "traefik";
-            # traefik needs to bind to port 80/443
-            # so we need network capabilities
-            AmbientCapabilities = "CAP_NET_BIND_SERVICE";
-          };
       };
     }
 

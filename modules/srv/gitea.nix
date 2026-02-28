@@ -5,19 +5,6 @@
 }: let
   cfg = config.stars.server.gitea;
   scfg = config.stars.server.enable;
-
-  sandbox = {
-    ProtectSystem = "strict";
-    ProtectHome = true;
-    PrivateTmp = true;
-    PrivateDevices = true;
-    ProtectClock = true;
-    ProtectKernelTunables = true;
-    ProtectKernelModules = true;
-    ProtectControlGroups = true;
-    RestrictNamespaces = true;
-    LockPersonality = true;
-  };
 in {
   options.stars.server.gitea.enable =
     lib.mkEnableOption "Gitea, a git forge";
@@ -60,22 +47,6 @@ in {
           }
         ];
       };
-    };
-
-    users = {
-      users.gitea = {
-        isSystemUser = true;
-        group = "gitea";
-      };
-      groups.gitea = {};
-    };
-
-    systemd.services.gitea = {
-      serviceConfig =
-        sandbox
-        // {
-          StateDirectory = "gitea";
-        };
     };
 
     sops.secrets = {
