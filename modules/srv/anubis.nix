@@ -51,6 +51,8 @@ in {
       };
     };
 
+    users.users.traefik.extraGroups = ["anubis"];
+
     sops.secrets = {
       "anubis/mainsite_key" = {
         owner = "anubis";
