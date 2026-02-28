@@ -9,6 +9,19 @@
 }: let
   cfg = config.stars.server.searchix;
   scfg = config.stars.server.enable;
+
+  sandbox = {
+    ProtectSystem = "strict";
+    ProtectHome = true;
+    PrivateTmp = true;
+    PrivateDevices = true;
+    ProtectClock = true;
+    ProtectKernelTunables = true;
+    ProtectKernelModules = true;
+    ProtectControlGroups = true;
+    RestrictNamespaces = true;
+    LockPersonality = true;
+  };
 in {
   options.stars.server.searchix.enable =
     lib.mkEnableOption "Searchix, a nix options and packages search engine";
@@ -16,6 +29,20 @@ in {
   config = lib.mkIf (scfg && cfg.enable) {
     systemd.services.searchix.environment = {
       NIX_PATH = "nixpkgs=${pkgs.path}";
+    };
+
+    users.users.searchix = {
+      isSystemUser = true;
+      group = "searchix";
+    };
+    users.groups.searchix = {};
+
+    systemd.services.searchix = {
+      serviceConfig =
+        sandbox
+        // {
+          StateDirectory = "searchix";
+        };
     };
 
     services.searchix = {

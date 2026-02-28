@@ -5,6 +5,19 @@
 }: let
   cfg = config.stars.server.ollama;
   scfg = config.stars.server.enable;
+
+  sandbox = {
+    ProtectSystem = "strict";
+    ProtectHome = true;
+    PrivateTmp = true;
+    PrivateDevices = true;
+    ProtectClock = true;
+    ProtectKernelTunables = true;
+    ProtectKernelModules = true;
+    ProtectControlGroups = true;
+    RestrictNamespaces = true;
+    LockPersonality = true;
+  };
 in {
   options.stars.server.ollama.enable =
     lib.mkEnableOption "Ollama, an open LLM model runner";
@@ -13,6 +26,28 @@ in {
     services.ollama = {
       enable = true;
       # acceleration = "rocm";
+    };
+
+    users = {
+      users.ollama = {
+        isSystemUser = true;
+        group = "ollama";
+      };
+      groups.ollama = {};
+
+      users.open-webui = {
+        isSystemUser = true;
+        group = "open-webui";
+      };
+      groups.open-webui = {};
+    };
+
+    systemd.services.ollama = {
+      serviceConfig =
+        sandbox
+        // {
+          StateDirectory = "ollama";
+        };
     };
 
     services.open-webui = {

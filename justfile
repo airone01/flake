@@ -33,7 +33,7 @@ check *args="":
 
 # clean unused derivations with nh
 clean:
-    nh clean all
+    nh clean all --keep 10
 
 # enter a devshell
 develop shell="commitlint" *args="":
