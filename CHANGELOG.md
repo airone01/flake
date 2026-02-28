@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.2.0](https://github.com/airone01/flake/compare/flake-v10.1.2...flake-v10.2.0) (2026-02-28)
+
+
+### Features
+
+* **cetus:** wake-on-lan ([#196](https://github.com/airone01/flake/issues/196)) ([2a530e6](https://github.com/airone01/flake/commit/2a530e6bde13a46c7a17b2c0f8e630739b23d683))
+
 ## [10.1.2](https://github.com/airone01/flake/compare/flake-v10.1.1...flake-v10.1.2) (2026-02-26)
 
 
