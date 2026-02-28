@@ -22,7 +22,7 @@ local.nix
 *.uuid
 
 # AI 😈
-repomix-output.txt
+repomix-output.*
 
 # NodeJS
 node_modules/
