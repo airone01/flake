@@ -1,10 +1,9 @@
 {
   "output": {
-    "filePath": "repomix-output.txt",
-    "style": "plain",
+    "filePath": "repomix-output.xml",
     "removeComments": false,
-    "removeEmptyLines": false,
-    "topFilesLength": 5,
+    "removeEmptyLines": true,
+    "topFilesLength": 10,
     "showLineNumbers": false,
     "copyToClipboard": false
   },

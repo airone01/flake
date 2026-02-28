@@ -4,6 +4,8 @@
   networking = {
     hostName = "cetus";
     hostId = "c2bd1785";
+
+    interfaces.eno1.wakeOnLan.enable = true;
   };
   system.stateVersion = "25.05"; # never change this
   time.timeZone = "Europe/Paris";
