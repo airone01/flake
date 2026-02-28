@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -18,12 +19,12 @@ in {
         ROCKET_PORT = 8222;
         DOMAIN = "https://vault.air1.one";
         SIGNUPS_ALLOWED = true;
-        # TODO: put this in secrets
-        ADMIN_TOKEN = "$argon2id$v=19$m=65536,t=4,p=1$SE5UaWhvaFJrK0hRRmFLM3dxRUVrdz09$dooYCHvCoGK7HqDmz3vBFv4zOSd9kLPGPv4MrFHsfUE";
+        # ADMIN_TOKEN = ""; # TODO: set argon2 pass in sops secrets
         LOG_FILE = "/var/lib/bitwarden_rs/access.log";
       };
     };
 
+    environment.systemPackages = [pkgs.vaultwarden];
     networking.firewall.allowedTCPPorts = [8222];
   };
 }
