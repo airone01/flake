@@ -18,7 +18,7 @@ in {
           mappings = {
             closeCurrent = "<leader>x";
             cycleNext = "<tab>";
-            cyclePrevious = "<shift><tab>";
+            cyclePrevious = "<S-Tab>";
           };
 
           setupOpts.options = {
