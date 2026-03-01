@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.3.8](https://github.com/airone01/flake/compare/flake-v10.3.7...flake-v10.3.8) (2026-03-01)
+
+
+### Bug Fixes
+
+* **nvim:** patch highlighting issue ([#218](https://github.com/airone01/flake/issues/218)) ([51957bf](https://github.com/airone01/flake/commit/51957bf21b8dfae24f722b3b8cf6ac9eceeb4049))
+
 ## [10.3.7](https://github.com/airone01/flake/compare/flake-v10.3.6...flake-v10.3.7) (2026-03-01)
 
 
