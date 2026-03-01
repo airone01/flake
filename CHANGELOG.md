@@ -1,5 +1,19 @@
 # Changelog
 
+## [10.3.3](https://github.com/airone01/flake/compare/flake-v10.3.2...flake-v10.3.3) (2026-03-01)
+
+
+### Bug Fixes
+
+* **searchix:** fiddle with nvf option exposure ([#205](https://github.com/airone01/flake/issues/205)) ([ef08d13](https://github.com/airone01/flake/commit/ef08d131ed902a9e8f23fce3e18c474e3b4eac39))
+
+## [10.3.2](https://github.com/airone01/flake/compare/flake-v10.3.1...flake-v10.3.2) (2026-03-01)
+
+
+### Bug Fixes
+
+* **searchix:** patch again ([#203](https://github.com/airone01/flake/issues/203)) ([0e9d0be](https://github.com/airone01/flake/commit/0e9d0bec1323e1227ac099c0d5de6e2ce1b009cc))
+
 ## [10.3.1](https://github.com/airone01/flake/compare/flake-v10.3.0...flake-v10.3.1) (2026-02-28)
 
 
