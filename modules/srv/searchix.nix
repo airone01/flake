@@ -61,9 +61,11 @@ in {
       settings = {
         dataPath = "/var/lib/searchix/data";
 
+        searchTimeout = "30s";
+
         importer = {
           batchSize = 10000;
-          lowMemory = true;
+          lowMemory = false;
           timeout = "2h";
           updateAt = "03:00:00";
 
