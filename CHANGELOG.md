@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.3.6](https://github.com/airone01/flake/compare/flake-v10.3.5...flake-v10.3.6) (2026-03-01)
+
+
+### Bug Fixes
+
+* **flake:** cleaner pkgs import in devshells ([56bdef8](https://github.com/airone01/flake/commit/56bdef81ed53e1d81db8c62a6f795da977949cb4))
+
 ## [10.3.5](https://github.com/airone01/flake/compare/flake-v10.3.4...flake-v10.3.5) (2026-03-01)
 
 
