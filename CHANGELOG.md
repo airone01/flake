@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.3.4](https://github.com/airone01/flake/compare/flake-v10.3.3...flake-v10.3.4) (2026-03-01)
+
+
+### Bug Fixes
+
+* **searchix:** hopeful patches ([#209](https://github.com/airone01/flake/issues/209)) ([a655d7c](https://github.com/airone01/flake/commit/a655d7cb84ca6b6a1b88a3efffc6d6959ebf7348))
+
 ## [10.3.3](https://github.com/airone01/flake/compare/flake-v10.3.2...flake-v10.3.3) (2026-03-01)
 
 
