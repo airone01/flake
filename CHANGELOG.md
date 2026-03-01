@@ -1,5 +1,13 @@
 # Changelog
 
+## [10.3.9](https://github.com/airone01/flake/compare/flake-v10.3.8...flake-v10.3.9) (2026-03-01)
+
+
+### Bug Fixes
+
+* **hyprland:** enable numlock by default ([#222](https://github.com/airone01/flake/issues/222)) ([bce0373](https://github.com/airone01/flake/commit/bce0373e7a6845f7bce5077e928da4b287f37057))
+* **nvim:** patch syntax error ([#220](https://github.com/airone01/flake/issues/220)) ([3c0d6d7](https://github.com/airone01/flake/commit/3c0d6d7387d99e4274c3af7f9f3de85f71877fa5))
+
 ## [10.3.8](https://github.com/airone01/flake/compare/flake-v10.3.7...flake-v10.3.8) (2026-03-01)
 
 
