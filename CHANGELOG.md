@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.3.7](https://github.com/airone01/flake/compare/flake-v10.3.6...flake-v10.3.7) (2026-03-01)
+
+
+### Bug Fixes
+
+* **flake:** patch legagcy nix practices ([#216](https://github.com/airone01/flake/issues/216)) ([aad26af](https://github.com/airone01/flake/commit/aad26af8bb2c54ffdaaf6bca0362ed9881da5a79))
+
 ## [10.3.6](https://github.com/airone01/flake/compare/flake-v10.3.5...flake-v10.3.6) (2026-03-01)
 
 
