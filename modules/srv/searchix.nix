@@ -169,6 +169,7 @@ in {
               attribute = "";
               outputPath = "share/doc/nvf";
               importer = "options";
+              jsonDepth = 1;
               timeout = "10m";
               repo = {
                 type = "github";
