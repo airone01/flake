@@ -5,7 +5,14 @@
   nvf = (import flakeCompatSrc {src = nvfSrc;}).defaultNix;
   docs = nvf.packages.${pkgs.system}.docs-json;
 in
-  pkgs.runCommand "nvf-options-flattened" {} ''
+  pkgs.runCommand "nvf-options-flattened" {
+    nativeBuildInputs = [pkgs.jq];
+  } ''
     mkdir -p $out
-    ln -s ${docs}/share/doc/nvf/options.json $out/options.json
+
+    # NVF outputs options.json as a JSON array to preserve order.
+    # Searchix strictly expects a JSON object where keys are the option names.
+    # We use jq to dynamically reshape the array of objects into a single key-value object.
+    jq 'if type == "array" then map({(.name): .}) | add else . end' \
+      ${docs}/share/doc/nvf/options.json > $out/options.json
   ''
