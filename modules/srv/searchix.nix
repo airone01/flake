@@ -122,7 +122,6 @@ in {
                   enable = true;
                   key = "nixos";
                   name = "NixOS";
-                  order = 0;
                   fetcher = "channel";
                   channel = "nixos-unstable";
                   url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
@@ -142,7 +141,6 @@ in {
                   enable = true;
                   name = "Home Manager";
                   key = "home-manager";
-                  order = 2;
                   fetcher = "channel";
                   channel = "home-manager";
                   url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
@@ -170,7 +168,6 @@ in {
                   importer = "packages";
                   jsonDepth = 2;
                   name = "Nix Packages";
-                  order = 3;
                   outputPath = "packages.json.br";
                   timeout = "30m";
                   url = "";
@@ -190,7 +187,6 @@ in {
               {
                 darwin = {
                   name = "Darwin";
-                  order = 1;
                   key = "darwin";
                   enable = true;
                   fetcher = "channel";
@@ -217,7 +213,6 @@ in {
                   enable = true;
                   name = "NVF";
                   key = "nvf";
-                  order = 5;
                   fetcher = "channel";
                   url = "https://github.com/airone01/flake/archive/main.tar.gz";
                   importPath = "lib/nvf-searchix.nix";
