@@ -1,4 +1,4 @@
-{inputs, ...}: {
+_: {
   perSystem = {
     config,
     pkgs,
@@ -12,10 +12,7 @@
         shellHook = config.pre-commit.installationScript;
       };
 
-      commitlint = import ../shells/commitlint.nix {
-        inherit (pkgs) system;
-        inherit (inputs) nixpkgs;
-      };
+      commitlint = import ../shells/commitlint.nix {inherit pkgs;};
     };
   };
 }
