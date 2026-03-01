@@ -176,7 +176,6 @@ in {
         web = {
           listenAddress = "localhost";
           port = 51313;
-          # timeout = "60s";
         };
       };
     };
