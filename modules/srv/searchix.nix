@@ -1,17 +1,20 @@
 # hey! go check out Searchix, it's pretty dope!
 # note for myself: config reference at time of writing:
 # https://git.sr.ht/~alanpearce/searchix/tree/b7de525d7fe617674030c493ec4214f2f5a4b887
-# (also actively developed at https://codeberg.org/alinnow/searchix and https://git.alin.ovh/searchix)
 #
 # searchix configuration quirks to remember:
 # - the 'download' fetcher strictly requires a '/revision' file to exist at the URL.
 # - for nixos options, use the 'channel' fetcher pointing to the 'nixexprs.tar.xz'
 #   tarball. searchix knows how to unpack and evaluate it natively.
-# - for custom option derivations (like my nvf wrapper), searchix appends '/options.json'
-#   to whatever `outputPath` is set to. if my script outputs exactly `$out/options.json`,
-#   i must set `outputPath = "";`.
-# - always set explicit timeouts for heavy derivations to avoid 'context deadline exceeded' errors.
-# - indexing is heavily memory intensive. keep batchSize low and GOMEMLIMIT configured.
+# - memory leaks: searchix will explode your ram. always set `lowMemory = true;`,
+#   keep `batchSize` around 1000, and set a `GOMEMLIMIT` in the systemd service.
+# - custom flakes (like nvf): if you use a custom derivation that outputs a json object
+#   instead of key-value pairs, you MUST set `jsonDepth = 1;` or it will panic with
+#   a jstream.KV cast error.
+# - broken symlinks: searchix expects custom options at `$out/share/doc/<name>/options.json`.
+#   if your script outputs to `$out/options.json`, either fix the script or set `outputPath`.
+# - cache hell: if you update your custom script on github, searchix will use the cached
+#   tarball unless you change the commit hash in the url.
 {
   lib,
   pkgs,
@@ -164,7 +167,7 @@ in {
               key = "nvf";
               order = 5;
               fetcher = "channel";
-              url = "https://github.com/airone01/flake/archive/8edc241524a6879bde5e677366d892ee98b597cc.tar.gz";
+              url = "https://github.com/airone01/flake/archive/main.tar.gz";
               importPath = "lib/nvf-searchix.nix";
               attribute = "";
               outputPath = "share/doc/nvf";
