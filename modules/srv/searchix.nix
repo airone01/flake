@@ -10,8 +10,8 @@
 # - for custom option derivations (like my nvf wrapper), searchix appends '/options.json'
 #   to whatever `outputPath` is set to. if my script outputs exactly `$out/options.json`,
 #   i must set `outputPath = "";`.
-# - if an archive url 404s, searchix silently fails the import.
 # - always set explicit timeouts for heavy derivations to avoid 'context deadline exceeded' errors.
+# - indexing is heavily memory intensive. keep batchSize low and GOMEMLIMIT configured.
 {
   lib,
   pkgs,
@@ -38,8 +38,22 @@ in {
     lib.mkEnableOption "Searchix, a nix options and packages search engine";
 
   config = lib.mkIf (scfg && cfg.enable) {
-    systemd.services.searchix.environment = {
-      NIX_PATH = "nixpkgs=${pkgs.path}";
+    systemd.services.searchix = {
+      wants = ["network-online.target"];
+      after = ["network-online.target"];
+
+      environment = {
+        NIX_PATH = "nixpkgs=${pkgs.path}";
+        GOMEMLIMIT = "2500MiB";
+      };
+
+      serviceConfig =
+        sandbox
+        // {
+          StateDirectory = "searchix";
+          # ensure systemd doesn't kill it if heavy indexing delays startup readiness
+          TimeoutStartSec = "10m";
+        };
     };
 
     users.users.searchix = {
@@ -48,14 +62,6 @@ in {
     };
     users.groups.searchix = {};
 
-    systemd.services.searchix = {
-      serviceConfig =
-        sandbox
-        // {
-          StateDirectory = "searchix";
-        };
-    };
-
     services.searchix = {
       enable = true;
 
@@ -63,8 +69,8 @@ in {
         dataPath = "/var/lib/searchix/data";
 
         importer = {
-          batchSize = 10000;
-          lowMemory = false;
+          batchSize = 1000;
+          lowMemory = true;
           timeout = "2h";
           updateAt = "03:00:00";
 
