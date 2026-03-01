@@ -11,6 +11,7 @@
 #   to whatever `outputPath` is set to. if my script outputs exactly `$out/options.json`,
 #   i must set `outputPath = "";`.
 # - if an archive url 404s, searchix silently fails the import.
+# - always set explicit timeouts for heavy derivations to avoid 'context deadline exceeded' errors.
 {
   lib,
   pkgs,
@@ -61,8 +62,6 @@ in {
       settings = {
         dataPath = "/var/lib/searchix/data";
 
-        searchTimeout = "30s";
-
         importer = {
           batchSize = 10000;
           lowMemory = false;
@@ -103,6 +102,7 @@ in {
               importPath = "default.nix";
               attribute = "docs.json";
               importer = "options";
+              timeout = "10m";
               repo = {
                 type = "github";
                 owner = "nix-community";
@@ -161,10 +161,9 @@ in {
               url = "https://github.com/airone01/flake/archive/main.tar.gz";
               importPath = "lib/nvf-searchix.nix";
               attribute = "";
-              # searchix appends '/options.json' to outputPath.
-              # since the wrapper puts it in $out/options.json, we need outputPath to be empty.
               outputPath = "";
               importer = "options";
+              timeout = "10m";
               repo = {
                 type = "github";
                 owner = "NotAShelf";
@@ -177,6 +176,7 @@ in {
         web = {
           listenAddress = "localhost";
           port = 51313;
+          timeout = "60s";
         };
       };
     };
