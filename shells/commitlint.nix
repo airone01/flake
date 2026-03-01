@@ -1,10 +1,4 @@
-{
-  system,
-  nixpkgs,
-  ...
-}: let
-  pkgs = nixpkgs.legacyPackages.${system};
-
+{pkgs, ...}: let
   packages = with pkgs; [
     commitlint
   ];

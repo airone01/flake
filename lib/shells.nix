@@ -7,10 +7,7 @@
     devShells = {
       default = pkgs.mkShell {
         inputsFrom = [
-          (import ../shells {
-            inherit (pkgs) system;
-            inherit (inputs) nixpkgs;
-          })
+          (import ../shells {inherit pkgs;})
         ];
         shellHook = config.pre-commit.installationScript;
       };

@@ -1,12 +1,4 @@
-{
-  system,
-  nixpkgs,
-  ...
-}: let
-  pkgs = import nixpkgs {
-    inherit system;
-  };
-
+{pkgs, ...}: let
   packages = with pkgs; [
     # general
     curl
