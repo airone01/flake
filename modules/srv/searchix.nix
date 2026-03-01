@@ -1,6 +1,17 @@
 # hey! go check out Searchix, it's pretty dope!
 # note for myself: config reference at time of writing:
 # https://git.sr.ht/~alanpearce/searchix/tree/b7de525d7fe617674030c493ec4214f2f5a4b887
+# (also actively developed at https://codeberg.org/alinnow/searchix and https://git.alin.ovh/searchix)
+#
+# searchix configuration quirks to remember:
+# - the 'download' fetcher strictly requires a '/revision' file to exist at the URL.
+# - for nixos options, use the 'channel' fetcher pointing to the 'nixexprs.tar.xz'
+#   tarball. searchix knows how to unpack and evaluate it natively.
+# - for custom option derivations (like my nvf wrapper), searchix appends '/options.json'
+#   to whatever `outputPath` is set to. if my script outputs exactly `$out/options.json`,
+#   i must set `outputPath = "";`.
+# - if an archive url 404s, searchix silently fails the import.
+# - always set explicit timeouts for heavy derivations to avoid 'context deadline exceeded' errors.
 {
   lib,
   pkgs,
@@ -53,7 +64,7 @@ in {
 
         importer = {
           batchSize = 10000;
-          lowMemory = true;
+          lowMemory = false;
           timeout = "2h";
           updateAt = "03:00:00";
 
@@ -78,16 +89,6 @@ in {
                 owner = "LnL7";
                 repo = "nix-darwin";
               };
-
-              # programs = {
-              #   enable = false;
-              #   attribute = "";
-              # };
-
-              # manPages = {
-              #   enable = false;
-              #   attribute = "";
-              # };
             };
 
             home-manager = {
@@ -101,6 +102,7 @@ in {
               importPath = "default.nix";
               attribute = "docs.json";
               importer = "options";
+              timeout = "10m";
               repo = {
                 type = "github";
                 owner = "nix-community";
@@ -111,23 +113,18 @@ in {
             nixos = {
               enable = true;
               key = "nixos";
-              fetcher = "download";
               name = "NixOS";
               order = 0;
-              outputPath = "share/doc/nixos";
+              fetcher = "channel";
+              channel = "nixos-unstable";
+              url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+              importer = "options";
               timeout = "30m";
-              url = "https://channels.nixos.org/nixos-unstable/options.json.br";
-
               repo = {
                 owner = "NixOS";
                 repo = "nixpkgs";
                 type = "github";
               };
-
-              # programs = {
-              #   attribute = "";
-              #   enable = false;
-              # };
             };
 
             nixpkgs = {
@@ -155,45 +152,18 @@ in {
               };
             };
 
-            # The 'download' fetcher in Searchix strictly requires a 'revision' file
-            # to exist at the URL (e.g. .../data/revision). The official NUR endpoint
-            # only provides 'packages.json', so Searchix errors out. Hence must be
-            # disabled.
-            # nur = {
-            #   enable = true;
-            #   key = "nur";
-            #   attribute = "";
-            #   channel = "";
-            #   fetcher = "download";
-            #   importPath = "";
-            #   importer = "packages";
-            #   jsonDepth = 1;
-            #   name = "NUR";
-            #   order = 4;
-            #   outputPath = "";
-            #   timeout = "30m";
-            #   url = "https://nur.nix-community.org/data/packages.json";
-            #   repo = {
-            #     owner = "nix-community";
-            #     repo = "nur";
-            #     type = "github";
-            #   };
-            #   programs = {
-            #     attribute = "";
-            #     enable = false;
-            #   };
-            # };
-
             nvf = {
               enable = true;
               name = "NVF";
               key = "nvf";
               order = 5;
               fetcher = "channel";
-              url = "https://github.com/airone01/flake/archive/fix/hercules-patches.tar.gz";
+              url = "https://github.com/airone01/flake/archive/main.tar.gz";
               importPath = "lib/nvf-searchix.nix";
               attribute = "";
+              outputPath = "";
               importer = "options";
+              timeout = "10m";
               repo = {
                 type = "github";
                 owner = "NotAShelf";
