@@ -39,9 +39,12 @@ in {
 
   config = lib.mkIf (scfg && cfg.enable) {
     systemd.services.searchix = {
+      wants = ["network-online.target"];
+      after = ["network-online.target"];
+
       environment = {
         NIX_PATH = "nixpkgs=${pkgs.path}";
-        # GOMEMLIMIT = "2500MiB";
+        GOMEMLIMIT = "2500MiB";
       };
 
       serviceConfig =
