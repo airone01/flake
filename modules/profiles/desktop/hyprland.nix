@@ -208,6 +208,7 @@ in {
               input = {
                 kb_layout = lib.mkDefault "us";
                 follow_mouse = 1; # focus follow mouse
+                numlock_by_default = true;
               };
 
               # appearance
