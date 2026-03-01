@@ -72,7 +72,8 @@ in {
             colorizer.enable = true;
 
             # simple line decorator
-            # might be causing a bug, disabled in the meantime
+            # this is causing a bug when highlighting text
+            # see #117
             modes-nvim.enable = false;
           };
 
