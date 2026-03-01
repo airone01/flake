@@ -72,7 +72,8 @@ in {
             colorizer.enable = true;
 
             # simple line decorator
-            modes-nvim.enable = true;
+            # might be causing a bug, disabled in the meantime
+            modes-nvim.enable = false;
           };
 
           # notification library
