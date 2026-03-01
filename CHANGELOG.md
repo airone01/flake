@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.3.5](https://github.com/airone01/flake/compare/flake-v10.3.4...flake-v10.3.5) (2026-03-01)
+
+
+### Bug Fixes
+
+* **searchix:** final nvf fixes ([#213](https://github.com/airone01/flake/issues/213)) ([e91ea8e](https://github.com/airone01/flake/commit/e91ea8e59e828f1342bac2cec62ff2baa249be10))
+
 ## [10.3.4](https://github.com/airone01/flake/compare/flake-v10.3.3...flake-v10.3.4) (2026-03-01)
 
 
