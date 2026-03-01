@@ -41,6 +41,7 @@ in {
     systemd.services.searchix = {
       environment = {
         NIX_PATH = "nixpkgs=${pkgs.path}";
+        # GOMEMLIMIT = "2500MiB";
       };
 
       serviceConfig =
