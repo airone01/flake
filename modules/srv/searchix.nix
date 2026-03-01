@@ -167,7 +167,7 @@ in {
               url = "https://github.com/airone01/flake/archive/main.tar.gz";
               importPath = "lib/nvf-searchix.nix";
               attribute = "";
-              outputPath = "";
+              outputPath = "share/doc/nvf";
               importer = "options";
               timeout = "10m";
               repo = {
