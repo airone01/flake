@@ -72,7 +72,9 @@ in {
             colorizer.enable = true;
 
             # simple line decorator
-            modes-nvim.enable = true;
+            # this is causing a bug when highlighting text
+            # see #117
+            modes-nvim.enable = false;
           };
 
           # notification library
