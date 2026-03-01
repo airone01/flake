@@ -164,11 +164,12 @@ in {
               key = "nvf";
               order = 5;
               fetcher = "channel";
-              url = "https://github.com/airone01/flake/archive/main.tar.gz";
+              url = "https://github.com/airone01/flake/archive/ca32a4b3230ac8705dec67d1dd9f950ff633bcb8.tar.gz";
               importPath = "lib/nvf-searchix.nix";
               attribute = "";
-              outputPath = "";
+              outputPath = "share/doc/nvf";
               importer = "options";
+              jsonDepth = 1;
               timeout = "10m";
               repo = {
                 type = "github";
