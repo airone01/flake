@@ -38,6 +38,9 @@
           gtpl = "git pull";
           gtl = "git log --all --oneline --graph";
           gtlo = "git log --oneline";
+          gtm = "git merge";
+          gtma = "git merge --abort";
+          gtmc = "git merge --continue";
 
           # just
           jts = "just switch";
