@@ -6,23 +6,6 @@
 }: let
   cfg = config.stars;
 in {
-  imports = [
-    ./binds.nix
-    ./dashboard.nix
-    ./filetree.nix
-    ./git.nix
-    ./languages.nix
-    ./lsp.nix
-    ./statusline.nix
-    ./tabline.nix
-    ./telescope.nix
-    ./treesitter.nix
-    ./ui.nix
-    ./utility.nix
-    ./vim.nix
-    ./wrappers.nix
-  ];
-
   options.stars.profiles.development.enableNvf = lib.mkOption {
     default = true;
     example = true;

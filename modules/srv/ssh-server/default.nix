@@ -7,12 +7,6 @@
   cfg = config.stars.server.ssh-server;
   scfg = config.stars.server.enable;
 in {
-  imports = [
-    ./hardening.nix
-    ./known-hosts.nix
-    ./ssh-keys
-  ];
-
   options.stars.server.ssh-server = {
     enable = lib.mkEnableOption "SSH server with enhanced configuration";
 

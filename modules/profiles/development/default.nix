@@ -6,10 +6,6 @@
 }: let
   cfg = config.stars;
 in {
-  imports = [
-    ./nvim
-  ];
-
   options.stars.profiles.development.enable = lib.mkEnableOption "development environment & tools";
 
   config =

@@ -6,15 +6,6 @@
 }: let
   cfg = config.stars;
 in {
-  imports = [
-    ./asus.nix
-    ./dualsense.nix
-    ./firefox.nix
-    ./french.nix
-    ./gnome.nix
-    ./hyprland.nix
-  ];
-
   options.stars.profiles.desktop = {
     enable = lib.mkEnableOption "desktop environment";
 
