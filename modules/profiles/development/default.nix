@@ -49,6 +49,9 @@ in {
         nodejs
         pnpm
 
+        # Go
+        go
+
         # Rust
         cargo
         cargo-outdated
