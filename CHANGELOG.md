@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.4.1](https://github.com/airone01/flake/compare/flake-v10.4.0...flake-v10.4.1) (2026-03-03)
+
+
+### Bug Fixes
+
+* **hyprland:** xdg-desktop-portal ([#232](https://github.com/airone01/flake/issues/232)) ([4186d79](https://github.com/airone01/flake/commit/4186d791f4d35b005bc15464759220f5568a7179))
+
 ## [10.4.0](https://github.com/airone01/flake/compare/flake-v10.3.9...flake-v10.4.0) (2026-03-03)
 
 
