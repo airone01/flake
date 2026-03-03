@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.4.0](https://github.com/airone01/flake/compare/flake-v10.3.9...flake-v10.4.0) (2026-03-03)
+
+
+### Features
+
+* random patches ([#230](https://github.com/airone01/flake/issues/230)) ([d34ed1c](https://github.com/airone01/flake/commit/d34ed1c5016d9e82522692ee8d15791e264a82cb))
+
 ## [10.3.9](https://github.com/airone01/flake/compare/flake-v10.3.8...flake-v10.3.9) (2026-03-01)
 
 
