@@ -31,7 +31,6 @@
             port = 22;
           }
         ];
-        allowGroups = ["wheel"];
       };
 
       anubis.enable = true;

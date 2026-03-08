@@ -2,6 +2,7 @@
   description = "r1's flake-parts Nix configs";
 
   inputs = {
+    deploy-rs.url = "github:serokell/deploy-rs";
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
@@ -48,7 +49,7 @@
         # flake parts
         ./hosts
         ./lib/formatting.nix
-        ./lib/packages.nix
+        ./lib/pkgs.nix
         ./lib/shells.nix
       ];
     };

@@ -1,0 +1,45 @@
+base_url = "http://localhost"
+theme = "zola.386"
+
+default_language = "en"
+title = "airone01"
+description = "A blog for nix and system lovers"
+
+# highlight_code = true
+compile_sass = true
+# generate_rss = true
+build_search_index = true
+
+taxonomies = [
+  { name = "categories", rss = true },
+  { name = "tags", rss = true },
+]
+
+[extra]
+keywords = ["blog", "programming", "zola"]
+author = "airone01"
+year = 2026
+theme_color = "auto"
+
+zola386_menu = [
+  { path = "", name = "Home" },
+  { path = "stats", name = "Stats" },
+  { path = "categories", name = "Categories" },
+  { path = "tags", name = "Tags" },
+  { path = "about", name = "About" },
+]
+
+image = "https://avatars.githubusercontent.com/u/21955960?v=4"
+github_user = "airone01"
+
+label_tags = "Tags"
+label_tag = "Tag"
+label_categories = "Categories"
+label_category = "Category"
+label_author = "Author"
+label_date = "Date"
+label_taxonomy = "Taxonomy"
+label_reading = "Reading time"
+label_read_more = "Read more"
+
+# https://github.com/lopes/zola.386/blob/master/config.toml
