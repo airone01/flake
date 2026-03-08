@@ -27,7 +27,6 @@ in {
           # libnotify # notifications
           # dunst # notifications
           # swww # wallpaper deamon
-          # rofi # app launcher
           xdg-desktop-portal-hyprland # screen sharing
           # kitty # terminal emulator
           thunar # file manager
@@ -41,7 +40,6 @@ in {
           wl-clipboard # Wayland clipboard
           # cliphist # clipboard manager
           # hyprlock # lock screen
-          pavucontrol # used by waybar
         ];
 
         # Thunar extras
@@ -82,8 +80,6 @@ in {
           programs = {
             hyprlock.enable = true;
             kitty.enable = true;
-            rofi.enable = true;
-            waybar.enable = true;
           };
 
           services = {
@@ -109,7 +105,6 @@ in {
                 "dunst"
                 # set wallpaper
                 "swww img -t none ${wallpaperImg}"
-                "waybar"
                 # "nm-applet --indicator" # network manager icon
                 # ui for pasword auth
                 "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
@@ -144,8 +139,6 @@ in {
                   # apps
                   ## terminal
                   "$mod, return, exec, ${pkgs.kitty}/bin/kitty"
-                  ## rofi
-                  "$mod, S, exec, ${pkgs.rofi}/bin/rofi -show drun -show-icons"
                   ## web browser
                   "$mod SHIFT, F, exec, ${pkgs.firefox}/bin/firefox"
                   ## screenshot tool screen
@@ -155,8 +148,6 @@ in {
                   "$mod, R, exec, kitty -e yazi"
 
                   # other
-                  ## view clipboard history
-                  "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
                 ]
                 ++
                 # workspaces

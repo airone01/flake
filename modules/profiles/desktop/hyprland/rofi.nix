@@ -31,6 +31,7 @@ in {
       cfg.core.enable
       && cfg.profiles.desktop.enable
       && cfg.profiles.desktop.desktopEnv == "hyprland"
+      && cfg.profiles.desktop.hyprland.waybar.enable
       && cfg.profiles.desktop.hyprland.rofi.enable
     ) {
       environment.systemPackages = with pkgs; [
@@ -39,22 +40,36 @@ in {
         networkmanager_dmenu
       ];
 
-      home-manager.users.${cfg.mainUser}.programs.waybar.settings = {
-        "network" = {
-          "format" = "{ifname}";
-          "format-wifi" = "  {essid} ({signalStrength}%)";
-          "on-click-right" = "networkmanager_dmenu";
+      home-manager.users.${cfg.mainUser} = {
+        wayland.windowManager.hyprland.settings = {
+          bind = [
+            # app menu
+            "$mod, S, exec, ${pkgs.rofi}/bin/rofi -show drun -show-icons"
+            # clipboard history
+            "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+          ];
         };
 
-        "pulseaudio" = {
-          "format" = "  {volume}%";
-          "on-click-right" = "rofi-sound";
-        };
+        programs = {
+          rofi.enable = true;
+          waybar.settings = {
+            "network" = {
+              "format" = "{ifname}";
+              "format-wifi" = "  {essid} ({signalStrength}%)";
+              "on-click-right" = "networkmanager_dmenu";
+            };
 
-        "custom/power" = {
-          "format" = "⏻";
-          "on-click" = "rofi-power";
-          "tooltip" = false;
+            "pulseaudio" = {
+              "format" = "  {volume}%";
+              "on-click-right" = "rofi-sound";
+            };
+
+            "custom/power" = {
+              "format" = "⏻";
+              "on-click" = "rofi-power";
+              "tooltip" = false;
+            };
+          };
         };
       };
     };

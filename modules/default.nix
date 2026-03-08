@@ -10,6 +10,7 @@ _: {
     ./profiles/desktop/gnome.nix
     ./profiles/desktop/hyprland/default.nix
     ./profiles/desktop/hyprland/rofi.nix
+    ./profiles/desktop/hyprland/waybar.nix
     ./profiles/desktop/schizofox
 
     ./profiles/development
