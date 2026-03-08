@@ -26,7 +26,6 @@ _: {
             port = 22;
           }
         ];
-        allowGroups = ["wheel"];
       };
 
       hercules-ci.enable = true;

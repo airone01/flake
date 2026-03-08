@@ -98,7 +98,7 @@ in {
 
     allowGroups = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = ["wheel"];
+      default = ["wheel" "sudo"];
       description = "List of groups allowed to connect via SSH.";
     };
 
