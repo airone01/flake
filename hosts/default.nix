@@ -39,7 +39,7 @@ in {
 
       profiles.system = {
         sshUser = "rack";
-        user = "rack";
+        user = "root";
         path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigs.cetus;
       };
     };
@@ -55,8 +55,8 @@ in {
       remoteBuild = true;
 
       profiles.system = {
-        sshUser = "root";
-        user = "rack";
+        sshUser = "rack";
+        user = "root";
         path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos nixosConfigs.hercules;
       };
     };
