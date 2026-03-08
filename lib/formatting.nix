@@ -7,7 +7,7 @@
   preCommitExcludes = [
     "CHANGELOG\\.md$"
     "\\.release-please-manifest\\.json$"
-    "pkgs/website/.*"
+    "pkgs/website/.*$"
   ];
 in {
   imports = [
