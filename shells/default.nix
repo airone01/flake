@@ -11,6 +11,7 @@
     nh
     nix-output-monitor # nom
     alejandra
+    deploy-rs
     # project-specific
     just
     bun

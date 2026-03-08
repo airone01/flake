@@ -148,3 +148,9 @@ ssh-config host:
       echo "No SSH server configuration found for {{host}}"
     fi
 
+deploy node *args="":
+    deploy .#{{node}} {{args}}
+
+deploy-all *args="":
+    deploy .#cetus .#hercules {{args}}
+
