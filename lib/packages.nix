@@ -1,6 +1,6 @@
 {inputs, ...}: {
   perSystem = {pkgs, ...}: {
-    packages = import ../packages {
+    packages = import ../pkgs {
       inherit pkgs;
       inherit (inputs.nixpkgs) lib;
     };

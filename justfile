@@ -152,5 +152,5 @@ deploy node *args="":
     deploy .#{{node}} {{args}}
 
 deploy-all *args="":
-    deploy .#cetus .#hercules {{args}}
+    deploy cetus hercules {{args}}
 

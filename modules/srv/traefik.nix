@@ -11,7 +11,7 @@
   searchixCfg = config.stars.server.searchix;
   giteaCfg = config.stars.server.gitea;
 
-  websitePackage = pkgs.callPackage ../../packages/astro-website.nix {};
+  websitePackage = pkgs.callPackage ../../pkgs/zola-website.nix {};
 in {
   options.stars.server.traefik.enable =
     lib.mkEnableOption "Traefik, a reverse proxy";
