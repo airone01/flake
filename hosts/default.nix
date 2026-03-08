@@ -32,6 +32,11 @@ in {
   flake.deploy.nodes = {
     cetus = {
       hostname = "cetus.gotdns.ch";
+
+      fastConnection = true;
+      magicRollback = true;
+      autoRollback = true;
+
       profiles.system = {
         sshUser = "root";
         path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigs.cetus;
@@ -40,6 +45,11 @@ in {
 
     hercules = {
       hostname = "84.235.228.86";
+
+      fastConnection = false;
+      magicRollback = true;
+      autoRollback = true;
+
       profiles.system = {
         sshUser = "root";
         path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos nixosConfigs.hercules;
