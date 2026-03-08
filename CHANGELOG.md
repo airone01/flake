@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.4.2](https://github.com/airone01/flake/compare/flake-v10.4.1...flake-v10.4.2) (2026-03-08)
+
+
+### Bug Fixes
+
+* zola website is back ([#241](https://github.com/airone01/flake/issues/241)) ([c9d853f](https://github.com/airone01/flake/commit/c9d853fc498824fa72982d6bd7910188c5d9fe57))
+
 ## [10.4.1](https://github.com/airone01/flake/compare/flake-v10.4.0...flake-v10.4.1) (2026-03-03)
 
 
