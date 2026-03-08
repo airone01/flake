@@ -38,7 +38,8 @@ in {
       autoRollback = true;
 
       profiles.system = {
-        sshUser = "root";
+        sshUser = "rack";
+        user = "rack";
         path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigs.cetus;
       };
     };
@@ -50,8 +51,12 @@ in {
       magicRollback = true;
       autoRollback = true;
 
+      # aarch64 can't be built locally on most of my systems
+      remoteBuild = true;
+
       profiles.system = {
         sshUser = "root";
+        user = "rack";
         path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos nixosConfigs.hercules;
       };
     };

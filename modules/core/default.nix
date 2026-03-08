@@ -26,6 +26,8 @@
       # other groups are added to the user in their respective modules
     };
 
+    security.sudo.wheelNeedsPassword = false;
+
     environment.systemPackages = with pkgs; [
       age
       bat
