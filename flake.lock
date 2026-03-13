@@ -550,11 +550,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1772386632,
-        "narHash": "sha256-sm6OpWZuoDwR53KNlsY482YOoHFWlWYwt0wHmqLkRGE=",
+        "lastModified": 1773413953,
+        "narHash": "sha256-a1v+mYCsXdQNUqnDEuymA2AOwHw3pK25N9OEZd/dA9A=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "be894604b2aa2184c0b3d3b44995acd0da14dc0c",
+        "rev": "2ea448a9bf84034de4af24e9cf7193892189765d",
         "type": "github"
       },
       "original": {
