@@ -41,6 +41,8 @@
           gtm = "git merge";
           gtma = "git merge --abort";
           gtmc = "git merge --continue";
+          gtr = "git restore";
+          gtrs = "git reset";
 
           # just
           jts = "just switch";

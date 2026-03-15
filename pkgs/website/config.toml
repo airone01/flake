@@ -1,4 +1,4 @@
-base_url = "http://localhost"
+base_url = "http://air1.one"
 theme = "zola.386"
 
 default_language = "en"
