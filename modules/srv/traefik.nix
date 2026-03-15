@@ -86,8 +86,8 @@ in {
           ];
           root = websitePackage;
           locations."/" = {
+            # NixOS already handles mime types, no need to add them to the NGINX config
             extraConfig = ''
-              include ${pkgs.nginx}/conf/mime.types;
               autoindex off;
               try_files $uri $uri/index.html $uri.html =404;
             '';
@@ -120,7 +120,7 @@ in {
           rule = "Host(`git.air1.one`)";
           service = "gitea";
           entryPoints = ["websecure"];
-          tls = {};
+          tls.certResolver = "le";
         };
         services.gitea.loadBalancer.servers = [
           {url = "http://127.0.0.1:3031";}
