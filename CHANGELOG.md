@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.4.3](https://github.com/airone01/flake/compare/flake-v10.4.2...flake-v10.4.3) (2026-03-15)
+
+
+### Bug Fixes
+
+* patch some website config issues ([#261](https://github.com/airone01/flake/issues/261)) ([a572d91](https://github.com/airone01/flake/commit/a572d916e4f58f178512daf110407cbd164aa731))
+
 ## [10.4.2](https://github.com/airone01/flake/compare/flake-v10.4.1...flake-v10.4.2) (2026-03-08)
 
 
