@@ -38,12 +38,13 @@ mine-including a Gitea forge, Searchix, and Vaultwarden.
 I try to touch grass occasionally. In order of how much I enjoy them, you'll
 usually find me:
 
-1. Hanging out with friends
-2. Skiing
-3. Listening to rap, hip-hop, and electronic music (I'm an old Skrillex fan)
-4. Boulder climbing
-5. Failing miserably at 100%'ing _Celeste_ (I'm almost there)
-6. Swimming
+- Hanging out with friends
+- Skiing
+- Listening to rap, hip-hop, and electronic music (I'm an old Skrillex fan)
+- Boulder climbing
+- Failing miserably at 100%'ing _Celeste_ (I'm almost there)
+- Getting lost on [neoncities.org](https://neocities.org/browse).
+- Swimming
 
 ## Contact
 

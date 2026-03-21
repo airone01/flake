@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <link rel="stylesheet" href="{{ get_url(path="site.css", trailing_slash=false) | safe }}">
   <title>{% block title %}{{ config.title }}{% endblock title %}</title>
-  
+
   {% if config.generate_rss %}
   <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml") }}">
   {% endif %}
 
-  <meta name="description" itemprop="about" content="{{ config.description }}">
-  <meta name="keywords" itemprop="keywords" content="{{ config.extra.keywords }}">
-  <meta name="author" itemprop="author" content="{{ config.extra.author }}">
+  <meta name="description" content="{{ config.description }}">
+  <meta name="keywords" content="{{ config.extra.keywords }}">
+  <meta name="author" content="{{ config.extra.author }}">
   <meta itemprop="headline" content="{{ config.title }}">
   <meta itemprop="copyrightYear" content="{{ config.extra.year }}">
 
@@ -94,7 +94,7 @@
       {% endblock header %}
       {% block meta %}{% endblock meta %}
     </header>
-    
+
     <div class="row-fluid">
 
       <div class="span9 bs-docs-sidebar">
@@ -103,6 +103,34 @@
           <div class="col-md-12">
             <h2>Welcome to my place!</h2>
             <p>My name is Erwann, but you can find more information about who I am and what I'm currently hosting in the <a href="/about">About</a> page.</p>
+
+            <div class="web-badges" style="margin-top: 15px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 4px;">
+              <a href="https://www.mabsland.com/Adoption.html" target="_blank" title="CSS">
+                <img src="/images/badges/Censor_14c.png" alt="CSS" width="88" height="31" style="image-rendering: pixelated;">
+              </a>
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" title="CSS">
+                <img src="/images/badges/css.png" alt="CSS" width="88" height="31" style="image-rendering: pixelated;">
+              </a>
+              <a href="https://validator.w3.org/" target="_blank" title="Valid HTML">
+                <img src="/images/badges/qldbwc_graphics_valid-html40.gif" alt="Valid HTML" width="88" height="31" style="image-rendering: pixelated;">
+              </a>
+              <a href="https://neovim.io/" target="_blank" title="Neovim User">
+                <img src="/images/badges/neovim.gif" alt="Neovim" width="88" height="31" style="image-rendering: pixelated;">
+              </a>
+              <a href="https://www.mozilla.org/firefox/new/" target="_blank" title="Get Firefox">
+                <img src="/images/badges/firefoxnow.gif" alt="Firefox" width="88" height="31" style="image-rendering: pixelated;">
+              </a>
+              <a href="https://ffmpeg.org/" target="_blank" title="Get FFmpeg">
+                <img src="/images/badges/ffmpeg.gif" alt="FFmpeg" width="88" height="31" style="image-rendering: pixelated;">
+              </a>
+              <a href="https://www.linuxfromscratch.org/" target="_blank" title="I don't use Windows 3.1">
+                <img src="/images/badges/windows-3.1-no.gif" alt="No Windows 3.1" width="88" height="31" style="image-rendering: pixelated;">
+              </a>
+              <a href="https://www.linuxfromscratch.org/" target="_blank" title="I use GNU Linux">
+                <img src="/images/badges/gnu-linux.gif" alt="Linux" width="88" height="31" style="image-rendering: pixelated;">
+              </a>
+            </div>
+
             <br>
           </div>
         </div>
@@ -136,11 +164,11 @@
         </ul>
         <p></p>
         <h1>Tags</h1>
-        <ul class="nav nav-list bs-docs-sidenav">        
+        <ul class="nav nav-list bs-docs-sidenav">
           {% set tags = get_taxonomy(kind="tags") %}
           {% for tag in tags.items %}
             <li><a href="{{ config.base_url }}/tags/{{ tag.name }}">{{ tag.name }}</a></li>
-          {% endfor %}    
+          {% endfor %}
         </ul>
       {% endblock sidebar %}
       </div>
