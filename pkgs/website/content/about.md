@@ -19,8 +19,12 @@ working on:
 - **`instanc.es`**: a curated (or not?) list of instances and mirrors for
   various privacy-respecting and open-source services. When I have a repo to
   show, I'll display it here.
+- [**`ft_badges`**](https://airone01.github.io/ft_badges/): elegant badges for
+  42 students to show off their projects.
 - [**`flake`**](https://github.com/airone01/flake): this website, my nix
   configurations, and everything with it
+- [**`nixpkgs`**](https://github.com/NixOS/nixpkgs/): packaging and maintaining
+  [some packages](https://github.com/search?q=repo%3ANixOS%2Fnixpkgs%20airone01&type=code).
 - ~~**`transcendence`**: The final project for the 42 core curriculum.~~ It's
   [finished](https://github.com/airone01/ft_transcendence)!
 
