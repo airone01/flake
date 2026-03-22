@@ -13,6 +13,7 @@ _: {
       };
 
       commitlint = import ../shells/commitlint.nix {inherit pkgs;};
+      website = import ../shells/website.nix {inherit pkgs;};
     };
   };
 }
