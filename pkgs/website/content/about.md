@@ -70,3 +70,19 @@ Want to reach out? The best places to find me right now are:
 
 _(Eventually, I'll get around to setting up email on my servers. But today is
 not that day.)_
+
+## Sites I Like
+
+Here are some websites I like or I want to bookmark, in no particular order.
+
+- [Snowflake Standalone Proxy](https://community.torproject.org/relay/setup/snowflake/standalone/)
+- [neonaut](https://neonaut.neocities.org/)
+- [hasque](https://hasque.com/)
+- [88x31db](https://88x31db.com/)
+- [Sammy Fox](https://www.theresnotime.co.uk/)
+- [ari melody](https://arimelody.space/)
+- [isabelroses's dotfiles topology](https://github.com/isabelroses/dotfiles/blob/2bd2c00968f6be116d8f31b0663aa9e0cc297abd/docs/src/images/topology.webp)
+- [Alexander Fritsch](https://illegal.trading/)
+- [⛧-440729's "Catgirl Cloud"](https://catgirl.cloud/)
+- [The honest review of Nix on hlissner's dotfiles FAQ](https://github.com/hlissner/dotfiles?tab=readme-ov-file#frequently-asked-questions)
+- [Xe's whole blog](https://xeiaso.net/)
