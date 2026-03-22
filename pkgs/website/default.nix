@@ -8,7 +8,7 @@ stdenv.mkDerivation {
   pname = "zola-website";
   version = "0.1.0";
 
-  src = ./website;
+  src = ./.;
 
   nativeBuildInputs = [zola];
 

@@ -11,6 +11,7 @@ _: {
     ./srv/anubis.nix
     ./srv/gitea.nix
     ./srv/hercules-ci.nix
+    ./srv/mcheads.nix
     # ./srv/ollama.nix
     ./srv/searchix.nix
     ./srv/ssh-server

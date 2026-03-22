@@ -10,8 +10,7 @@
   anubisCfg = config.stars.server.anubis;
   searchixCfg = config.stars.server.searchix;
   giteaCfg = config.stars.server.gitea;
-
-  websitePackage = pkgs.callPackage ../../pkgs/zola-website.nix {};
+  mcheadsCfg = config.stars.server.mcheads;
 in {
   options.stars.server.traefik.enable =
     lib.mkEnableOption "Traefik, a reverse proxy";
@@ -84,7 +83,7 @@ in {
               port = 5972;
             }
           ];
-          root = websitePackage;
+          root = pkgs.website;
           locations."/" = {
             # NixOS already handles mime types, no need to add them to the NGINX config
             extraConfig = ''
@@ -124,6 +123,21 @@ in {
         };
         services.gitea.loadBalancer.servers = [
           {url = "http://127.0.0.1:3031";}
+        ];
+      };
+    })
+
+    # MC Heads API
+    (lib.mkIf mcheadsCfg.enable {
+      services.traefik.dynamicConfigOptions.http = {
+        routers.mcheads = {
+          rule = "Host(`mc.air1.one`)";
+          service = "mcheads";
+          entryPoints = ["websecure"];
+          tls.certResolver = "le";
+        };
+        services.mcheads.loadBalancer.servers = [
+          {url = "http://127.0.0.1:8080";}
         ];
       };
     })

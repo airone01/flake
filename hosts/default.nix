@@ -16,6 +16,16 @@
 
           ../modules
           ../hosts/${name}/configuration.nix
+
+          (_: {
+            nixpkgs.overlays = [
+              (final: _prev:
+                import ../pkgs {
+                  pkgs = final;
+                  inherit (inputs.nixpkgs) lib;
+                })
+            ];
+          })
         ]
         ++ extraModules;
     };

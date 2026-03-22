@@ -38,6 +38,7 @@
       gitea.enable = true;
       searchix.enable = true;
       traefik.enable = true;
+      mcheads.enable = true;
     };
   };
 
