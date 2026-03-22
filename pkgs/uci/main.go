@@ -12,15 +12,15 @@ func main() {
 
 	fetchers := []Fetcher{
 		&GitHubFetcher{
-			Owner: "airone01",
-			Repo:  "flake",
+			Owner: "nixos",
+			Repo:  "nixpkgs",
 			Token: ghToken,
 		},
 	}
 
 	m := New(fetchers)
 
-	p := tea.NewProgram(m)
+	p := tea.NewProgram(m, tea.WithAltScreen())
 	if _, err := p.Run(); err != nil {
 		fmt.Printf("Alas, there's been an error: %v", err)
 		os.Exit(1)

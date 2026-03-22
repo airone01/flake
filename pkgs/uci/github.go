@@ -34,7 +34,7 @@ type ghRun struct {
 }
 
 func (g *GitHubFetcher) FetchRecent(ctx context.Context) ([]Pipeline, error) {
-	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/actions/runs?per_page=10", g.Owner, g.Repo)
+	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/actions/runs?per_page=50", g.Owner, g.Repo)
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
 		return nil, err
@@ -63,16 +63,25 @@ func (g *GitHubFetcher) FetchRecent(ctx context.Context) ([]Pipeline, error) {
 
 	var pipelines []Pipeline
 	for _, run := range result.WorkflowRuns {
+		status := parseGitHubStatus(run.Status, run.Conclusion)
+
+		mockJobs := []Job{
+			{Name: "Checkout Code", Status: StatusSuccess, Time: "2s"},
+			{Name: "Setup Go", Status: StatusSuccess, Time: "15s"},
+			{Name: "Run Tests", Status: status, Time: "1m 10s"},
+		}
+
 		pipelines = append(pipelines, Pipeline{
 			ID:        fmt.Sprintf("%d", run.ID),
 			Provider:  "GitHub",
 			Project:   g.Repo,
 			Branch:    run.HeadBranch,
 			CommitMsg: run.DisplayTitle,
-			Status:    parseGitHubStatus(run.Status, run.Conclusion),
+			Status:    status,
 			Duration:  run.UpdatedAt.Sub(run.CreatedAt),
 			StartedAt: run.CreatedAt,
 			URL:       run.HTMLURL,
+			Jobs:      mockJobs, // <-- Add this here!
 		})
 	}
 

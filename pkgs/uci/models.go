@@ -12,6 +12,12 @@ const (
 	StatusCanceled Status = "Canceled"
 )
 
+type Job struct {
+	Name   string
+	Status Status
+	Time   string
+}
+
 type Pipeline struct {
 	ID        string
 	Provider  string
@@ -22,4 +28,5 @@ type Pipeline struct {
 	Duration  time.Duration
 	StartedAt time.Time
 	URL       string
+	Jobs      []Job
 }
