@@ -5,18 +5,20 @@
 }: let
   dirContents = builtins.readDir ./.;
 
-  isPackageFile = name: type:
-    type
-    == "regular"
-    && lib.hasSuffix ".nix" name
-    && name != "default.nix";
+  isPackage = name: type:
+    (type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix")
+    || (type == "directory" && builtins.pathExists (./. + "/${name}/default.nix"));
 
-  packageFiles = lib.filterAttrs isPackageFile dirContents;
+  packages = lib.filterAttrs isPackage dirContents;
 in
   lib.mapAttrs' (
-    name: _:
+    name: type:
       lib.nameValuePair
-      (lib.removeSuffix ".nix" name)
+      (
+        if type == "regular"
+        then lib.removeSuffix ".nix" name
+        else name
+      )
       (pkgs.callPackage (./. + "/${name}") {inherit lib;})
   )
-  packageFiles
+  packages
