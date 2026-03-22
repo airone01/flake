@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 )
@@ -13,6 +14,14 @@ import (
 // --- Messages ---
 type pipelinesFetchedMsg []Pipeline
 type errMsg error
+
+// --- Enums ---
+type pane int
+
+const (
+	paneList pane = iota
+	paneDetails
+)
 
 // --- Model ---
 type Model struct {
@@ -24,10 +33,18 @@ type Model struct {
 	err        error
 	width      int
 	height     int
+
+	details viewport.Model
+	ready   bool
+	focus   pane
 }
 
 func New(fetchers []Fetcher) Model {
-	return Model{fetchers: fetchers, loading: true}
+	return Model{
+		fetchers: fetchers,
+		loading:  true,
+		focus:    paneList,
+	}
 }
 
 func (m Model) Init() tea.Cmd {
@@ -36,44 +53,85 @@ func (m Model) Init() tea.Cmd {
 
 // --- Update ---
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+	var cmds []tea.Cmd
+
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
-		visibleItems := m.height - 8
-		if visibleItems < 1 {
-			visibleItems = 1
-		}
-
 		switch msg.String() {
 		case "ctrl+c", "q":
 			return m, tea.Quit
-		case "up", "k":
-			if m.cursor > 0 {
-				m.cursor--
-				if m.cursor < m.listOffset {
-					m.listOffset = m.cursor
-				}
+		case "tab":
+			if m.focus == paneList {
+				m.focus = paneDetails
+			} else {
+				m.focus = paneList
 			}
-		case "down", "j":
-			if m.cursor < len(m.pipelines)-1 {
-				m.cursor++
-				if m.cursor >= m.listOffset+visibleItems {
-					m.listOffset = m.cursor - visibleItems + 1
-				}
-			}
+			return m, nil
 		}
+
+		if m.focus == paneList {
+			switch msg.String() {
+			case "up", "k":
+				if m.cursor > 0 {
+					m.cursor--
+					if m.cursor < m.listOffset {
+						m.listOffset = m.cursor
+					}
+					m.details.SetContent(m.renderDetails())
+					m.details.GotoTop()
+				}
+			case "down", "j":
+				if m.cursor < len(m.pipelines)-1 {
+					m.cursor++
+					visibleItems := m.height - 8
+					if visibleItems < 1 {
+						visibleItems = 1
+					}
+					if m.cursor >= m.listOffset+visibleItems {
+						m.listOffset = m.cursor - visibleItems + 1
+					}
+					m.details.SetContent(m.renderDetails())
+					m.details.GotoTop()
+				}
+			}
+		} else if m.focus == paneDetails {
+			var cmd tea.Cmd
+			m.details, cmd = m.details.Update(msg)
+			cmds = append(cmds, cmd)
+		}
+
 	case tea.WindowSizeMsg:
 		m.width = msg.Width
 		m.height = msg.Height
+
+		leftWidth := (m.width * 40) / 100
+		rightWidth := m.width - leftWidth - 5
+		paneHeight := m.height - 10
+
+		if !m.ready {
+			m.details = viewport.New(rightWidth, paneHeight)
+			m.ready = true
+			if len(m.pipelines) > 0 {
+				m.details.SetContent(m.renderDetails())
+			}
+		} else {
+			m.details.Width = rightWidth
+			m.details.Height = paneHeight
+		}
+
 	case pipelinesFetchedMsg:
 		m.pipelines = msg
 		m.loading = false
-		return m, nil
+		if m.ready && len(m.pipelines) > 0 {
+			m.details.SetContent(m.renderDetails())
+		}
+
 	case errMsg:
 		m.err = msg
 		m.loading = false
-		return m, nil
 	}
-	return m, nil
+
+	return m, tea.Batch(cmds...)
 }
 
 // --- Styles ---
@@ -82,16 +140,15 @@ var (
 	failedColor  = lipgloss.Color("196")
 	runningColor = lipgloss.Color("214")
 	dimColor     = lipgloss.Color("240")
+	activeColor  = lipgloss.Color("63")
 
 	dimStyle   = lipgloss.NewStyle().Foreground(dimColor)
-	titleStyle = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("63")).MarginBottom(1).MarginLeft(1)
+	titleStyle = lipgloss.NewStyle().Bold(true).Foreground(activeColor).MarginBottom(1).MarginLeft(1)
 
 	paneStyle = lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(dimColor).
 			Padding(1, 2)
-
-	activePaneStyle = paneStyle.Copy().BorderForeground(lipgloss.Color("63"))
 )
 
 // --- View ---
@@ -99,32 +156,41 @@ func (m Model) View() string {
 	if m.err != nil {
 		return fmt.Sprintf("Error: %v\nPress q to quit.", m.err)
 	}
-	if m.loading {
+	if m.loading || !m.ready {
 		return " Fetching CI pipelines...\n"
-	}
-	if m.width == 0 {
-		m.width = 100
-		m.height = 30
 	}
 
 	leftWidth := (m.width * 40) / 100
 	rightWidth := m.width - leftWidth - 5
 
-	leftPane := activePaneStyle.Width(leftWidth).Height(m.height - 5).Render(m.renderList())
-	rightPane := paneStyle.Width(rightWidth).Height(m.height - 5).Render(m.renderDetails())
+	leftPaneStyle := paneStyle.Copy()
+	rightPaneStyle := paneStyle.Copy()
+
+	if m.focus == paneList {
+		leftPaneStyle = leftPaneStyle.BorderForeground(activeColor)
+	} else {
+		rightPaneStyle = rightPaneStyle.BorderForeground(activeColor)
+	}
+
+	leftPane := leftPaneStyle.Width(leftWidth).Height(m.height - 10).Render(m.renderList())
+	rightPane := rightPaneStyle.Width(rightWidth).Height(m.height - 10).Render(m.details.View())
 
 	header := titleStyle.Render("🚀 Unified CI Dashboard")
-	footer := dimStyle.Render("\n  ↑/k: up • ↓/j: down • q: quit")
+
+	footerText := "  ↑/k: up • ↓/j: down • tab: switch pane • q: quit"
+	if m.focus == paneDetails {
+		footerText = "  ↑/k: scroll details • tab: switch pane • q: quit"
+	}
+	footer := dimStyle.Render("\n" + footerText)
 
 	splitView := lipgloss.JoinHorizontal(lipgloss.Top, leftPane, rightPane)
-
 	return lipgloss.JoinVertical(lipgloss.Left, header, splitView, footer)
 }
 
 func (m Model) renderList() string {
 	var b strings.Builder
 
-	visibleItems := m.height - 8
+	visibleItems := m.height - 10
 	if visibleItems < 1 {
 		visibleItems = 1
 	}
