@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.5.1](https://github.com/airone01/flake/compare/flake-v10.5.0...flake-v10.5.1) (2026-03-22)
+
+
+### Documentation
+
+* **log:** stash cool sites ([#282](https://github.com/airone01/flake/issues/282)) ([6b4b333](https://github.com/airone01/flake/commit/6b4b333a425e8519e73773d71073e19ecf49bfef))
+
 ## [10.5.0](https://github.com/airone01/flake/compare/flake-v10.4.4...flake-v10.5.0) (2026-03-22)
 
 
