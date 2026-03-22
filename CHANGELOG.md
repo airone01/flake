@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.4.4](https://github.com/airone01/flake/compare/flake-v10.4.3...flake-v10.4.4) (2026-03-22)
+
+
+### Documentation
+
+* **blog:** about, index, and posts ([#276](https://github.com/airone01/flake/issues/276)) ([51d8138](https://github.com/airone01/flake/commit/51d81387e619643e6bd8a205211c7278a7035ccd))
+
 ## [10.4.3](https://github.com/airone01/flake/compare/flake-v10.4.2...flake-v10.4.3) (2026-03-15)
 
 
