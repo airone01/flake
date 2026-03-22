@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.5.0](https://github.com/airone01/flake/compare/flake-v10.4.4...flake-v10.5.0) (2026-03-22)
+
+
+### Features
+
+* **mcheads:** init w/ module and enable on traefik ([#278](https://github.com/airone01/flake/issues/278)) ([086341d](https://github.com/airone01/flake/commit/086341d51e95e64816d8043c33ca19b945a55e57))
+
 ## [10.4.4](https://github.com/airone01/flake/compare/flake-v10.4.3...flake-v10.4.4) (2026-03-22)
 
 
