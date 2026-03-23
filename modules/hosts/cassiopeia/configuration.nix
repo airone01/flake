@@ -34,10 +34,10 @@
 
         hyprland.enable = true;
         asusPatch = true;
-        dualsensePatch = true;
         frenchPatch = true;
       };
       dev = true;
+      dualsensePatch = true;
       gaming = true;
       nvim = true;
       virt = true;

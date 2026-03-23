@@ -31,9 +31,9 @@
           enable = true;
           ratePatch = true;
         };
-        dualsensePatch = true;
       };
       dev = true;
+      dualsensePatch = true;
       gaming = true;
       nvim = true;
       virt = true;
