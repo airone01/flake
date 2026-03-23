@@ -20,6 +20,7 @@
       };
       dev = true;
       gaming = true;
+      nvim = true;
       virt = true;
     };
 
