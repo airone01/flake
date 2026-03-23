@@ -17,6 +17,7 @@
       desktop = {
         enable = true;
 
+        hyprland.enable = true;
         asusPatches = true;
         dualsensePatches = true;
         frenchPatches = true;
