@@ -19,6 +19,27 @@
         maintainers = [];
       };
     };
+
+    checks = {
+      mcheads-e2e = pkgs.testers.runNixOSTest {
+        name = "mcheads-api-test";
+
+        nodes.server = _: {
+          imports = [self.nixosModules.mcheads];
+          stars.server.mcheads.enable = true;
+        };
+
+        testScript = ''
+          server.start()
+          server.wait_for_unit("mcheads.service")
+          server.wait_for_open_port(8080)
+
+          response = server.succeed("curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/avatar/NonExistentUser123 || true")
+
+          assert response.strip() == "404", f"MCHeads returned {response}"
+        '';
+      };
+    };
   };
 
   flake.nixosModules.mcheads = {
