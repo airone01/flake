@@ -1,4 +1,4 @@
-# flake development tooling
+# feature: flake development tooling
 {inputs, ...}: let
   treefmtExcludes = [
     "CHANGELOG.md"

@@ -1,3 +1,4 @@
+# feature: development environment & tools
 _: {
   flake.nixosModules.dev = {
     lib,

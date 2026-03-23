@@ -1,3 +1,4 @@
+# feature: French language packs and patches
 _: {
   flake.nixosModules.desktopFrench = {
     lib,

@@ -1,3 +1,4 @@
+# feature: common settings
 {inputs, ...}: {
   flake.nixosModules.core = {
     lib,

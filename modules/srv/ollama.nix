@@ -1,3 +1,6 @@
+# feature: Ollama unified LLM running interface configuration
+#
+# TODO: integrate with Anubis and Traefik
 _: {
   flake.nixosModules.ollama = {
     lib,

@@ -1,3 +1,5 @@
+# feature: end to end configuration checks
+#
 # This check emulates the server configurations environment and test services
 # connecting between each other.
 # Depending on how Hercules CI handles KVM, this one test might tank perfs.

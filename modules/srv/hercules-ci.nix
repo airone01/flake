@@ -1,3 +1,4 @@
+# feature: Hercules Nix CI runner configuration and integration with other services
 _: {
   flake.nixosModules.hercules-ci = {
     lib,

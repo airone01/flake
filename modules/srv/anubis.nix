@@ -1,3 +1,4 @@
+# feature: Anubis reverse proxy configuration and integration with other services
 _: {
   flake.nixosModules.anubis = {
     lib,

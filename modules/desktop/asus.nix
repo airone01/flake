@@ -1,3 +1,4 @@
+# feature: Asus computer patches
 _: {
   flake.nixosModules.desktopAsusPatch = {
     lib,

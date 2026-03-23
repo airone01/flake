@@ -1,3 +1,4 @@
+# feature: GNOME desktop environment
 _: {
   flake.nixosModules.desktopGnome = {
     lib,

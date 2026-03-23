@@ -1,3 +1,4 @@
+# feature: Sony DualSense controller patches
 _: {
   flake.nixosModules.desktopDualsensePatch = {
     lib,

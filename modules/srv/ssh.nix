@@ -1,3 +1,4 @@
+# feature: SSH server configuration and integration with other services
 _: {
   flake.nixosModules.ssh = {
     config,

@@ -1,3 +1,4 @@
+# feature: gaming
 _: {
   flake.nixosModules.gaming = {
     lib,

@@ -1,3 +1,4 @@
+# feature: Neovim IDE using NVF
 {
   inputs,
   self,

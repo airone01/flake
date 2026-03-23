@@ -1,3 +1,5 @@
+# feature: flake-parts configuration
+#
 # This file tells flake-parts which system it should build the flake derivations
 # for. I might add Darwin support when I manage to get my hands on a Darwin
 # machine to run the CI on.

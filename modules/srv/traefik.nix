@@ -1,3 +1,4 @@
+# feature: Traefik reverse proxy configuration and integration with other services
 _: {
   flake.nixosModules.traefik = {
     lib,

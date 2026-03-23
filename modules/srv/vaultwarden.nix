@@ -1,3 +1,6 @@
+# feature: Vaulwarden password manager configuration
+#
+# TODO: integrate with Anubis and Traefik
 _: {
   flake.nixosModules.vaultwarden = {
     lib,

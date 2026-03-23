@@ -1,3 +1,4 @@
+# feature: virtualization support
 _: {
   flake.nixosModules.virt = {
     lib,

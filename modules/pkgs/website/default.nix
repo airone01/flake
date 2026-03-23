@@ -1,3 +1,4 @@
+# feature: Zola blog website package with devShells and NixOS modules
 {self, ...}: {
   perSystem = {
     lib,

@@ -1,3 +1,4 @@
+# feature: MCHeads API package with NixOS checks and modules
 {self, ...}: {
   perSystem = {
     lib,

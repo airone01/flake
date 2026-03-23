@@ -1,3 +1,4 @@
+# feature: unified desktop environment
 {self, ...}: {
   flake.nixosModules.desktop = {
     lib,

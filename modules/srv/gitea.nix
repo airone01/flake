@@ -1,3 +1,4 @@
+# feature: Gitea git forge configurations and integration with other services
 _: {
   flake.nixosModules.gitea = {
     lib,

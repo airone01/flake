@@ -1,3 +1,4 @@
+# feature: Hyprland desktop environment
 _: {
   flake.nixosModules.desktopHyprland = {
     lib,

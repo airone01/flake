@@ -1,3 +1,5 @@
+# feature: Searchix nix options search engine configuration and integration with other services
+#
 # hey! go check out Searchix, it's pretty dope!
 # note for myself: config reference at time of writing:
 # https://git.sr.ht/~alanpearce/searchix/tree/b7de525d7fe617674030c493ec4214f2f5a4b887
