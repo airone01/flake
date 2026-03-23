@@ -18,8 +18,6 @@
               whichKey.enable = true;
             };
 
-            # TODO: dashboard-nvim theme
-            # https://github.com/goolord/alpha-nvim/blob/a9d8fb72213c8b461e791409e7feabb74eb6ce73/README.md#dashboard-nvim-theme
             dashboard.alpha.enable = true;
 
             diagnostics = {
@@ -278,7 +276,7 @@
               };
             };
 
-            # main theme (doesn't apply to status bar)
+            # main theme
             theme = {
               enable = true;
 
