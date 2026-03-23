@@ -41,8 +41,44 @@ develop shell="commitlint" *args="":
     nom develop --no-update-lock-file {{flake_dir}}#{{shell}} {{args}}
 
 # Diff staged nix files
-diff:
+git-diff:
     git diff -U0 *.nix
+
+# Diff NixOS closure of the current working tree against a previous commit
+# This might take a lot of disk space, don't forget to garbage collect
+nix-diff host=hostname base="" target="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    HOST="{{host}}"
+    BASE="{{base}}"
+    TARGET="{{target}}"
+
+    if [ -z "$BASE" ]; then
+        BASE=$(git merge-base HEAD main 2>/dev/null || git merge-base HEAD origin/main)
+        echo "[nix-diff] No base commit provided. Using merge-base with main: $BASE"
+    else
+        echo "[nix-diff] Using provided base commit: $BASE"
+    fi
+
+    TMP_DIR=$(mktemp -d)
+    trap 'rm -rf "$TMP_DIR"' EXIT
+
+    echo "[nix-diff] Building base configuration ($BASE) for $HOST..."
+    nix build "git+file://$PWD?rev=$BASE#nixosConfigurations.$HOST.config.system.build.toplevel" -o "$TMP_DIR/result-base" |& nom
+
+    echo "[nix-diff] Building target configuration for $HOST..."
+    if [ -z "$TARGET" ]; then
+        echo "[nix-diff] No target commit provided. Using current working tree (HEAD + uncommitted changes)."
+        nix build ".#nixosConfigurations.$HOST.config.system.build.toplevel" -o "$TMP_DIR/result-target" |& nom
+    else
+        echo "[nix-diff] Using provided target commit: $TARGET"
+        nix build "git+file://$PWD?rev=$TARGET#nixosConfigurations.$HOST.config.system.build.toplevel" -o "$TMP_DIR/result-target" |& nom
+    fi
+
+    echo ""
+    echo "[nix-diff] Configuration Diff for $HOST:"
+    nix run nixpkgs#nvd -- diff "$TMP_DIR/result-base" "$TMP_DIR/result-target"
 
 # Deploy a host configuration
 deploy-all *args="":
