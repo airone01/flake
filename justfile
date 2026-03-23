@@ -1,30 +1,31 @@
 hostname := `hostname`
 flake_dir := env_var_or_default("FLAKE_DIR", justfile_directory())
 
+# List commands
 default:
     @just --list
 
-# Build a host configuration and add it to the boot menu
+# Build a NixOS closure to boot menu
 boot host=hostname *args="":
     nh os boot --no-update-lock-file -a -H {{host}} {{flake_dir}} {{args}}
 
-# Build a system derivation to `result/`
+# Build a NixOS closure to `result/`
 build-any-system host=hostname *args="":
     nix build --no-update-lock-file --show-trace {{flake_dir}}#nixosConfigurations.{{host}}.config.system.build.toplevel {{args}}|&nom
 
-# Build and switch to a host configuration
 # Should probably only be used without setting the host parameter
 # If SSH server sigkill's you out, maybe try using the classic NixOS rebuild command
+# Build and switch
 switch host=hostname *args="":
     nh os switch --no-update-lock-file -a -H {{host}} {{flake_dir}} {{args}}
 
-# Build and test a host configuration without switching
 # Used for manually testing a full system
+# Build and test without switching
 test host=hostname *args="":
     nh os test -a -H {{host}} {{flake_dir}} {{args}}
 
-# Update one or all flake inputs
 # This is run daily by a GitHub Actions
+# Update one or all flake inputs
 update *args="":
     nix flake update --flake {{flake_dir}} {{args}}|& nom
 
@@ -44,8 +45,10 @@ develop shell="commitlint" *args="":
 git-diff:
     git diff -U0 *.nix
 
-# Diff NixOS closure of the current working tree against a previous commit
 # This might take a lot of disk space, don't forget to garbage collect
+# By default it diffs closure of the current working tree against the last commit that this branch has in common with the main branch.
+# This is useful for checking if the current branch broke something (though NixOS checks are better but welp)
+# Diff NixOS closures
 nix-diff host=hostname base="" target="":
     #!/usr/bin/env bash
     set -euo pipefail
@@ -80,11 +83,11 @@ nix-diff host=hostname base="" target="":
     echo "[nix-diff] Configuration Diff for $HOST:"
     nix run nixpkgs#nvd -- diff "$TMP_DIR/result-base" "$TMP_DIR/result-target"
 
-# Deploy a host configuration
+# Deploy all servers NixOS closures
 deploy-all *args="":
     deploy cetus hercules {{args}}
 
-# Deploy servers hosts configurations
+# Deploy NixOS closure to host
 deploy node *args="":
     deploy .#{{node}} {{args}}
 
