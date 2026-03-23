@@ -168,7 +168,7 @@ _: {
                 key = "nvf";
                 fetcher = "channel";
                 url = "https://github.com/airone01/flake/archive/main.tar.gz";
-                importPath = "misc/nvf-searchix.nix";
+                importPath = "misc/nvf-searchix-wrapper.nix";
                 attribute = "";
                 outputPath = "share/doc/nvf";
                 importer = "options";
