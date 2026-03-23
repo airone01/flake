@@ -722,11 +722,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1774194879,
-        "narHash": "sha256-J4WAfJkyPVvWka3VhrGSxSnCPKn8vU1IA1Drd1C4Ekw=",
+        "lastModified": 1774224548,
+        "narHash": "sha256-g45WZAZHNc7wJBkK4IdB5dq0Bh0JE7G0gcY2H5DFi44=",
         "owner": "notashelf",
         "repo": "nvf",
-        "rev": "a3ea20fcebdbd0ed35d4929f2aad579704869c95",
+        "rev": "edfb73fa4ced576f587d259a70a513b4152f8cea",
         "type": "github"
       },
       "original": {
