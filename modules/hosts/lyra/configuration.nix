@@ -29,9 +29,9 @@
         enable = true;
         hyprland = {
           enable = true;
-          ratePatches = true;
+          ratePatch = true;
         };
-        dualsensePatches = true;
+        dualsensePatch = true;
       };
       dev = true;
       gaming = true;

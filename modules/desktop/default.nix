@@ -6,8 +6,8 @@
     ...
   }: {
     imports = [
-      self.nixosModules.desktopAsusPatches
-      self.nixosModules.desktopDualsensePatches
+      self.nixosModules.desktopAsusPatch
+      self.nixosModules.desktopDualsensePatch
       self.nixosModules.desktopFrench
       self.nixosModules.desktopGnome
       self.nixosModules.desktopHyprland

@@ -14,7 +14,7 @@ _: {
   in {
     options.stars.desktop.hyprland.enable =
       lib.mkEnableOption "Hyprland desktop environment";
-    options.stars.desktop.hyprland.ratePatches =
+    options.stars.desktop.hyprland.ratePatch =
       lib.mkEnableOption "Hyprland high rate screen configuration";
 
     config = lib.mkIf config.stars.desktop.hyprland.enable {
@@ -250,7 +250,7 @@ _: {
             debug.disable_logs = false;
 
             monitor =
-              lib.mkIf config.stars.desktop.hyprland.ratePatches
+              lib.mkIf config.stars.desktop.hyprland.ratePatch
               [", highrr, auto, 1"];
           };
         };

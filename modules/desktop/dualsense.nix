@@ -1,14 +1,14 @@
 _: {
-  flake.nixosModules.desktopDualsensePatches = {
+  flake.nixosModules.desktopDualsensePatch = {
     lib,
     pkgs,
     config,
     ...
   }: {
-    options.stars.desktop.dualsensePatches =
+    options.stars.desktop.dualsensePatch =
       lib.mkEnableOption "Sony DualSense controller patches";
 
-    config = lib.mkIf config.stars.desktop.dualsensePatches {
+    config = lib.mkIf config.stars.desktop.dualsensePatch {
       environment.systemPackages = with pkgs; [dualsensectl];
 
       services.udev = {

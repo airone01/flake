@@ -4,10 +4,10 @@ _: {
     config,
     ...
   }: {
-    options.stars.desktop.frenchPatches =
+    options.stars.desktop.frenchPatch =
       lib.mkEnableOption "patches for frogs";
 
-    config = lib.mkIf config.stars.desktop.frenchPatches {
+    config = lib.mkIf config.stars.desktop.frenchPatch {
       console.keyMap = "fr";
 
       services.xserver.xkb = {

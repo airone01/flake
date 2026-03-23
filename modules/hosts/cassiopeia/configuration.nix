@@ -33,9 +33,9 @@
         enable = true;
 
         hyprland.enable = true;
-        asusPatches = true;
-        dualsensePatches = true;
-        frenchPatches = true;
+        asusPatch = true;
+        dualsensePatch = true;
+        frenchPatch = true;
       };
       dev = true;
       gaming = true;
