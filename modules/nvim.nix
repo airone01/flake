@@ -1,24 +1,14 @@
-_: {
-  flake.nixosModules.nvim = {
-    lib,
-    pkgs,
-    config,
-    ...
-  }: {
-    options.stars.nvim = lib.mkEnableOption "custom Neovim configuration with NVF";
-
-    config = lib.mkIf config.stars.nvim {
-      home-manager.users.${config.stars.mainUser} = {
-        home.packages = with pkgs; [
-          # lightbulb requires an emoji font
-          noto-fonts-color-emoji
-          twemoji-color-font
-        ];
-
-        programs.nvf = {
-          enable = true;
-
-          settings.vim = {
+{
+  inputs,
+  self,
+  ...
+}: {
+  perSystem = {pkgs, ...}: let
+    customNeovim = inputs.nvf.lib.neovimConfiguration {
+      inherit pkgs;
+      modules = [
+        {
+          config.vim = {
             autocomplete.nvim-cmp.enable = true;
             autopairs.nvim-autopairs.enable = true;
 
@@ -395,6 +385,32 @@ _: {
             withPython3 = true;
             withRuby = true;
           };
+        }
+      ];
+    };
+  in {
+    packages.nvim = customNeovim.neovim;
+  };
+
+  flake.nixosModules.nvim = {
+    lib,
+    pkgs,
+    config,
+    ...
+  }: {
+    options.stars.nvim = lib.mkEnableOption "custom Neovim configuration with NVF";
+
+    config = lib.mkIf config.stars.nvim {
+      home-manager.users.${config.stars.mainUser} = {
+        home.packages = with pkgs; [
+          self.packages.${pkgs.system}.nvim
+          noto-fonts-color-emoji
+          twemoji-color-font
+        ];
+
+        home.sessionVariables = {
+          EDITOR = "nvim";
+          VISUAL = "nvim";
         };
       };
     };
