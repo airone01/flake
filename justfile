@@ -1,29 +1,30 @@
-# Variables
 hostname := `hostname`
-flake_dir := env_var_or_default("FLAKE_DIR", "~/.config/nixos")
-flake_url := env_var_or_default("FLAKE_URL", "github:airone01/flake")
+flake_dir := env_var_or_default("FLAKE_DIR", justfile_directory())
 
-# help
 default:
     @just --list
 
-# build a new conf
+# Build a host configuration and add it to the boot menu
 boot host=hostname *args="":
     nh os boot --no-update-lock-file -a -H {{host}} {{flake_dir}} {{args}}
 
-# build a system (tests full system compilation)
+# Build a system derivation to `result/`
 build-any-system host=hostname *args="":
     nix build --no-update-lock-file --show-trace {{flake_dir}}#nixosConfigurations.{{host}}.config.system.build.toplevel {{args}}|&nom
 
-# Build and switch to a new conf
+# Build and switch to a host configuration
+# Should probably only be used without setting the host parameter
+# If SSH server sigkill's you out, maybe try using the classic NixOS rebuild command
 switch host=hostname *args="":
     nh os switch --no-update-lock-file -a -H {{host}} {{flake_dir}} {{args}}
 
-# build and test conf without switching
+# Build and test a host configuration without switching
+# Used for manually testing a full system
 test host=hostname *args="":
     nh os test -a -H {{host}} {{flake_dir}} {{args}}
 
 # Update one or all flake inputs
+# This is run daily by a GitHub Actions
 update *args="":
     nix flake update --flake {{flake_dir}} {{args}}|& nom
 
@@ -31,126 +32,23 @@ update *args="":
 check *args="":
     nix flake check --all-systems --no-update-lock-file {{flake_dir}} {{args}}|& nom
 
-# clean unused derivations with nh
+# Garbage collection
 clean:
     nh clean all --keep 10
 
-# enter a devshell
+# Enter a development shell
 develop shell="commitlint" *args="":
-    echo "🚀 Launching {{shell}} development environment..."
     nom develop --no-update-lock-file {{flake_dir}}#{{shell}} {{args}}
 
-# diff staged nix files
+# Diff staged nix files
 diff:
     git diff -U0 *.nix
 
-# generate an initial SOPS key
-sops-key:
-    #!/usr/bin/env sh
-    echo "🔑 Generating SOPS age key..."
-    mkdir -p ~/.config/sops/age
-    if [ ! -f ~/.config/sops/age/keys.txt ]; then
-        age-keygen -o ~/.config/sops/age/keys.txt
-        echo "✅ Key generated at ~/.config/sops/age/keys.txt"
-    else
-        echo "⚠️  Key already exists at ~/.config/sops/age/keys.txt"
-    fi
-
-# rotate SSH host keys
-ssh-rotate-keys host:
-    echo "🔄 Rotating SSH keys for {{host}}..."
-    chmod +x ./modules/srv/ssh-server/rotate-keys.sh
-    sudo ./modules/srv/ssh-server/rotate-keys.sh {{host}}
-    echo "✅ SSH keys rotated for {{host}}"
-
-# add an SSH key to a host
-ssh-add-key host user key_file:
-    #!/usr/bin/env sh
-    echo "🔑 Adding SSH key from {{key_file}} for {{user}} on {{host}}..."
-    KEY_FILE="./modules/srv/ssh-server/ssh-keys/{{host}}.nix"
-    KEY=$(cat {{key_file}})
-
-    # temp file for the updated keys
-    TMP_FILE=$(mktemp)
-
-    # extract current keys
-    awk -v user="{{user}}" -v key="$KEY" '
-      BEGIN { in_user = 0; found = 0; }
-
-      # Match the user section start
-      /'"{{user}}"' = \[/ {
-        in_user = 1;
-        print $0;
-        next;
-      }
-
-      # If we are in the user section, look for the end
-      in_user && /\];/ {
-        # If we found the key already, just print the line
-        if (found) {
-          print $0;
-        } else {
-          # Otherwise add the key before the closing bracket
-          gsub(/\];/, "  \"" key "\"\n];");
-          print $0;
-        }
-        in_user = 0;
-        next;
-      }
-
-      # Check if key already exists in the section
-      in_user && $0 ~ key {
-        found = 1;
-      }
-
-      # Print all other lines
-      { print $0; }
-    ' "$KEY_FILE" > "$TMP_FILE"
-
-    # if the key was not found and user section not found, we need to add it
-    if ! grep -q "{{user}} = \[" "$TMP_FILE"; then
-      awk -v user="{{user}}" -v key="$KEY" '
-        /userKeys = {/ {
-          print $0;
-          print "    " user " = [";
-          print "      \"" key "\"";
-          print "    ];";
-          next;
-        }
-        { print $0; }
-      ' "$KEY_FILE" > "$TMP_FILE"
-    fi
-
-    # replace original file
-    cp "$TMP_FILE" "$KEY_FILE"
-    rm "$TMP_FILE"
-
-    echo "✅ SSH key added successfully"
-    echo "Remember to rebuild your system with: just switch {{host}}"
-
-# print SSH configuration for a host
-ssh-config host:
-    #!/usr/bin/env sh
-    echo "📋 SSH configuration for {{host}}:"
-    echo ""
-    if [[ -f "./modules/srv/ssh-server/ssh-keys/{{host}}.nix" ]]; then
-      echo "=== AUTHORIZED KEYS ==="
-      grep -A 20 "userKeys = {" "./modules/srv/ssh-server/ssh-keys/{{host}}.nix" | sed 's/^/  /'
-      echo ""
-    else
-      echo "No SSH key configuration found for {{host}}"
-    fi
-
-    if grep -q "stars.ssh-server" "./hosts/{{host}}/configuration.nix"; then
-      echo "=== SSH SERVER CONFIGURATION ==="
-      grep -A 15 "stars.ssh-server" "./hosts/{{host}}/configuration.nix" | sed 's/^/  /'
-    else
-      echo "No SSH server configuration found for {{host}}"
-    fi
-
-deploy node *args="":
-    deploy .#{{node}} {{args}}
-
+# Deploy a host configuration
 deploy-all *args="":
     deploy cetus hercules {{args}}
+
+# Deploy servers hosts configurations
+deploy node *args="":
+    deploy .#{{node}} {{args}}
 
