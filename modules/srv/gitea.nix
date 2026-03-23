@@ -3,7 +3,14 @@ _: {
     lib,
     config,
     ...
-  }: {
+  }: let
+    appPort = 3001;
+    anubisPort = 3031;
+    traefikTarget =
+      if config.stars.server.anubis.enable
+      then anubisPort
+      else appPort;
+  in {
     options.stars.server.gitea.enable =
       lib.mkEnableOption "Gitea, a git forge";
 
@@ -56,7 +63,17 @@ _: {
         };
       };
 
-      services.traefik.dynamicConfigOptions.http = {
+      services.anubis.instances.git = lib.mkIf config.stars.server.anubis.enable {
+        enable = true;
+        settings = {
+          TARGET = "http://127.0.0.1:${toString appPort}";
+          ED25519_PRIVATE_KEY_HEX_FILE = config.sops.secrets."anubis/mainsite_key".path;
+          BIND_NETWORK = "tcp";
+          BIND = ":${toString anubisPort}";
+        };
+      };
+
+      services.traefik.dynamicConfigOptions.http = lib.mkIf config.stars.server.traefik.enable {
         routers.gitea = {
           rule = "Host(`git.air1.one`)";
           service = "gitea";
@@ -64,7 +81,7 @@ _: {
           tls.certResolver = "le";
         };
         services.gitea.loadBalancer.servers = [
-          {url = "http://127.0.0.1:3001";}
+          {url = "http://127.0.0.1:${toString traefikTarget}";}
         ];
       };
     };

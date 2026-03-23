@@ -46,7 +46,7 @@
         };
       };
 
-      services.traefik.dynamicConfigOptions.http = {
+      services.traefik.dynamicConfigOptions.http = lib.mkIf config.stars.server.traefik.enable {
         routers.mcheads = {
           rule = "Host(`mc.air1.one`)";
           service = "mcheads";
