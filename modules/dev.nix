@@ -1,14 +1,18 @@
 # feature: development environment & tools
-_: {
+{self, ...}: {
   flake.nixosModules.dev = {
     lib,
     pkgs,
     config,
     ...
   }: {
+    imports = [self.nixosModules.userEnv];
+
     options.stars.dev = lib.mkEnableOption "development environment & tools";
 
     config = lib.mkIf config.stars.dev {
+      stars.userEnv = lib.mkDefault true;
+
       environment.systemPackages = with pkgs; [
         # C/C++
         gcc
@@ -52,15 +56,27 @@ _: {
         rustfmt
         rust-analyzer
 
+        # Nix & flake
+        age
+        cachix
+        sops
+        ssh-to-age
+
         # tools
         atac
         act
         bat
+        btop
         dig
+        fzf
+        gh
         glow
+        htop
         jq
         man-pages
+        nmap
         onefetch
+        ripgrep
       ];
     };
   };

@@ -9,6 +9,7 @@
       inputs.sops-nix.nixosModules.sops
 
       self.nixosModules.core
+      self.nixosModules.userEnv
       self.nixosModules.server-services
 
       self.nixosModules.herculesHardware
@@ -22,6 +23,7 @@
       mainUser = "rack";
 
       core = true;
+      userEnv = true;
       server = {
         ssh.enable = true;
 
