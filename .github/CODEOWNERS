@@ -1,10 +1,7 @@
 .github/         @airone01
 secrets/         @airone01
 lib/             @airone01
-packages/        @airone01
 modules/         @airone01
-shells/          @airone01
-hosts/           @airone01
 
 .gitignore                 @airone01
 .repomixignore             @airone01
