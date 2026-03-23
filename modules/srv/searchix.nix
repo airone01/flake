@@ -15,12 +15,11 @@
 #   if your script outputs to `$out/options.json`, either fix the script or set `outputPath`.
 # - cache hell: if you update your custom script on github, searchix will use the cached
 #   tarball unless you change the commit hash in the url.
-_: {
+{inputs, ...}: {
   flake.nixosModules.searchix = {
     lib,
     pkgs,
     config,
-    inputs,
     ...
   }: let
     sandbox = {

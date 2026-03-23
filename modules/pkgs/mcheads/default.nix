@@ -1,4 +1,4 @@
-_: {
+{self, ...}: {
   perSystem = {
     lib,
     pkgs,
@@ -24,7 +24,6 @@ _: {
   flake.nixosModules.mcheads = {
     lib,
     pkgs,
-    self,
     config,
     ...
   }: {

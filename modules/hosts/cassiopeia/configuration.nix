@@ -1,10 +1,25 @@
-{inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.nixosModules.cassiopeiaConfig = {
     pkgs,
     config,
     ...
   }: {
-    imports = [inputs.self.nixosModules.cassiopeiaHardware];
+    imports = [
+      inputs.home-manager.nixosModules.home-manager
+
+      self.nixosModules.core
+      self.nixosModules.desktop
+      self.nixosModules.dev
+      self.nixosModules.gaming
+      self.nixosModules.nvim
+      self.nixosModules.virt
+
+      self.nixosModules.cassiopeiaHardware
+    ];
 
     networking.hostName = "cassiopeia";
     system.stateVersion = "25.05"; # never change this

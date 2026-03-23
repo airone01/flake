@@ -1,6 +1,21 @@
-{inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.nixosModules.lyraConfig = {pkgs, ...}: {
-    imports = [inputs.self.nixosModules.lyraHardware];
+    imports = [
+      inputs.home-manager.nixosModules.home-manager
+
+      self.nixosModules.core
+      self.nixosModules.desktop
+      self.nixosModules.dev
+      self.nixosModules.gaming
+      self.nixosModules.nvim
+      self.nixosModules.virt
+
+      self.nixosModules.lyraHardware
+    ];
 
     networking.hostName = "lyra";
     system.stateVersion = "25.11"; # never change this

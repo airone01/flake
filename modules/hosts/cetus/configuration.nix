@@ -1,6 +1,18 @@
-{inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.nixosModules.cetusConfig = {pkgs, ...}: {
-    imports = [inputs.self.nixosModules.cetusHardware];
+    imports = [
+      inputs.home-manager.nixosModules.home-manager
+      inputs.sops-nix.nixosModules.sops
+
+      self.nixosModules.core
+      self.nixosModules.server-services
+
+      self.nixosModules.cetusHardware
+    ];
 
     networking = {
       hostName = "cetus";

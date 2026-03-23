@@ -1,6 +1,18 @@
-{inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.nixosModules.herculesConfig = _: {
-    imports = [inputs.self.nixosModules.herculesHardware];
+    imports = [
+      inputs.home-manager.nixosModules.home-manager
+      inputs.sops-nix.nixosModules.sops
+
+      self.nixosModules.core
+      self.nixosModules.server-services
+
+      self.nixosModules.herculesHardware
+    ];
 
     networking.hostName = "hercules";
     system.stateVersion = "24.05"; # never change this
