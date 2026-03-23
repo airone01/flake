@@ -4,7 +4,7 @@
 
 <h4 align="center">
   <a href="https://profile.intra.42.fr/users/elagouch"><img alt="School 42 badge" src="https://img.shields.io/badge/-elagouch-0?style=flat-square&labelColor=020617&color=5a45fe&logo=42"></a>
-  <img alt="Apache-2.0 license" src="https://img.shields.io/badge/License-Apache--2.0-ef00c7?style=flat-square&logo=creativecommons&logoColor=fff&labelColor=020617">
+  <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-ef00c7?style=flat-square&logo=creativecommons&logoColor=fff&labelColor=020617">
   <img alt="Made with Nix" src="https://img.shields.io/badge/Made_with-Nix-ff2b89?style=flat-square&logo=nixos&logoColor=fff&labelColor=020617">
   <img alt="Release version" src="https://img.shields.io/github/v/release/airone01/flake?style=flat-square&logo=nixos&logoColor=fff&label=Release&labelColor=020617&color=ff8059">
   <img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/airone01/flake?style=flat-square&logo=github&labelColor=020617&color=ffc248&label=Contributors">
@@ -19,7 +19,7 @@ and deployments. It's very faulty to say the least, but I love it.
 > I ever define something and I decide to share it, I will update this note
 > accordingly and explain usage in this README, but for now, there is not much
 > for you I'm afraid. Nothing is stopping you from yoinking code however, the
-> repo is Apache-2.0 licensed!
+> repo is MIT licensed!
 
 ## Organization
 
@@ -61,8 +61,7 @@ Configured at [`.commitlintrc.yml`](.commitlintrc.yml).
 
 ## License
 
-This project is open source and available under the
-[Apache v2 license](/LICENSE).
+This project is open source and available under the [MIT License](/LICENSE).
 
 ## Acknowledgments
 
