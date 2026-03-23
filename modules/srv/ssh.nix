@@ -35,14 +35,13 @@ _: {
         };
       };
 
-      # might disable Mosh eventually, idk
-      programs.mosh.enable = true;
-      networking.firewall.allowedUDPPortRanges = [
-        {
-          from = 60000;
-          to = 61000;
-        }
-      ];
+      # programs.mosh.enable = true;
+      # networking.firewall.allowedUDPPortRanges = [
+      #   {
+      #     from = 60000;
+      #     to = 61000;
+      #   }
+      # ];
 
       programs.ssh.extraConfig = ''
         HashKnownHosts yes
