@@ -15,8 +15,6 @@ _: {
         gamescope
         lutris
         prismlauncher
-        retroarch-full
-        retroarch-assets
         typer
       ];
 
