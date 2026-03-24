@@ -1,5 +1,16 @@
 # Changelog
 
+## [11.0.0](https://github.com/airone01/flake/compare/flake-v10.5.1...flake-v11.0.0) (2026-03-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **flake:** dendritic pattern ([#290](https://github.com/airone01/flake/issues/290))
+
+### Code Refactoring
+
+* **flake:** dendritic pattern ([#290](https://github.com/airone01/flake/issues/290)) ([772d8e5](https://github.com/airone01/flake/commit/772d8e58f5a1643d62c2e821cb42196bb4cab955))
+
 ## [10.5.1](https://github.com/airone01/flake/compare/flake-v10.5.0...flake-v10.5.1) (2026-03-22)
 
 
