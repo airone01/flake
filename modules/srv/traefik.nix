@@ -1,28 +1,18 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
-  cfg = config.stars.server.traefik;
-  scfg = config.stars.server.enable;
+# feature: Traefik reverse proxy configuration and integration with other services
+_: {
+  flake.nixosModules.traefik = {
+    lib,
+    config,
+    ...
+  }: {
+    options.stars.server.traefik.enable = lib.mkEnableOption "Traefik, a reverse proxy";
 
-  anubisCfg = config.stars.server.anubis;
-  searchixCfg = config.stars.server.searchix;
-  giteaCfg = config.stars.server.gitea;
-  mcheadsCfg = config.stars.server.mcheads;
-in {
-  options.stars.server.traefik.enable =
-    lib.mkEnableOption "Traefik, a reverse proxy";
-
-  config = lib.mkIf (scfg && cfg.enable) (lib.mkMerge [
-    # base Traefik config (always applied if TRaefik is enabled)
-    {
-      # 80 for HTTP used by Let's Encrypt to verify ownership
+    config = lib.mkIf config.stars.server.traefik.enable {
       networking.firewall.allowedTCPPorts = [443 80];
 
       services.traefik = {
         enable = true;
+
         staticConfigOptions = {
           entryPoints = {
             web = {
@@ -47,7 +37,7 @@ in {
           certificatesResolvers = {
             le = {
               acme = {
-                email = "popgthyrd@gmail.com";
+                email = "airone01@proton.me";
                 storage = "/var/lib/traefik/acme.json";
                 httpChallenge = {
                   entryPoint = "web";
@@ -57,89 +47,6 @@ in {
           };
         };
       };
-    }
-
-    # Main site / Anubis (only if Anubis is enabled)
-    (lib.mkIf anubisCfg.enable {
-      services.traefik.dynamicConfigOptions.http = {
-        routers.mainsite = {
-          rule = "Host(`air1.one`)";
-          service = "mainsite";
-          entryPoints = ["websecure"];
-          tls.certResolver = "le";
-        };
-        services.mainsite.loadBalancer.servers = [
-          {url = "http://127.0.0.1:3032";}
-        ];
-      };
-
-      # The underlying NGINX server for the main site
-      services.nginx = {
-        enable = true;
-        virtualHosts."_" = {
-          listen = [
-            {
-              addr = "127.0.0.1";
-              port = 5972;
-            }
-          ];
-          root = pkgs.website;
-          locations."/" = {
-            # NixOS already handles mime types, no need to add them to the NGINX config
-            extraConfig = ''
-              autoindex off;
-              try_files $uri $uri/index.html $uri.html =404;
-            '';
-          };
-        };
-      };
-    })
-
-    # Searchix
-    (lib.mkIf searchixCfg.enable {
-      services.traefik.dynamicConfigOptions.http = {
-        routers.searchix = {
-          rule = "Host(`searchix.air1.one`)";
-          service = "searchix";
-          entryPoints = ["websecure"];
-          tls.certResolver = "le";
-        };
-        services.searchix.loadBalancer.servers = [
-          {url = "http://127.0.0.1:3033";}
-        ];
-      };
-
-      services.searchix.settings.web.baseURL = "https://searchix.air1.one";
-    })
-
-    # Gitea
-    (lib.mkIf giteaCfg.enable {
-      services.traefik.dynamicConfigOptions.http = {
-        routers.gitea = {
-          rule = "Host(`git.air1.one`)";
-          service = "gitea";
-          entryPoints = ["websecure"];
-          tls.certResolver = "le";
-        };
-        services.gitea.loadBalancer.servers = [
-          {url = "http://127.0.0.1:3031";}
-        ];
-      };
-    })
-
-    # MC Heads API
-    (lib.mkIf mcheadsCfg.enable {
-      services.traefik.dynamicConfigOptions.http = {
-        routers.mcheads = {
-          rule = "Host(`mc.air1.one`)";
-          service = "mcheads";
-          entryPoints = ["websecure"];
-          tls.certResolver = "le";
-        };
-        services.mcheads.loadBalancer.servers = [
-          {url = "http://127.0.0.1:8080";}
-        ];
-      };
-    })
-  ]);
+    };
+  };
 }

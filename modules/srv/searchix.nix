@@ -1,3 +1,5 @@
+# feature: Searchix nix options search engine configuration and integration with other services
+#
 # hey! go check out Searchix, it's pretty dope!
 # note for myself: config reference at time of writing:
 # https://git.sr.ht/~alanpearce/searchix/tree/b7de525d7fe617674030c493ec4214f2f5a4b887
@@ -15,109 +17,82 @@
 #   if your script outputs to `$out/options.json`, either fix the script or set `outputPath`.
 # - cache hell: if you update your custom script on github, searchix will use the cached
 #   tarball unless you change the commit hash in the url.
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
-  cfg = config.stars.server.searchix;
-  scfg = config.stars.server.enable;
+{inputs, ...}: {
+  flake.nixosModules.searchix = {
+    lib,
+    pkgs,
+    config,
+    ...
+  }: let
+    appPort = 51313;
+    anubisPort = 3033;
+    traefikTarget =
+      if config.stars.server.anubis.enable
+      then anubisPort
+      else appPort;
 
-  sandbox = {
-    ProtectSystem = "strict";
-    ProtectHome = true;
-    PrivateTmp = true;
-    PrivateDevices = true;
-    ProtectClock = true;
-    ProtectKernelTunables = true;
-    ProtectKernelModules = true;
-    ProtectControlGroups = true;
-    RestrictNamespaces = true;
-    LockPersonality = true;
-  };
-in {
-  options.stars.server.searchix = {
-    enable = lib.mkEnableOption "Searchix, a nix options and packages search engine";
+    sandbox = {
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      PrivateTmp = true;
+      PrivateDevices = true;
+      ProtectClock = true;
+      ProtectKernelTunables = true;
+      ProtectKernelModules = true;
+      ProtectControlGroups = true;
+      RestrictNamespaces = true;
+      LockPersonality = true;
+    };
+  in {
+    imports = [inputs.searchix.nixosModules.web];
 
-    nixos.enable = lib.mkOption {
-      default = true;
-      example = true;
-      description = "Whether to enable the NixOS source. https://github.com/NixOS/nixpkgs";
-      type = lib.types.bool;
-    };
-    nixpkgs.enable = lib.mkOption {
-      default = true;
-      example = true;
-      description = "Whether to enable the nixpkgs source. https://github.com/NixOS/nixpkgs";
-      type = lib.types.bool;
-    };
-    home-manager.enable = lib.mkOption {
-      default = true;
-      example = true;
-      description = "Whether to enable the Home Manager source. https://github.com/nix-community/home-manager";
-      type = lib.types.bool;
-    };
-    darwin.enable = lib.mkOption {
-      default = true;
-      example = true;
-      description = "Whether to enable the Darwin source. https://github.com/nix-darwin/nix-darwin";
-      type = lib.types.bool;
-    };
-    nvf.enable = lib.mkOption {
-      default = true;
-      example = true;
-      description = "Whether to enable the NVF source. https://github.com/NotAShelf/nvf";
-      type = lib.types.bool;
-    };
-  };
+    options.stars.server.searchix.enable =
+      lib.mkEnableOption "Searchix, a nix options and packages search engine";
 
-  config = lib.mkIf (scfg && cfg.enable) {
-    systemd.services.searchix = {
-      wants = ["network-online.target"];
-      after = ["network-online.target"];
+    config = lib.mkIf config.stars.server.searchix.enable {
+      systemd.services.searchix = {
+        wants = ["network-online.target"];
+        after = ["network-online.target"];
 
-      environment = {
-        NIX_PATH = "nixpkgs=${pkgs.path}";
-        GOMEMLIMIT = "2500MiB";
+        environment = {
+          NIX_PATH = "nixpkgs=${pkgs.path}";
+          GOMEMLIMIT = "2500MiB";
+        };
+
+        serviceConfig =
+          sandbox
+          // {
+            StateDirectory = "searchix";
+            # ensure systemd doesn't kill Searchix if heavy indexing delays startup readiness
+            TimeoutStartSec = "10m";
+          };
       };
 
-      serviceConfig =
-        sandbox
-        // {
-          StateDirectory = "searchix";
-          # ensure systemd doesn't kill it if heavy indexing delays startup readiness
-          TimeoutStartSec = "10m";
-        };
-    };
+      users.users.searchix = {
+        isSystemUser = true;
+        group = "searchix";
+      };
+      users.groups.searchix = {};
 
-    users.users.searchix = {
-      isSystemUser = true;
-      group = "searchix";
-    };
-    users.groups.searchix = {};
+      services = {
+        searchix = {
+          enable = true;
 
-    services.searchix = {
-      enable = true;
+          settings = {
+            dataPath = "/var/lib/searchix/data";
 
-      settings = {
-        dataPath = "/var/lib/searchix/data";
+            web = {
+              listenAddress = "localhost";
+              port = 51313;
+            };
 
-        web = {
-          listenAddress = "localhost";
-          port = 51313;
-        };
+            importer = {
+              batchSize = 1000;
+              lowMemory = true;
+              timeout = "2h";
+              updateAt = "03:00:00";
 
-        importer = {
-          batchSize = 1000;
-          lowMemory = true;
-          timeout = "2h";
-          updateAt = "03:00:00";
-
-          sources = lib.mkMerge [
-            (lib.mkIf
-              cfg.nixos.enable
-              {
+              sources = {
                 nixos = {
                   enable = true;
                   key = "nixos";
@@ -133,10 +108,7 @@ in {
                     type = "github";
                   };
                 };
-              })
-            (lib.mkIf
-              cfg.home-manager.enable
-              {
+
                 home-manager = {
                   enable = true;
                   name = "Home Manager";
@@ -154,10 +126,7 @@ in {
                     repo = "home-manager";
                   };
                 };
-              })
-            (lib.mkIf
-              cfg.nixpkgs.enable
-              {
+
                 nixpkgs = {
                   enable = true;
                   key = "nixpkgs";
@@ -181,10 +150,7 @@ in {
                     enable = true;
                   };
                 };
-              })
-            (lib.mkIf
-              cfg.darwin.enable
-              {
+
                 darwin = {
                   name = "Darwin";
                   key = "darwin";
@@ -198,24 +164,20 @@ in {
                   timeout = "30m";
                   outputPath = "share/doc/darwin";
                   jsonDepth = 1;
-
                   repo = {
                     type = "github";
                     owner = "LnL7";
                     repo = "nix-darwin";
                   };
                 };
-              })
-            (lib.mkIf
-              cfg.nvf.enable
-              {
+
                 nvf = {
                   enable = true;
                   name = "NVF";
                   key = "nvf";
                   fetcher = "channel";
                   url = "https://github.com/airone01/flake/archive/main.tar.gz";
-                  importPath = "lib/nvf-searchix.nix";
+                  importPath = "misc/nvf-searchix-wrapper.nix";
                   attribute = "";
                   outputPath = "share/doc/nvf";
                   importer = "options";
@@ -227,7 +189,30 @@ in {
                     repo = "nvf";
                   };
                 };
-              })
+              };
+            };
+          };
+        };
+
+        anubis.instances.searchix = lib.mkIf config.stars.server.anubis.enable {
+          enable = true;
+          settings = {
+            TARGET = "http://127.0.0.1:${toString appPort}";
+            ED25519_PRIVATE_KEY_HEX_FILE = config.sops.secrets."anubis/mainsite_key".path;
+            BIND_NETWORK = "tcp";
+            BIND = ":${toString anubisPort}";
+          };
+        };
+
+        traefik.dynamicConfigOptions.http = lib.mkIf config.stars.server.traefik.enable {
+          routers.searchix = {
+            rule = "Host(`searchix.air1.one`)";
+            service = "searchix";
+            entryPoints = ["websecure"];
+            tls.certResolver = "le";
+          };
+          services.searchix.loadBalancer.servers = [
+            {url = "http://127.0.0.1:${toString traefikTarget}";}
           ];
         };
       };
