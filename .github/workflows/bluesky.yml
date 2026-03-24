@@ -1,0 +1,30 @@
+name: Daily Bluesky nixpkgs Bot(s) Post
+
+on:
+  schedule:
+    - cron: "0 1 * * *" # 01:00 UTC every day
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install atproto requests
+
+      - name: Run bot script
+        env:
+          BSKY_HANDLE: ${{ secrets.IOM_BSKY_HANDLE }}
+          BSKY_PASSWORD: ${{ secrets.IOM_BSKY_PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+        run: python modules/pkgs/bluesky/initomatic.py

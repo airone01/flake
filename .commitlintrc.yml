@@ -111,6 +111,8 @@ rules:
       - docs
       # Release-please
       - main
+      # Packages
+      - bsky
 
   # Other rules
   scope-case:
