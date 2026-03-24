@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.1.1](https://github.com/airone01/flake/compare/flake-v11.1.0...flake-v11.1.1) (2026-03-24)
+
+
+### Documentation
+
+* **flake:** dev.nix anti-pattern comment ([#296](https://github.com/airone01/flake/issues/296)) ([49a05b6](https://github.com/airone01/flake/commit/49a05b6891225cf466a3234979991bb0225fd91e))
+
 ## [11.1.0](https://github.com/airone01/flake/compare/flake-v11.0.0...flake-v11.1.0) (2026-03-24)
 
 
