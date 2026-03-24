@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.1.0](https://github.com/airone01/flake/compare/flake-v11.0.0...flake-v11.1.0) (2026-03-24)
+
+
+### Features
+
+* **bsky:** init-o-matic bot ([#293](https://github.com/airone01/flake/issues/293)) ([60ae995](https://github.com/airone01/flake/commit/60ae995b42083e10bfd02f4c9d56d82e9697056b))
+
 ## [11.0.0](https://github.com/airone01/flake/compare/flake-v10.5.1...flake-v11.0.0) (2026-03-24)
 
 
