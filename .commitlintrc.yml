@@ -53,6 +53,7 @@ rules:
       # Desktop environments & WMs
       - gnome
       - hyprland
+      - niri
       # Applications
       - arduino
       - astro

@@ -10,6 +10,6 @@
 .direnv/
 repomix-output*
 LICENSE*
+COPYING*
 CHANGELOG*
-/packages/website/
 

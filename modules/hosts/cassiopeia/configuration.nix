@@ -13,6 +13,7 @@
 
       self.nixosModules.core
       self.nixosModules.desktop
+      self.nixosModules.niri
       self.nixosModules.dev
       self.nixosModules.gaming
       self.nixosModules.nvim
@@ -32,7 +33,8 @@
       desktop = {
         enable = true;
 
-        hyprland.enable = true;
+        # hyprland.enable = true;
+        niri.enable = true;
         frenchPatch = true;
       };
       asusPatch = true;
@@ -84,7 +86,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd start-hyprland";
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd niri-session";
           user = "greeter";
         };
       };
