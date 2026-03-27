@@ -26,7 +26,7 @@
         wl-clipboard
         cliphist
         rofi
-        xfce.thunar
+        thunar
         yazi
         firefox
         hyprlock
@@ -39,7 +39,13 @@
     pkgs,
     ...
   }: let
-    caelestiaPkg = inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    caelestiaPkg = inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
+      postPatch =
+        (old.postPatch or "")
+        + ''
+          sed -i 's/return screens.get(Hypr.focusedMonitor);/let active = screens.get(Hypr.focusedMonitor); if (active) return active; let vals = screens.values(); let first = vals.next(); return first.done ? null : first.value;/' services/Visibilities.qml
+        '';
+    });
   in {
     packages.niri = inputs.wrapper-modules.wrappers.niri.wrap {
       inherit pkgs;
@@ -52,11 +58,10 @@
         input.keyboard.xkb.layout = "fr,us";
         binds =
           {
-            "Mod+Return".spawn-sh = lib.getExe pkgs.kitty;
+            "Mod+Return".spawn = lib.getExe pkgs.kitty;
             "Mod+Q".close-window = null;
-            "Mod+S".spawn-sh = "${lib.getExe caelestiaPkg} ipc call launcher toggle";
-            "Mod+Shift+E".quit = null;
-            "Mod+L".spawn-sh = lib.getExe pkgs.hyprlock;
+            "Mod+S".spawn-sh = "WAYLAND_DISPLAY=$WAYLAND_DISPLAY ${lib.getExe caelestiaPkg} ipc call drawers toggle launcher";
+            "Mod+L".spawn = lib.getExe pkgs.hyprlock;
 
             # Apps
             "Mod+E".spawn = lib.getExe pkgs.thunar;
