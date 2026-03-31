@@ -13,6 +13,7 @@
       self.nixosModules.dev
       self.nixosModules.gaming
       self.nixosModules.prettyBoot
+      self.nixosModules.niri
       self.nixosModules.nvim
       self.nixosModules.virt
 
