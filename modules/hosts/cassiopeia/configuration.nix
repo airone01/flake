@@ -16,6 +16,7 @@
       self.nixosModules.niri
       self.nixosModules.dev
       self.nixosModules.gaming
+      self.nixosModules.prettyBoot
       self.nixosModules.nvim
       self.nixosModules.virt
 
@@ -42,6 +43,7 @@
       dualsensePatch = true;
       gaming = true;
       nvim = true;
+      prettyBoot = true;
       virt = true;
     };
 
