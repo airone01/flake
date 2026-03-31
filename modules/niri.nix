@@ -30,6 +30,7 @@
         yazi
         firefox
         hyprlock
+        self.packages.${pkgs.stdenv.hostPlatform.system}.caelestia
       ];
     };
   };
@@ -44,9 +45,16 @@
         (old.postPatch or "")
         + ''
           sed -i 's/return screens.get(Hypr.focusedMonitor);/let active = screens.get(Hypr.focusedMonitor); if (active) return active; let vals = screens.values(); let first = vals.next(); return first.done ? null : first.value;/' services/Visibilities.qml
+          sed -i 's/WlrKeyboardFocus.OnDemand/WlrKeyboardFocus.Exclusive/g' modules/drawers/Drawers.qml
+        '';
+      postInstall =
+        (old.postInstall or "")
+        + ''
+          ln -s $out/bin/caelestia-shell $out/bin/caelestia
         '';
     });
   in {
+    packages.caelestia = caelestiaPkg;
     packages.niri = inputs.wrapper-modules.wrappers.niri.wrap {
       inherit pkgs;
 
@@ -56,6 +64,7 @@
         ];
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
         input.keyboard.xkb.layout = "fr,us";
+        input.touchpad.tap = null;
         binds =
           {
             "Mod+Return".spawn = lib.getExe pkgs.kitty;
