@@ -17,6 +17,8 @@
         package = self.packages.${pkgs.stdenv.hostPlatform.system}.niri;
       };
 
+      services.upower.enable = true;
+
       environment.systemPackages = with pkgs; [
         xwayland-satellite
         brightnessctl
