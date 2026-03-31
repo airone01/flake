@@ -21,6 +21,12 @@ _: {
 
       kernelModules = ["kvm-amd"];
 
+      # ASUS tests ACPI against Windows and ships broken tables.
+      # This stops the mobo from violently cutting PCIe power on sleep,
+      # saving the NVMe from racking up endless unsafe shutdowns.
+      # TODO: propose quirk fix to upstream Linux when I have time.
+      kernelParams = ["nvme.noacpi=1"];
+
       loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
