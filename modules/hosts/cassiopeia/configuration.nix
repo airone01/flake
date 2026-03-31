@@ -11,6 +11,7 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
 
+      self.nixosModules.caelestia
       self.nixosModules.core
       self.nixosModules.desktop
       self.nixosModules.niri
@@ -36,6 +37,7 @@
 
         # hyprland.enable = true;
         niri.enable = true;
+        caelestia.enable = true;
         frenchPatch = true;
       };
       asusPatch = true;

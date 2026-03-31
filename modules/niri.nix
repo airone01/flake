@@ -30,7 +30,6 @@
         yazi
         firefox
         hyprlock
-        self.packages.${pkgs.stdenv.hostPlatform.system}.caelestia
       ];
     };
   };
@@ -38,29 +37,16 @@
   perSystem = {
     lib,
     pkgs,
+    self',
     ...
-  }: let
-    caelestiaPkg = inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
-      postPatch =
-        (old.postPatch or "")
-        + ''
-          sed -i 's/return screens.get(Hypr.focusedMonitor);/let active = screens.get(Hypr.focusedMonitor); if (active) return active; let vals = screens.values(); let first = vals.next(); return first.done ? null : first.value;/' services/Visibilities.qml
-          sed -i 's/WlrKeyboardFocus.OnDemand/WlrKeyboardFocus.Exclusive/g' modules/drawers/Drawers.qml
-        '';
-      postInstall =
-        (old.postInstall or "")
-        + ''
-          ln -s $out/bin/caelestia-shell $out/bin/caelestia
-        '';
-    });
-  in {
-    packages.caelestia = caelestiaPkg;
+  }: {
     packages.niri = inputs.wrapper-modules.wrappers.niri.wrap {
       inherit pkgs;
 
       settings = {
+        prefer-no-csd = true;
         spawn-at-startup = [
-          [(lib.getExe caelestiaPkg)]
+          [(lib.getExe self'.packages.caelestia)]
         ];
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
         input.keyboard.xkb.layout = "fr,us";
@@ -69,7 +55,7 @@
           {
             "Mod+Return".spawn = lib.getExe pkgs.kitty;
             "Mod+Q".close-window = null;
-            "Mod+S".spawn-sh = "WAYLAND_DISPLAY=$WAYLAND_DISPLAY ${lib.getExe caelestiaPkg} ipc call drawers toggle launcher";
+            "Mod+S".spawn-sh = "${lib.getExe self'.packages.caelestia} ipc call drawers toggle launcher";
             "Mod+L".spawn = lib.getExe pkgs.hyprlock;
 
             # Apps
@@ -99,6 +85,10 @@
             "Mod+Ctrl+Right".set-column-width = "+10%";
             "Mod+Ctrl+Up".set-window-height = "-10%";
             "Mod+Ctrl+Down".set-window-height = "+10%";
+
+            # Multi-screen
+            "Mod+Shift+Ctrl+Left".move-window-to-monitor-left = null;
+            "Mod+Shift+Ctrl+Right".move-window-to-monitor-right = null;
 
             # Media keys
             "XF86AudioRaiseVolume".spawn = ["${lib.getExe pkgs.pamixer}" "-i" "5"];

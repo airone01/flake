@@ -7,6 +7,7 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
 
+      self.nixosModules.caelestia
       self.nixosModules.core
       self.nixosModules.desktop
       self.nixosModules.dev
@@ -28,10 +29,9 @@
       core = true;
       desktop = {
         enable = true;
-        hyprland = {
-          enable = true;
-          ratePatch = true;
-        };
+        niri.enable = true;
+        caelestia.enable = true;
+        hyprland.ratePatch = true;
       };
       dev = true;
       dualsensePatch = true;
