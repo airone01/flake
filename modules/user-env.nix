@@ -73,7 +73,7 @@ _: {
 
             settings = {
               user.name = "airone01";
-              user.email = "21955960+airone01@users.noreply.github.com";
+              user.email = "airone01@proton.me";
             };
           };
 
