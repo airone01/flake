@@ -5,12 +5,6 @@
 }: {
   perSystem = {pkgs, ...}: let
     caelestiaPkg = inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
-      postPatch =
-        (old.postPatch or "")
-        + ''
-          sed -i 's/return screens.get(Hypr.focusedMonitor);/let active = screens.get(Hypr.focusedMonitor); if (active) return active; let vals = screens.values(); let first = vals.next(); return first.done ? null : first.value;/' services/Visibilities.qml
-          sed -i 's/WlrKeyboardFocus.OnDemand/WlrKeyboardFocus.Exclusive/g' modules/drawers/Drawers.qml
-        '';
       postInstall =
         (old.postInstall or "")
         + ''
@@ -35,7 +29,7 @@
       ];
 
       home-manager.users.${config.stars.mainUser} = {
-        xdg.configFile."caelestia/shell.json".source = ./shell.json;
+        xdg.configFile."niri_caelestia/shell.json".source = ./shell.json;
       };
 
       services.greetd = lib.mkIf (config.services.greetd.enable && config.stars.desktop.niri.enable) {
