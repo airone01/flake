@@ -4,13 +4,16 @@
   ...
 }: {
   perSystem = {pkgs, ...}: let
-    caelestiaPkg = inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
-      postInstall =
-        (old.postInstall or "")
-        + ''
-          ln -s $out/bin/caelestia-shell $out/bin/caelestia
-        '';
-    });
+    caelestiaPkg =
+      (inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
+        withCli = true;
+      }).overrideAttrs (old: {
+        postInstall =
+          (old.postInstall or "")
+          + ''
+            ln -s $out/bin/caelestia-shell $out/bin/caelestia
+          '';
+      });
   in {
     packages.caelestia = caelestiaPkg;
   };
@@ -30,6 +33,11 @@
 
       home-manager.users.${config.stars.mainUser} = {
         xdg.configFile."niri_caelestia/shell.json".source = ./shell.json;
+
+        home.file.".face".source = pkgs.fetchurl {
+          url = "https://github.com/airone01.png";
+          sha256 = "1w7cznj7cx55a6zk6yz1qks0psjh8wgh2nj0qhqqvzq1bd2w6r8j";
+        };
       };
 
       services.greetd = lib.mkIf (config.services.greetd.enable && config.stars.desktop.niri.enable) {

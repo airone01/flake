@@ -33,11 +33,11 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1775005737,
+        "lastModified": 1775145948,
         "narHash": "sha256-QKcyfHaA7T7k3SYvej3JQCj6s8KE4ekYehB4ki8evoA=",
         "owner": "airone01",
         "repo": "niri-caelestia-shell",
-        "rev": "8354d33c5b14621b176104780e3cb637db47feba",
+        "rev": "1c42637531c7753f5f3cd9f60fe854105a09861c",
         "type": "github"
       },
       "original": {

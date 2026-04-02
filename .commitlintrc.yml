@@ -54,6 +54,7 @@ rules:
       - gnome
       - hyprland
       - niri
+      - caelestia
       # Applications
       - arduino
       - astro

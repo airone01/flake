@@ -17,7 +17,9 @@
         package = self.packages.${pkgs.stdenv.hostPlatform.system}.niri;
       };
 
+      # Power profiles and management for Caelestia
       services.upower.enable = true;
+      services.power-profiles-daemon.enable = true;
 
       environment.systemPackages = with pkgs; [
         xwayland-satellite
