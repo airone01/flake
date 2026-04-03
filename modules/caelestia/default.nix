@@ -3,20 +3,23 @@
   inputs,
   ...
 }: {
-  perSystem = {pkgs, ...}: let
-    caelestiaPkg =
-      (inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
-        withCli = true;
-      }).overrideAttrs (old: {
-        postInstall =
-          (old.postInstall or "")
-          + ''
-            ln -s $out/bin/caelestia-shell $out/bin/caelestia
-          '';
-      });
-  in {
-    packages.caelestia = caelestiaPkg;
-  };
+  perSystem = {
+    lib,
+    pkgs,
+    ...
+  }:
+    lib.mkIf (pkgs.stdenv.hostPlatform.system != "aarch64-linux") {
+      packages.caelestia =
+        (inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
+          withCli = true;
+        }).overrideAttrs (old: {
+          postInstall =
+            (old.postInstall or "")
+            + ''
+              ln -s $out/bin/caelestia-shell $out/bin/caelestia
+            '';
+        });
+    };
 
   flake.nixosModules.caelestia = {
     lib,
