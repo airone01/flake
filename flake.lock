@@ -1,5 +1,51 @@
 {
   "nodes": {
+    "caelestia-cli": {
+      "inputs": {
+        "caelestia-shell": [
+          "caelestia-shell"
+        ],
+        "nixpkgs": [
+          "caelestia-shell",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1766195958,
+        "narHash": "sha256-YGawjW7RDzzOEiovrRGyRoXfjISbgLz4BVN9ZMb8LEc=",
+        "owner": "caelestia-dots",
+        "repo": "cli",
+        "rev": "8c83ae1e6a60de7d496d346bf3623f789a9f53e3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "caelestia-dots",
+        "repo": "cli",
+        "type": "github"
+      }
+    },
+    "caelestia-shell": {
+      "inputs": {
+        "caelestia-cli": "caelestia-cli",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "quickshell": "quickshell"
+      },
+      "locked": {
+        "lastModified": 1775145948,
+        "narHash": "sha256-QKcyfHaA7T7k3SYvej3JQCj6s8KE4ekYehB4ki8evoA=",
+        "owner": "airone01",
+        "repo": "niri-caelestia-shell",
+        "rev": "1c42637531c7753f5f3cd9f60fe854105a09861c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "airone01",
+        "repo": "niri-caelestia-shell",
+        "type": "github"
+      }
+    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -430,8 +476,30 @@
         "type": "github"
       }
     },
+    "quickshell": {
+      "inputs": {
+        "nixpkgs": [
+          "caelestia-shell",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1764663772,
+        "narHash": "sha256-sHqLmm0wAt3PC4vczJeBozI1/f4rv9yp3IjkClHDXDs=",
+        "ref": "refs/heads/master",
+        "rev": "26531fc46ef17e9365b03770edd3fb9206fcb460",
+        "revCount": 713,
+        "type": "git",
+        "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
+      }
+    },
     "root": {
       "inputs": {
+        "caelestia-shell": "caelestia-shell",
         "deploy-rs": "deploy-rs",
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",
@@ -441,7 +509,8 @@
         "nvf": "nvf",
         "searchix": "searchix",
         "sops-nix": "sops-nix",
-        "treefmt-nix": "treefmt-nix_2"
+        "treefmt-nix": "treefmt-nix_2",
+        "wrapper-modules": "wrapper-modules"
       }
     },
     "searchix": {
@@ -602,6 +671,26 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "wrapper-modules": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774337247,
+        "narHash": "sha256-835jMfBfjR2nHNcfYJp32fsH/2Kk9bmnz70nzmaR1yQ=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "50517537c7f4d60cbadbfa8adec74c05518d8718",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
         "type": "github"
       }
     }

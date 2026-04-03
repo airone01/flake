@@ -11,10 +11,13 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
 
+      self.nixosModules.caelestia
       self.nixosModules.core
       self.nixosModules.desktop
+      self.nixosModules.niri
       self.nixosModules.dev
       self.nixosModules.gaming
+      self.nixosModules.prettyBoot
       self.nixosModules.nvim
       self.nixosModules.virt
 
@@ -32,7 +35,9 @@
       desktop = {
         enable = true;
 
-        hyprland.enable = true;
+        # hyprland.enable = true;
+        niri.enable = true;
+        caelestia.enable = true;
         frenchPatch = true;
       };
       asusPatch = true;
@@ -40,6 +45,7 @@
       dualsensePatch = true;
       gaming = true;
       nvim = true;
+      prettyBoot = true;
       virt = true;
     };
 
@@ -84,7 +90,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd start-hyprland";
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd niri-session";
           user = "greeter";
         };
       };
