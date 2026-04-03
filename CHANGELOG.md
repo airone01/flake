@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.2.0](https://github.com/airone01/flake/compare/flake-v11.1.1...flake-v11.2.0) (2026-04-03)
+
+
+### Features
+
+* niri & caelestia shell ([#314](https://github.com/airone01/flake/issues/314)) ([fd71827](https://github.com/airone01/flake/commit/fd71827efaf274526ea25480df59d7831a089c14))
+
 ## [11.1.1](https://github.com/airone01/flake/compare/flake-v11.1.0...flake-v11.1.1) (2026-03-24)
 
 
