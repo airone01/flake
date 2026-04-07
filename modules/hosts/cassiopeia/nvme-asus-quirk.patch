@@ -1,0 +1,35 @@
+From f2b377b54204e36457cbb2089f894041c33a36e0 Mon Sep 17 00:00:00 2001
+From: airone01 <airone01@proton.me>
+Date: Mon, 6 Apr 2026 18:15:39 +0200
+Subject: [PATCH] nvme: add simple suspend quirk for ASUS TUF A17
+
+---
+ drivers/nvme/host/pci.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/nvme/host/pci.c b/drivers/nvme/host/pci.c
+index b78ba239c8ea..b0de21c4f5ec 100644
+--- a/drivers/nvme/host/pci.c
++++ b/drivers/nvme/host/pci.c
+@@ -3579,11 +3579,15 @@ static unsigned long check_vendor_combination_bug(struct pci_dev *pdev)
+ 		 * Forcing to use host managed nvme power settings for
+ 		 * lowest idle power with quick resume latency on
+ 		 * Samsung and Toshiba SSDs based on suspend behavior
+-		 * on Coffee Lake board for LENOVO C640
++		 * on Coffee Lake board for LENOVO C640 and ASUS TUF706QM
+ 		 */
+-		if ((dmi_match(DMI_BOARD_VENDOR, "LENOVO")) &&
+-		     dmi_match(DMI_BOARD_NAME, "LNVNB161216"))
++		if (((dmi_match(DMI_BOARD_VENDOR, "LENOVO")) &&
++		    dmi_match(DMI_BOARD_NAME, "LNVNB161216")) ||
++		    ((dmi_match(DMI_SYS_VENDOR, "ASUSTeK COMPUTER INC.")) &&
++		    dmi_match(DMI_PRODUCT_NAME, "ASUS TUF Gaming A17 FA706QM_TUF706QM"))) {
++			dev_info(pdev->dev, "QUIRK: Applying Samsung 980 ASUS TUF simple-suspend\n");
+ 			return NVME_QUIRK_SIMPLE_SUSPEND;
++		}
+ 	} else if (pdev->vendor == 0x2646 && (pdev->device == 0x2263 ||
+ 		   pdev->device == 0x500f)) {
+ 		/*
+-- 
+2.53.0
+

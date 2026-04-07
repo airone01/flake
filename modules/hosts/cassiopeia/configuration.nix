@@ -54,6 +54,13 @@
       "amdgpu"
     ];
 
+    boot.kernelPatches = [
+      {
+        name = "nvme-asus-simple-suspend-quirk";
+        patch = ./nvme-asus-quirk.patch;
+      }
+    ];
+
     # NVIDIA PRIME setup
     hardware.nvidia = {
       modesetting.enable = true;
