@@ -68,8 +68,16 @@ _: {
           git = {
             enable = true;
 
-            # TODO: enable signing
-            signing.format = null;
+            lfs.enable = true;
+
+            signing = {
+              key = "~/.ssh/id_ed25519.pub";
+              signByDefault = true;
+            };
+            extraConfig = {
+              gpg.format = "ssh";
+              gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
+            };
 
             settings = {
               user.name = "airone01";
