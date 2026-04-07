@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.3.0](https://github.com/airone01/flake/compare/flake-v11.2.0...flake-v11.3.0) (2026-04-07)
+
+
+### Features
+
+* git signing ([#320](https://github.com/airone01/flake/issues/320)) ([9861658](https://github.com/airone01/flake/commit/98616582a3a30d88ba3d676856f0fc3a41f615f5))
+
 ## [11.2.0](https://github.com/airone01/flake/compare/flake-v11.1.1...flake-v11.2.0) (2026-04-03)
 
 
