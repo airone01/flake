@@ -397,7 +397,7 @@
     config = lib.mkIf config.stars.nvim {
       home-manager.users.${config.stars.mainUser} = {
         home.packages = with pkgs; [
-          self.packages.${pkgs.system}.nvim
+          self.packages.${stdenv.hostPlatform.system}.nvim
           noto-fonts-color-emoji
           twemoji-color-font
         ];

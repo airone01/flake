@@ -60,6 +60,12 @@
         };
       };
 
+      # lower nix processes priority for desktops
+      nix = {
+        daemonIOSchedClass = "idle";
+        daemonCPUSchedPolicy = "idle";
+      };
+
       nixpkgs.config.allowUnfreePredicate = pkg:
         builtins.elem (lib.getName pkg) [
           "discord"
