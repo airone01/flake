@@ -10,7 +10,11 @@
       modules = [
         {
           config.vim = {
-            autocomplete.nvim-cmp.enable = true;
+            autocomplete.blink-cmp = {
+              enable = true;
+              # "lsp-signature does not work with blink.cmp. Please use blink.cmp's builtin signature feature"
+              setupOpts.signature.enabled = true;
+            };
             autopairs.nvim-autopairs.enable = true;
 
             binds = {
@@ -118,10 +122,12 @@
               enable = true;
 
               formatOnSave = true;
+              harper-ls.enable = true;
               # show code actions even when there are no lsp warns/errors
               lightbulb.enable = true;
               # "signature": box that appears when e.g. you start typing args of a function
-              lspSignature.enable = true;
+              # "lsp-signature does not work with blink.cmp. Please use blink.cmp's builtin signature feature"
+              # lspSignature.enable = true;
               lspconfig.enable = true;
               # pictograms
               lspkind.enable = true;
@@ -224,6 +230,7 @@
             spellcheck = {
               enable = true;
 
+              programmingWordlist.enable = true;
               languages = [
                 "en"
                 # TODO add "fr" here and configure dictionary
@@ -303,7 +310,7 @@
 
                 # plugins and integrations
                 plugins = {
-                  lsp-signature.enable = true;
+                  # lsp-signature.enable = true;
                   lspsaga.enable = true;
                   nvim-cmp.enable = true;
                   which-key.enable = true;
@@ -347,21 +354,13 @@
             };
 
             visuals = {
-              # Smooth scrolling
-              cinnamon-nvim.enable = true;
-
-              # notification widget
-              fidget-nvim.enable = true;
-
-              # indent blankline
+              cinnamon-nvim.enable = true; # Smooth scrolling
+              fidget-nvim.enable = true; # Progress notifications (bottom-right)
+              highlight-undo.enable = true;
               indent-blankline = {
                 enable = true;
-
-                setupOpts = {
-                  scope.enabled = true;
-                };
+                setupOpts.scope.enabled = true;
               };
-
               # highlight cursor
               nvim-cursorline = {
                 enable = true;
@@ -371,11 +370,7 @@
                   cursorword.enable = true;
                 };
               };
-
-              # scroll bar
               nvim-scrollbar.enable = true;
-
-              # icons
               nvim-web-devicons.enable = true;
             };
 
