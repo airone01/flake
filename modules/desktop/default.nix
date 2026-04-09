@@ -25,6 +25,7 @@
         localsend
         mc # midnight commander
         mullvad-vpn
+        ncspot # spotify
         obsidian
         pfetch
         protonvpn-gui
