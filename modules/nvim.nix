@@ -105,7 +105,7 @@
               tailwind.enable = true;
               ts = {
                 enable = true;
-                format.type = ["biome"];
+                format.type = ["biome" "prettier"];
               };
               yaml.enable = true;
               zig.enable = true;
