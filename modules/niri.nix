@@ -21,6 +21,15 @@
       services.upower.enable = true;
       services.power-profiles-daemon.enable = true;
 
+      xdg.portal = {
+        enable = true;
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gnome
+          xdg-desktop-portal-gtk
+        ];
+        config.niri.default = ["gnome" "gtk"];
+      };
+
       environment.systemPackages = with pkgs; [
         xwayland-satellite
         brightnessctl
