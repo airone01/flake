@@ -19,7 +19,6 @@
 
     config = lib.mkIf config.stars.desktop.enable {
       environment.systemPackages = with pkgs; [
-        discord
         firefox
         kitty
         localsend
@@ -33,6 +32,7 @@
         qbittorrent
         ranger
         switcheroo
+        vesktop # discord
         vlc
       ];
 
