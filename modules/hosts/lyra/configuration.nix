@@ -32,7 +32,7 @@
         enable = true;
         niri.enable = true;
         caelestia.enable = true;
-        hyprland.ratePatch = true;
+        ratePatch = true;
       };
       dev = true;
       dualsensePatch = true;

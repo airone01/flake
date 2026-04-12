@@ -14,17 +14,19 @@
       self.nixosModules.desktopHyprland
     ];
 
-    options.stars.desktop.enable =
-      lib.mkEnableOption "desktop environment";
+    options.stars.desktop = {
+      enable = lib.mkEnableOption "desktop environment";
+      ratePatch = lib.mkEnableOption "high rate screen configuration";
+    };
 
     config = lib.mkIf config.stars.desktop.enable {
       environment.systemPackages = with pkgs; [
-        discord
         firefox
         kitty
         localsend
         mc # midnight commander
         mullvad-vpn
+        ncspot # spotify
         obsidian
         pfetch
         protonvpn-gui
@@ -32,6 +34,7 @@
         qbittorrent
         ranger
         switcheroo
+        vesktop # discord
         vlc
       ];
 
@@ -57,6 +60,12 @@
           monospace = ["ShureTechMono Nerd Font"];
           emoji = ["Noto Color Emoji"];
         };
+      };
+
+      # lower nix processes priority for desktops
+      nix = {
+        daemonIOSchedClass = "idle";
+        daemonCPUSchedPolicy = "idle";
       };
 
       nixpkgs.config.allowUnfreePredicate = pkg:

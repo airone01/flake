@@ -79,7 +79,7 @@
                 port = 5972;
               }
             ];
-            root = self.packages.${pkgs.system}.website;
+            root = self.packages.${pkgs.stdenv.hostPlatform.system}.website;
             locations."/".extraConfig = ''
               autoindex off;
               try_files $uri $uri/index.html $uri.html =404;

@@ -71,6 +71,12 @@ _: {
             lfs.enable = true;
 
             signing = {
+              # You are currently using the legacy default (`"openpgp"`) because `home.stateVersion` is less than "25.05".
+              # To silence this warning and keep legacy behavior, set:
+              #   programs.git.signing.format = "openpgp";
+              # To adopt the new default behavior, set:
+              #   programs.git.signing.format = null;
+              format = null;
               key = "~/.ssh/id_ed25519.pub";
               signByDefault = true;
             };

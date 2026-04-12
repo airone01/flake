@@ -34,9 +34,11 @@
       core = true;
       desktop = {
         enable = true;
-
         # hyprland.enable = true;
-        niri.enable = true;
+        niri = {
+          enable = true;
+          keyboardLayout = "us";
+        };
         caelestia.enable = true;
         frenchPatch = true;
       };
