@@ -14,8 +14,10 @@
       self.nixosModules.desktopHyprland
     ];
 
-    options.stars.desktop.enable =
-      lib.mkEnableOption "desktop environment";
+    options.stars.desktop = {
+      enable = lib.mkEnableOption "desktop environment";
+      ratePatch = lib.mkEnableOption "high rate screen configuration";
+    };
 
     config = lib.mkIf config.stars.desktop.enable {
       environment.systemPackages = with pkgs; [
