@@ -373,7 +373,7 @@
     }
   },
   "paths": {
-    "wallpaperDir": "/home/r1/Pictures/Wallpapers",
+    "wallpaperDir": "!! Updated by `niri.nix` to ~/Pictures/Wallpapers !!",
     "wallpaper": "",
     "sessionGif": "root:/assets/kurukuru.gif",
     "mediaGif": "root:/assets/bongocat.gif"

@@ -20,6 +20,7 @@
       self.nixosModules.prettyBoot
       self.nixosModules.nvim
       self.nixosModules.virt
+      self.nixosModules.wallpapers
 
       self.nixosModules.cassiopeiaHardware
     ];
@@ -41,6 +42,7 @@
         };
         caelestia.enable = true;
         frenchPatch = true;
+        wallpapers.enable = true;
       };
       asusPatch = true;
       dev = true;

@@ -8,7 +8,31 @@
     pkgs,
     config,
     ...
-  }: {
+  }: let
+    # What 'niri-highrr' does:
+    # - Queries Niri's IPC on startup (niri msg --json outputs) to detect all
+    #   connected monitors.
+    # - Uses jq to parse out all available modes for each monitor and
+    #   automatically selects the one with the highest refresh rate.
+    # - Dynamically issues the correct niri msg output <name> mode <WxH@Hz>
+    #   command to apply it instantly.
+    # - Listens to Niri's event stream in the background for OutputsChanged
+    #   events, so if you plug in a new high refresh rate monitor later, it will
+    #   instantly bump it to the maximum refresh rate automatically!
+    niri-highrr = pkgs.writeShellScriptBin "niri-highrr" ''
+      apply_highrr() {
+        niri msg --json outputs | ${lib.getExe pkgs.jq} -r '.[] | . as $out | ($out.modes | sort_by(.refresh_rate) | last) as $max | "niri msg output \"\($out.name)\" mode \($max.width)x\($max.height)@\($max.refresh_rate)\"' | bash
+      }
+
+      apply_highrr
+
+      niri msg --json event-stream | while read -r line; do
+        if echo "$line" | ${pkgs.gnugrep}/bin/grep -q 'OutputsChanged'; then
+          apply_highrr
+        fi
+      done
+    '';
+  in {
     options.stars.desktop.niri = {
       enable = lib.mkEnableOption "Niri desktop environment";
       keyboardLayout = lib.mkOption {
@@ -27,15 +51,19 @@
           settings =
             {
               prefer-no-csd = {};
-              spawn-at-startup = [
-                [(lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.caelestia)]
-              ];
+              spawn-at-startup =
+                [
+                  [(lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.caelestia)]
+                ]
+                ++ lib.optionals config.stars.desktop.ratePatch [
+                  [(lib.getExe niri-highrr)]
+                ];
               xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
               input.keyboard.xkb.layout = config.stars.desktop.niri.keyboardLayout;
               input.touchpad.tap = {};
             }
             // lib.optionalAttrs config.stars.desktop.ratePatch {
-              outputs."default".variable-refresh-rate = {};
+              outputs.".*".variable-refresh-rate = {};
             }
             // {
               binds =
