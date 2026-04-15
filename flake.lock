@@ -284,11 +284,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776114641,
-        "narHash": "sha256-VJMt3n9zGRzupzvlhcKIz4SpWflKh0rWfYTgmkmun0Q=",
+        "lastModified": 1776184304,
+        "narHash": "sha256-No6QGBmIv5ChiwKCcbkxjdEQ/RO2ZS1gD7SFy6EZ7rc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2de7205ce6e10b031151033e69b7ef89708dc282",
+        "rev": "3c7524c68348ef79ce48308e0978611a050089b2",
         "type": "github"
       },
       "original": {
@@ -523,11 +523,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1775220266,
-        "narHash": "sha256-anmPuZ2En0KNhbnf4MiwiR/YP8QabOrjHHcQoZJ5Dho=",
+        "lastModified": 1776191206,
+        "narHash": "sha256-Y6VQ36PUopsezTZpDI76WBomdb1O/8kWwG3bejHD79c=",
         "ref": "refs/heads/main",
-        "rev": "ebb5e265a22f90eee6929971502451fc0f4bb5d2",
-        "revCount": 702,
+        "rev": "5d686ce6d4b389ea2803f03395ec5eeeaf6f0d05",
+        "revCount": 705,
         "type": "git",
         "url": "https://codeberg.org/alinnow/searchix"
       },
@@ -681,11 +681,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776126269,
-        "narHash": "sha256-KsxerXRUyxPoAdtXM00reByXDUzdt21jth5QUbS6J7k=",
+        "lastModified": 1776143651,
+        "narHash": "sha256-uwZ18kmkX8cdF7gTxPNhtBTrNt4jx6Pqp8HoyupG2NQ=",
         "owner": "BirdeeHub",
         "repo": "nix-wrapper-modules",
-        "rev": "7620e258eb61a41f3fe990fe01803d042b319326",
+        "rev": "40559c09c6496aef6677115d99a7c942349a799b",
         "type": "github"
       },
       "original": {
