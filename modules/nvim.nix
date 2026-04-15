@@ -173,6 +173,32 @@
                   end,
                 })
               '';
+
+              formatter-switcher = ''
+                -- prettier
+                vim.api.nvim_create_user_command("UsePrettier", function()
+                  local conform = require("conform")
+                  local web_fts = {"javascript", "typescript", "javascriptreact", "typescriptreact", "svelte", "astro", "css"}
+
+                  for _, ft in ipairs(web_fts) do
+                    conform.formatters_by_ft[ft] = { "prettier" }
+                  end
+
+                  vim.notify("Formatter switched to Prettier", vim.log.levels.INFO)
+                end, {})
+
+                -- biome
+                vim.api.nvim_create_user_command("UseBiome", function()
+                  local conform = require("conform")
+                  local web_fts = {"javascript", "typescript", "javascriptreact", "typescriptreact", "svelte", "astro", "css"}
+
+                  for _, ft in ipairs(web_fts) do
+                    conform.formatters_by_ft[ft] = { "biome" }
+                  end
+
+                  vim.notify("Formatter switched to Biome", vim.log.levels.INFO)
+                end, {})
+              '';
             };
 
             # Custom keymaps
@@ -230,7 +256,7 @@
             spellcheck = {
               enable = true;
 
-              programmingWordlist.enable = true;
+              # programmingWordlist.enable = true;
               languages = [
                 "en"
                 # TODO add "fr" here and configure dictionary
