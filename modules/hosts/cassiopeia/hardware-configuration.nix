@@ -25,7 +25,10 @@ _: {
       # This stops the mobo from violently cutting PCIe power on sleep,
       # saving the NVMe from racking up endless unsafe shutdowns.
       # TODO: propose quirk fix to upstream Linux when I have time.
-      kernelParams = ["nvme.noacpi=1"];
+      kernelParams = [
+        "nvme.noacpi=1"
+        "nvme_core.default_ps_max_latency_us=0"
+      ];
 
       loader = {
         systemd-boot.enable = true;
