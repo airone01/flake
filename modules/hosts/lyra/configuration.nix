@@ -16,6 +16,7 @@
       self.nixosModules.niri
       self.nixosModules.nvim
       self.nixosModules.virt
+      self.nixosModules.wallpapers
 
       self.nixosModules.lyraHardware
     ];
@@ -40,6 +41,7 @@
       nvim = true;
       prettyBoot = true;
       virt = true;
+      wallpapers.enable = true;
     };
 
     hardware = {
