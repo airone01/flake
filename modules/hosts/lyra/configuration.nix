@@ -34,6 +34,7 @@
         niri.enable = true;
         caelestia.enable = true;
         ratePatch = true;
+        wallpapers.enable = true;
       };
       dev = true;
       dualsensePatch = true;
@@ -41,7 +42,6 @@
       nvim = true;
       prettyBoot = true;
       virt = true;
-      wallpapers.enable = true;
     };
 
     hardware = {
