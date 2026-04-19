@@ -1,5 +1,19 @@
 # Changelog
 
+## [11.5.0](https://github.com/airone01/flake/compare/flake-v11.4.0...flake-v11.5.0) (2026-04-19)
+
+
+### Features
+
+* idk ([661f380](https://github.com/airone01/flake/commit/661f38088fa92359ab2bbcc8f704eaa994e52a0c))
+* **nvim:** add fmt switching commands ([70d357a](https://github.com/airone01/flake/commit/70d357ae67576ebeef0c3c05f3f31106b0e8555e))
+
+
+### Bug Fixes
+
+* **cassiopeia:** try newer hardware patch ([53d1fe0](https://github.com/airone01/flake/commit/53d1fe043375d2e8f8287e56a05980c8355c1f30))
+* **lyra:** wallpapers option mismatch ([ee1fba1](https://github.com/airone01/flake/commit/ee1fba1e76f6123414b9c8a8051ad12bb0871738))
+
 ## [11.4.0](https://github.com/airone01/flake/compare/flake-v11.3.0...flake-v11.4.0) (2026-04-12)
 
 
