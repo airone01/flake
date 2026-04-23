@@ -35,7 +35,7 @@
       ];
 
       home-manager.users.${config.stars.mainUser} = {
-        xdg.configFile."niri_caelestia/shell.json".source = ./shell.json;
+        xdg.configFile."niri_caelestia/shell.json".source = ./caelestia.json;
 
         home.file.".face".source = pkgs.fetchurl {
           url = "https://github.com/airone01.png";
