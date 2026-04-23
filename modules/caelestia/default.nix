@@ -34,14 +34,8 @@
         self.packages.${pkgs.stdenv.hostPlatform.system}.caelestia
       ];
 
-      home-manager.users.${config.stars.mainUser} = {
-        xdg.configFile."niri_caelestia/shell.json".source = ./caelestia.json;
-
-        home.file.".face".source = pkgs.fetchurl {
-          url = "https://github.com/airone01.png";
-          sha256 = "1w7cznj7cx55a6zk6yz1qks0psjh8wgh2nj0qhqqvzq1bd2w6r8j";
-        };
-      };
+      home-manager.users.${config.stars.mainUser}.xdg.configFile.
+          "niri_caelestia/shell.json".source = ./caelestia.json;
 
       services.greetd = lib.mkIf (config.services.greetd.enable && config.stars.desktop.niri.enable) {
         settings = {

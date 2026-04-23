@@ -11,6 +11,12 @@ _: {
 
     config = lib.mkIf config.stars.desktop.wallpapers.enable {
       home-manager.users.${config.stars.mainUser}.home.file = {
+        # Profile picture
+        ".face".source = pkgs.fetchurl {
+          url = "https://github.com/airone01.png";
+          sha256 = "1w7cznj7cx55a6zk6yz1qks0psjh8wgh2nj0qhqqvzq1bd2w6r8j";
+        };
+
         # Fangpeii
         # https://www.pixiv.net/en/users/50047601
         "Pictures/Wallpapers/Fangpeii Geese Pink Pond.jpg".source = pkgs.fetchurl {
