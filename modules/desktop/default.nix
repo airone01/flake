@@ -33,6 +33,7 @@
         qFlipper
         qbittorrent
         ranger
+        spotify
         switcheroo
         vesktop # discord
         vlc
@@ -72,6 +73,7 @@
         builtins.elem (lib.getName pkg) [
           "discord"
           "obsidian"
+          "spotify"
         ];
 
       services = {
