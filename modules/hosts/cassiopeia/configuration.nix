@@ -58,6 +58,8 @@
     };
 
     services = {
+      resolved.enable = true;
+
       mullvad-vpn = {
         enable = true;
         enableEarlyBootBlocking = true;
