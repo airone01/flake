@@ -9,7 +9,6 @@
   mkNiri = {
     pkgs,
     lib,
-    caelestia ? null,
     noctalia ? null,
     keyboardLayout ? "us,fr",
     ratePatch ? false,
@@ -22,10 +21,7 @@
         {
           prefer-no-csd = {};
           spawn-at-startup =
-            lib.optionals (caelestia != null) [
-              [(lib.getExe caelestia)]
-            ]
-            ++ lib.optionals (noctalia != null) [
+            lib.optionals (noctalia != null) [
               [(lib.getExe noctalia)]
             ]
             ++ lib.optionals (ratePatch && niri-highrr != null) [
@@ -43,11 +39,11 @@
             {
               "Mod+Return".spawn = lib.getExe pkgs.kitty;
               "Mod+Q".close-window = {};
-              # If noctalia is available, use it for the launcher; otherwise fallback to caelestia.
+              # launcher
               "Mod+S".spawn-sh =
                 if noctalia != null
                 then "${lib.getExe noctalia} ipc call launcher toggle"
-                else "${lib.getExe caelestia} ipc call drawers toggle launcher";
+                else "${lib.getExe pkgs.rofi} -show drun";
               "Mod+L".spawn = lib.getExe pkgs.hyprlock;
 
               # Apps
@@ -186,10 +182,6 @@ in {
         enable = true;
         package = mkNiri {
           inherit pkgs lib niri-highrr;
-          caelestia =
-            if config.stars.desktop.caelestia.enable
-            then self.packages.${pkgs.stdenv.hostPlatform.system}.caelestia
-            else null;
           noctalia =
             if config.stars.desktop.noctalia.enable
             then self.packages.${pkgs.stdenv.hostPlatform.system}.myNoctalia
@@ -199,7 +191,7 @@ in {
         };
       };
 
-      # Power profiles and management for Caelestia
+      # Power profiles and management
       services.upower.enable = true;
       services.power-profiles-daemon.enable = true;
 
@@ -238,7 +230,6 @@ in {
     lib.mkIf (pkgs.stdenv.hostPlatform.system != "aarch64-linux") {
       packages.niri = mkNiri {
         inherit pkgs lib;
-        inherit (self'.packages) caelestia;
         noctalia = self'.packages.myNoctalia or null;
         keyboardLayout = "us,fr";
         ratePatch = false;

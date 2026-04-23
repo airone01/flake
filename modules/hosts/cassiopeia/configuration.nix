@@ -11,7 +11,6 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
 
-      self.nixosModules.caelestia
       self.nixosModules.core
       self.nixosModules.desktop
       self.nixosModules.niri
@@ -43,7 +42,6 @@
           enable = true;
           keyboardLayout = "fr,us";
         };
-        caelestia.enable = false;
         noctalia.enable = true;
         frenchPatch = true;
         wallpapers.enable = true;

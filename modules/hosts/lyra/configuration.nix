@@ -7,7 +7,7 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
 
-      self.nixosModules.caelestia
+      self.nixosModules.noctalia
       self.nixosModules.core
       self.nixosModules.desktop
       self.nixosModules.dev
@@ -32,7 +32,7 @@
       desktop = {
         enable = true;
         niri.enable = true;
-        caelestia.enable = true;
+        noctalia.enable = true;
         ratePatch = true;
         wallpapers.enable = true;
       };

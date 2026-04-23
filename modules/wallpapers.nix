@@ -6,8 +6,6 @@ _: {
     ...
   }: {
     options.stars.desktop.wallpapers.enable = lib.mkEnableOption "Wallpapers";
-    # Note: Caelestia Shell only displays wallpapers in the launcher when there
-    # is an odd number of them. https://github.com/caelestia-dots/shell
 
     config = lib.mkIf config.stars.desktop.wallpapers.enable {
       home-manager.users.${config.stars.mainUser}.home.file = {
