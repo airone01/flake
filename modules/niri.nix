@@ -177,9 +177,6 @@ in {
     };
 
     config = lib.mkIf config.stars.desktop.niri.enable {
-      # Use lib.mkDefault for keyboard layout if frenchPatch is enabled.
-      stars.desktop.niri.keyboardLayout = lib.mkIf (config.stars.desktop.frenchPatch or false) (lib.mkDefault "fr,us");
-
       environment.sessionVariables = {
         NIXOS_OZONE_WL = "1";
         MOZ_ENABLE_WAYLAND = "1";

@@ -16,6 +16,8 @@ _: {
         layout = "fr,us";
       };
 
+      stars.desktop.niri.keyboardLayout = lib.mkDefault "fr,us";
+
       home-manager.users.${config.stars.mainUser}.home = {
         keyboard.layout = "fr";
       };
