@@ -37,7 +37,6 @@
       core = true;
       desktop = {
         enable = true;
-        # hyprland.enable = true;
         niri = {
           enable = true;
           keyboardLayout = "fr,us";
@@ -115,15 +114,5 @@
     environment.systemPackages = with pkgs; [
       mesa-demos # NVIDIA settings
     ];
-
-    home-manager.users.${config.stars.mainUser} = {
-      wayland.windowManager.hyprland.settings = {
-        input = {
-          kb_layout = "fr,us";
-          kb_options = "grp:caps_toggle"; # caps lock switches layout
-          follow_mouse = 1; # focus follow mouse
-        };
-      };
-    };
   };
 }

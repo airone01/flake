@@ -33,7 +33,7 @@ working on:
 I maintain a multi-machine NixOS setup that runs my life and this website. If
 you are curious, here is the current fleet:
 
-- **`lyra`**: My main PC, running Hyprland and geared up for dev and
+- **`lyra`**: My main PC, running Niri and geared up for dev and
   ([some](https://dawn.wine/dawn-winery/dwproton/issues/3)) gaming. 6650xt, 64Gb
   DDR4, 12-threads Ryzen 5 5500 @ 3.6Ghz.
 - **`cassiopeia`**: The trusty laptop. RTX 3060 (portable version), 16Gb DDR4,
