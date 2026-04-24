@@ -1,6 +1,6 @@
-# feature: Asus computer patches
+# feature: ASUS vendor patches
 _: {
-  flake.nixosModules.desktopAsusPatch = {
+  flake.nixosModules.asusPatch = {
     lib,
     pkgs,
     config,
