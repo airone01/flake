@@ -116,7 +116,12 @@
     ];
 
     boot.loader = {
-      systemd-boot.enable = true;
+      grub = {
+        enable = true;
+        efiSupport = true;
+        device = "nodev"; # "nodev" for UEFI
+        theme = pkgs.minimal-grub-theme;
+      };
       efi.canTouchEfiVariables = true;
     };
   };
