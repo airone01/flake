@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.6.2](https://github.com/airone01/flake/compare/flake-v11.6.1...flake-v11.6.2) (2026-04-24)
+
+
+### Documentation
+
+* **flake:** remove ft mention ([63e36e0](https://github.com/airone01/flake/commit/63e36e03642901c4473dff097c9cca88e512277e))
+
 ## [11.6.1](https://github.com/airone01/flake/compare/flake-v11.6.0...flake-v11.6.1) (2026-04-24)
 
 
