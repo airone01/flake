@@ -51,4 +51,4 @@ jobs:
           echo "Targeting PR #${{ steps.update.outputs.pull-request-number }}"
           gh pr merge ${{ steps.update.outputs.pull-request-number }} \
             --repo ${{ github.repository }} \
-            --auto --squash -t "chore(flake): update inputs"
+            --auto --rebase -t "chore(flake): update inputs"

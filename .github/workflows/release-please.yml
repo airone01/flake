@@ -35,4 +35,4 @@ jobs:
           echo "Targeting PR #$PR_NUMBER"
           gh pr merge $PR_NUMBER \
             --repo ${{ github.repository }} \
-            --auto --squash
+            --auto --rebase
