@@ -24,22 +24,15 @@ and deployments. It's very faulty to say the least, but I love it.
 ## Organization
 
 This repository is now trying to follow the
-[dendritic pattern](https://github.com/mightyiam/dendritic) strictly. For this
-reason, all modules and features are dropped into the `modules` directory, and
-loosely grouped by category.
+[dendritic pattern](https://github.com/mightyiam/dendritic). For this reason,
+all modules and features are dropped into the `modules` directory.
 
 Notable stuff `modules/` include:
 
-- `hosts/`: NixOS configurations for hosts
+- `hosts/`: hosts configurations
 - `pkgs/`: half source-code, half nix derivations of small apps and scripts
-- `shells/`: devShells
-- `desktop/`: options for desktops
-- `srv/`: options for servers
-- `core.nix`: default config I want everywhere
-- `dev.nix`: dev config I want (almost) everywhere
-- `formatting.nix`: linting and formatting with treefmt and git hooks
-- `gaming.nix`: options for gaming
-- `nvim.nix`: Neovim config using [NVF](https://github.com/NotAShelf/nvf/)
+- `srv/`: services configurations
+- `*.nix`: any feature detailed at the top of the file
 
 ## Machines
 
