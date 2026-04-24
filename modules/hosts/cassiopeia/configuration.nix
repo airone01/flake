@@ -37,14 +37,11 @@
       core = true;
       desktop = {
         enable = true;
-        niri = {
-          enable = true;
-          keyboardLayout = "fr,us";
-        };
+        niri.enable = true;
         noctalia.enable = true;
-        frenchPatch = true;
         wallpapers.enable = true;
       };
+      frenchPatch = true;
       asusPatch = true;
       dev = true;
       dualsensePatch = true;

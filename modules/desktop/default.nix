@@ -9,8 +9,8 @@
     imports = [
       self.nixosModules.desktopAsusPatch
       self.nixosModules.desktopDualsensePatch
-      self.nixosModules.desktopFrench
       self.nixosModules.desktopGnome
+      self.nixosModules.french
     ];
 
     options.stars.desktop = {
