@@ -21,9 +21,6 @@ local.nix
 # System-specific files that shouldn't be tracked
 *.uuid
 
-# AI 😈
-repomix-output.*
-
 # NodeJS
 node_modules/
 
