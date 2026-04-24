@@ -1,5 +1,5 @@
 _: {
-  flake.nixosModules.cetusHardware = {
+  flake.nixosModules.hostCetusHardware = {
     config,
     lib,
     modulesPath,

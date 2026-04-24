@@ -1,5 +1,5 @@
 _: {
-  flake.nixosModules.cassiopeiaHardware = {
+  flake.nixosModules.hostCassiopeiaHardware = {
     config,
     lib,
     modulesPath,

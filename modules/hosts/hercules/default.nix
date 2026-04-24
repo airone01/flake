@@ -4,6 +4,6 @@
   ...
 }: {
   flake.nixosConfigurations.hercules = inputs.nixpkgs.lib.nixosSystem {
-    modules = [self.nixosModules.herculesConfig];
+    modules = [self.nixosModules.hostHerculesConfig];
   };
 }

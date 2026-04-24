@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.lyraConfig = {pkgs, ...}: {
+  flake.nixosModules.hostLyraConfig = {pkgs, ...}: {
     imports = [
       inputs.home-manager.nixosModules.home-manager
 
@@ -18,7 +18,7 @@
       self.nixosModules.virt
       self.nixosModules.wallpapers
 
-      self.nixosModules.lyraHardware
+      self.nixosModules.hostLyraHardware
     ];
 
     networking.hostName = "lyra";

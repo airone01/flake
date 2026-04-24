@@ -4,6 +4,6 @@
   ...
 }: {
   flake.nixosConfigurations.cassiopeia = inputs.nixpkgs.lib.nixosSystem {
-    modules = [self.nixosModules.cassiopeiaConfig];
+    modules = [self.nixosModules.hostCassiopeiaConfig];
   };
 }

@@ -4,6 +4,6 @@
   ...
 }: {
   flake.nixosConfigurations.lyra = inputs.nixpkgs.lib.nixosSystem {
-    modules = [self.nixosModules.lyraConfig];
+    modules = [self.nixosModules.hostLyraConfig];
   };
 }

@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.herculesConfig = _: {
+  flake.nixosModules.hostHerculesConfig = _: {
     imports = [
       inputs.home-manager.nixosModules.home-manager
       inputs.sops-nix.nixosModules.sops
@@ -12,7 +12,7 @@
       self.nixosModules.userEnv
       self.nixosModules.server-services
 
-      self.nixosModules.herculesHardware
+      self.nixosModules.hostHerculesHardware
     ];
 
     networking.hostName = "hercules";
