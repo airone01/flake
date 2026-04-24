@@ -3,11 +3,10 @@
 </h2>
 
 <h4 align="center">
-  <a href="https://profile.intra.42.fr/users/elagouch"><img alt="School 42 badge" src="https://img.shields.io/badge/-elagouch-0?style=flat-square&labelColor=020617&color=5a45fe&logo=42"></a>
-  <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-ef00c7?style=flat-square&logo=creativecommons&logoColor=fff&labelColor=020617">
-  <img alt="Made with Nix" src="https://img.shields.io/badge/Made_with-Nix-ff2b89?style=flat-square&logo=nixos&logoColor=fff&labelColor=020617">
-  <img alt="Release version" src="https://img.shields.io/github/v/release/airone01/flake?style=flat-square&logo=nixos&logoColor=fff&label=Release&labelColor=020617&color=ff8059">
-  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/airone01/flake?style=flat-square&logo=github&labelColor=020617&color=ffc248&label=Contributors">
+  <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-5a45fe?style=flat-square&logo=creativecommons&logoColor=fff&labelColor=020617">
+  <img alt="Made with Nix" src="https://img.shields.io/badge/Made_with-Nix-d049d7?style=flat-square&logo=nixos&logoColor=fff&labelColor=020617">
+  <img alt="Release version" src="https://img.shields.io/github/v/release/airone01/flake?style=flat-square&logo=nixos&logoColor=fff&label=Release&labelColor=020617&color=ff758b">
+  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/airone01/flake?style=flat-square&logo=github&labelColor=020617&color=ffb971&label=Contributors">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/airone01/flake?style=flat-square&logo=github&labelColor=020617&color=f9f871&label=Last%20commit">
 </h4>
 
