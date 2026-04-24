@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.cetusConfig = {pkgs, ...}: {
+  flake.nixosModules.hostCetusConfig = {pkgs, ...}: {
     imports = [
       inputs.home-manager.nixosModules.home-manager
       inputs.sops-nix.nixosModules.sops
@@ -12,7 +12,7 @@
       self.nixosModules.userEnv
       self.nixosModules.server-services
 
-      self.nixosModules.cetusHardware
+      self.nixosModules.hostCetusHardware
     ];
 
     networking = {

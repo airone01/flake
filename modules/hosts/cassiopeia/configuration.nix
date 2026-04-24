@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.cassiopeiaConfig = {
+  flake.nixosModules.hostCassiopeiaConfig = {
     pkgs,
     config,
     ...
@@ -22,7 +22,7 @@
       self.nixosModules.wallpapers
       self.nixosModules.noctalia
 
-      self.nixosModules.cassiopeiaHardware
+      self.nixosModules.hostCassiopeiaHardware
     ];
 
     networking.hosts = {"127.0.0.1" = ["moggolist.fr" "localhost"];};

@@ -1,5 +1,5 @@
 _: {
-  flake.nixosModules.herculesHardware = {
+  flake.nixosModules.hostHerculesHardware = {
     lib,
     modulesPath,
     ...

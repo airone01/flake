@@ -1,5 +1,5 @@
 _: {
-  flake.nixosModules.lyraHardware = {
+  flake.nixosModules.hostLyraHardware = {
     lib,
     config,
     modulesPath,
