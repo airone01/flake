@@ -23,11 +23,6 @@ _: {
           "crypt_250gb".device = "/dev/disk/by-uuid/8c341c91-7646-41f1-aaa0-6a93e6c22b10";
         };
       };
-
-      loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
-      };
     };
 
     fileSystems = {

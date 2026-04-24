@@ -96,5 +96,10 @@
       clinfo # to check opencl
       lact # see above
     ];
+
+    boot.loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
 }

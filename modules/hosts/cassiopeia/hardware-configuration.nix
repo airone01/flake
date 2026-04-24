@@ -20,11 +20,6 @@ _: {
       };
 
       kernelModules = ["kvm-amd"];
-
-      loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
-      };
     };
 
     fileSystems."/" = {

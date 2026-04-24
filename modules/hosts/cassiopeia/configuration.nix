@@ -114,5 +114,10 @@
     environment.systemPackages = with pkgs; [
       mesa-demos # NVIDIA settings
     ];
+
+    boot.loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
 }
