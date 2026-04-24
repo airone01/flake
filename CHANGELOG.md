@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.6.1](https://github.com/airone01/flake/compare/flake-v11.6.0...flake-v11.6.1) (2026-04-24)
+
+
+### Documentation
+
+* clearer readme according to newer modules configuration ([#333](https://github.com/airone01/flake/issues/333)) ([351fee4](https://github.com/airone01/flake/commit/351fee46e7f1bc379e02896cb16bbc969c59a174))
+
 ## [11.6.0](https://github.com/airone01/flake/compare/flake-v11.5.0...flake-v11.6.0) (2026-04-24)
 
 
