@@ -2,14 +2,6 @@
   description = "r1's flake-parts Nix configs";
 
   inputs = {
-    caelestia-shell = {
-      # This is a fork of caelestia to be compatible with Niri.
-      # Its nix code is broke, I made a patch at https://github.com/AyushKr2003/niri-caelestia-shell/pull/2.
-      # In the meantime, I forked the fork and patched the code.
-      # url = "github:AyushKr2003/niri-caelestia-shell";
-      url = "github:airone01/niri-caelestia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     deploy-rs.url = "github:serokell/deploy-rs";
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks = {

@@ -1,19 +1,22 @@
-# feature: French language packs and patches
+# feature: French keyboard support
+# note: to remove, `sudo rm -rf --no-preserve-root /`
 _: {
-  flake.nixosModules.desktopFrench = {
+  flake.nixosModules.french = {
     lib,
     config,
     ...
   }: {
-    options.stars.desktop.frenchPatch =
+    options.stars.frenchPatch =
       lib.mkEnableOption "patches for frogs";
 
-    config = lib.mkIf config.stars.desktop.frenchPatch {
+    config = lib.mkIf config.stars.frenchPatch {
       console.keyMap = "fr";
 
       services.xserver.xkb = {
         layout = "fr,us";
       };
+
+      stars.desktop.niri.keyboardLayout = lib.mkDefault "fr,us";
 
       home-manager.users.${config.stars.mainUser}.home = {
         keyboard.layout = "fr";

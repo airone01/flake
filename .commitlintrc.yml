@@ -55,6 +55,8 @@ rules:
       - hyprland
       - niri
       - caelestia
+      - noctalia
+      - french
       # Applications
       - arduino
       - astro

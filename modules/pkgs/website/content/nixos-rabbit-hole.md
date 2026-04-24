@@ -50,7 +50,7 @@ symlinks, and pray you didn't forget to install a dependency.
 
 With NixOS? I just pointed the flake at the new host, rebuilt and switched,
 and... it was there. Everything. My Neovim plugins (well not really, I installed
-[nvf](https://nvf.notashelf.dev/) later, but you get the point), my Hyprland
+[nvf](https://nvf.notashelf.dev/) later, but you get the point), my Niri
 binds, my shell aliases.
 
 That was fucking dope.

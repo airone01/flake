@@ -9,9 +9,8 @@
     imports = [
       self.nixosModules.desktopAsusPatch
       self.nixosModules.desktopDualsensePatch
-      self.nixosModules.desktopFrench
       self.nixosModules.desktopGnome
-      self.nixosModules.desktopHyprland
+      self.nixosModules.french
     ];
 
     options.stars.desktop = {
@@ -33,6 +32,7 @@
         qFlipper
         qbittorrent
         ranger
+        spotify
         switcheroo
         vesktop # discord
         vlc
@@ -72,6 +72,7 @@
         builtins.elem (lib.getName pkg) [
           "discord"
           "obsidian"
+          "spotify"
         ];
 
       services = {
