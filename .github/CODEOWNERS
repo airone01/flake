@@ -4,12 +4,10 @@ lib/             @airone01
 modules/         @airone01
 
 .gitignore                 @airone01
-.repomixignore             @airone01
 .sops.yaml                 @airone01
 LICENSE                    @airone01
 README.md                  @airone01
 flake.nix                  @airone01
 justfile                   @airone01
 release-please-config.json @airone01
-repomix.config.json        @airone01
 
