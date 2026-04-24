@@ -44,7 +44,6 @@
                 if noctalia != null
                 then "${lib.getExe noctalia} ipc call launcher toggle"
                 else "${lib.getExe pkgs.rofi} -show drun";
-              "Mod+L".spawn = lib.getExe pkgs.hyprlock;
 
               # Apps
               "Mod+E".spawn = lib.getExe pkgs.thunar;
@@ -87,6 +86,9 @@
               "XF86AudioPlay".spawn = ["${lib.getExe pkgs.playerctl}" "play-pause"];
               "XF86AudioNext".spawn = ["${lib.getExe pkgs.playerctl}" "next"];
               "XF86AudioPrev".spawn = ["${lib.getExe pkgs.playerctl}" "previous"];
+            }
+            // lib.optionalAttrs (noctalia != null) {
+              "Mod+L".spawn-sh = "${lib.getExe noctalia} ipc call lockScreen lock";
             }
             // (builtins.listToAttrs (builtins.concatLists (builtins.genList (x: let
               ws = x + 1;
@@ -216,7 +218,6 @@ in {
         thunar
         yazi
         firefox
-        hyprlock
       ];
     };
   };
