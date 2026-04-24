@@ -28,7 +28,7 @@ _: {
     };
   };
 
-  flake.nixosModules.desktopDualsensePatch = {
+  flake.nixosModules.dualsensePatch = {
     lib,
     pkgs,
     config,
