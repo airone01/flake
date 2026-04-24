@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.6.0](https://github.com/airone01/flake/compare/flake-v11.5.0...flake-v11.6.0) (2026-04-24)
+
+
+### Features
+
+* noctalia ([#330](https://github.com/airone01/flake/issues/330)) ([e68f6c8](https://github.com/airone01/flake/commit/e68f6c813401753792415d0ba47c43ec07e3e565))
+
 ## [11.5.0](https://github.com/airone01/flake/compare/flake-v11.4.0...flake-v11.5.0) (2026-04-19)
 
 
