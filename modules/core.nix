@@ -51,8 +51,8 @@
           experimental-features = ["nix-command" "flakes"];
 
           builders-use-substitutes = true;
-          keep-derivations = true;
-          keep-outputs = true;
+          keep-derivations = false;
+          keep-outputs = false;
           auto-optimise-store = true;
           eval-cache = true;
           warn-dirty = false;
@@ -106,6 +106,10 @@
       programs = {
         nh = {
           enable = true;
+          clean = {
+            enable = true;
+            extraArgs = "--keep-since 7d --keep 3";
+          };
           flake = "${config.users.users.${config.stars.mainUser}.home}/.config/nixos";
         };
 
