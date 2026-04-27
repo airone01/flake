@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.7.0](https://github.com/airone01/flake/compare/flake-v11.6.2...flake-v11.7.0) (2026-04-27)
+
+
+### Features
+
+* **noctalia:** declarative config ([cff7a5a](https://github.com/airone01/flake/commit/cff7a5abf0e8276053d92f830da7c419564b5519))
+
 ## [11.6.2](https://github.com/airone01/flake/compare/flake-v11.6.1...flake-v11.6.2) (2026-04-24)
 
 
