@@ -24,7 +24,6 @@
         kitty
         localsend
         mc # midnight commander
-        mullvad-vpn
         ncspot # spotify
         obsidian
         pfetch
@@ -76,6 +75,13 @@
         ];
 
       services = {
+        resolved.enable = true;
+        mullvad-vpn = {
+          enable = true;
+          package = pkgs.mullvad-vpn;
+          enableEarlyBootBlocking = true;
+        };
+
         pipewire = {
           enable = true;
           alsa.enable = true;
@@ -83,7 +89,8 @@
           pulse.enable = true;
           jack.enable = true;
         };
-        # this is required to be explicitly set to false
+
+        # This is required to be explicitly set to false
         pulseaudio.enable = false;
 
         # TODO: check that this is useful and should be defined here
