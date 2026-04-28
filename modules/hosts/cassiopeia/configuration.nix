@@ -52,13 +52,6 @@
     };
 
     services = {
-      resolved.enable = true;
-
-      mullvad-vpn = {
-        enable = true;
-        enableEarlyBootBlocking = true;
-      };
-
       xserver.videoDrivers = [
         "nvidia"
         "amdgpu"
