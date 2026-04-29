@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.7.1](https://github.com/airone01/flake/compare/flake-v11.7.0...flake-v11.7.1) (2026-04-29)
+
+
+### Bug Fixes
+
+* **mullvad:** move to desktop feat and fix ([28d6426](https://github.com/airone01/flake/commit/28d64266e9bc2fccd854877e99ff99964b1c7f73))
+
 ## [11.7.0](https://github.com/airone01/flake/compare/flake-v11.6.2...flake-v11.7.0) (2026-04-27)
 
 
