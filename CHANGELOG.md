@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.7.2](https://github.com/airone01/flake/compare/flake-v11.7.1...flake-v11.7.2) (2026-04-30)
+
+
+### Bug Fixes
+
+* **flake:** re-enable garbage collection ([6371501](https://github.com/airone01/flake/commit/63715014a1539c954cad63fff3fa97a839048bd4))
+
 ## [11.7.1](https://github.com/airone01/flake/compare/flake-v11.7.0...flake-v11.7.1) (2026-04-29)
 
 
