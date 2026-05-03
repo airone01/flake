@@ -40,6 +40,7 @@
         niri.enable = true;
         noctalia.enable = true;
         wallpapers.enable = true;
+        vpn.enable = true;
       };
       frenchPatch = true;
       asusPatch = true;

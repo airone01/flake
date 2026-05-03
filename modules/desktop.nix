@@ -11,6 +11,7 @@
       self.nixosModules.dualsensePatch
       self.nixosModules.gnome
       self.nixosModules.french
+      self.nixosModules.vpn
     ];
 
     options.stars.desktop = {
@@ -27,7 +28,6 @@
         ncspot # spotify
         obsidian
         pfetch
-        protonvpn-gui
         qFlipper
         qbittorrent
         ranger
@@ -76,11 +76,6 @@
 
       services = {
         resolved.enable = true;
-        mullvad-vpn = {
-          enable = true;
-          package = pkgs.mullvad-vpn;
-          enableEarlyBootBlocking = true;
-        };
 
         pipewire = {
           enable = true;

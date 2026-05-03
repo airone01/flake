@@ -35,6 +35,7 @@
         noctalia.enable = true;
         ratePatch = true;
         wallpapers.enable = true;
+        vpn.enable = true;
       };
       dev = true;
       dualsensePatch = true;
