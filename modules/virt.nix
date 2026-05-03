@@ -36,12 +36,12 @@ _: {
 
       services.spice-vdagentd.enable = true;
 
-      # module options to get OSX-KVM working
-      boot.extraModprobeConfig = ''
-        options kvm_intel nested=1
-        options kvm_intel emulate_invalid_guest_state=0
-        options kvm ignore_msrs=1
-      '';
+      # # module options to get OSX-KVM working
+      # boot.extraModprobeConfig = ''
+      #   options kvm_intel nested=1
+      #   options kvm_intel emulate_invalid_guest_state=0
+      #   options kvm ignore_msrs=1
+      # '';
 
       users.users.${config.stars.mainUser}.extraGroups = ["docker" "libvirtd"];
     };

@@ -11,6 +11,7 @@
       self.nixosModules.core
       self.nixosModules.userEnv
       self.nixosModules.server-services
+      self.nixosModules.virt
 
       self.nixosModules.hostCetusHardware
     ];
@@ -39,6 +40,7 @@
         traefik.enable = true;
         mcheads.enable = true;
       };
+      virt = true;
     };
 
     systemd.services.nix-daemon.serviceConfig = {
