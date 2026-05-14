@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.8.0](https://github.com/airone01/flake/compare/flake-v11.7.2...flake-v11.8.0) (2026-05-14)
+
+
+### Features
+
+* add mullvad browser and move vpn stuff ([b3fd09e](https://github.com/airone01/flake/commit/b3fd09eaa01ad32a843abaa6be1b61c5f3f534c2))
+
 ## [11.7.2](https://github.com/airone01/flake/compare/flake-v11.7.1...flake-v11.7.2) (2026-04-30)
 
 
