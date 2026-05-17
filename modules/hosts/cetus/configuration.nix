@@ -41,8 +41,8 @@
 
         wireguard.client = {
           enable = true;
-          serverEndpoint = "CHANGE_ME_PUB_IP:51820";
-          serverPublicKey = "CHANGE_ME_WG_PUBKEY";
+          serverEndpoint = "84.235.228.86:51820";
+          serverPublicKey = "nVwD5clPmYIMsV/kNaQn8z8I7QJVb4M5aXLN+f3LjgI=";
         };
       };
       virt = true;
