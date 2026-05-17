@@ -66,7 +66,7 @@
     options.stars.server.website.enable =
       lib.mkEnableOption "the blog";
 
-    config = lib.mkIf config.stars.website.enable {
+    config = lib.mkIf config.stars.server.website.enable {
       services = {
         # NGINX is probably overkill for serving static files
         # TODO: find a better way

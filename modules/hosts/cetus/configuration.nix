@@ -37,8 +37,13 @@
         hercules-ci.enable = true;
         gitea.enable = true;
         searchix.enable = true;
-        traefik.enable = true;
         mcheads.enable = true;
+
+        wireguard.client = {
+          enable = true;
+          serverEndpoint = "CHANGE_ME_PUB_IP:51820";
+          serverPublicKey = "CHANGE_ME_WG_PUBKEY";
+        };
       };
       virt = true;
     };

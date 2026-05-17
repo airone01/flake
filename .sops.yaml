@@ -7,7 +7,15 @@ keys:
   - &cetus age1lw73ydjttuaxyzlx6tez8jcxakt62yxf5q84swk6ut6sq36p3qqqra67v3
   - &lyra age1u27xlvk5slpyeryp7h5st6surn87rvlz0zsjvr9utn0p98kjw43qf68dql
 creation_rules:
-  - path_regex: secrets/(anubis|gitea)\.yaml$
+  # Anubis key: both Cetus (gitea/searchix Anubis) and Hercules (website Anubis) need it
+  - path_regex: secrets/anubis\.yaml$
+    key_groups:
+      - age:
+          - *backup
+          - *cetus
+          - *hercules
+  # Gitea DB password: stays on Cetus only
+  - path_regex: secrets/gitea\.yaml$
     key_groups:
       - age:
           - *backup
@@ -18,3 +26,14 @@ creation_rules:
           - *backup
           - *cetus
           - *hercules
+  # WireGuard private keys: each host only decrypts its own
+  - path_regex: secrets/wireguard-hercules\.yaml$
+    key_groups:
+      - age:
+          - *backup
+          - *hercules
+  - path_regex: secrets/wireguard-cetus\.yaml$
+    key_groups:
+      - age:
+          - *backup
+          - *cetus
