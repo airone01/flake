@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.8.1](https://github.com/airone01/flake/compare/flake-v11.8.0...flake-v11.8.1) (2026-05-17)
+
+
+### Bug Fixes
+
+* **website:** new theme ([42d3f9a](https://github.com/airone01/flake/commit/42d3f9a5c5a3da919b4d2456b9a0166346d6f47f))
+
 ## [11.8.0](https://github.com/airone01/flake/compare/flake-v11.7.2...flake-v11.8.0) (2026-05-14)
 
 
