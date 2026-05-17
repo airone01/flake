@@ -20,12 +20,8 @@ in {
     pre-commit = {
       check.enable = true;
       settings = {
-        # filename shenanigans
-        excludes = preCommitExcludes;
-
-        hooks = {
-          treefmt.enable = true; # formatting and deadnix/statix fixes
-        };
+        excludes = preCommitExcludes; # filename shenanigans
+        hooks.treefmt.enable = true; # formatting and deadnix/statix fixes
       };
     };
 
