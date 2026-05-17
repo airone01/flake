@@ -22,7 +22,9 @@ _: {
         };
       };
 
-      users.users.traefik.extraGroups = ["anubis"];
+      users.users.traefik = lib.mkIf config.stars.server.traefik.enable {
+        extraGroups = ["anubis"];
+      };
 
       sops.secrets."anubis/mainsite_key" = {
         owner = "anubis";
