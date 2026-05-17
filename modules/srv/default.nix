@@ -11,6 +11,8 @@
       self.nixosModules.ssh
       self.nixosModules.traefik
       self.nixosModules.vaultwarden
+      self.nixosModules.website
+      self.nixosModules.wireguard
     ];
   };
 }

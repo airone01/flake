@@ -26,8 +26,44 @@
       userEnv = true;
       server = {
         ssh.enable = true;
-
         hercules-ci.enable = true;
+
+        traefik.enable = true;
+        anubis.enable = true;
+        website.enable = true;
+
+        wireguard.server = {
+          enable = true;
+          cetusPublicKey = "CHANGE_ME_WG_PUBKEY";
+        };
+      };
+    };
+
+    services.traefik.dynamicConfigOptions.http = {
+      routers = {
+        searchix = {
+          rule = "Host(`searchix.air1.one`)";
+          service = "searchix";
+          entryPoints = ["websecure"];
+          tls.certResolver = "le";
+        };
+        gitea = {
+          rule = "Host(`git.air1.one`)";
+          service = "gitea";
+          entryPoints = ["websecure"];
+          tls.certResolver = "le";
+        };
+        mcheads = {
+          rule = "Host(`mc.air1.one`)";
+          service = "mcheads";
+          entryPoints = ["websecure"];
+          tls.certResolver = "le";
+        };
+      };
+      services = {
+        searchix.loadBalancer.servers = [{url = "http://10.100.0.2:3033";}]; # Anubis on Cetus
+        gitea.loadBalancer.servers = [{url = "http://10.100.0.2:3031";}]; # Anubis on Cetus
+        mcheads.loadBalancer.servers = [{url = "http://10.100.0.2:8080";}]; # MCHeads on Cetus
       };
     };
 
