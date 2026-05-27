@@ -1,5 +1,18 @@
 # Changelog
 
+## [11.10.0](https://github.com/airone01/flake/compare/flake-v11.9.0...flake-v11.10.0) (2026-05-27)
+
+
+### Features
+
+* **ai:** claude-code, gemini-cli ([7af80cd](https://github.com/airone01/flake/commit/7af80cd20c521c32d96e102dda0a509e69308c8e))
+* **dev:** tmpdir & gtf aliases ([19f10be](https://github.com/airone01/flake/commit/19f10be65cf76f9b6ebeba27be7e2dbdeb272ea7))
+
+
+### Bug Fixes
+
+* **flake:** pre-commit hook ([85312bf](https://github.com/airone01/flake/commit/85312bf88f99e2a431dac73661534f4428fa3f7c))
+
 ## [11.9.0](https://github.com/airone01/flake/compare/flake-v11.8.1...flake-v11.9.0) (2026-05-27)
 
 
