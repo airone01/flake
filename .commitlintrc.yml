@@ -101,6 +101,7 @@ rules:
       - nvidia
       - gaming
       # Development
+      - ai
       - dev
       - python
       - rust
