@@ -16,7 +16,11 @@ in {
     inputs.git-hooks.flakeModule
   ];
 
-  perSystem = {pkgs, ...}: {
+  perSystem = {
+    pkgs,
+    config,
+    ...
+  }: {
     pre-commit = {
       check.enable = true;
       settings = {
@@ -45,6 +49,7 @@ in {
         deploy-rs
         just
       ];
+      shellHook = config.pre-commit.installationScript;
     };
 
     devShells.commitlint = pkgs.mkShell {
