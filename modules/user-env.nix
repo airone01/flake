@@ -29,6 +29,7 @@ _: {
             gtaa = "git add .";
             gtaan = "git add -N .";
             gtaac = "git add . && git commit";
+            gtf = "git fetch";
             gtc = "git commit";
             gtcc = "git checkout";
             gtccb = "git checkout -b";
@@ -49,6 +50,8 @@ _: {
             # just
             jts = "just switch";
             jtc = "just check";
+
+            tmpdir = "cd $(mktemp -d)";
           };
         };
 
