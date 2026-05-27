@@ -34,7 +34,7 @@
 
         wireguard.server = {
           enable = true;
-          cetusPublicKey = "j9diCNMlehtrvDgCnQfMS0qI2Q/b7Wbo5HRBIUSMUV4=";
+          cetusPublicKey = "nVwD5clPmYIMsV/kNaQn8z8I7QJVb4M5aXLN+f3LjgI=";
         };
       };
     };
