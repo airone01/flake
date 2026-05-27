@@ -3,7 +3,7 @@ keys:
   - &backup age1gh0a3deq5u57vz655w659lspx3x3jk4p2p6tv0w3t9lzm57pkfwslwa9za
   # hosts
   - &cassiopeia age15ptmy54dcgrz7aa5k6jjutgrkj9x8cfcecnmy6uqkp2l7m5muvzskdtsnf
-  - &hercules age1gawacww0wxtfxuaajx0lvnnzfpe9x7ghf4694pgzc2fgn5hwngzq38v2nd
+  - &hercules age1ndfm0f6pmhu9gy7us8j39n5zd0985vtvaqz24dktua895gzkvvzs54fhsn
   - &cetus age1lw73ydjttuaxyzlx6tez8jcxakt62yxf5q84swk6ut6sq36p3qqqra67v3
   - &lyra age1u27xlvk5slpyeryp7h5st6surn87rvlz0zsjvr9utn0p98kjw43qf68dql
 creation_rules:
