@@ -1,5 +1,23 @@
 # Changelog
 
+## [11.9.0](https://github.com/airone01/flake/compare/flake-v11.8.1...flake-v11.9.0) (2026-05-27)
+
+
+### Features
+
+* **secrets:** cetus wireguard ([7c7cc3f](https://github.com/airone01/flake/commit/7c7cc3f6db02b7d360fb2d3098181299170b2b1e))
+* **secrets:** hercules wireguard ([0a9e98a](https://github.com/airone01/flake/commit/0a9e98aaabf331e915188bd0da0aefc34cc9299b))
+* **srv:** wireguard routing ([a5153fd](https://github.com/airone01/flake/commit/a5153fdda4cbf6286d210cdf8278828264ba8246))
+
+
+### Bug Fixes
+
+* **anubis:** missing condition ([ac1714f](https://github.com/airone01/flake/commit/ac1714f8fdaadd012cd9b6ebbde687760587a19c))
+* **secrets:** re-encrypt anubis for hercules ([d62fd9f](https://github.com/airone01/flake/commit/d62fd9f596c3bccbd22e08dce8285d2579bff77a))
+* **secret:** typo in wireguard keys entries ([9c0c541](https://github.com/airone01/flake/commit/9c0c5413642aaa3900fe63e862128e291fbd5f0f))
+* **wireguard:** change port to avoid isp restrictions ([7603237](https://github.com/airone01/flake/commit/7603237a2fdad06dca78ec729f48332f664f3911))
+* **wireguard:** exchange pub keys ([60215ca](https://github.com/airone01/flake/commit/60215caded93a33957a58590839d4b75f18789d0))
+
 ## [11.8.1](https://github.com/airone01/flake/compare/flake-v11.8.0...flake-v11.8.1) (2026-05-17)
 
 
