@@ -17,7 +17,7 @@ _: {
   }: let
     herculesIp = "10.100.0.1";
     cetusIp = "10.100.0.2";
-    wgPort = 51820;
+    wgPort = 13231; # non-default port to avoid ISP blocking of 51820
   in {
     options.stars.server.wireguard = {
       server = {

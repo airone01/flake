@@ -41,7 +41,7 @@
 
         wireguard.client = {
           enable = true;
-          serverEndpoint = "84.235.228.86:51820";
+          serverEndpoint = "84.235.228.86:13231";
           serverPublicKey = "j9diCNMlehtrvDgCnQfMS0qI2Q/b7Wbo5HRBIUSMUV4=";
         };
       };
