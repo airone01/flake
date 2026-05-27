@@ -21,6 +21,7 @@
       self.nixosModules.virt
       self.nixosModules.wallpapers
       self.nixosModules.noctalia
+      self.nixosModules.ai
 
       self.nixosModules.hostCassiopeiaHardware
     ];
@@ -47,6 +48,7 @@
       dev = true;
       dualsensePatch = true;
       gaming = true;
+      ai.enable = true;
       nvim = true;
       prettyBoot = true;
       virt = true;
