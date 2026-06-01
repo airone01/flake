@@ -11,22 +11,23 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
 
+      self.nixosModules.ai
       self.nixosModules.core
       self.nixosModules.desktop
       self.nixosModules.niri
       self.nixosModules.dev
       self.nixosModules.gaming
+      self.nixosModules.ios
       self.nixosModules.prettyBoot
       self.nixosModules.nvim
       self.nixosModules.virt
       self.nixosModules.wallpapers
       self.nixosModules.noctalia
-      self.nixosModules.ai
 
       self.nixosModules.hostCassiopeiaHardware
     ];
 
-    networking.hosts = {"127.0.0.1" = ["moggolist.fr" "localhost"];};
+    networking.hosts = {"127.0.0.1" = ["moggo" "moggolist.fr" "localhost"];};
 
     networking.hostName = "cassiopeia";
     system.stateVersion = "25.05"; # never change this
@@ -48,7 +49,8 @@
       dev = true;
       dualsensePatch = true;
       gaming = true;
-      ai.enable = true;
+      ai = true;
+      ios = true;
       nvim = true;
       prettyBoot = true;
       virt = true;

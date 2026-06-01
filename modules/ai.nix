@@ -4,10 +4,10 @@ _: {
     config,
     ...
   }: {
-    options.stars.ai.enable =
+    options.stars.ai =
       lib.mkEnableOption "AIs and LLMs";
 
-    config = lib.mkIf config.stars.ai.enable {
+    config = lib.mkIf config.stars.ai {
       home-manager.users.${config.stars.mainUser}.programs = {
         claude-code = {
           enable = true;
