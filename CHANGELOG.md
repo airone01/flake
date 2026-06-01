@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.12.0](https://github.com/airone01/flake/compare/flake-v11.11.0...flake-v11.12.0) (2026-06-01)
+
+
+### Features
+
+* **flake:** compatibility later ([43d1a2c](https://github.com/airone01/flake/commit/43d1a2ce6e382438210ee61cacbd5e274994c689))
+
 ## [11.11.0](https://github.com/airone01/flake/compare/flake-v11.10.1...flake-v11.11.0) (2026-06-01)
 
 
