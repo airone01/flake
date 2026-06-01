@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.10.1](https://github.com/airone01/flake/compare/flake-v11.10.0...flake-v11.10.1) (2026-06-01)
+
+
+### Bug Fixes
+
+* **flake:** implement patches module that disables checks for pipx and ldap ([f1a8da4](https://github.com/airone01/flake/commit/f1a8da49ad1a70e3b6360dec9c72a196c8627b87))
+
 ## [11.10.0](https://github.com/airone01/flake/compare/flake-v11.9.0...flake-v11.10.0) (2026-05-27)
 
 
