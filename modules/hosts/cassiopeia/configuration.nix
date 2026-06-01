@@ -36,6 +36,7 @@
       mainUser = "r1";
 
       core = true;
+      compat.fwd_2605.enable = true;
       desktop = {
         enable = true;
         niri.enable = true;
