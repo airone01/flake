@@ -1,12 +1,16 @@
 # feature: common settings
-{inputs, ...}: {
+{
+  inputs,
+  self,
+  ...
+}: {
   flake.nixosModules.core = {
     lib,
     pkgs,
     config,
     ...
   }: {
-    imports = [inputs.sops-nix.nixosModules.sops];
+    imports = [inputs.sops-nix.nixosModules.sops self.nixosModules.patches];
 
     options.stars = {
       mainUser = lib.mkOption {
