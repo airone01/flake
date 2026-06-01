@@ -83,7 +83,7 @@ _: {
               key = "~/.ssh/id_ed25519.pub";
               signByDefault = true;
             };
-            extraConfig = {
+            settings = {
               gpg.format = "ssh";
               gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
             };

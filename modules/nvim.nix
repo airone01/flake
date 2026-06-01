@@ -106,8 +106,7 @@
                 enable = true;
                 format.type = ["biome"];
               };
-              tailwind.enable = true;
-              ts = {
+              typescript = {
                 enable = true;
                 format.type = ["biome" "prettier"];
               };
@@ -121,8 +120,12 @@
             lsp = {
               enable = true;
 
+              presets = {
+                tailwindcss-language-server.enable = true;
+                harper.enable = true;
+              };
+
               formatOnSave = true;
-              harper-ls.enable = true;
               # show code actions even when there are no lsp warns/errors
               lightbulb.enable = true;
               # "signature": box that appears when e.g. you start typing args of a function
