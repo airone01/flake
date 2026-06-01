@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.12.1](https://github.com/airone01/flake/compare/flake-v11.12.0...flake-v11.12.1) (2026-06-01)
+
+
+### Bug Fixes
+
+* **flake:** patch some warnings ([40f09f4](https://github.com/airone01/flake/commit/40f09f42955d2dd61e0b3f4c5cd1c3824d4dff21))
+
 ## [11.12.0](https://github.com/airone01/flake/compare/flake-v11.11.0...flake-v11.12.0) (2026-06-01)
 
 
