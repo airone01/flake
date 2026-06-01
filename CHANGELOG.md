@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.11.0](https://github.com/airone01/flake/compare/flake-v11.10.1...flake-v11.11.0) (2026-06-01)
+
+
+### Features
+
+* ios support ([4bb52af](https://github.com/airone01/flake/commit/4bb52af1f2174ba6b885697cd0617f2fcb2ac7a8))
+
 ## [11.10.1](https://github.com/airone01/flake/compare/flake-v11.10.0...flake-v11.10.1) (2026-06-01)
 
 
