@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.12.2](https://github.com/airone01/flake/compare/flake-v11.12.1...flake-v11.12.2) (2026-06-05)
+
+
+### Bug Fixes
+
+* **flake:** openldap builds ([2aaf9d4](https://github.com/airone01/flake/commit/2aaf9d4eeb995e8e27005dd9a27cd5711c2a6e1a))
+
 ## [11.12.1](https://github.com/airone01/flake/compare/flake-v11.12.0...flake-v11.12.1) (2026-06-01)
 
 
