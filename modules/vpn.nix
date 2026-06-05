@@ -11,7 +11,7 @@ _: {
     config = lib.mkIf config.stars.desktop.vpn.enable {
       environment.systemPackages = with pkgs; [
         mullvad-browser
-        protonvpn-gui
+        proton-vpn
         tor
         tor-browser
       ];

@@ -167,6 +167,8 @@ in {
       done
     '';
   in {
+    imports = [inputs.clipboard-sync.nixosModules.default];
+
     options.stars.desktop.niri = {
       enable = lib.mkEnableOption "Niri desktop environment";
       keyboardLayout = lib.mkOption {
@@ -177,6 +179,8 @@ in {
     };
 
     config = lib.mkIf config.stars.desktop.niri.enable {
+      services.clipboard-sync.enable = true;
+
       environment.sessionVariables = {
         NIXOS_OZONE_WL = "1";
         MOZ_ENABLE_WAYLAND = "1";
