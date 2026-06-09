@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.12.3](https://github.com/airone01/flake/compare/flake-v11.12.2...flake-v11.12.3) (2026-06-09)
+
+
+### Bug Fixes
+
+* **niri:** enable high refresh rate ([7fccfb6](https://github.com/airone01/flake/commit/7fccfb6180a0c67f6294ca53f87e8c9d781a75de))
+
 ## [11.12.2](https://github.com/airone01/flake/compare/flake-v11.12.1...flake-v11.12.2) (2026-06-05)
 
 
