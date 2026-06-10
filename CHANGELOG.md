@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.12.4](https://github.com/airone01/flake/compare/flake-v11.12.3...flake-v11.12.4) (2026-06-10)
+
+
+### Bug Fixes
+
+* **virt:** remove groups for user ([21b09ed](https://github.com/airone01/flake/commit/21b09ed0af7fdd3cb96ad329bf66d73662761284))
+
 ## [11.12.3](https://github.com/airone01/flake/compare/flake-v11.12.2...flake-v11.12.3) (2026-06-09)
 
 
