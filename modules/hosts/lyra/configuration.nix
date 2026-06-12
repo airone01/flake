@@ -105,6 +105,10 @@
         efiSupport = true;
         device = "nodev"; # "nodev" for UEFI
         theme = pkgs.minimal-grub-theme;
+        # /boot is only 511M; without a limit GRUB keeps every generation's
+        # kernel+initrd (~100M each) and fills the ESP. Cap the menu so old
+        # boot files get pruned on each rebuild.
+        configurationLimit = 10;
       };
       efi.canTouchEfiVariables = true;
     };
