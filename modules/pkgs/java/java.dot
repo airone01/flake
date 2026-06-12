@@ -73,6 +73,7 @@ digraph JavaBootstrapJPB {
     COM_LAN3 [label="commons-lang3", fillcolor="#dcfce7", color="#15803d"];
     SLF_API  [label="slf4j-api",     fillcolor="#dcfce7", color="#15803d"];
     SLF_SMP  [label="slf4j-simple",  fillcolor="#dcfce7", color="#15803d"];
+    JSPECIFY [label="jspecify",      fillcolor="#dcfce7", color="#15803d"];
     JSOUP    [label="jsoup",         fillcolor="#dcfce7", color="#15803d"];
   }
 
@@ -162,7 +163,7 @@ digraph JavaBootstrapJPB {
   JC -> COM_LAN3;
   JC -> SLF_API;
   JC -> SLF_SMP;
-  JC -> JSOUP;
+  JC -> JSPECIFY;
   JC -> WAG_API;
   JC -> WAG_HTSH;
   JC -> WAG_FILE;
@@ -205,6 +206,9 @@ digraph JavaBootstrapJPB {
   SISU_INJ -> SISU_PLEX;
   JX_CDI -> SISU_PLEX;
   PL_CA -> SISU_PLEX;
+
+  // ── Commons / misc internal ──
+  JSPECIFY -> JSOUP;
 
   // ── Wagon classpath order ──
   WAG_API -> WAG_FILE;
