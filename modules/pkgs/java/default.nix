@@ -15,12 +15,16 @@
 #                  last release fully bootstrappable from bootstrap.sh + javac.
 # - ant:           overrides the nixpkgs (binary) ant with a from-source 1.10.15
 #                  built via the bootstrap ant, compiled against our junit_4.
+# - jspecify:      new attr; pure nullness annotations, javac-only leaf.
+# - jsoup:         new attr; HTML parser, javac build, compiled against jspecify.
 {inputs, ...}: let
   overlay = final: _prev: {
     java-hamcrest = final.callPackage ./java-hamcrest/_package.nix {};
     junit_4 = final.callPackage ./junit_4/_package.nix {};
     ant_1_7 = final.callPackage ./ant_1_7/_package.nix {};
     ant = final.callPackage ./ant/_package.nix {};
+    jspecify = final.callPackage ./jspecify/_package.nix {};
+    jsoup = final.callPackage ./jsoup/_package.nix {};
   };
 in {
   # Reusable overlay output (e.g. for downstream flakes or `nix build`).
