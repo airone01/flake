@@ -10,7 +10,7 @@
     config,
     ...
   }: {
-    imports = [inputs.sops-nix.nixosModules.sops self.nixosModules.patches self.nixosModules.compat];
+    imports = [inputs.sops-nix.nixosModules.sops self.nixosModules.patches self.nixosModules.compat self.nixosModules.java];
 
     options.stars = {
       mainUser = lib.mkOption {
