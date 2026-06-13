@@ -17,6 +17,10 @@
 #                  built via the bootstrap ant, compiled against our junit_4.
 # - jspecify:      new attr; pure nullness annotations, javac-only leaf.
 # - jsoup:         new attr; HTML parser, javac build, compiled against jspecify.
+# - commons-cli:   new attr; CLI argument parsing, javac-only leaf.
+# - commons-io:    new attr; IO utilities, javac-only leaf.
+# - commons-lang:  new attr; java.lang extras (2.x API), javac-only leaf.
+# - commons-lang3: new attr; java.lang extras (3.x API), javac-only leaf.
 {inputs, ...}: let
   overlay = final: _prev: {
     java-hamcrest = final.callPackage ./java-hamcrest/_package.nix {};
@@ -25,6 +29,10 @@
     ant = final.callPackage ./ant/_package.nix {};
     jspecify = final.callPackage ./jspecify/_package.nix {};
     jsoup = final.callPackage ./jsoup/_package.nix {};
+    commons-cli = final.callPackage ./commons-cli/_package.nix {};
+    commons-io = final.callPackage ./commons-io/_package.nix {};
+    commons-lang = final.callPackage ./commons-lang/_package.nix {};
+    commons-lang3 = final.callPackage ./commons-lang3/_package.nix {};
   };
 in {
   # Reusable overlay output (e.g. for downstream flakes or `nix build`).
