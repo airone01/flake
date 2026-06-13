@@ -71,10 +71,32 @@ digraph JavaBootstrapJPB {
     COM_IO   [label="commons-io",    fillcolor="#dcfce7", color="#15803d"];
     COM_LANG [label="commons-lang",  fillcolor="#dcfce7", color="#15803d"];
     COM_LAN3 [label="commons-lang3", fillcolor="#dcfce7", color="#15803d"];
-    SLF_API  [label="slf4j-api",     fillcolor="#dcfce7", color="#15803d"];
-    SLF_SMP  [label="slf4j-simple",  fillcolor="#dcfce7", color="#15803d"];
     JSPECIFY [label="jspecify",      fillcolor="#dcfce7", color="#15803d"];
     JSOUP    [label="jsoup",         fillcolor="#dcfce7", color="#15803d"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // Logging (SLF4J + Logback)
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_logging {
+    label="Logging";
+    style="rounded,filled"; fillcolor="#f0fdf4"; color="#166534"; fontcolor="#14532d"; fontname="Helvetica-Bold";
+    SLF_API      [label="slf4j-api",        fillcolor="#bbf7d0", color="#166534"];
+    SLF_SMP      [label="slf4j-simple",     fillcolor="#bbf7d0", color="#166534"];
+    LOGBACK_CORE [label="logback-core",     fillcolor="#bbf7d0", color="#166534"];
+    LOGBACK      [label="logback-classic",  fillcolor="#bbf7d0", color="#166534"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // HttpComponents (compile deps of wagon-http and httpclient)
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_httpcomp {
+    label="HttpComponents 4.3.x";
+    style="rounded,filled"; fillcolor="#f0f9ff"; color="#0369a1"; fontcolor="#0c4a6e"; fontname="Helvetica-Bold";
+    COM_LOG    [label="commons-logging 1.1.3", fillcolor="#e0f2fe", color="#0369a1"];
+    COM_CODEC  [label="commons-codec 1.6",     fillcolor="#e0f2fe", color="#0369a1"];
+    HTTPCORE   [label="httpcore 4.3.2",        fillcolor="#e0f2fe", color="#0369a1"];
+    HTTPCLIENT [label="httpclient 4.3.5",      fillcolor="#bae6fd", color="#0369a1"];
   }
 
   // ════════════════════════════════════════════════════════════
@@ -164,6 +186,12 @@ digraph JavaBootstrapJPB {
   JC -> SLF_API;
   JC -> SLF_SMP;
   JC -> JSPECIFY;
+  JC -> LOGBACK_CORE;
+  JC -> LOGBACK;
+  JC -> COM_LOG;
+  JC -> COM_CODEC;
+  JC -> HTTPCORE;
+  JC -> HTTPCLIENT;
   JC -> WAG_API;
   JC -> WAG_HTSH;
   JC -> WAG_FILE;
@@ -195,37 +223,64 @@ digraph JavaBootstrapJPB {
   JU4 -> ANT;
 
   // ── Plexus internal ──
+  PL_UTIL -> PL_SEC;
   PL_CIPH -> PL_SEC;
   JC -> PL_SEC;
 
   // ── DI primitives ──
   JX_INJ -> GUICE;
-  AOPAL -> GUICE;
+  AOPAL  -> GUICE;
+  GUAVA  -> GUICE;
   JX_JSR -> JX_CDI;
-  GUICE -> SISU_INJ;
-  SISU_INJ -> SISU_PLEX;
-  JX_CDI -> SISU_PLEX;
-  PL_CA -> SISU_PLEX;
+  GUICE      -> SISU_INJ;
+  SISU_INJ   -> SISU_PLEX;
+  JX_CDI     -> SISU_PLEX;
+  PL_CA      -> SISU_PLEX;
+  PL_CW      -> SISU_PLEX;
+  PL_UTIL    -> SISU_PLEX;
+  GUICE      -> SISU_PLEX;
 
   // ── Commons / misc internal ──
+  // jspecify is a provided (compile-only annotation) dep of jsoup 1.17.2
   JSPECIFY -> JSOUP;
+  // wagon-http-shared 2.10 specifies jsoup:1.7.2; our overlay supplies 1.17.2
+  JSOUP -> WAG_HTSH;
+
+  // ── Logging ──
+  SLF_API      -> LOGBACK;
+  LOGBACK_CORE -> LOGBACK;
+  // logback-core and logback-classic optional deps (janino, jansi, groovy,
+  // servlet-api, JavaMail, JMS) are all <optional>true</optional> in pom;
+  // a minimal javac build excludes those source files and needs nothing more.
+
+  // ── HttpComponents internal ──
+  HTTPCORE   -> HTTPCLIENT;
+  COM_LOG    -> HTTPCLIENT;
+  COM_CODEC  -> HTTPCLIENT;
 
   // ── Wagon classpath order ──
-  WAG_API -> WAG_FILE;
-  WAG_API -> WAG_HTTP;
-  WAG_HTSH -> WAG_HTTP;
+  WAG_API    -> WAG_FILE;
+  WAG_API    -> WAG_HTTP;
+  WAG_HTSH   -> WAG_HTTP;
+  COM_LANG   -> WAG_FILE;
+  COM_LANG   -> WAG_HTSH;
+  COM_IO     -> WAG_HTSH;
+  // wagon-http directly lists httpclient, httpcore, commons-logging in its pom
+  HTTPCLIENT -> WAG_HTTP;
+  HTTPCORE   -> WAG_HTTP;
+  COM_LOG    -> WAG_HTTP;
 
   // ── Aether classpath order ──
-  AE_API -> AE_SPI;
-  AE_API -> AE_UTIL;
-  AE_API -> AE_IMPL;
-  AE_SPI -> AE_IMPL;
+  AE_API  -> AE_SPI;
+  AE_API  -> AE_UTIL;
+  AE_API  -> AE_IMPL;
+  AE_SPI  -> AE_IMPL;
   AE_UTIL -> AE_IMPL;
-  AE_API -> AE_CONN;
-  AE_SPI -> AE_CONN;
+  AE_API  -> AE_CONN;
+  AE_SPI  -> AE_CONN;
   AE_UTIL -> AE_CONN;
-  AE_API -> AE_TRAN;
-  AE_SPI -> AE_TRAN;
+  AE_API  -> AE_TRAN;
+  AE_SPI  -> AE_TRAN;
   WAG_API -> AE_TRAN;
 
   // ── Modello generates Maven model sources ──
@@ -234,54 +289,95 @@ digraph JavaBootstrapJPB {
   MODELLO -> M_REPOM;
 
   // ── Maven module compile order ──
-  M_MODEL -> M_MODELB;
-  M_BUILD -> M_MODELB;
-  PL_INTP -> M_MODELB;
-  GUAVA -> M_MODELB;
-  M_SET -> M_SETB;
-  PL_SEC -> M_SETB;
-  M_ART -> M_CORE;
-  M_MODEL -> M_CORE;
-  M_MODELB -> M_CORE;
-  M_SETB -> M_CORE;
-  M_REPOM -> M_CORE;
-  M_PLUG -> M_CORE;
-  M_AETHP -> M_CORE;
-  AE_API -> M_AETHP;
+  // maven-model-builder
+  M_MODEL  -> M_MODELB;
+  M_BUILD  -> M_MODELB;
+  M_ART    -> M_MODELB;
+  PL_INTP  -> M_MODELB;
+  PL_CA    -> M_MODELB;
+  PL_UTIL  -> M_MODELB;
+  GUAVA    -> M_MODELB;
+  COM_LAN3 -> M_MODELB;
+
+  // maven-settings-builder
+  M_SET    -> M_SETB;
+  M_BUILD  -> M_SETB;
+  PL_SEC   -> M_SETB;
+  PL_CA    -> M_SETB;
+  PL_INTP  -> M_SETB;
+  PL_UTIL  -> M_SETB;
+  COM_LAN3 -> M_SETB;
+
+  // maven-aether-provider
+  AE_API  -> M_AETHP;
   AE_UTIL -> M_AETHP;
   AE_CONN -> M_AETHP;
   AE_TRAN -> M_AETHP;
-  AE_IMPL -> M_CORE;
+
+  // maven-core
+  M_ART    -> M_CORE;
+  M_MODEL  -> M_CORE;
+  M_MODELB -> M_CORE;
+  M_SET    -> M_CORE;
+  M_SETB   -> M_CORE;
+  M_REPOM  -> M_CORE;
+  M_PLUG   -> M_CORE;
+  M_AETHP  -> M_CORE;
+  AE_API   -> M_CORE;
+  AE_IMPL  -> M_CORE;
+  AE_UTIL  -> M_CORE;
   SISU_PLEX -> M_CORE;
-  GUICE -> M_CORE;
-  PL_CA -> M_CORE;
-  PL_INTP -> M_CORE;
+  GUICE    -> M_CORE;
+  PL_CA    -> M_CORE;
+  PL_CW    -> M_CORE;
+  PL_INTP  -> M_CORE;
+  PL_UTIL  -> M_CORE;
+  PL_SEC   -> M_CORE;
+  COM_LAN3 -> M_CORE;
+
+  // maven-compat
+  M_ART    -> M_COMPAT;
+  M_MODEL  -> M_COMPAT;
+  M_MODELB -> M_COMPAT;
+  M_SET    -> M_COMPAT;
+  M_CORE   -> M_COMPAT;
+  WAG_API  -> M_COMPAT;
+  PL_CA    -> M_COMPAT;
+  PL_INTP  -> M_COMPAT;
+  PL_UTIL  -> M_COMPAT;
+  SISU_PLEX -> M_COMPAT;
+
+  // maven-embedder
+  M_CORE   -> M_EMB;
   M_MODELB -> M_EMB;
-  M_SET -> M_EMB;
-  M_PLUG -> M_EMB;
-  M_CORE -> M_EMB;
-  PL_CW -> M_EMB;
-  PL_UTIL -> M_EMB;
-  SLF_API -> M_EMB;
-  SLF_SMP -> M_EMB;
+  M_SET    -> M_EMB;
+  M_PLUG   -> M_EMB;
+  PL_CW    -> M_EMB;
+  PL_CA    -> M_EMB;
+  PL_UTIL  -> M_EMB;
+  PL_CIPH  -> M_EMB;
+  PL_SEC   -> M_EMB;
+  SISU_PLEX -> M_EMB;
+  SLF_API  -> M_EMB;
+  SLF_SMP  -> M_EMB;
+  LOGBACK  -> M_EMB;
   COM_LAN3 -> M_EMB;
-  COM_CLI -> M_EMB;
-  JSOUP -> M_EMB;
-  WAG_API -> M_COMPAT;
-  COM_LANG -> M_COMPAT;
-  COM_IO -> M_COMPAT;
-  M_CORE -> M_COMPAT;
+  COM_CLI  -> M_EMB;
 
   // ── Modules assemble into the product ──
-  M_EMB -> MVN339;
-  M_CORE -> MVN339;
+  M_EMB    -> MVN339;
+  M_CORE   -> MVN339;
   M_COMPAT -> MVN339;
-  ANT -> MVN339 [style=dashed, label="built with"];
+  ANT      -> MVN339 [style=dashed, label="built with"];
+  WAG_FILE -> MVN339 [style=dashed, label="bundled in dist"];
+  WAG_HTTP -> MVN339 [style=dashed, label="bundled in dist"];
+  // NOTE: maven-compat is a runtime (not compile) dep of maven-embedder;
+  // build order still requires M_COMPAT before M_EMB.
 
   // ── Onward ──
   MVN339 -> MVN35;
-  MVN35 -> GDEPS;
-  GDEPS -> GRADLE;
+  MVN35  -> GDEPS;
+  GDEPS  -> GRADLE;
 
   // ── Circular back-edges (upstream build-tool reality, broken by javac bypass) ──
   GRADLE -> HC  [style=dashed, color="#b45309", fontcolor="#b45309", label="upstream: Gradle", constraint=false];
