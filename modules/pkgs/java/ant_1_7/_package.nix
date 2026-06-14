@@ -4,6 +4,7 @@
   fetchurl,
   jdk,
   makeWrapper,
+  junit_3,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "ant";
@@ -19,30 +20,39 @@ stdenv.mkDerivation (finalAttrs: {
     makeWrapper
   ];
 
+  depsVersions.junit = "3.8.2";
+
   postPatch = ''
     # dist-lite depends on test-jar, which has an unconditional
     # <fail unless="junit.present"> — drop it; we don't need the test jar.
     substituteInPlace build.xml \
       --replace-fail 'depends="jars,test-jar"' 'depends="jars"'
 
-    # Evict all binary blobs. bootstrap.sh hardcodes lib/xercesImpl.jar and
-    # lib/xml-apis.jar on the classpath and glob-adds lib/optional/*.jar.
-    # The ant-driven build phase runs check_for_optional_packages, which
-    # probes the classpath via <available>; without the jars, junit.present
-    # and antunit.present are not set and those source files are excluded
-    # from compilation by the conditional selectors in build.xml.
+    # Evict binary blobs and replace the junit blob with our from-source build.
+    # bootstrap.sh hardcodes lib/xercesImpl.jar and lib/xml-apis.jar on the
+    # classpath and glob-adds lib/optional/*.jar. Removing xercesImpl/xml-apis
+    # leaves trax.present true (JDK has javax.xml.transform.*) so the XSLT tasks
+    # still compile. Replacing the junit blob with junit_3 sets junit.present and
+    # compiles JUnitTask against our from-source jar instead of the blob.
     rm -f lib/xercesImpl.jar lib/xml-apis.jar \
           lib/optional/junit-*.jar lib/optional/ant-antunit-*.jar
+    mkdir -p lib/optional
+    cp ${junit_3}/share/java/junit-${finalAttrs.depsVersions.junit}.jar lib/optional/
   '';
 
   postInstall = ''
-    # Verify the optional tasks dependent on the removed blobs are absent.
+    # Verify JUnitTask was compiled (junit_3 was found by check_for_optional_packages).
+    found=0
     for j in $out/share/ant/lib/*.jar; do
-      if jar tf "$j" 2>/dev/null | grep -q "JUnitTask\|AntUnitTask"; then
-        echo "ant_1_7: JUnitTask or AntUnitTask found in $j — blob eviction failed" >&2
-        exit 1
+      if jar tf "$j" 2>/dev/null | grep -q "JUnitTask"; then
+        found=1
+        break
       fi
     done
+    if [ $found -eq 0 ]; then
+      echo "ant_1_7: JUnitTask not found in output — junit_3 was not picked up" >&2
+      exit 1
+    fi
   '';
 
   buildPhase = ''

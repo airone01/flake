@@ -21,9 +21,12 @@
 # - commons-io:    new attr; IO utilities, javac-only leaf.
 # - commons-lang:  new attr; java.lang extras (2.x API), javac-only leaf.
 # - commons-lang3: new attr; java.lang extras (3.x API), javac-only leaf.
+# - junit_3:       new attr; JUnit 3.8.2 built from Maven Central sources.jar
+#                  (no public git repo); wired into ant_1_7 so JUnitTask compiles.
 {inputs, ...}: let
   overlay = final: _prev: {
     java-hamcrest = final.callPackage ./java-hamcrest/_package.nix {};
+    junit_3 = final.callPackage ./junit_3/_package.nix {};
     junit_4 = final.callPackage ./junit_4/_package.nix {};
     ant_1_7 = final.callPackage ./ant_1_7/_package.nix {};
     ant = final.callPackage ./ant/_package.nix {};
