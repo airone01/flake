@@ -5,6 +5,8 @@
   jdk,
   makeWrapper,
   junit_3,
+  xml-apis,
+  xerces_j,
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "ant";
@@ -21,6 +23,8 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   depsVersions.junit = "3.8.2";
+  depsVersions.xercesImpl = "2.9.1";
+  depsVersions.xmlApis = "1.3.04";
 
   postPatch = ''
     # dist-lite depends on test-jar, which has an unconditional
@@ -28,30 +32,40 @@ stdenv.mkDerivation (finalAttrs: {
     substituteInPlace build.xml \
       --replace-fail 'depends="jars,test-jar"' 'depends="jars"'
 
-    # Evict binary blobs and replace the junit blob with our from-source build.
+    # Evict all binary blobs and replace with from-source builds.
     # bootstrap.sh hardcodes lib/xercesImpl.jar and lib/xml-apis.jar on the
-    # classpath and glob-adds lib/optional/*.jar. Removing xercesImpl/xml-apis
-    # leaves trax.present true (JDK has javax.xml.transform.*) so the XSLT tasks
-    # still compile. Replacing the junit blob with junit_3 sets junit.present and
-    # compiles JUnitTask against our from-source jar instead of the blob.
+    # classpath; we replace them so the compile classpath is blob-free.
+    # dist-lite copies lib/*.jar to the output distribution, so replacing the
+    # blobs also makes the shipped ant blob-free.
+    # junit_3 replaces the optional junit blob; check_for_optional_packages then
+    # finds junit.present and compiles JUnitTask.
     rm -f lib/xercesImpl.jar lib/xml-apis.jar \
           lib/optional/junit-*.jar lib/optional/ant-antunit-*.jar
+    cp ${xml-apis}/share/java/xml-apis-${finalAttrs.depsVersions.xmlApis}.jar lib/
+    cp ${xerces_j}/share/java/xercesImpl-${finalAttrs.depsVersions.xercesImpl}.jar lib/
     mkdir -p lib/optional
     cp ${junit_3}/share/java/junit-${finalAttrs.depsVersions.junit}.jar lib/optional/
   '';
 
   postInstall = ''
-    # Verify JUnitTask was compiled (junit_3 was found by check_for_optional_packages).
+    # Verify JUnitTask compiled and all expected jars are in the distribution.
     found=0
     for j in $out/share/ant/lib/*.jar; do
       if jar tf "$j" 2>/dev/null | grep -q "JUnitTask"; then
-        found=1
-        break
+        found=1; break
       fi
     done
     if [ $found -eq 0 ]; then
-      echo "ant_1_7: JUnitTask not found in output — junit_3 was not picked up" >&2
-      exit 1
+      echo "ant_1_7: JUnitTask not found — junit_3 was not picked up" >&2; exit 1
+    fi
+    if ! ls $out/share/ant/lib/xercesImpl-*.jar &>/dev/null; then
+      echo "ant_1_7: xercesImpl jar missing from output" >&2; exit 1
+    fi
+    if ! ls $out/share/ant/lib/xml-apis-*.jar &>/dev/null; then
+      echo "ant_1_7: xml-apis jar missing from output" >&2; exit 1
+    fi
+    if ! ls $out/share/ant/lib/optional/junit-*.jar &>/dev/null; then
+      echo "ant_1_7: junit jar missing from lib/optional" >&2; exit 1
     fi
   '';
 
@@ -73,6 +87,9 @@ stdenv.mkDerivation (finalAttrs: {
     mkdir -p $out/share/ant
     cp -r bootstrap/* $out/share/ant/
     rm -rf $out/share/ant/bin/*.bat
+    mkdir -p $out/share/ant/lib/optional
+    cp ${junit_3}/share/java/junit-${finalAttrs.depsVersions.junit}.jar \
+      $out/share/ant/lib/optional/
 
     makeWrapper $out/share/ant/bin/ant $out/bin/ant \
       --set ANT_HOME $out/share/ant \
