@@ -45,6 +45,9 @@ production compile classpath.
                               invokes build.xml so this blob is inert.
   junit 3.8.2               — no git repo; sourced from Maven Central -sources.jar
                               (same as aopalliance). No blobs in the sources.jar.
+  xml-apis 1.3.04           — no git repo; sourced from Maven Central -sources.jar.
+                              No blobs in the sources.jar.
+  xercesImpl 2.9.1          — clean (2.9.0 had no source tarball; 2.9.1 used instead)
   commons-logging 1.1.3     — clean
   commons-codec 1.6         — clean
   httpcore 4.3.2            — clean
@@ -54,11 +57,14 @@ KNOWN BLOB ISSUES
 -----------------
 ant_1_7: RESOLVED. bootstrap.sh hardcoded lib/xercesImpl.jar, lib/xml-apis.jar,
   ant-antunit-1.0.jar, and junit-3.8.2.jar on the javac classpath.
-  postPatch removes xercesImpl.jar, xml-apis.jar, and the antunit blob.
-  The junit blob is replaced by junit_3 (built from source): our from-source
-  jar is copied to lib/optional/ before the build, so check_for_optional_packages
-  finds junit.present=true and compiles JUnitTask against it.
-  postInstall verifies JUnitTask IS present in ant-junit.jar.
+  postPatch removes all four blobs. xercesImpl and xml-apis are replaced by
+  from-source builds (xerces_j 2.9.1 and xml-apis 1.3.04) copied to lib/; dist-lite
+  then ships them in the output distribution. The junit blob is replaced by junit_3
+  (built from source) copied to lib/optional/; check_for_optional_packages finds
+  junit.present=true and compiles JUnitTask against it. ant-antunit is not replaced
+  (not needed for the bootstrap).
+  postInstall verifies: JUnitTask present in ant-junit.jar, xercesImpl-*.jar and
+  xml-apis-*.jar present in $out/share/ant/lib/.
 
 ant 1.10.15: postPatch evicts junit/hamcrest from lib/optional, but
   ant-antunit-1.4.1.jar is left behind. build.sh passes -lib lib/optional to
