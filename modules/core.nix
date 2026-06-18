@@ -32,6 +32,12 @@
         # other groups are added to the user in their respective modules
       };
 
+      # suid-less
+      security = {
+        sudo.enable = false;
+        wrappers.pkexec.enable = false;
+      };
+
       # Utility and recovery tools
       # More specialized tools go in dev.nix.
       environment.systemPackages = with pkgs; [

