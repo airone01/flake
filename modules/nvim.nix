@@ -89,12 +89,19 @@
                 enable = true;
                 format.type = ["biome"];
               };
+              env = {
+                enable = true;
+                extraDiagnostics.enable = true;
+              };
               go.enable = true;
               html.enable = true;
               json.enable = true;
               lua.enable = true;
               markdown.enable = true;
-              nix.enable = true;
+              nix = {
+                enable = true;
+                extraDiagnostics.enable = true;
+              };
               php.enable = true;
               python.enable = true;
               rust = {
@@ -105,6 +112,11 @@
               svelte = {
                 enable = true;
                 format.type = ["biome"];
+              };
+              tsx = {
+                enable = true;
+                extraDiagnostics.enable = true;
+                format.type = ["biome" "prettier"];
               };
               typescript = {
                 enable = true;
