@@ -1,5 +1,17 @@
 # Changelog
 
+## [11.13.0](https://github.com/airone01/flake/compare/flake-v11.12.4...flake-v11.13.0) (2026-06-24)
+
+
+### Features
+
+* **nvf:** more languages ([fd753cb](https://github.com/airone01/flake/commit/fd753cbc5a3104104012927e3df1082ad0f9a53a))
+
+
+### Bug Fixes
+
+* **flake:** suid-less system ([4b883b2](https://github.com/airone01/flake/commit/4b883b2f0c8869100f8c632c39051514a702f06b))
+
 ## [11.12.4](https://github.com/airone01/flake/compare/flake-v11.12.3...flake-v11.12.4) (2026-06-10)
 
 
