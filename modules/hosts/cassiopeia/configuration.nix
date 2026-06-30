@@ -11,7 +11,6 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
 
-      self.nixosModules.ai
       self.nixosModules.core
       self.nixosModules.desktop
       self.nixosModules.niri
@@ -50,7 +49,6 @@
       dev = true;
       dualsensePatch = true;
       gaming = true;
-      ai = true;
       ios = true;
       nvim = true;
       prettyBoot = true;
