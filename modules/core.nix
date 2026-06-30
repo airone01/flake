@@ -35,6 +35,10 @@
       # suid-less
       security = {
         sudo.enable = false;
+
+        # those two probably do the same
+        # in case they conflict, keep first
+        polkit.enablePkexecWrapper = false;
         wrappers.pkexec.enable = false;
       };
 
