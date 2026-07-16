@@ -1,4 +1,5 @@
 {inputs}: final: prev: {
+  cv = final.callPackage ../pkgs/cv {};
   initomatic = final.callPackage ../pkgs/initomatic {};
   mcheads = final.callPackage ../pkgs/mcheads {};
   noctalia = final.callPackage ../pkgs/noctalia {
