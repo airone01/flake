@@ -113,6 +113,7 @@
                 enable = true;
                 format.type = ["biome"];
               };
+              tex.enable = true;
               tsx = {
                 enable = true;
                 extraDiagnostics.enable = true;
