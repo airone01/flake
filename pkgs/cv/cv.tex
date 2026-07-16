@@ -1,0 +1,266 @@
+%-------------------------
+% Resume in Latex
+% Author : Erwann Lagouche
+% Based off of: https://github.com/sb2nov/resume
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+%----------FONT OPTIONS----------
+% sans-serif
+\usepackage[sfdefault]{FiraSans}
+\usepackage[sfdefault]{roboto}
+\usepackage[sfdefault]{noto-sans}
+\usepackage[default]{sourcesanspro}
+
+% serif
+\usepackage{CormorantGaramond}
+\usepackage{charter}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+\item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}
+\item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+\item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \textit{\small#1} & \textit{\small #2} \\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+\item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \small#1 & #2 \\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{
+\begin{itemize}[leftmargin=0.15in, label={}]}
+    \newcommand{\resumeSubHeadingListEnd}{
+\end{itemize}}
+\newcommand{\resumeItemListStart}{
+\begin{itemize}}
+    \newcommand{\resumeItemListEnd}{
+\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} &
+% Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} &
+% Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+  \textbf{\Huge \scshape Erwann Lagouche} \\ \vspace{1pt}
+  % \small 123-456-7890 $|$
+  \href{mailto:erwann.lagouche@gmail.com}{\underline{erwann.lagouche@gmail.com}}
+  $|$
+  \href{https://linkedin.com/in/elagouche}{\underline{linkedin.com/in/elagouche}}
+  $|$
+  \href{https://github.com/airone01}{\underline{github.com/airone01}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+\resumeSubHeadingListStart
+\resumeSubheading
+{42 Lyon Auvergne Rhône-Alpes}{Lyon, France}
+{RNCP 7 - Expert Computer Architect (in progress)}{Oct. 2024 -- Present}
+\resumeSubheading
+{42 Lyon Auvergne Rhône-Alpes}{Lyon, France}
+{Certificate of Completion}{Oct. 2024 -- Mar. 2026}
+\resumeSubheading
+{Claude Bernard University of Lyon 1}{Villeurbanne, France}
+{BUT - Computer Science, Systems \& Networking}{Sept. 2021 -- Sept. 2024}
+\resumeSubheading
+{Cambridge Assessment (Linguaskill English)}{Maurice La Mache High
+School, Lyon, France}
+{Linguaskill English Test - 180+ (\underline{C1+, max
+grade})}{Apr. 13 2021}
+\resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{Open Source Contributor \& Package Maintainer}{Mar. 2026 -- Present}
+{nixpkgs \& NixOS}{Remote}
+\resumeItemListStart
+\resumeItem{Authored 6 merged pull requests and reviewed/merged
+~10 automated package-bump PRs on nixpkgs (120k+ packages, 1M+ commits)}
+\resumeItem{Maintain the \emph{Docker Compose} and \emph{Mullvad VPN}
+packages, handling upstream updates and build failures}
+\resumeItem{Actively contribute to bootstrapping the Java/JVM
+  toolchain from source, a multi-month effort to remove binary
+bootstrap dependencies from the package set}
+\resumeItemListEnd
+
+\resumeSubheading
+{Intern}{Apr. 2026 -- Present}
+{Moggo}{Remote, France}
+\resumeItemListStart
+\resumeItem{Designed and shipped a chat moderation system with
+automatic message flagging, unblocking safer user communication}
+\resumeItem{Extended user onboarding to capture account preferences,
+enabling filtering options and account customization}
+\resumeItem{Designed and implemented an end-to-end user analytics
+system integrating PostHog, from event tracking to data pipeline}
+\resumeItemListEnd
+
+% -----------Multiple Positions Heading-----------
+%    \resumeSubSubheading
+%     {Software Engineer I}{Oct 2014 - Sep 2016}
+%     \resumeItemListStart
+%        \resumeItem{Apache Beam}
+%          {Apache Beam is a unified model for defining both batch
+% and streaming data-parallel processing pipelines}
+%     \resumeItemListEnd
+%    \resumeSubHeadingListEnd
+%-------------------------------------------
+
+\resumeSubheading
+{Intern}{May 2025 -- June 2025}
+{LDLC School}{Limonest, France}
+\resumeItemListStart
+\resumeItem{Delivered a working electronics-based proof of concept
+for a pharmaceutical client in under 4 weeks, with live demo}
+\resumeItem{Co-authored and presented a business/technical case on
+digital nudging to representatives of multiple partner companies}
+\resumeItemListEnd
+
+\resumeSubheading
+{DevOps Apprentice}{June 2023 -- Aug. 2024}
+{SPIE CityNetworks}{Vénissieux, France}
+\resumeItemListStart
+\resumeItem{Modernized deployment pipelines to Docker and Ansible for
+industrial signaling systems, over a 14-month apprenticeship}
+\resumeItem{Built and maintained CI/CD pipelines under real
+production constraints on embedded and low-level infrastructure}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+\resumeSubHeadingListStart
+\resumeProjectHeading
+{\textbf{Nix Flake} $|$ \emph{Nix, Linux, Bash, HTML, Go,
+Python}}{March 2024 -- Present}
+\resumeItemListStart
+\resumeItem{Design and maintain a declarative monorepo of NixOS
+  system configurations with CI (GitHub Actions, Hercules CI), site-to-site
+  networking (WireGuard, Traefik, NGINX) and automated secrets
+management (sops-nix)}
+\resumeItemListEnd
+\resumeProjectHeading
+{\textbf{Full-Stack Chess Game} $|$ \emph{TypeScript, Node.js,
+Svelte(Kit), HTML/CSS, Docker Compose, Git}}{Jan. 2026 -- Mar. 2026}
+\resumeItemListStart
+\resumeItem{Led the technical stack decisions and architecture for a
+  team project delivering a full chess tournament platform (TypeScript,
+SvelteKit, Docker)}
+\resumeItem{Implemented secure authentication (Google OAuth) and core
+user-facing features end-to-end}
+\resumeItem{Achieved the maximum evaluation score (\emph{125/100}) across
+three independent reviewers}
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+%-----------SKILLS-----------
+\section{Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+    \small{
+    \item{
+        \begin{tabularx}{0.97\textwidth}{@{}p{0.47\textwidth}@{\hspace{0.03\textwidth}}p{0.47\textwidth}@{}}
+          \textbf{Systems \& Low-level}: C, x86-64 Assembly, Linux
+          internals (syscalls, PAM, PTY) \newline
+          \textbf{Languages}: Nix, TypeScript/JavaScript, C/C++, Java,
+          Python, SQL \newline
+          \textbf{Frameworks}: React, Svelte(Kit), NestJS, Next.js,
+          Node.js, Bun
+          &
+          \textbf{Spoken Languages}: French (Native), English
+          (Proficient, C1+) \newline
+          \textbf{Soft Skills}: Team leadership (co-led 15-person
+          student org), cross-team collaboration
+        \end{tabularx}
+    }}
+\end{itemize}
+
+% %-----------LANGUAGES-----------
+% \section{Languages}
+% \begin{itemize}[leftmargin=0.15in, label={}]
+%     \small{
+%     \item{
+%         \textbf{French}{: Native} \\
+%         \textbf{English}{: Proficient}
+%     }}
+% \end{itemize}
+
+%-------------------------------------------
+\end{document}
