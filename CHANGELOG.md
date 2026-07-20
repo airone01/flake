@@ -1,5 +1,14 @@
 # Changelog
 
+## [11.13.2](https://github.com/airone01/flake/compare/flake-v11.13.1...flake-v11.13.2) (2026-07-20)
+
+
+### Bug Fixes
+
+* **mcheads:** del checks ([cc556cd](https://github.com/airone01/flake/commit/cc556cdb6f9fe38001da0bdbff2ca95998844e91))
+* **noctalia:** rename derivation from myNoctalia to noctalia ([918d344](https://github.com/airone01/flake/commit/918d3449d7ede1285e36f38c583abbb981dfda42))
+* **security:** patch polkit pkexec setting ([058e7ef](https://github.com/airone01/flake/commit/058e7efb73651ec7d8f7dc3355c605db6cf783af))
+
 ## [11.13.1](https://github.com/airone01/flake/compare/flake-v11.13.0...flake-v11.13.1) (2026-06-30)
 
 
