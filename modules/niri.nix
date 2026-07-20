@@ -204,7 +204,7 @@ in {
           inherit pkgs lib niri-highrr;
           noctalia =
             if config.stars.desktop.noctalia.enable
-            then self.packages.${pkgs.stdenv.hostPlatform.system}.myNoctalia
+            then self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia
             else null;
           inherit (config.stars.desktop.niri) keyboardLayout;
           inherit (config.stars.desktop) ratePatch;
@@ -249,7 +249,7 @@ in {
     lib.mkIf (pkgs.stdenv.hostPlatform.system != "aarch64-linux") {
       packages.niri = mkNiri {
         inherit pkgs lib;
-        noctalia = self'.packages.myNoctalia or null;
+        noctalia = self'.packages.noctalia or null;
         keyboardLayout = "us,fr";
         ratePatch = false;
       };
