@@ -29,3 +29,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v30
       - run: nix build -L '.#${{ matrix.attr }}'
+
+  nix-build-failures:
+    name: No build failures
+    needs: nix-build
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - run: |
+          if [[ "${{ needs.nix-build.result }}" != "success" ]]; then
+            echo "One or more matrix jobs failed."
+            exit 1
+          fi
