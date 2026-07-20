@@ -2,7 +2,7 @@
   perSystem = {pkgs, ...}: {
     # Default version for the flake packages, NixOS module will create a
     # customized one.
-    packages.myNoctalia = self.inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
+    packages.noctalia = self.inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
       inherit pkgs;
       inherit
         (builtins.fromJSON (builtins.readFile ./noctalia.json))
