@@ -18,6 +18,7 @@
       self.nixosModules.gaming
       self.nixosModules.ios
       self.nixosModules.prettyBoot
+      self.nixosModules.music
       self.nixosModules.nvim
       self.nixosModules.virt
       self.nixosModules.wallpapers
