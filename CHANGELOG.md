@@ -1,5 +1,13 @@
 # Changelog
 
+## [11.14.0](https://github.com/airone01/flake/compare/flake-v11.13.2...flake-v11.14.0) (2026-07-21)
+
+
+### Features
+
+* mixxx ([99dabf4](https://github.com/airone01/flake/commit/99dabf4ba55f5b0d3f4c1d3dc17071bee383ac08))
+* **virtualization:** virtualbox ([88098d3](https://github.com/airone01/flake/commit/88098d32ce7db2b6a38313ba77e1cb2e11bc79a4))
+
 ## [11.13.2](https://github.com/airone01/flake/compare/flake-v11.13.1...flake-v11.13.2) (2026-07-20)
 
 
