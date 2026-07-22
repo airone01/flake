@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.14.1](https://github.com/airone01/flake/compare/flake-v11.14.0...flake-v11.14.1) (2026-07-22)
+
+
+### Bug Fixes
+
+* **flake:** typo in pre commit excludes ([54902ad](https://github.com/airone01/flake/commit/54902addc13a84a68f964f24ae6f4e66c8fb0de2))
+
 ## [11.14.0](https://github.com/airone01/flake/compare/flake-v11.13.2...flake-v11.14.0) (2026-07-21)
 
 
