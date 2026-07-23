@@ -13,7 +13,6 @@ _: {
         home = {
           packages = with pkgs; [
             pay-respects # thefuck replacement
-            zellij
             zoxide
           ];
 
@@ -21,7 +20,7 @@ _: {
             l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons=auto";
             ll = "eza -laab --icons=auto --git --group";
             neofetch = "pfetch"; # TODO: https://github.com/ThatOneCalculator/NerdFetch
-            zz = "zellij";
+            zz = "tmux";
 
             # git
             gts = "git status -s";
@@ -118,10 +117,11 @@ _: {
             }));
           };
 
-          zellij = {
+          tmux = {
             enable = true;
 
-            settings.show_startup_tips = false;
+            clock24 = true;
+            mouse = true;
           };
 
           zsh = {

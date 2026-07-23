@@ -89,6 +89,7 @@ rules:
       - qflipper
       - searchix
       - switcheroo
+      - tmux
       - thunderbird
       - typer
       - vaultwarden
