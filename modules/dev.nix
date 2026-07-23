@@ -78,6 +78,7 @@
         bat
         btop
         dig
+        file
         fzf
         gh
         glow
