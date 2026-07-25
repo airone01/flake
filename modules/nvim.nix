@@ -4,427 +4,427 @@
   self,
   ...
 }: {
-  perSystem = {pkgs, ...}: let
-    customNeovim = inputs.nvf.lib.neovimConfiguration {
-      inherit pkgs;
-      modules = [
+  perSystem = {pkgs, ...}: {
+    packages.nvim =
+      (inputs.nvf.lib.neovimConfiguration
         {
-          config.vim = {
-            autocomplete.blink-cmp = {
-              enable = true;
-              # "lsp-signature does not work with blink.cmp. Please use blink.cmp's builtin signature feature"
-              setupOpts.signature.enabled = true;
-            };
-            autopairs.nvim-autopairs.enable = true;
-
-            binds = {
-              cheatsheet.enable = true;
-              # shows menu with corresponding keys when typing
-              whichKey.enable = true;
-            };
-
-            dashboard.alpha.enable = true;
-
-            diagnostics = {
-              enable = true;
-              config = {
-                signs.text = {
-                  "vim.diagnostic.severity.ERROR" = "󰅚 ";
-                  "vim.diagnostic.severity.WARN" = "󰀪 ";
+          inherit pkgs;
+          modules = [
+            {
+              config.vim = {
+                autocomplete.blink-cmp = {
+                  enable = true;
+                  # "lsp-signature does not work with blink.cmp. Please use blink.cmp's builtin signature feature"
+                  setupOpts.signature.enabled = true;
                 };
-              };
-            };
+                autopairs.nvim-autopairs.enable = true;
 
-            filetree.neo-tree = {
-              enable = true;
-
-              setupOpts = {
-                enable_cursor_hijack = true;
-                git_status_async = true; # for big repos
-                auto_clean_after_session_restore = true;
-
-                window = {
-                  width = 30; # default is 40
-                  # mappings = {
-                  #   "<" = "none"; # Disable default shrink
-                  #   ">" = "none"; # Disable default expand
-                  # };
+                binds = {
+                  cheatsheet.enable = true;
+                  # shows menu with corresponding keys when typing
+                  whichKey.enable = true;
                 };
 
-                # note: to toggle on/off hidden files, press H in neo-tree
-              };
-            };
+                dashboard.alpha.enable = true;
 
-            git = {
-              enable = true;
-              gitsigns.enable = true;
-              gitsigns.mappings = {
-                nextHunk = "]c";
-                previousHunk = "[c";
-                stageHunk = "<leader>hs";
-                resetHunk = "<leader>hr";
-                previewHunk = "<leader>hp";
-              };
-            };
-
-            languages = {
-              # for each enabled language below:
-              enableDAP = true;
-              enableExtraDiagnostics = true;
-              enableFormat = true;
-              enableTreesitter = true;
-
-              # programming/scripting/configuration languages list
-              assembly = {
-                enable = true;
-                lsp.enable = false;
-              };
-              astro = {
-                enable = true;
-                format.type = ["biome"];
-              };
-              bash.enable = true;
-              clang.enable = true;
-              css = {
-                enable = true;
-                format.type = ["biome"];
-              };
-              env = {
-                enable = true;
-                extraDiagnostics.enable = true;
-              };
-              go.enable = true;
-              html.enable = true;
-              json.enable = true;
-              lua.enable = true;
-              markdown.enable = true;
-              nix = {
-                enable = true;
-                extraDiagnostics.enable = true;
-              };
-              php.enable = true;
-              python.enable = true;
-              rust = {
-                enable = true;
-                extensions.crates-nvim.enable = true;
-              };
-              sql.enable = true;
-              svelte = {
-                enable = true;
-                format.type = ["biome"];
-              };
-              tsx = {
-                enable = true;
-                extraDiagnostics.enable = true;
-                format.type = ["biome" "prettier"];
-              };
-              typescript = {
-                enable = true;
-                format.type = ["biome" "prettier"];
-              };
-              yaml.enable = true;
-              zig.enable = true;
-            };
-
-            # show static line, not relative number
-            lineNumberMode = "number";
-
-            lsp = {
-              enable = true;
-
-              presets = {
-                tailwindcss-language-server.enable = true;
-                harper.enable = true;
-              };
-
-              formatOnSave = true;
-              # show code actions even when there are no lsp warns/errors
-              lightbulb.enable = true;
-              # "signature": box that appears when e.g. you start typing args of a function
-              # "lsp-signature does not work with blink.cmp. Please use blink.cmp's builtin signature feature"
-              # lspSignature.enable = true;
-              lspconfig.enable = true;
-              # pictograms
-              lspkind.enable = true;
-              # advanced lsp framework
-              lspsaga.enable = true;
-              # Language-in-language
-              otter-nvim.enable = true;
-            };
-
-            luaConfigRC = {
-              better-escape = ''
-                -- Better `jk` escape with timeout
-                vim.o.timeoutlen = 300
-                vim.o.ttimeoutlen = 10
-              '';
-
-              suppress-null-ls-warning = ''
-                -- Suppress null-ls deprecation warnings
-                local notify = vim.notify
-                vim.notify = function(msg, ...)
-                  if msg:match("null%-ls") then
-                    return
-                  end
-                  notify(msg, ...)
-                end
-              '';
-
-              winbar-theme = ''
-                -- Make winbar follow theme
-                vim.api.nvim_set_hl(0, 'WinBar', { link = 'Normal' })
-                vim.api.nvim_set_hl(0, 'WinBarNC', { link = 'Comment' })
-              '';
-
-              visual-high-contrast = ''
-                vim.api.nvim_create_autocmd("ColorScheme", {
-                  pattern = "*",
-                  callback = function()
-                    vim.api.nvim_set_hl(0, 'Visual', {
-                      bg = '#3a515d',  -- More blue-tinted, higher contrast
-                      fg = 'NONE',
-                      reverse = false
-                    })
-                  end,
-                })
-              '';
-
-              formatter-switcher = ''
-                -- prettier
-                vim.api.nvim_create_user_command("UsePrettier", function()
-                  local conform = require("conform")
-                  local web_fts = {"javascript", "typescript", "javascriptreact", "typescriptreact", "svelte", "astro", "css"}
-
-                  for _, ft in ipairs(web_fts) do
-                    conform.formatters_by_ft[ft] = { "prettier" }
-                  end
-
-                  vim.notify("Formatter switched to Prettier", vim.log.levels.INFO)
-                end, {})
-
-                -- biome
-                vim.api.nvim_create_user_command("UseBiome", function()
-                  local conform = require("conform")
-                  local web_fts = {"javascript", "typescript", "javascriptreact", "typescriptreact", "svelte", "astro", "css"}
-
-                  for _, ft in ipairs(web_fts) do
-                    conform.formatters_by_ft[ft] = { "biome" }
-                  end
-
-                  vim.notify("Formatter switched to Biome", vim.log.levels.INFO)
-                end, {})
-              '';
-            };
-
-            # Custom keymaps
-            maps = {
-              # jk to escape insert mode
-              insert = {
-                "jk" = {
-                  action = "<Esc>";
-                  silent = true;
-                  desc = "Exit insert mode";
-                };
-              };
-
-              normal = {
-                # code actions
-                "<leader>ca" = {
-                  action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
-                  silent = true;
-                  desc = "Code actions";
+                diagnostics = {
+                  enable = true;
+                  config = {
+                    signs.text = {
+                      "vim.diagnostic.severity.ERROR" = "󰅚 ";
+                      "vim.diagnostic.severity.WARN" = "󰀪 ";
+                    };
+                  };
                 };
 
-                # format file
-                "<leader>fm" = {
-                  action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>";
-                  silent = true;
-                  desc = "Format buffer";
+                filetree.neo-tree = {
+                  enable = true;
+
+                  setupOpts = {
+                    enable_cursor_hijack = true;
+                    git_status_async = true; # for big repos
+                    auto_clean_after_session_restore = true;
+
+                    window = {
+                      width = 30; # default is 40
+                      # mappings = {
+                      #   "<" = "none"; # Disable default shrink
+                      #   ">" = "none"; # Disable default expand
+                      # };
+                    };
+
+                    # note: to toggle on/off hidden files, press H in neo-tree
+                  };
                 };
 
-                # Quickfix navigation
-                "<leader>qn" = {
-                  action = "<cmd>cnext<CR>";
-                  desc = "Next quickfix item";
+                git = {
+                  enable = true;
+                  gitsigns.enable = true;
+                  gitsigns.mappings = {
+                    nextHunk = "]c";
+                    previousHunk = "[c";
+                    stageHunk = "<leader>hs";
+                    resetHunk = "<leader>hr";
+                    previewHunk = "<leader>hp";
+                  };
                 };
-                "<leader>qp" = {
-                  action = "<cmd>cprev<CR>";
-                  desc = "Previous quickfix item";
+
+                languages = {
+                  # for each enabled language below:
+                  enableDAP = true;
+                  enableExtraDiagnostics = true;
+                  enableFormat = true;
+                  enableTreesitter = true;
+
+                  # programming/scripting/configuration languages list
+                  assembly = {
+                    enable = true;
+                    lsp.enable = false;
+                  };
+                  astro = {
+                    enable = true;
+                    format.type = ["biome"];
+                  };
+                  bash.enable = true;
+                  clang.enable = true;
+                  css = {
+                    enable = true;
+                    format.type = ["biome"];
+                  };
+                  env = {
+                    enable = true;
+                    extraDiagnostics.enable = true;
+                  };
+                  go.enable = true;
+                  html.enable = true;
+                  json.enable = true;
+                  lua.enable = true;
+                  markdown.enable = true;
+                  nix = {
+                    enable = true;
+                    extraDiagnostics.enable = true;
+                  };
+                  php.enable = true;
+                  python.enable = true;
+                  rust = {
+                    enable = true;
+                    extensions.crates-nvim.enable = true;
+                  };
+                  sql.enable = true;
+                  svelte = {
+                    enable = true;
+                    format.type = ["biome"];
+                  };
+                  tsx = {
+                    enable = true;
+                    extraDiagnostics.enable = true;
+                    format.type = ["biome" "prettier"];
+                  };
+                  typescript = {
+                    enable = true;
+                    format.type = ["biome" "prettier"];
+                  };
+                  yaml.enable = true;
+                  zig.enable = true;
                 };
-                "<leader>qo" = {
-                  action = "<cmd>copen<CR>";
-                  desc = "Open quickfix list";
+
+                # show static line, not relative number
+                lineNumberMode = "number";
+
+                lsp = {
+                  enable = true;
+
+                  presets = {
+                    tailwindcss-language-server.enable = true;
+                    harper.enable = true;
+                  };
+
+                  formatOnSave = true;
+                  # show code actions even when there are no lsp warns/errors
+                  lightbulb.enable = true;
+                  # "signature": box that appears when e.g. you start typing args of a function
+                  # "lsp-signature does not work with blink.cmp. Please use blink.cmp's builtin signature feature"
+                  # lspSignature.enable = true;
+                  lspconfig.enable = true;
+                  # pictograms
+                  lspkind.enable = true;
+                  # advanced lsp framework
+                  lspsaga.enable = true;
+                  # Language-in-language
+                  otter-nvim.enable = true;
                 };
-                "<leader>qc" = {
-                  action = "<cmd>cclose<CR>";
-                  desc = "Close quickfix list";
-                };
-              };
-            };
 
-            # notification library
-            notify.nvim-notify.enable = true;
+                luaConfigRC = {
+                  better-escape = ''
+                    -- Better `jk` escape with timeout
+                    vim.o.timeoutlen = 300
+                    vim.o.ttimeoutlen = 10
+                  '';
 
-            options.termguicolors = true;
-
-            # spoken/written languages
-            spellcheck = {
-              enable = true;
-
-              # programmingWordlist.enable = true;
-              languages = [
-                "en"
-                # TODO add "fr" here and configure dictionary
-              ];
-            };
-
-            statusline.lualine.enable = true;
-
-            syntaxHighlighting = true;
-
-            tabline.nvimBufferline = {
-              enable = true;
-
-              mappings = {
-                closeCurrent = "<leader>x";
-                cycleNext = "<tab>";
-                cyclePrevious = "<S-Tab>";
-              };
-
-              setupOpts.options = {
-                middle_mouse_command = {
-                  _type = "lua-inline";
-                  expr = ''
-                    function(bufnum)
-                      require("bufdelete").bufdelete(bufnum, false)
+                  suppress-null-ls-warning = ''
+                    -- Suppress null-ls deprecation warnings
+                    local notify = vim.notify
+                    vim.notify = function(msg, ...)
+                      if msg:match("null%-ls") then
+                        return
+                      end
+                      notify(msg, ...)
                     end
+                  '';
+
+                  winbar-theme = ''
+                    -- Make winbar follow theme
+                    vim.api.nvim_set_hl(0, 'WinBar', { link = 'Normal' })
+                    vim.api.nvim_set_hl(0, 'WinBarNC', { link = 'Comment' })
+                  '';
+
+                  visual-high-contrast = ''
+                    vim.api.nvim_create_autocmd("ColorScheme", {
+                      pattern = "*",
+                      callback = function()
+                        vim.api.nvim_set_hl(0, 'Visual', {
+                          bg = '#3a515d',  -- More blue-tinted, higher contrast
+                          fg = 'NONE',
+                          reverse = false
+                        })
+                      end,
+                    })
+                  '';
+
+                  formatter-switcher = ''
+                    -- prettier
+                    vim.api.nvim_create_user_command("UsePrettier", function()
+                      local conform = require("conform")
+                      local web_fts = {"javascript", "typescript", "javascriptreact", "typescriptreact", "svelte", "astro", "css"}
+
+                      for _, ft in ipairs(web_fts) do
+                        conform.formatters_by_ft[ft] = { "prettier" }
+                      end
+
+                      vim.notify("Formatter switched to Prettier", vim.log.levels.INFO)
+                    end, {})
+
+                    -- biome
+                    vim.api.nvim_create_user_command("UseBiome", function()
+                      local conform = require("conform")
+                      local web_fts = {"javascript", "typescript", "javascriptreact", "typescriptreact", "svelte", "astro", "css"}
+
+                      for _, ft in ipairs(web_fts) do
+                        conform.formatters_by_ft[ft] = { "biome" }
+                      end
+
+                      vim.notify("Formatter switched to Biome", vim.log.levels.INFO)
+                    end, {})
                   '';
                 };
 
-                numbers = "none";
-                separator_style = "thin";
-                modified_icon = "●";
+                # Custom keymaps
+                maps = {
+                  # jk to escape insert mode
+                  insert = {
+                    "jk" = {
+                      action = "<Esc>";
+                      silent = true;
+                      desc = "Exit insert mode";
+                    };
+                  };
 
-                indicator = {
-                  style = "none"; # this removes the underline/icon indicator
+                  normal = {
+                    # code actions
+                    "<leader>ca" = {
+                      action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
+                      silent = true;
+                      desc = "Code actions";
+                    };
+
+                    # format file
+                    "<leader>fm" = {
+                      action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>";
+                      silent = true;
+                      desc = "Format buffer";
+                    };
+
+                    # Quickfix navigation
+                    "<leader>qn" = {
+                      action = "<cmd>cnext<CR>";
+                      desc = "Next quickfix item";
+                    };
+                    "<leader>qp" = {
+                      action = "<cmd>cprev<CR>";
+                      desc = "Previous quickfix item";
+                    };
+                    "<leader>qo" = {
+                      action = "<cmd>copen<CR>";
+                      desc = "Open quickfix list";
+                    };
+                    "<leader>qc" = {
+                      action = "<cmd>cclose<CR>";
+                      desc = "Close quickfix list";
+                    };
+                  };
                 };
-              };
-            };
 
-            telescope = {
-              enable = true;
+                # notification library
+                notify.nvim-notify.enable = true;
 
-              mappings = {
-                findFiles = "<leader>ff";
-                liveGrep = "<leader>fw";
-                buffers = "<leader>fb";
-                helpTags = "<leader>fh";
-                gitCommits = "<leader>gc";
-                lspReferences = "<leader>lr";
-                lspDefinitions = "<leader>ld";
-              };
-            };
+                options.termguicolors = true;
 
-            # main theme
-            theme = {
-              enable = true;
+                # spoken/written languages
+                spellcheck = {
+                  enable = true;
 
-              name = "everforest";
-              style = "medium";
-            };
-
-            treesitter = {
-              enable = true;
-
-              # html tag auto rename
-              autotagHtml = true;
-
-              context.enable = true;
-            };
-
-            ui = {
-              # borders for compatible plugins
-              borders = {
-                enable = true;
-
-                globalStyle = "rounded";
-
-                # plugins and integrations
-                plugins = {
-                  # lsp-signature.enable = true;
-                  lspsaga.enable = true;
-                  nvim-cmp.enable = true;
-                  which-key.enable = true;
+                  # programmingWordlist.enable = true;
+                  languages = [
+                    "en"
+                    # TODO add "fr" here and configure dictionary
+                  ];
                 };
-              };
 
-              # lsp path indication below the tab bar
-              breadcrumbs = {
-                enable = true;
-                navbuddy.enable = true;
-              };
+                statusline.lualine.enable = true;
 
-              # render written colors e.g. `#f00`
-              colorizer.enable = true;
+                syntaxHighlighting = true;
 
-              # simple line decorator
-              # this is causing a bug when highlighting text
-              # see #117
-              modes-nvim.enable = false;
-            };
+                tabline.nvimBufferline = {
+                  enable = true;
 
-            utility = {
-              # NF icon picker
-              icon-picker.enable = true;
+                  mappings = {
+                    closeCurrent = "<leader>x";
+                    cycleNext = "<tab>";
+                    cyclePrevious = "<S-Tab>";
+                  };
 
-              # markdown preview with glow
-              preview.glow = {
-                enable = true;
-                # "<leader>p"
-              };
+                  setupOpts.options = {
+                    middle_mouse_command = {
+                      _type = "lua-inline";
+                      expr = ''
+                        function(bufnum)
+                          require("bufdelete").bufdelete(bufnum, false)
+                        end
+                      '';
+                    };
 
-              # images support
-              images.image-nvim = {
-                enable = true;
+                    numbers = "none";
+                    separator_style = "thin";
+                    modified_icon = "●";
 
-                setupOpts = {
-                  backend = "kitty";
-                  integrations.markdown.downloadRemoteImages = true;
+                    indicator = {
+                      style = "none"; # this removes the underline/icon indicator
+                    };
+                  };
                 };
-              };
-            };
 
-            visuals = {
-              cinnamon-nvim.enable = true; # Smooth scrolling
-              fidget-nvim.enable = true; # Progress notifications (bottom-right)
-              highlight-undo.enable = true;
-              indent-blankline = {
-                enable = true;
-                setupOpts.scope.enabled = true;
-              };
-              # highlight cursor
-              nvim-cursorline = {
-                enable = true;
+                telescope = {
+                  enable = true;
 
-                setupOpts = {
-                  cursorline.enable = true;
-                  cursorword.enable = true;
+                  mappings = {
+                    findFiles = "<leader>ff";
+                    liveGrep = "<leader>fw";
+                    buffers = "<leader>fb";
+                    helpTags = "<leader>fh";
+                    gitCommits = "<leader>gc";
+                    lspReferences = "<leader>lr";
+                    lspDefinitions = "<leader>ld";
+                  };
                 };
-              };
-              nvim-scrollbar.enable = true;
-              nvim-web-devicons.enable = true;
-            };
 
-            # wrappers
-            withNodeJs = true;
-            withPython3 = true;
-            withRuby = true;
-          };
-        }
-      ];
-    };
-  in {
-    packages.nvim = customNeovim.neovim;
+                # main theme
+                theme = {
+                  enable = true;
+
+                  name = "everforest";
+                  style = "medium";
+                };
+
+                treesitter = {
+                  enable = true;
+
+                  # html tag auto rename
+                  autotagHtml = true;
+
+                  context.enable = true;
+                };
+
+                ui = {
+                  # borders for compatible plugins
+                  borders = {
+                    enable = true;
+
+                    globalStyle = "rounded";
+
+                    # plugins and integrations
+                    plugins = {
+                      # lsp-signature.enable = true;
+                      lspsaga.enable = true;
+                      nvim-cmp.enable = true;
+                      which-key.enable = true;
+                    };
+                  };
+
+                  # lsp path indication below the tab bar
+                  breadcrumbs = {
+                    enable = true;
+                    navbuddy.enable = true;
+                  };
+
+                  # render written colors e.g. `#f00`
+                  colorizer.enable = true;
+
+                  # simple line decorator
+                  # this is causing a bug when highlighting text
+                  # see #117
+                  modes-nvim.enable = false;
+                };
+
+                utility = {
+                  # NF icon picker
+                  icon-picker.enable = true;
+
+                  # markdown preview with glow
+                  preview.glow = {
+                    enable = true;
+                    # "<leader>p"
+                  };
+
+                  # images support
+                  images.image-nvim = {
+                    enable = true;
+
+                    setupOpts = {
+                      backend = "kitty";
+                      integrations.markdown.downloadRemoteImages = true;
+                    };
+                  };
+                };
+
+                visuals = {
+                  cinnamon-nvim.enable = true; # Smooth scrolling
+                  fidget-nvim.enable = true; # Progress notifications (bottom-right)
+                  highlight-undo.enable = true;
+                  indent-blankline = {
+                    enable = true;
+                    setupOpts.scope.enabled = true;
+                  };
+                  # highlight cursor
+                  nvim-cursorline = {
+                    enable = true;
+
+                    setupOpts = {
+                      cursorline.enable = true;
+                      cursorword.enable = true;
+                    };
+                  };
+                  nvim-scrollbar.enable = true;
+                  nvim-web-devicons.enable = true;
+                };
+
+                # wrappers
+                withNodeJs = true;
+                withPython3 = true;
+                withRuby = true;
+              };
+            }
+          ];
+        }).neovim;
   };
 
   flake.nixosModules.nvim = {
@@ -436,14 +436,14 @@
     options.stars.nvim = lib.mkEnableOption "custom Neovim configuration with NVF";
 
     config = lib.mkIf config.stars.nvim {
-      home-manager.users.${config.stars.mainUser} = {
-        home.packages = with pkgs; [
+      environment = {
+        systemPackages = with pkgs; [
           self.packages.${stdenv.hostPlatform.system}.nvim
           noto-fonts-color-emoji
           twemoji-color-font
         ];
 
-        home.sessionVariables = {
+        sessionVariables = {
           EDITOR = "nvim";
           VISUAL = "nvim";
         };

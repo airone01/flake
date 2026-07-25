@@ -1,12 +1,6 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{self, ...}: {
   flake.nixosModules.hostLyraConfig = {pkgs, ...}: {
     imports = [
-      inputs.home-manager.nixosModules.home-manager
-
       self.nixosModules.noctalia
       self.nixosModules.core
       self.nixosModules.desktop
@@ -29,7 +23,7 @@
       mainUser = "user";
 
       core = true;
-      compat.fwd_2605.enable = true;
+      # compat.fwd_2605.enable = true;
       desktop = {
         enable = true;
         niri.enable = true;
@@ -40,6 +34,7 @@
       };
       dev = true;
       dualsensePatch = true;
+      fz = true;
       gaming = true;
       nvim = true;
       prettyBoot = true;

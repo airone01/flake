@@ -1,0 +1,24 @@
+{pkgs, ...}: let
+  # Using built-in wrapping tool wrapOBS
+  obsWithPlugins = pkgs.wrapOBS {
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-pipewire-audio-v4l2
+      obs-vkcapture
+      obs-vaapi
+      obs-gstreamer
+    ];
+  };
+in
+  pkgs.symlinkJoin {
+    name = "obs-wrapped";
+    paths = [obsWithPlugins];
+    nativeBuildInputs = [pkgs.makeWrapper];
+
+    postBuild = ''
+      wrapProgram $out/bin/obs \
+        --set QT_QPA_PLATFORM wayland \
+        --set OBS_VKCAPTURE 1 \
+        --prefix PATH : ${pkgs.lib.makeBinPath [pkgs.ffmpeg]}
+    '';
+  }

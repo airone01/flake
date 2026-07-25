@@ -1,0 +1,39 @@
+{pkgs, ...}: let
+  obsWithPlugins = pkgs.wrapOBS {
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-pipewire-audio-v4l2
+      obs-vkcapture
+      obs-vaapi
+    ];
+  };
+
+  # Store default value in Nix store
+  defaultGlobalConfig = pkgs.writeText "global.ini" ''
+    [General]
+    LicenseAccepted=true
+
+    [Video]
+    BaseCX=1920
+    BaseCY=1080
+    OutputCX=1920
+    OutputCY=1080
+    FPSCommon=60
+  '';
+in
+  pkgs.writeShellScriptBin "obs" ''
+    # Ensure config dir
+    CONFIG_DIR="$HOME/.config/obs-studio"
+    mkdir -p "$CONFIG_DIR"
+
+    # Provision default config
+    if [ ! -f "$CONFIG_DIR/global.ini" ]; then
+      cp "${defaultGlobalConfig}" "$CONFIG_DIR/global.ini"
+      chmod 644 "$CONFIG_DIR/global.ini"
+    fi
+
+    # Some needed env
+    export QT_QPA_PLATFORM=wayland
+    export OBS_VKCAPTURE=1
+
+    exec ${obsWithPlugins}/bin/obs "$@"
+  ''

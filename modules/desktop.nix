@@ -1,4 +1,4 @@
-# feature: unified desktop environment
+# feature: desktop environment
 {self, ...}: {
   flake.nixosModules.desktop = {
     lib,
@@ -9,8 +9,9 @@
     imports = [
       self.nixosModules.asusPatch
       self.nixosModules.dualsensePatch
-      self.nixosModules.gnome
+      # self.nixosModules.gnome
       self.nixosModules.french
+      self.nixosModules.fz
       self.nixosModules.vpn
     ];
 
@@ -28,7 +29,6 @@
         ncspot # spotify
         obsidian
         pfetch
-        qFlipper
         qbittorrent
         ranger
         spotify
@@ -61,7 +61,7 @@
         };
       };
 
-      # lower nix processes priority for desktops
+      # Lower nix processes priority for desktops
       nix = {
         daemonIOSchedClass = "idle";
         daemonCPUSchedPolicy = "idle";
@@ -84,7 +84,6 @@
           pulse.enable = true;
           jack.enable = true;
         };
-
         # This is required to be explicitly set to false
         pulseaudio.enable = false;
 
@@ -96,20 +95,13 @@
 
       hardware.graphics.enable = true;
 
-      programs.localsend = {
-        enable = true;
-        openFirewall = true;
-      };
+      programs = {
+        localsend.enable = true;
+        obs-studio.enable = true;
 
-      home-manager.users.${config.stars.mainUser} = {
-        programs = {
-          obs-studio.enable = true;
-          obsidian.enable = true;
-
-          firefox = {
-            enable = true;
-            languagePacks = ["en-US" "fr"];
-          };
+        firefox = {
+          enable = true;
+          languagePacks = ["en-US" "fr"];
         };
       };
     };

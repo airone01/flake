@@ -12,10 +12,6 @@
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     import-tree.url = "github:vic/import-tree";
     nix-github-actions = {
       url = "github:nix-community/nix-github-actions";
