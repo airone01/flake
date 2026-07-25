@@ -1,16 +1,10 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{self, ...}: {
   flake.nixosModules.hostCassiopeiaConfig = {
     pkgs,
     config,
     ...
   }: {
     imports = [
-      inputs.home-manager.nixosModules.home-manager
-
       self.nixosModules.core
       self.nixosModules.desktop
       self.nixosModules.niri
@@ -37,7 +31,7 @@
       mainUser = "r1";
 
       core = true;
-      compat.fwd_2605.enable = true;
+      # compat.fwd_2605.enable = true;
       desktop = {
         enable = true;
         niri.enable = true;

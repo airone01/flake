@@ -9,138 +9,80 @@ _: {
     options.stars.userEnv = lib.mkEnableOption "user environment";
 
     config = lib.mkIf config.stars.userEnv {
-      home-manager.users.${config.stars.mainUser} = {
-        home = {
-          packages = with pkgs; [
-            pay-respects # thefuck replacement
-            zoxide
-          ];
+      environment = {
+        systemPackages = with pkgs; [
+          gh
+          pay-respects # thefuck replacement
+          zoxide
+        ];
 
-          shellAliases = {
-            l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons=auto";
-            ll = "eza -laab --icons=auto --git --group";
-            neofetch = "pfetch"; # TODO: https://github.com/ThatOneCalculator/NerdFetch
-            zz = "tmux";
+        shellAliases = {
+          l = "eza -laab --no-filesize --no-permissions --no-time --group --git --icons=auto";
+          ll = "eza -laab --icons=auto --git --group";
+          neofetch = "pfetch"; # TODO: https://github.com/ThatOneCalculator/NerdFetch
+          zz = "tmux";
 
-            # git
-            gts = "git status -s";
-            gta = "git add";
-            gtaa = "git add .";
-            gtaan = "git add -N .";
-            gtaac = "git add . && git commit";
-            gtf = "git fetch";
-            gtc = "git commit";
-            gtcc = "git checkout";
-            gtccb = "git checkout -b";
-            gtd = "git diff";
-            gtdc = "git diff --cached";
-            gtrm = "git rm --cached";
-            gtp = "git push";
-            gtpu = "git push -u $(git remote) $(git rev-parse --abbrev-ref HEAD)";
-            gtpl = "git pull";
-            gtl = "git log --all --oneline --graph";
-            gtlo = "git log --oneline";
-            gtm = "git merge";
-            gtma = "git merge --abort";
-            gtmc = "git merge --continue";
-            gtr = "git restore";
-            gtrs = "git reset";
+          # git
+          gts = "git status -s";
+          gta = "git add";
+          gtaa = "git add .";
+          gtaan = "git add -N .";
+          gtaac = "git add . && git commit";
+          gtf = "git fetch";
+          gtc = "git commit";
+          gtcc = "git checkout";
+          gtccb = "git checkout -b";
+          gtd = "git diff";
+          gtdc = "git diff --cached";
+          gtrm = "git rm --cached";
+          gtp = "git push";
+          gtpu = "git push -u $(git remote) $(git rev-parse --abbrev-ref HEAD)";
+          gtpl = "git pull";
+          gtl = "git log --all --oneline --graph";
+          gtlo = "git log --oneline";
+          gtm = "git merge";
+          gtma = "git merge --abort";
+          gtmc = "git merge --continue";
+          gtr = "git restore";
+          gtrs = "git reset";
 
-            # just
-            jts = "just switch";
-            jtc = "just check";
+          # just
+          jts = "just switch";
+          jtc = "just check";
 
-            tmpdir = "cd $(mktemp -d)";
-          };
+          tmpdir = "cd $(mktemp -d)";
+        };
+      };
+
+      programs = {
+        direnv = {
+          enable = true;
+          settings.global.hide_env_diff = true;
         };
 
-        programs = {
-          direnv = {
+        git = {
+          enable = true;
+
+          lfs.enable = true;
+        };
+
+        tmux = {
+          enable = true;
+
+          clock24 = true;
+        };
+
+        zsh = {
+          enable = true;
+
+          enableCompletion = true;
+          autosuggestions.enable = true;
+          syntaxHighlighting.enable = true;
+          ohMyZsh = {
             enable = true;
-
-            nix-direnv.enable = true;
-            enableBashIntegration = true;
-            enableFishIntegration = true;
-            enableNushellIntegration = true;
-            enableZshIntegration = true;
-
-            config.global.hide_env_diff = true;
-          };
-
-          git = {
-            enable = true;
-
-            lfs.enable = true;
-
-            signing = {
-              # You are currently using the legacy default (`"openpgp"`) because `home.stateVersion` is less than "25.05".
-              # To silence this warning and keep legacy behavior, set:
-              #   programs.git.signing.format = "openpgp";
-              # To adopt the new default behavior, set:
-              #   programs.git.signing.format = null;
-              format = null;
-              key = "~/.ssh/id_ed25519.pub";
-              signByDefault = true;
-            };
-            settings = {
-              gpg.format = "ssh";
-              gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
-            };
-
-            settings = {
-              user.name = "airone01";
-              user.email = "airone01@proton.me";
-            };
-          };
-
-          gh = {
-            enable = true;
-
-            gitCredentialHelper = {
-              enable = true;
-
-              hosts = ["https://github.com" "https://gist.github.com"];
-            };
-          };
-
-          oh-my-posh = {
-            enable = true;
-
-            enableBashIntegration = true;
-            enableFishIntegration = true;
-            enableNushellIntegration = true;
-            enableZshIntegration = true;
-
-            settings = builtins.fromJSON (builtins.readFile (builtins.fetchurl {
-              url = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/df8f599351258f749dc9959af666cd9037340567/themes/huvix.omp.json";
-              sha256 = "0sjxvrjpc4l6rb6z2sqqxx3m57qrghqd9w9c4qpbjprxpfhl6bqq";
-            }));
-          };
-
-          tmux = {
-            enable = true;
-
-            clock24 = true;
-            mouse = true;
-          };
-
-          zsh = {
-            enable = true;
-
-            enableCompletion = true;
-            autosuggestion.enable = true;
-            syntaxHighlighting.enable = true;
 
             plugins = [
-              {
-                name = "fzf-tab";
-                src = pkgs.fetchFromGitHub {
-                  owner = "Aloxaf";
-                  repo = "fzf-tab";
-                  rev = "v1.1.2";
-                  sha256 = "sha256-Qv8zAiMtrr67CbLRrFjGaPzFZcOiMVEFLg1Z+N6VMhg=";
-                };
-              }
+              "zsh-fzf-tab"
             ];
           };
         };

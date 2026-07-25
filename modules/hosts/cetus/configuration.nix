@@ -5,7 +5,6 @@
 }: {
   flake.nixosModules.hostCetusConfig = {pkgs, ...}: {
     imports = [
-      inputs.home-manager.nixosModules.home-manager
       inputs.sops-nix.nixosModules.sops
 
       self.nixosModules.core

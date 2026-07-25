@@ -135,24 +135,6 @@
         # needed for the login shell to be zsh
         zsh.enable = true;
       };
-
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-        backupFileExtension = "backup";
-
-        # sharedModules = with inputs; [
-        #   nvf.homeManagerModules.default
-        # ];
-
-        users.${config.stars.mainUser} = {
-          home = {
-            username = config.stars.mainUser;
-            homeDirectory = "/home/${config.stars.mainUser}";
-            inherit (config.system) stateVersion;
-          };
-        };
-      };
     };
   };
 }
