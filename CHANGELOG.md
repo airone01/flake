@@ -1,5 +1,16 @@
 # Changelog
 
+## [12.0.0](https://github.com/airone01/flake/compare/flake-v11.15.0...flake-v12.0.0) (2026-07-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* **flake:** remove home-manager
+
+### Code Refactoring
+
+* **flake:** remove home-manager ([110cc22](https://github.com/airone01/flake/commit/110cc228624f7a9700c4a2f38ac347d9c68795d3))
+
 ## [11.15.0](https://github.com/airone01/flake/compare/flake-v11.14.1...flake-v11.15.0) (2026-07-28)
 
 
