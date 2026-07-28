@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.15.0](https://github.com/airone01/flake/compare/flake-v11.14.1...flake-v11.15.0) (2026-07-28)
+
+
+### Features
+
+* **tmux:** replace zellij ([46efc24](https://github.com/airone01/flake/commit/46efc247cf2f749b9856bff1548e1e71085ca716))
+
 ## [11.14.1](https://github.com/airone01/flake/compare/flake-v11.14.0...flake-v11.14.1) (2026-07-22)
 
 
