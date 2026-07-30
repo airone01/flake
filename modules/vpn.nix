@@ -16,10 +16,10 @@ _: {
         tor-browser
       ];
 
-      services.
-        mullvad-vpn = {
+      services.mullvad-vpn = {
         enable = true;
-        package = pkgs.mullvad-vpn;
+
+        gui.enable = true;
         enableEarlyBootBlocking = true;
       };
     };
