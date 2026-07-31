@@ -1,5 +1,14 @@
 # Changelog
 
+## [12.0.1](https://github.com/airone01/flake/compare/flake-v12.0.0...flake-v12.0.1) (2026-07-31)
+
+
+### Bug Fixes
+
+* **patches.nix:** disable pipx patch ([bd72b05](https://github.com/airone01/flake/commit/bd72b0519f6c483c17adc299a8f098ed1af32f2f))
+* rm pipx ([cbd8b6d](https://github.com/airone01/flake/commit/cbd8b6d36185e5fb409ace8fc5bc4a985eaf6e4a))
+* **vpn:** update mullvad config ([1a0bd6e](https://github.com/airone01/flake/commit/1a0bd6e3eed76cd131cd29d8f567f1240cdc786d))
+
 ## [12.0.0](https://github.com/airone01/flake/compare/flake-v11.15.0...flake-v12.0.0) (2026-07-28)
 
 
