@@ -45,9 +45,10 @@
         zls
 
         # Python
-        pipx
-        python313
-        python313Packages.pip
+        # pipx # waiting for nixpkgs #536749
+        python3
+        # python313
+        # python313Packages.pip
 
         # JS/TS
         bun
