@@ -191,8 +191,6 @@ in {
     };
 
     config = lib.mkIf config.stars.desktop.niri.enable {
-      services.clipboard-sync.enable = true;
-
       environment.sessionVariables = {
         NIXOS_OZONE_WL = "1";
         MOZ_ENABLE_WAYLAND = "1";
@@ -211,9 +209,13 @@ in {
         };
       };
 
-      # Power profiles and management
-      services.upower.enable = true;
-      services.power-profiles-daemon.enable = true;
+      services = {
+        clipboard-sync.enable = true;
+
+        # Power profiles and management
+        upower.enable = true;
+        power-profiles-daemon.enable = true;
+      };
 
       xdg.portal = {
         enable = true;
