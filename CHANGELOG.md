@@ -1,5 +1,12 @@
 # Changelog
 
+## [12.1.0](https://github.com/airone01/flake/compare/flake-v12.0.1...flake-v12.1.0) (2026-08-03)
+
+
+### Features
+
+* **desktop:** thunar plugins ([0ee4cb3](https://github.com/airone01/flake/commit/0ee4cb321e97f14c38ee8d9793d51bcb829030c5))
+
 ## [12.0.1](https://github.com/airone01/flake/compare/flake-v12.0.0...flake-v12.0.1) (2026-07-31)
 
 
