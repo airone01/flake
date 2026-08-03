@@ -1,0 +1,27 @@
+# feature: Anubis reverse proxy configuration and integration with other services
+{enableTraefik ? false}: {lib, ...}: {
+  services = {
+    anubis = {
+      defaultOptions.settings = {
+        OG_PASSTHROUGH = true;
+        OG_EXPIRY_TIME = "1h";
+        COOKIE_DOMAIN = "air1.one";
+        REDIRECT_DOMAINS = "air1.one,git.air1.one,searchix.air1.one";
+      };
+
+      # This is now populated automatically by their respective modules.
+      # instances = {};
+    };
+  };
+
+  users.users = lib.optionalAttrs enableTraefik {
+    traefik.extraGroups = ["anubis"];
+  };
+
+  sops.secrets."anubis/mainsite_key" = {
+    owner = "anubis";
+    group = "anubis";
+    mode = "0400";
+    sopsFile = ../../secrets/anubis.yaml;
+  };
+}

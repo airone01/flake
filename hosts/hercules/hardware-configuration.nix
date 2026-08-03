@@ -1,0 +1,36 @@
+{
+  lib,
+  modulesPath,
+  ...
+}: {
+  imports = [
+    (modulesPath + "/profiles/qemu-guest.nix")
+  ];
+
+  boot = {
+    initrd.availableKernelModules = ["xhci_pci" "virtio_scsi"];
+    initrd.kernelModules = [];
+    kernelModules = [];
+    extraModulePackages = [];
+  };
+
+  fileSystems."/" = {
+    device = "UUID=6ecc6a4f-eece-42b6-952f-389ad3da499a";
+    fsType = "bcachefs";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/CC94-69FD";
+    fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
+  };
+
+  swapDevices = [
+    {device = "/dev/mapper/dev-disk-byx2dpartlabel-diskx2dmainx2dencryptedSwap";}
+    {device = "/dev/disk/by-uuid/57500517-b54d-4c68-8760-2521a8e0a4cf";}
+  ];
+
+  networking.useDHCP = lib.mkDefault true;
+
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
+}

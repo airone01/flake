@@ -7,12 +7,10 @@
       url = "github:dnut/clipboard-sync";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    import-tree.url = "github:vic/import-tree";
     nix-github-actions = {
       url = "github:nix-community/nix-github-actions";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,8 +32,17 @@
     };
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake
-    {inherit inputs;}
-    (inputs.import-tree ./modules);
+  outputs = {nixpkgs, ...} @ inputs: let
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "x86_64-linux"
+      "aarch64-linux"
+      "aarch64-darwin"
+    ];
+  in {
+    packages = forAllSystems (
+      system: import ./pkgs {inherit inputs system;}
+    );
+
+    nixosConfigurations = import ./hosts {inherit nixpkgs inputs;};
+  };
 }
