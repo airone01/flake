@@ -7,31 +7,86 @@
   ratePatch ? false,
   ...
 }: let
-  niri-highrr = pkgs.writeShellScriptBin "niri-highrr" ''
-    log() { ${pkgs.util-linux}/bin/logger -t niri-highrr "$*"; }
+  niri-highrr = pkgs.callPackage ./highrr.nix {};
 
-    apply_highrr() {
-      local cmd
-      cmd=$(niri msg --json outputs | ${lib.getExe pkgs.jq} -r '.[] | . as $out | ($out.modes | sort_by(.refresh_rate) | last) as $max | "niri msg output \"\($out.name)\" mode \($max.width)x\($max.height)@\($max.refresh_rate / 1000)"')
-      log "running: $cmd"
-      echo "$cmd" | bash 2>&1 | log "result:"
-      log "current_mode after: $(niri msg --json outputs | ${lib.getExe pkgs.jq} '.[].current_mode')"
-    }
+  noctaliaBin =
+    if noctalia != null
+    then "${lib.getExe noctalia}"
+    else null;
 
-    until niri msg version &>/dev/null; do
-      sleep 0.5
-    done
-    log "IPC ready"
+  highrrBin =
+    if ratePatch
+    then "${lib.getExe niri-highrr}"
+    else null;
 
-    apply_highrr
+  qwertyWorkspaceBinds = {
+    "Mod+1".focus-workspace = 1;
+    "Mod+2".focus-workspace = 2;
+    "Mod+3".focus-workspace = 3;
+    "Mod+4".focus-workspace = 4;
+    "Mod+5".focus-workspace = 5;
+    "Mod+6".focus-workspace = 6;
+    "Mod+7".focus-workspace = 7;
+    "Mod+8".focus-workspace = 8;
+    "Mod+9".focus-workspace = 9;
+    "Mod+0".focus-workspace = 10;
 
-    niri msg --json event-stream | while read -r line; do
-      if echo "$line" | ${pkgs.gnugrep}/bin/grep -q 'OutputsChanged'; then
-        log "OutputsChanged event"
-        apply_highrr
-      fi
-    done
-  '';
+    "Mod+Shift+1".move-column-to-workspace = 1;
+    "Mod+Shift+2".move-column-to-workspace = 2;
+    "Mod+Shift+3".move-column-to-workspace = 3;
+    "Mod+Shift+4".move-column-to-workspace = 4;
+    "Mod+Shift+5".move-column-to-workspace = 5;
+    "Mod+Shift+6".move-column-to-workspace = 6;
+    "Mod+Shift+7".move-column-to-workspace = 7;
+    "Mod+Shift+8".move-column-to-workspace = 8;
+    "Mod+Shift+9".move-column-to-workspace = 9;
+    "Mod+Shift+0".move-column-to-workspace = 10;
+  };
+
+  azertyWorkspaceBinds =
+    qwertyWorkspaceBinds
+    // {
+      "Mod+ampersand".focus-workspace = 1;
+      "Mod+eacute".focus-workspace = 2;
+      "Mod+quotedbl".focus-workspace = 3;
+      "Mod+apostrophe".focus-workspace = 4;
+      "Mod+parenleft".focus-workspace = 5;
+      "Mod+minus".focus-workspace = 6;
+      "Mod+egrave".focus-workspace = 7;
+      "Mod+underscore".focus-workspace = 8;
+      "Mod+ccedilla".focus-workspace = 9;
+      "Mod+agrave".focus-workspace = 10;
+
+      "Mod+Shift+ampersand".move-column-to-workspace = 1;
+      "Mod+Shift+eacute".move-column-to-workspace = 2;
+      "Mod+Shift+quotedbl".move-column-to-workspace = 3;
+      "Mod+Shift+apostrophe".move-column-to-workspace = 4;
+      "Mod+Shift+parenleft".move-column-to-workspace = 5;
+      "Mod+Shift+minus".move-column-to-workspace = 6;
+      "Mod+Shift+egrave".move-column-to-workspace = 7;
+      "Mod+Shift+underscore".move-column-to-workspace = 8;
+      "Mod+Shift+ccedilla".move-column-to-workspace = 9;
+      "Mod+Shift+agrave".move-column-to-workspace = 10;
+    };
+
+  workspaceBinds =
+    if lib.hasInfix "fr" keyboardLayout
+    then azertyWorkspaceBinds
+    else qwertyWorkspaceBinds;
+
+  spawnAtStartup =
+    lib.optionals (noctaliaBin != null) [[noctaliaBin]]
+    ++ lib.optionals (highrrBin != null) [[highrrBin]];
+
+  launcherCmd =
+    if noctaliaBin != null
+    then "${noctaliaBin} ipc call launcher toggle"
+    else "rofi -show drun";
+
+  lockCmd =
+    if noctaliaBin != null
+    then "${noctaliaBin} ipc call lockScreen lock"
+    else null;
 in
   inputs.wrapper-modules.wrappers.niri.wrap {
     inherit pkgs;
@@ -39,11 +94,8 @@ in
     settings =
       {
         prefer-no-csd = {};
-        spawn-at-startup =
-          lib.optionals (noctalia != null) [[(lib.getExe noctalia)]]
-          ++ lib.optionals ratePatch [[(lib.getExe niri-highrr)]];
-
-        xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
+        spawn-at-startup = spawnAtStartup;
+        xwayland-satellite.path = "xwayland-satellite";
         input.keyboard.xkb.layout = keyboardLayout;
         input.touchpad.tap = {};
       }
@@ -53,18 +105,15 @@ in
       // {
         binds =
           {
-            "Mod+Return".spawn = lib.getExe pkgs.kitty;
+            "Mod+Return".spawn = "kitty";
             "Mod+Q".close-window = {};
-            "Mod+S".spawn-sh =
-              if noctalia != null
-              then "${lib.getExe noctalia} ipc call launcher toggle"
-              else "${lib.getExe pkgs.rofi} -show drun";
+            "Mod+S".spawn-sh = launcherCmd;
 
-            "Mod+E".spawn = lib.getExe pkgs.thunar;
-            "Mod+R".spawn = ["${lib.getExe pkgs.kitty}" "-e" "${lib.getExe pkgs.yazi}"];
-            "Mod+Shift+B".spawn = lib.getExe pkgs.firefox;
-            "Mod+V".spawn-sh = "${lib.getExe pkgs.cliphist} list | ${lib.getExe pkgs.rofi} -dmenu | ${lib.getExe pkgs.cliphist} decode | ${pkgs.wl-clipboard}/bin/wl-copy";
-            "Print".spawn = ["${lib.getExe pkgs.grimblast}" "copy" "area"];
+            "Mod+E".spawn = "thunar";
+            "Mod+R".spawn = ["kitty" "-e" "yazi"];
+            "Mod+Shift+B".spawn = "firefox";
+            "Mod+V".spawn-sh = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
+            "Print".spawn = ["grimblast" "copy" "area"];
 
             "Mod+F".maximize-column = {};
             "Mod+Shift+F".fullscreen-window = {};
@@ -89,58 +138,18 @@ in
             "Mod+Shift+Ctrl+Left".move-window-to-monitor-left = {};
             "Mod+Shift+Ctrl+Right".move-window-to-monitor-right = {};
 
-            "XF86AudioRaiseVolume".spawn = ["${lib.getExe pkgs.pamixer}" "-i" "5"];
-            "XF86AudioLowerVolume".spawn = ["${lib.getExe pkgs.pamixer}" "-d" "5"];
-            "XF86AudioMute".spawn = ["${lib.getExe pkgs.pamixer}" "-t"];
-            "XF86MonBrightnessUp".spawn = ["${lib.getExe pkgs.brightnessctl}" "s" "10%+"];
-            "XF86MonBrightnessDown".spawn = ["${lib.getExe pkgs.brightnessctl}" "s" "10%-"];
-            "XF86AudioPlay".spawn = ["${lib.getExe pkgs.playerctl}" "play-pause"];
-            "XF86AudioNext".spawn = ["${lib.getExe pkgs.playerctl}" "next"];
-            "XF86AudioPrev".spawn = ["${lib.getExe pkgs.playerctl}" "previous"];
+            "XF86AudioRaiseVolume".spawn = ["pamixer" "-i" "5"];
+            "XF86AudioLowerVolume".spawn = ["pamixer" "-d" "5"];
+            "XF86AudioMute".spawn = ["pamixer" "-t"];
+            "XF86MonBrightnessUp".spawn = ["brightnessctl" "s" "10%+"];
+            "XF86MonBrightnessDown".spawn = ["brightnessctl" "s" "10%-"];
+            "XF86AudioPlay".spawn = ["playerctl" "play-pause"];
+            "XF86AudioNext".spawn = ["playerctl" "next"];
+            "XF86AudioPrev".spawn = ["playerctl" "previous"];
           }
-          // lib.optionalAttrs (noctalia != null) {
-            "Mod+L".spawn-sh = "${lib.getExe noctalia} ipc call lockScreen lock";
+          // lib.optionalAttrs (lockCmd != null) {
+            "Mod+L".spawn-sh = lockCmd;
           }
-          // (builtins.listToAttrs (builtins.concatLists (builtins.genList (x: let
-            ws = x + 1;
-            num = toString (
-              if x == 9
-              then 0
-              else x + 1
-            );
-            azertySyms = ["ampersand" "eacute" "quotedbl" "apostrophe" "parenleft" "minus" "egrave" "underscore" "ccedilla" "agrave"];
-            sym = builtins.elemAt azertySyms x;
-            isFr = lib.hasInfix "fr" keyboardLayout;
-          in
-            if isFr
-            then [
-              {
-                name = "Mod+${sym}";
-                value.focus-workspace = ws;
-              }
-              {
-                name = "Mod+Shift+${sym}";
-                value.move-column-to-workspace = ws;
-              }
-              {
-                name = "Mod+${num}";
-                value.focus-workspace = ws;
-              }
-              {
-                name = "Mod+Shift+${num}";
-                value.move-column-to-workspace = ws;
-              }
-            ]
-            else [
-              {
-                name = "Mod+${num}";
-                value.focus-workspace = ws;
-              }
-              {
-                name = "Mod+Shift+${num}";
-                value.move-column-to-workspace = ws;
-              }
-            ])
-          10)));
+          // workspaceBinds;
       };
   }
