@@ -1,4 +1,4 @@
-# TODO: nix-wrapper-modules or similar maybe?
+# TODO: multiple sizes of editors
 {
   pkgs,
   inputs,
