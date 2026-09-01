@@ -1,5 +1,30 @@
 # Changelog
 
+## [13.0.0](https://github.com/airone01/flake/compare/flake-v12.1.0...flake-v13.0.0) (2026-09-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove module definitions and automatic imports in favor of static imports and vanilla Nix code.
+
+### Features
+
+* bring back devshells and gha ([346dd93](https://github.com/airone01/flake/commit/346dd9302d6d3d46ab02266481e44fd9991728cb))
+
+
+### Bug Fixes
+
+* bring back git hooks ([7353484](https://github.com/airone01/flake/commit/73534841d85ab79ed831558b85f7ad1294a021d9))
+* **mullvad-vpn:** disable systemd enforce ([f3accb2](https://github.com/airone01/flake/commit/f3accb2a7ffc4b0416c207b2737dbd6b8735c708))
+* **niri:** correct boot command ([33c30a3](https://github.com/airone01/flake/commit/33c30a393e0fea91ecf6ab06d5f99275da0f0c5f))
+* **niri:** faster eval ([ce33a88](https://github.com/airone01/flake/commit/ce33a88aee45dce61fec30f8065573b938953dac))
+* remove nix-wrapper-modules ([ad56399](https://github.com/airone01/flake/commit/ad563992291d77068a7f1d3bf120ed6ae4795d48))
+
+
+### Code Refactoring
+
+* remove module system ([d8a0575](https://github.com/airone01/flake/commit/d8a057535dfbb2a5b31d950511b812cd44499b08))
+
 ## [12.1.0](https://github.com/airone01/flake/compare/flake-v12.0.1...flake-v12.1.0) (2026-08-03)
 
 
