@@ -11,6 +11,6 @@
     enable = true;
 
     gui.enable = true;
-    enableEarlyBootBlocking = true;
+    # enableEarlyBootBlocking = true;
   };
 }
