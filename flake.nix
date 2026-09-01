@@ -58,6 +58,24 @@
         }
     );
 
+    gitHooks = forAllSystems (
+      system:
+        inputs.git-hooks.lib.${system}.run {
+          src = ./.;
+          excludes = [
+            "CHANGELOG\\.md$"
+            "\\.release-please-manifest\\.json$"
+            ".*\\.html$"
+          ];
+          hooks = {
+            alejandra.enable = true;
+            deadnix.enable = true;
+            statix.enable = true;
+            prettier.enable = true;
+          };
+        }
+    );
+
     nixosChecks = nixpkgs.lib.foldl' (
       acc: name: let
         host = self.nixosConfigurations.${name};
@@ -79,6 +97,7 @@
     checks = forAllSystems (
       system: {
         formatting = treefmtEval.${system}.config.build.check self;
+        pre-commit = gitHooks.${system};
       }
     );
 
@@ -91,7 +110,9 @@
           nix-output-monitor
           deploy-rs
           just
+          nix-diff
         ];
+        shellHook = gitHooks.${system}.shellHook;
       };
 
       commitlint = pkgs.mkShell {
