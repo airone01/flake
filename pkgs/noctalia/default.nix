@@ -1,14 +1,11 @@
 # feature: noctalia desktop shell package wrapper
 {
   pkgs,
-  mainUser ? "r1",
+  homeDir ? "/home/r1",
   ...
 }: let
-  homeDir = "/home/${mainUser}";
-  rawSettings = builtins.readFile ./noctalia.json;
-  # Patch hardcoded `/home/r1` path
-  patchedSettings = builtins.replaceStrings ["/home/r1"] [homeDir] rawSettings;
-  settingsFile = pkgs.writeText "noctalia-settings.json" patchedSettings;
+  jsoncConf = builtins.readFile ./noctalia.jsonc;
+  conf = pkgs.writeText "noctalia-settings.json" jsoncConf;
 in
   pkgs.symlinkJoin {
     name = "noctalia-shell-${pkgs.noctalia-shell.version or "4.7.7"}";
@@ -16,7 +13,12 @@ in
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/noctalia-shell \
-        --set NOCTALIA_SETTINGS_FILE "${settingsFile}"
+        --set NOCTALIA_SETTINGS_FILE "${conf}"
+    '';
+    postPatch = ''
+      jq '.' ${conf} > ${conf} # strips comments from jsonc
+      substituteInPlace ${conf} --replace-fail "@HOME" "${homeDir}"
+      substituteInPlace ${conf} --replace-fail "@VERSION" "${pkgs.noctalia-shell.version}"
     '';
     meta =
       (pkgs.noctalia-shell.meta or {})
