@@ -32,6 +32,22 @@
         }
     }
 
+    layout {
+        focus-ring {
+            off
+        }
+        border {
+            width 2
+            active-color "#fffd66"
+            inactive-color "#1e1e1e80"
+        }
+    }
+
+    window-rule {
+        geometry-corner-radius 8
+        clip-to-geometry true
+    }
+
     xwayland-satellite {
         path "xwayland-satellite"
     }
