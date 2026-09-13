@@ -7,13 +7,14 @@
 }: let
   homeDir = "/home/${mainUser}";
   rawSettings = builtins.readFile ./noctalia.json;
-  patchedSettings = builtins.fromJSON (builtins.replaceStrings ["/home/r1"] [homeDir] rawSettings);
+  parsed = builtins.fromJSON (builtins.replaceStrings ["/home/r1"] [homeDir] rawSettings);
+  settingsJson = builtins.toJSON (parsed.settings or parsed);
 in
   if inputs ? wrapper-modules
   then
     inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
       inherit pkgs;
-      inherit (patchedSettings) settings;
+      inherit (parsed) settings;
       extraPackages = with pkgs; [
         xdg-utils
         glib
@@ -28,7 +29,7 @@ in
       nativeBuildInputs = [pkgs.makeWrapper];
       postBuild = ''
         wrapProgram $out/bin/noctalia-shell \
-          --set NOCTALIA_SETTINGS_FILE "${pkgs.writeText "noctalia-settings.json" (builtins.replaceStrings ["/home/r1"] [homeDir] rawSettings)}"
+          --set NOCTALIA_SETTINGS_FILE "${pkgs.writeText "noctalia-settings.json" settingsJson}"
       '';
       meta =
         (pkgs.noctalia-shell.meta or {})
