@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  keyboardLayout ? "us,fr",
+  keyboardLayout ? "fr,us",
   noctalia ? null,
   ratePatch ? false,
   ...
@@ -175,11 +175,16 @@ in
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/niri \
-        --add-flags "--config ${configFile}"
+        --set NIRI_CONFIG "${configFile}"
+      if [ -f $out/bin/niri-session ]; then
+        wrapProgram $out/bin/niri-session \
+          --set NIRI_CONFIG "${configFile}"
+      fi
     '';
     passthru =
       (pkgs.niri.passthru or {})
       // {
         providedSessions = ["niri"];
+        inherit configFile;
       };
   }
