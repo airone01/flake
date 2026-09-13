@@ -38,8 +38,9 @@
       gtrs = "git reset";
 
       # just
-      jts = "just switch";
       jtc = "just check";
+      jtb = "just boot";
+      jts = "just switch";
 
       tmpdir = "cd $(mktemp -d)";
     };
