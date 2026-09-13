@@ -1,13 +1,9 @@
 # feature: Wallpapers and profile picture configuration
-{
-  pkgs,
-  mainUser ? "r1",
-  ...
-}: let
+{pkgs, ...}: let
   mkHomeFile = {
     path,
     source,
-  }: "L+ /home/${mainUser}/${path} - - - - ${source}";
+  }: ''L+ "%h/${path}" - - - - ${source}'';
 
   mkWallpaper = {
     fileName,
@@ -132,8 +128,18 @@
       };
     }
   ];
+
+  ramonNunezWalls = [
+    {
+      fileName = "Ramon Nunez Cat.jpg";
+      source = pkgs.fetchurl {
+        url = "https://cdnb.artstation.com/p/assets/images/images/101/815/205/large/ramonn90-3.jpg";
+        sha256 = "sha256-srza3xXA1izcWAs0uqGEu16huQ4vkQYYJHRAY+0GpEM=";
+      };
+    }
+  ];
 in {
-  systemd.tmpfiles.rules =
+  systemd.user.tmpfiles.rules =
     [face]
-    ++ map mkWallpaper (fangpeiiWalls ++ nid417Walls ++ samdoesartsWalls);
+    ++ map mkWallpaper (fangpeiiWalls ++ nid417Walls ++ samdoesartsWalls ++ ramonNunezWalls);
 }
