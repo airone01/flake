@@ -197,7 +197,7 @@
       "animationSpeed": 1,
       "animationDisabled": false,
       "compactLockScreen": false,
-      "lockScreenAnimations": false,
+      "lockScreenAnimations": true,
       "lockOnSuspend": true,
       "showSessionButtonsOnLockScreen": true,
       "showHibernateOnLockScreen": false,
@@ -219,7 +219,7 @@
       "clockFormat": "hh\\nmm",
       "passwordChars": true,
       "lockScreenMonitors": [],
-      "lockScreenBlur": 0,
+      "lockScreenBlur": 0.5,
       "lockScreenTint": 0,
       "keybinds": {
         "keyUp": ["Up"],
@@ -323,63 +323,7 @@
       "wallhavenResolutionMode": "atleast",
       "wallhavenResolutionWidth": "",
       "wallhavenResolutionHeight": "",
-      "sortOrder": "name",
-      "favorites": [
-        {
-          "appearance": "dark",
-          "colorScheme": "Noctalia (default)",
-          "darkMode": true,
-          "generationMethod": "tonal-spot",
-          "paletteColors": ["#ffb692", "#e6beac", "#d0c890", "#ffb4ab"],
-          "path": "/home/r1/Pictures/Wallpapers/Fangpeii Clouds Sky Orange Girl Moon.jpg",
-          "useWallpaperColors": true
-        },
-        {
-          "appearance": "dark",
-          "colorScheme": "Noctalia (default)",
-          "darkMode": true,
-          "generationMethod": "tonal-spot",
-          "paletteColors": ["#ffb692", "#e6beac", "#d0c890", "#ffb4ab"],
-          "path": "/home/r1/Pictures/Wallpapers/Sam Yang Mountain Japan Field Car Wheat Orange Ping Blue Girl.jpg",
-          "useWallpaperColors": true
-        },
-        {
-          "appearance": "dark",
-          "colorScheme": "Noctalia (default)",
-          "darkMode": true,
-          "generationMethod": "tonal-spot",
-          "paletteColors": ["#8fccfa", "#b8c8d7", "#cec0e5", "#ffb4ab"],
-          "path": "/home/r1/Pictures/Wallpapers/Fangpeii Flowers Green.jpg",
-          "useWallpaperColors": true
-        },
-        {
-          "appearance": "dark",
-          "colorScheme": "Noctalia (default)",
-          "darkMode": true,
-          "generationMethod": "tonal-spot",
-          "paletteColors": ["#ffb59f", "#e7bdb2", "#d8c58d", "#ffb4ab"],
-          "path": "/home/r1/Pictures/Wallpapers/Fangpeii City Clouds Orange Blue Sky.jpg",
-          "useWallpaperColors": true
-        },
-        {
-          "appearance": "dark",
-          "colorScheme": "Noctalia (default)",
-          "darkMode": true,
-          "generationMethod": "tonal-spot",
-          "paletteColors": ["#e1b6ff", "#d2c1d9", "#f4b7bb", "#ffb4ab"],
-          "path": "/home/r1/Pictures/Wallpapers/Fangpeii Clouds Sky Purple Stars.jpg",
-          "useWallpaperColors": true
-        },
-        {
-          "appearance": "dark",
-          "colorScheme": "Noctalia (default)",
-          "darkMode": true,
-          "generationMethod": "tonal-spot",
-          "paletteColors": ["#86cfff", "#b6c9d8", "#cdc0e9", "#ffb4ab"],
-          "path": "/home/r1/Pictures/Wallpapers/Nid_417 Arknights White Green Blue Sky Rock Plain.jpg",
-          "useWallpaperColors": true
-        }
-      ]
+      "sortOrder": "name"
     },
     "appLauncher": {
       "enableClipboardHistory": false,
@@ -662,7 +606,7 @@
     },
     "colorSchemes": {
       "useWallpaperColors": true,
-      "predefinedScheme": "Faithful",
+      "predefinedScheme": "Noctalia (default)",
       "darkMode": true,
       "schedulingMode": "off",
       "manualSunrise": "06:30",
