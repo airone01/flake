@@ -28,6 +28,7 @@
       gtrm = "git rm --cached";
       gtp = "git push";
       gtpu = "git push -u $(git remote) $(git rev-parse --abbrev-ref HEAD)";
+      gtpf = "git push --force-with-lease";
       gtpl = "git pull";
       gtl = "git log --all --oneline --graph";
       gtlo = "git log --oneline";
