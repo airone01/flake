@@ -76,9 +76,13 @@
         enable = true;
 
         plugins = [
-          "zsh-fzf-tab"
+          "git"
         ];
       };
+
+      interactiveShellInit = ''
+        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+      '';
     };
   };
 }
