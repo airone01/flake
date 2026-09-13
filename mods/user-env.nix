@@ -36,6 +36,7 @@
       gtmc = "git merge --continue";
       gtr = "git restore";
       gtrs = "git reset";
+      gtrb = "git rebase";
 
       # just
       jtc = "just check";
