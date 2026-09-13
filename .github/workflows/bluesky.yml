@@ -26,4 +26,4 @@ jobs:
           BSKY_HANDLE: ${{ secrets.IOM_BSKY_HANDLE }}
           BSKY_PASSWORD: ${{ secrets.IOM_BSKY_PASSWORD }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-        run: python modules/pkgs/bluesky/initomatic.py
+        run: python pkgs/initomatic/initomatic.py
