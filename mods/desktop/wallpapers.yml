@@ -1,0 +1,145 @@
+# Suum cuique tribuere !
+
+artists:
+  - name: Fangpeii
+    page: https://www.pixiv.net/en/users/50047601
+    wallpapers:
+      - objects: Geese Pond
+        colors: Pink
+        url: https://w.wallhaven.cc/full/ly/wallhaven-lywpjl.jpg
+        sha256: sha256-EyGRsayeT1YDASaet4HYn/42ucAV+CaF21KMsIFPHNY=
+
+      - objects: Beach Sunset
+        colors: Orange
+        url: https://w.wallhaven.cc/full/yx/wallhaven-yxw15l.jpg
+        sha256: sha256-JqW+b2+y1AeVJOYtBmWTl1txaovHM0aeUfkBRSvvzrU=
+
+      - objects: Flowers
+        colors: Green
+        url: https://w.wallhaven.cc/full/3q/wallhaven-3qo9p6.jpg
+        sha256: sha256-ZKhdcsqFeKlSHvhiexHI+ShY/pjJf/OpyYM6KQp/glg=
+
+      - objects: Pond
+        colors: Green
+        url: https://w.wallhaven.cc/full/e8/wallhaven-e8z2xk.jpg
+        sha256: sha256-ba+jsQ9T5UJU9el7y/nepr4P+J+ji3xTXyeBjHIWF80=
+
+      - objects: Clouds Sky Girl Moon
+        colors: Orange
+        url: https://w.wallhaven.cc/full/d8/wallhaven-d8e373.jpg
+        sha256: sha256-e5OQY31ZsQOIEXhpMQpNPQID0Td27Du1c2UsFJXqchc=
+
+      - objects: Clouds Sky Stars
+        colors: Purple
+        url: https://w.wallhaven.cc/full/o3/wallhaven-o33l25.jpg
+        sha256: sha256-xREwFhTVVEGi3bvMrKudkwjuLZzmat9lLA+7PQNvPt8=
+
+      - objects: Morming Sky Tree Cold
+        colors: Blue Pink
+        url: https://w.wallhaven.cc/full/yq/wallhaven-yq57rl.jpg
+        sha256: sha256-fjEh28ECQnvCTTvHemiH6GHfpaZVieHb0EmoucMwUuk=
+
+      - objects: City Clouds Sky
+        colors: Orange Blue
+        url: https://w.wallhaven.cc/full/7p/wallhaven-7pd3l9.jpg
+        sha256: sha256-LFek+KkQ9Ig6HZrhfyuaP2K3biKW35Wjdsk7DZs0YNA=
+
+      - objects: Sea Lighthouse Sky
+        colors: Orange Blue
+        url: https://w.wallhaven.cc/full/j3/wallhaven-j33kv5.jpg
+        sha256: sha256-10iujyYzzvRm77VN1vKORQ7M7uP2iqYqfpbNcJk+4ik=
+
+      - objects: Mountain Sunset Sky
+        colors: Pink Blue
+        url: https://w.wallhaven.cc/full/vp/wallhaven-vpzqgl.jpg
+        sha256: sha256-sRH821hTfYW8TtjeO+irrFmQqAippIZgybJ/9Nc1sXk=
+
+      - objects: Sky Sunset Trees
+        colors: Orange Pink
+        url: https://w.wallhaven.cc/full/3q/wallhaven-3qzvey.jpg
+        sha256: sha256-mqQMDWfzhSWaL7sH3++cMni0jIxdeuE2NI0MscS7kWk=
+
+      - objects: Bubbles Sky Clouds
+        colors: Rainbow Blue White Gold
+        url: https://w.wallhaven.cc/full/je/wallhaven-jedr8p.jpg
+        sha256: sha256-7XNumPApQ8MT+PKokGxv9FIm18XkPE5/w4b/gmwuom4=
+
+  - name: Nid_417
+    page: https://www.pixiv.net/en/users/10315206
+    wallpapers:
+      - objects: Arknights Sky Rock Plain
+        colors: White Green Blue
+        url: https://w.wallhaven.cc/full/9o/wallhaven-9oxme1.jpg
+        sha256: sha256-AgE5JoIkvz7lGJpl4IBAAG7JiAdkjBYLTsF5w6L9fSY=
+
+  - name: Sam Yang
+    page: https://www.instagram.com/samdoesarts/
+    wallpapers:
+      - objects: Mountain Japan Field Car Wheat Girl
+        colors: Orange Pink Blue
+        url: https://w.wallhaven.cc/full/qr/wallhaven-qrz9wl.jpg
+        sha256: sha256-j5d6UghkxysHTftINhWZpbxN7y5dLSWS3iB8MP1tWxg=
+
+  - name: Ramon Nunez
+    page: https://www.artstation.com/ramonn90
+    wallpapers:
+      - objects: Cat Ramen Noodles
+        colors: Orange Purple Brown
+        url: https://cdnb.artstation.com/p/assets/images/images/101/815/205/large/ramonn90-3.jpg
+        sha256: sha256-srza3xXA1izcWAs0uqGEu16huQ4vkQYYJHRAY+0GpEM=
+
+  - name: Jiro Miyata
+    page: https://www.behance.net/Jiro_Miyata
+    wallpapers:
+      - objects: Cafe Beach Gas Station Sky Vespa Palm Japan
+        colors: Light Blue Orange White
+        url: https://w.wallhaven.cc/full/og/wallhaven-ogjjx9.jpg
+        sha256: sha256-OuQ4ZBHXSe4Ql2tbvlFOBjSXy4kQMKgkyMBj/sTVg/0=
+
+  - name: Banill4
+    page: https://wallhaven.cc/user/Banill4
+    wallpapers:
+      - objects: Angel ASCII
+        colors: Brown White Duotone
+        url: https://w.wallhaven.cc/full/qr/wallhaven-qromlq.png
+        sha256: sha256-BQQhZh+Y8xm0eYur0fMHApxzc2bqoQqI5QQfdN+yaAU=
+
+  - name: Zloigadik
+    page: https://wallhaven.cc/user/Zloigadik
+    wallpapers:
+      - objects: Hatsune Miku DOS ASCII
+        colors: Blue Gray White Black
+        url: https://w.wallhaven.cc/full/xe/wallhaven-xezolo.png
+        sha256: sha256-Fd83Blq5pqmuD1LKJe7NC+UFL/YSrESC8Kw0jzOxvpQ=
+
+  - name: Albert Bierstadt
+    page: https://en.wikipedia.org/wiki/Albert_Bierstadt
+    wallpapers:
+      - objects: Bear Moutain Forest Corcoran
+        colors: Brown Blue Green
+        url: https://w.wallhaven.cc/full/yq/wallhaven-yq93zk.jpg
+        sha256: sha256-vk84wfjwt3F13KiKTFOJH69WEQYT00ghoeC9pO6NOT4=
+
+  - name: Gavin O'Donnell
+    page: https://www.artstation.com/gavinodonnell
+    wallpapers:
+      - objects: Beach Fishing Arch Sky
+        colors: Light Blue Brown White Light Green
+        url: https://w.wallhaven.cc/full/je/wallhaven-jedm8y.jpg
+        sha256: sha256-cnoba2izk5sDCbypQ3vA1mxf1rKEgdKE2FncjLYJ8pw=
+
+  - name: Xiaobanjie
+    page:
+    wallpapers:
+      - objects: Mountain Lake Boat Anime
+        colors: Light Blue Gold Orange
+        url: https://w.wallhaven.cc/full/w5/wallhaven-w53elq.jpg
+        sha256: sha256-lzM2XMk77reByCrdpCgqCo0tZhG3OFPvxF4Jkve/Z0s=
+
+  - name: Simon Stålenhag
+    page: https://www.simonstalenhag.se/
+    wallpapers:
+      - objects: Winter Sky Snow Lake Night
+        colors: Black Dark Blue Red White
+        url: https://w.wallhaven.cc/full/po/wallhaven-pom9wp.jpg
+        sha256: sha256-b7BxEF41J+T+UFJkRlyDWXdD6ILx/LxnFR8Ri3YX86A=

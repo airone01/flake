@@ -28,6 +28,7 @@
       gtrm = "git rm --cached";
       gtp = "git push";
       gtpu = "git push -u $(git remote) $(git rev-parse --abbrev-ref HEAD)";
+      gtpf = "git push --force-with-lease";
       gtpl = "git pull";
       gtl = "git log --all --oneline --graph";
       gtlo = "git log --oneline";
@@ -36,10 +37,12 @@
       gtmc = "git merge --continue";
       gtr = "git restore";
       gtrs = "git reset";
+      gtrb = "git rebase";
 
       # just
-      jts = "just switch";
       jtc = "just check";
+      jtb = "just boot";
+      jts = "just switch";
 
       tmpdir = "cd $(mktemp -d)";
     };
@@ -73,9 +76,13 @@
         enable = true;
 
         plugins = [
-          "zsh-fzf-tab"
+          "git"
         ];
       };
+
+      interactiveShellInit = ''
+        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+      '';
     };
   };
 }

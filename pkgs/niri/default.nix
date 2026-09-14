@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  keyboardLayout ? "us,fr",
+  keyboardLayout ? "fr,us",
   noctalia ? null,
   ratePatch ? false,
   ...
@@ -30,6 +30,22 @@
         touchpad {
             tap
         }
+    }
+
+    layout {
+        focus-ring {
+            off
+        }
+        border {
+            width 2
+            active-color "#fffd66"
+            inactive-color "#1e1e1e80"
+        }
+    }
+
+    window-rule {
+        geometry-corner-radius 8
+        clip-to-geometry true
     }
 
     xwayland-satellite {
@@ -175,11 +191,16 @@ in
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/niri \
-        --add-flags "--config ${configFile}"
+        --set NIRI_CONFIG "${configFile}"
+      if [ -f $out/bin/niri-session ]; then
+        wrapProgram $out/bin/niri-session \
+          --set NIRI_CONFIG "${configFile}"
+      fi
     '';
     passthru =
       (pkgs.niri.passthru or {})
       // {
         providedSessions = ["niri"];
+        inherit configFile;
       };
   }
