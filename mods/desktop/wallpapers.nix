@@ -110,8 +110,8 @@
             then wp.ext
             else lib.last urlSplit;
         in {
-          fileName = "${artist.name} ${objectsStr}${colorsStr}.${ext}";
-          source = pkgs.fetchurl {
+          name = "${artist.name} ${objectsStr}${colorsStr}.${ext}";
+          path = pkgs.fetchurl {
             inherit (wp) url sha256;
           };
         })
@@ -119,19 +119,12 @@
     )
     parsed.artists;
 
+  wallpapersFolder = pkgs.linkFarm "wallpapers" allWallpapers;
+
   mkHomeFile = {
     path,
     source,
   }: ''L+ "%h/${path}" - - - - ${source}'';
-
-  mkWallpaper = {
-    fileName,
-    source,
-  }:
-    mkHomeFile {
-      inherit source;
-      path = "Pictures/Wallpapers/${fileName}";
-    };
 
   face = mkHomeFile {
     path = ".face";
@@ -140,6 +133,11 @@
       sha256 = "1w7cznj7cx55a6zk6yz1qks0psjh8wgh2nj0qhqqvzq1bd2w6r8j";
     };
   };
+
+  wallpapers = mkHomeFile {
+    path = "Pictures/Wallpapers";
+    source = wallpapersFolder;
+  };
 in {
-  systemd.user.tmpfiles.rules = [face] ++ map mkWallpaper allWallpapers;
+  systemd.user.tmpfiles.rules = [face wallpapers];
 }
