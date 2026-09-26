@@ -1,5 +1,33 @@
 # Changelog
 
+## [13.1.0](https://github.com/airone01/flake/compare/flake-v13.0.0...flake-v13.1.0) (2026-09-26)
+
+
+### Features
+
+* **desktop:** screen sharing ([20dc782](https://github.com/airone01/flake/commit/20dc78243f162d96bbb9e7a1ce2600de1dc2b552))
+* **dev:** `git push --force-with-lease` alias ([355645a](https://github.com/airone01/flake/commit/355645a33f460b0e2331949e3061dfe37ee5c42c))
+* **dev:** `git rebase` alias ([424ccfb](https://github.com/airone01/flake/commit/424ccfbca9d61677fbcd15c5a98fdd88444864d7))
+* **dev:** `just boot` alias ([8468179](https://github.com/airone01/flake/commit/8468179d972ad24d85b0db269f15d8400e7153de))
+* **noctalia:** dynamic border color depending on background image color ([d3efe63](https://github.com/airone01/flake/commit/d3efe632afcbbe6c86d6eac3f68614648c257075))
+* **wallpapers:** more wallpapers ([5ffd19c](https://github.com/airone01/flake/commit/5ffd19cfb35cccdabc6682125cb168c7517bf32a))
+
+
+### Bug Fixes
+
+* **dev:** working zsh-fzf-tab ([e000e39](https://github.com/airone01/flake/commit/e000e3952404ec9e52ac295dfde5ab1b09c1cac0))
+* **niri:** enable back session mode ([2329215](https://github.com/airone01/flake/commit/23292150b4d293ad8c9fbe366d8d2966a4d3f027))
+* **niri:** prettier window borders ([88c9fdc](https://github.com/airone01/flake/commit/88c9fdc698991610a50bc0f308d8b66c1b7fbc95))
+* **niri:** start session instead of standalone app ([d10a7a3](https://github.com/airone01/flake/commit/d10a7a306c872704e9024314fdd5653dcd2d58f7))
+* **noctalia:** clean some settings ([4d84e6e](https://github.com/airone01/flake/commit/4d84e6eb57281924771dd342913d37ce48fea12e))
+* **noctalia:** correctly load config ([85080aa](https://github.com/airone01/flake/commit/85080aa50dee61564c8911aee1907b18ceb17a92))
+* **noctalia:** merge config on launch ([a30124d](https://github.com/airone01/flake/commit/a30124dcfb62c8e355b234f936e4bb3b2b8e3ade))
+* **noctalia:** patches for niri session mode ([0c9d0db](https://github.com/airone01/flake/commit/0c9d0dbce0d39bcb4fd01d11413dae11601b7a17))
+* **noctalia:** remove vesktop patch ([e4e0df1](https://github.com/airone01/flake/commit/e4e0df18a57ce1453cf9741ce2c6409e0d910bfa))
+* **wallpapers:** single symlinked dir ([6dcdc14](https://github.com/airone01/flake/commit/6dcdc14cd5620c746c4c295a04470687c45c46e5))
+* **wallpapers:** use tmpfiles ([abaa76d](https://github.com/airone01/flake/commit/abaa76dbaaee5861f655c53df76440d2880364ae))
+* **wallpapers:** yaml definition ([0bf2ec9](https://github.com/airone01/flake/commit/0bf2ec949bea3c01a5a5eaff4f66d904e92bd13d))
+
 ## [13.0.0](https://github.com/airone01/flake/compare/flake-v12.1.0...flake-v13.0.0) (2026-09-01)
 
 
