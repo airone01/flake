@@ -38,7 +38,16 @@ in {
       xdg-desktop-portal-gnome
       xdg-desktop-portal-gtk
     ];
-    config.niri.default = ["gnome" "gtk"];
+    config = {
+      common = {
+        default = ["gtk"];
+      };
+      niri = lib.mkForce {
+        default = ["gtk"];
+        "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+        "org.freedesktop.impl.portal.Screenshot" = ["gnome"];
+      };
+    };
   };
 
   environment.systemPackages = with pkgs; [

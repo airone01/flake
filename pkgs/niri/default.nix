@@ -60,9 +60,10 @@
       }
     ''}
 
-    spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "XDG_SESSION_TYPE" "MOZ_ENABLE_WAYLAND" "NIXOS_OZONE_WL"
-    spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "XDG_SESSION_TYPE" "MOZ_ENABLE_WAYLAND" "NIXOS_OZONE_WL"
-    spawn-at-startup "systemctl" "--user" "restart" "xdg-desktop-portal"
+    spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=niri" "XDG_SESSION_TYPE" "MOZ_ENABLE_WAYLAND" "NIXOS_OZONE_WL"
+    spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=niri" "XDG_SESSION_TYPE" "MOZ_ENABLE_WAYLAND" "NIXOS_OZONE_WL"
+    spawn-at-startup "systemctl" "--user" "start" "nixos-fake-graphical-session.target"
+    spawn-at-startup "systemctl" "--user" "restart" "xdg-desktop-portal-gnome" "xdg-desktop-portal"
     spawn-at-startup "noctalia-color-generation"
     ${lib.optionalString (noctaliaBin != null) ''spawn-at-startup "${noctaliaBin}"''}
     ${lib.optionalString (highrrBin != null) ''spawn-at-startup "${highrrBin}"''}
@@ -197,7 +198,8 @@ in
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/niri \
-        --set NIRI_CONFIG "${configFile}"
+        --set NIRI_CONFIG "${configFile}" \
+        --add-flags "--session"
       if [ -f $out/bin/niri-session ]; then
         wrapProgram $out/bin/niri-session \
           --set NIRI_CONFIG "${configFile}"
