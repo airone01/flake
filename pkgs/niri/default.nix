@@ -43,6 +43,8 @@
         }
     }
 
+    include optional=true "~/.config/niri/border.kdl"
+
     window-rule {
         geometry-corner-radius 8
         clip-to-geometry true
@@ -61,6 +63,7 @@
     spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "XDG_SESSION_TYPE" "MOZ_ENABLE_WAYLAND" "NIXOS_OZONE_WL"
     spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "XDG_SESSION_TYPE" "MOZ_ENABLE_WAYLAND" "NIXOS_OZONE_WL"
     spawn-at-startup "systemctl" "--user" "restart" "xdg-desktop-portal"
+    spawn-at-startup "noctalia-color-generation"
     ${lib.optionalString (noctaliaBin != null) ''spawn-at-startup "${noctaliaBin}"''}
     ${lib.optionalString (highrrBin != null) ''spawn-at-startup "${highrrBin}"''}
 
