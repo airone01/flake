@@ -24,7 +24,15 @@
     ranger
     spotify
     switcheroo
-    vesktop # discord
+    (symlinkJoin {
+      name = "vesktop";
+      paths = [vesktop];
+      nativeBuildInputs = [makeWrapper];
+      postBuild = ''
+        wrapProgram $out/bin/vesktop \
+          --add-flags "--disable-features=WebRTCPipeWireCapturerDmaBuf"
+      '';
+    })
     vlc
   ];
 
