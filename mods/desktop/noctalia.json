@@ -575,7 +575,7 @@
         },
         {
           "action": "logout",
-          "command": "",
+          "command": "niri msg action quit --skip-confirmation",
           "countdownEnabled": true,
           "enabled": true,
           "keybind": "5"
