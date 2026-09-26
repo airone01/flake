@@ -198,11 +198,11 @@ in
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/niri \
-        --set NIRI_CONFIG "${configFile}" \
-        --add-flags "--session"
+        --set NIRI_CONFIG "${configFile}"
       if [ -f $out/bin/niri-session ]; then
         wrapProgram $out/bin/niri-session \
-          --set NIRI_CONFIG "${configFile}"
+          --set NIRI_CONFIG "${configFile}" \
+          --add-flags "--session"
       fi
     '';
     passthru =

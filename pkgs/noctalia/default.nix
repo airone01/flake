@@ -1,6 +1,7 @@
 # feature: noctalia desktop shell package wrapper
 {
   pkgs,
+  lib ? pkgs.lib,
   inputs ? {},
   mainUser ? "r1",
   ...
@@ -43,6 +44,16 @@
           enabled = true;
           colorGeneration = "${colorGenScript}/bin/noctalia-color-generation";
         };
+      sessionMenu =
+        (settingsObj.sessionMenu or {})
+        // {
+          powerOptions = map (
+            opt:
+              if (opt.action or "") == "logout"
+              then opt // {command = "niri msg action quit --skip-confirmation";}
+              else opt
+          ) (settingsObj.sessionMenu.powerOptions or []);
+        };
     };
 
   parsed =
@@ -63,6 +74,8 @@ in
         bash
         coreutils
         jq
+        desktop-file-utils
+        niri
         colorGenScript
       ];
     }
@@ -73,7 +86,8 @@ in
       nativeBuildInputs = [pkgs.makeWrapper];
       postBuild = ''
         wrapProgram $out/bin/noctalia-shell \
-          --set NOCTALIA_SETTINGS_FILE "${pkgs.writeText "noctalia-settings.json" settingsJson}"
+          --set NOCTALIA_SETTINGS_FILE "${pkgs.writeText "noctalia-settings.json" settingsJson}" \
+          --prefix PATH : "/run/current-system/sw/bin:/etc/profiles/per-user/${mainUser}/bin:${lib.makeBinPath (with pkgs; [xdg-utils glib bash coreutils jq desktop-file-utils niri])}"
       '';
       passthru =
         (pkgs.noctalia-shell.passthru or {})
