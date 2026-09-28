@@ -20,6 +20,7 @@
   programs.niri.package = pkgs.callPackage ../../pkgs/niri {
     inherit inputs;
     noctalia = pkgs.callPackage ../../pkgs/noctalia {inherit inputs;};
+    keyboardLayout = "us,fr";
     ratePatch = true;
   };
 
