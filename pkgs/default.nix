@@ -4,15 +4,7 @@
   inputs,
   system,
 }: let
-  inherit (inputs.nixpkgs.legacyPackages.${system}) callPackage;
+  pkgs = inputs.nixpkgs.legacyPackages.${system}.extend (import ../overlays {inherit inputs;});
 in {
-  initomatic = callPackage ./initomatic {};
-  mcheads = callPackage ./mcheads {};
-  noctalia = callPackage ./noctalia {inherit inputs;};
-  niri = callPackage ./niri {
-    inherit inputs;
-    noctalia = callPackage ./noctalia {inherit inputs;};
-  };
-  nvim = callPackage ./nvim {inherit inputs;};
-  website = callPackage ./website {inherit inputs;};
+  inherit (pkgs) initomatic mcheads noctalia niri nvim website;
 }

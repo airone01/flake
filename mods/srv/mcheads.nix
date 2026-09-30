@@ -2,11 +2,10 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }: let
   traefikEnabled = config.services.traefik.enable or false;
-  mcheadsPkg = pkgs.callPackage ../../pkgs/mcheads {inherit inputs;};
+  mcheadsPkg = pkgs.mcheads;
 in {
   systemd.services.mcheads = {
     description = "Minecraft Player Heads API";

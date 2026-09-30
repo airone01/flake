@@ -1,25 +1,14 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../../common/desktop.nix
     ../../common/dev.nix
-    ../../mods/desktop/noctalia.nix
-    ../../mods/desktop/wallpapers.nix
     ../../mods/sys/vpn.nix
     ../../mods/hardware/dualsense.nix
     ../../mods/hardware/flipper.nix
-    ../../mods/desktop/gaming.nix
-    ../../mods/desktop/nvim.nix
-    ../../mods/sys/pretty-boot.nix
     ../../mods/sys/virt.nix
   ];
 
-  programs.niri.package = pkgs.callPackage ../../pkgs/niri {
-    inherit inputs;
-    noctalia = pkgs.callPackage ../../pkgs/noctalia {inherit inputs;};
+  programs.niri.package = pkgs.niri.override {
     keyboardLayout = "us,fr";
     ratePatch = true;
   };
