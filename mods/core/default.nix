@@ -1,12 +1,9 @@
 # feature: common settings
 {
-  mainUser ? "r1",
-  username ? mainUser,
-  ...
-}: {
   pkgs,
   config,
   inputs,
+  mainUser,
   ...
 }: {
   imports = [
@@ -15,7 +12,7 @@
     ./patches.nix
   ];
 
-  users.users.${username} = {
+  users.users.${mainUser} = {
     shell = pkgs.zsh;
     # UID > 1000
     isNormalUser = true;
@@ -118,7 +115,7 @@
         enable = true;
         extraArgs = "--keep-since 7d --keep 3";
       };
-      flake = "${config.users.users.${username}.home}/.config/nixos";
+      flake = "${config.users.users.${mainUser}.home}/.config/nixos";
     };
 
     gnupg.agent = {

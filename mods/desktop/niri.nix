@@ -4,13 +4,7 @@
   lib,
   inputs,
   ...
-}: let
-  noctalia = pkgs.callPackage ../../pkgs/noctalia {inherit inputs;};
-  niriPkg = pkgs.callPackage ../../pkgs/niri {
-    inherit inputs noctalia;
-    keyboardLayout = "fr,us";
-  };
-in {
+}: {
   imports = [inputs.clipboard-sync.nixosModules.default];
 
   environment.sessionVariables = {
@@ -23,7 +17,7 @@ in {
 
   programs.niri = {
     enable = true;
-    package = lib.mkDefault niriPkg;
+    package = lib.mkDefault pkgs.niri;
   };
 
   services = {

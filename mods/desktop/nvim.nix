@@ -1,12 +1,8 @@
 # feature: Neovim IDE using NVF
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   environment = {
     systemPackages = with pkgs; [
-      (pkgs.callPackage ../../pkgs/nvim {inherit inputs;})
+      nvim
       noto-fonts-color-emoji
       twemoji-color-font
     ];

@@ -13,8 +13,11 @@
         {
           networking.hostName = hostName;
           nixpkgs.hostPlatform = lib.mkDefault system;
+          nixpkgs.overlays = [
+            (import ../overlays {inherit inputs;})
+          ];
         }
-        (import ../mods/core {inherit mainUser;})
+        ../mods/core
         ./${hostName}/configuration.nix
         ./${hostName}/hardware-configuration.nix
       ];

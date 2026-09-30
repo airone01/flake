@@ -90,6 +90,8 @@
       system: import ./pkgs {inherit inputs system;}
     );
 
+    overlays.default = import ./overlays {inherit inputs;};
+
     formatter = forAllSystems (
       system: treefmtEval.${system}.config.build.wrapper
     );
