@@ -8,6 +8,7 @@ on:
 
 jobs:
   nix-matrix:
+    name: Generate checks matrix
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -27,6 +28,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix: ${{fromJSON(needs.nix-matrix.outputs.matrix)}}
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v30
