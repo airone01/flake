@@ -5,7 +5,6 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }: {
   services = {
@@ -18,7 +17,7 @@
             port = 5972;
           }
         ];
-        root = pkgs.callPackage ../../pkgs/website {inherit inputs;};
+        root = pkgs.website;
         locations."/".extraConfig = ''
           autoindex off;
           try_files $uri $uri/index.html $uri.html =404;

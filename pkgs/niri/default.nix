@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  niri ? pkgs.niri,
   keyboardLayout ? "fr,us",
   noctalia ? null,
   ratePatch ? false,
@@ -193,8 +194,8 @@
   configFile = pkgs.writeText "niri-config.kdl" configKdl;
 in
   pkgs.symlinkJoin {
-    name = "niri-${pkgs.niri.version}";
-    paths = [pkgs.niri];
+    name = "niri-${niri.version}";
+    paths = [niri];
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/niri \
@@ -206,7 +207,7 @@ in
       fi
     '';
     passthru =
-      (pkgs.niri.passthru or {})
+      (niri.passthru or {})
       // {
         providedSessions = ["niri"];
         inherit configFile;

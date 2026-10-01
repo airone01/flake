@@ -1,10 +1,6 @@
 # feature: Noctalia shell package integration
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   environment.systemPackages = [
-    (pkgs.callPackage ../../pkgs/noctalia {inherit inputs;})
+    pkgs.noctalia
   ];
 }

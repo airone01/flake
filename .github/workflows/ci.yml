@@ -8,6 +8,7 @@ on:
 
 jobs:
   nix-matrix:
+    name: Generate checks matrix
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -27,14 +28,40 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix: ${{fromJSON(needs.nix-matrix.outputs.matrix)}}
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v30
+      - id: check-cache
+        name: Check if check is already cached
+        run: |
+          set -Eeuo pipefail
+          out_path="$(nix eval --raw '.#${{ matrix.attr }}.outPath')"
+          hash="$(basename "$out_path" | cut -d- -f1)"
+          echo "Store path: $out_path"
+          echo "Hash: $hash"
+
+          is_cached=false
+          for cache in "https://airone01.cachix.org" "https://cache.nixos.org"; do
+            code="$(curl -s -o /dev/null -w "%{http_code}" "$cache/$hash.narinfo")"
+            if [ "$code" = "200" ]; then
+              echo "Path is already cached in $cache. Skipping build."
+              is_cached=true
+              break
+            fi
+          done
+
+          echo "is_cached=$is_cached" >> "$GITHUB_OUTPUT"
+
       - uses: cachix/cachix-action@v17
+        if: steps.check-cache.outputs.is_cached != 'true'
         with:
           name: airone01
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-      - run: nix build -L '.#${{ matrix.attr }}'
+
+      - name: Build derivation
+        if: steps.check-cache.outputs.is_cached != 'true'
+        run: nix build -L '.#${{ matrix.attr }}'
 
   nix-build-failures:
     name: No build failures
