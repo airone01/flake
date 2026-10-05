@@ -6,6 +6,7 @@
 }: let
   inherit (inputs.nixpkgs.legacyPackages.${system}) callPackage;
 in {
+  cv = callPackage ./cv {};
   initomatic = callPackage ./initomatic {};
   mcheads = callPackage ./mcheads {};
   noctalia = callPackage ./noctalia {inherit inputs;};
