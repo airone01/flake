@@ -1,14 +1,11 @@
 {
   lib,
-  stdenvNoCC,
+  mkJavaPackage,
   fetchFromGitHub,
-  jdk,
-  stripJavaArchivesHook,
 }:
-stdenvNoCC.mkDerivation (finalAttrs: {
+mkJavaPackage (finalAttrs: {
   pname = "commons-lang";
   version = "2.6";
-  __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "apache";
@@ -16,12 +13,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     rev = "LANG_2_6";
     hash = "sha256-7fjU0OKkHeyPZvZZ0lmWrxym8huTGEPvNwiUMpOcquk=";
   };
-
-  nativeBuildInputs = [
-    jdk
-    stripJavaArchivesHook
-  ];
-
   buildPhase = ''
     runHook preBuild
 
@@ -44,19 +35,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
     runHook postBuild
   '';
-
-  installPhase = ''
-    runHook preInstall
-
-    install -Dm644 commons-lang-${finalAttrs.version}.jar \
-      $out/share/java/commons-lang-${finalAttrs.version}.jar
-    ln -s $out/share/java/commons-lang-${finalAttrs.version}.jar \
-      $out/share/java/commons-lang.jar
-
-    runHook postInstall
-  '';
-
-  strictDeps = true;
 
   meta = {
     homepage = "https://commons.apache.org/proper/commons-lang/";

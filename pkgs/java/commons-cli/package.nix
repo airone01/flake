@@ -1,14 +1,11 @@
 {
   lib,
-  stdenvNoCC,
+  mkJavaPackage,
   fetchFromGitHub,
-  jdk,
-  stripJavaArchivesHook,
 }:
-stdenvNoCC.mkDerivation (finalAttrs: {
+mkJavaPackage (finalAttrs: {
   pname = "commons-cli";
   version = "1.10.0";
-  __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "apache";
@@ -16,42 +13,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     rev = "rel/commons-cli-${finalAttrs.version}";
     hash = "sha256-xYefS5iict9yspWEZrhgGfWbqT9uzfilj3ehXjgQBOE=";
   };
-
-  nativeBuildInputs = [
-    jdk
-    stripJavaArchivesHook
-  ];
-
-  buildPhase = ''
-    runHook preBuild
-
-    mkdir -p build/classes
-
-    find src/main/java -name "*.java" > sources.txt
-
-    javac \
-      --release 8 \
-      -encoding UTF-8 \
-      -d build/classes \
-      @sources.txt
-
-    jar cf commons-cli-${finalAttrs.version}.jar -C build/classes .
-
-    runHook postBuild
-  '';
-
-  installPhase = ''
-    runHook preInstall
-
-    install -Dm644 commons-cli-${finalAttrs.version}.jar \
-      $out/share/java/commons-cli-${finalAttrs.version}.jar
-    ln -s $out/share/java/commons-cli-${finalAttrs.version}.jar \
-      $out/share/java/commons-cli.jar
-
-    runHook postInstall
-  '';
-
-  strictDeps = true;
 
   meta = {
     homepage = "https://commons.apache.org/proper/commons-cli/";

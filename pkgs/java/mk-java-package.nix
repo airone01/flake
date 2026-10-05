@@ -21,6 +21,7 @@ stdenvNoCC.mkDerivation (finalAttrs: let
   extraClasspath = attrs.extraClasspath or "";
   jarName = attrs.jarName or attrs.pname;
   javacFlags = attrs.javacFlags or [];
+  releaseArg = lib.optionalString (javaRelease != null) "--release ${toString javaRelease}";
 
   defaultBuildPhase = ''
     runHook preBuild
@@ -28,6 +29,7 @@ stdenvNoCC.mkDerivation (finalAttrs: let
     mkdir -p build/classes
 
     find ${javaSourceDir} -name "*.java" \
+      ! -path "./META-INF/*" \
       ${lib.concatMapStrings (pat: "! -path '${pat}' ") excludeSourcePatterns} \
       > sources.txt
 
@@ -54,7 +56,7 @@ stdenvNoCC.mkDerivation (finalAttrs: let
     fi
 
     javac \
-      --release ${toString javaRelease} \
+      ${releaseArg} \
       -encoding ${encoding} \
       $cp_arg \
       ${lib.escapeShellArgs javacFlags} \

@@ -1,14 +1,11 @@
 {
   lib,
-  stdenvNoCC,
   fetchurl,
-  jdk,
-  stripJavaArchivesHook,
+  mkJavaPackage,
 }:
-stdenvNoCC.mkDerivation (finalAttrs: {
+mkJavaPackage (finalAttrs: {
   pname = "junit";
   version = "3.8.2";
-  __structuredAttrs = true;
 
   # No public git repository for JUnit 3.x; sourced from Maven Central sources.jar
   # (same situation as aopalliance). fetchzip can't unpack .jar extensions, so
@@ -17,11 +14,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     url = "https://repo1.maven.org/maven2/junit/junit/${finalAttrs.version}/junit-${finalAttrs.version}-sources.jar";
     hash = "sha256-eQSHmRRBcRItEPj1e7r1QjieVFKnIQwmNgAFSOmEB4o=";
   };
-
-  nativeBuildInputs = [
-    jdk
-    stripJavaArchivesHook
-  ];
 
   unpackPhase = "true";
 
@@ -41,19 +33,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
     runHook postBuild
   '';
-
-  installPhase = ''
-    runHook preInstall
-
-    install -Dm644 junit-${finalAttrs.version}.jar \
-      $out/share/java/junit-${finalAttrs.version}.jar
-    ln -s $out/share/java/junit-${finalAttrs.version}.jar \
-      $out/share/java/junit.jar
-
-    runHook postInstall
-  '';
-
-  strictDeps = true;
 
   meta = {
     description = "JUnit 3 testing framework for Java";
