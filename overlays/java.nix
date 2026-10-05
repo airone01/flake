@@ -25,6 +25,8 @@
 # - xerces_j:      new attr; Xerces-J 2.9.1 from GitHub (2.9.0 has no source
 #                  tarball); wired into ant_1_7 lib/ so dist-lite ships it.
 final: _prev: {
+  mkJavaPackage = final.callPackage ../pkgs/java/mk-java-package.nix {};
+
   ant = final.callPackage ../pkgs/java/ant/package.nix {};
   ant_1_7 = final.callPackage ../pkgs/java/ant_1_7/package.nix {};
   commons-cli = final.callPackage ../pkgs/java/commons-cli/package.nix {};
