@@ -5,14 +5,16 @@
   system,
 }: let
   inherit (inputs.nixpkgs.legacyPackages.${system}) callPackage;
-in {
-  initomatic = callPackage ./initomatic {};
-  mcheads = callPackage ./mcheads {};
-  noctalia = callPackage ./noctalia {inherit inputs;};
-  niri = callPackage ./niri {
-    inherit inputs;
+in
+  {
+    initomatic = callPackage ./initomatic {};
+    mcheads = callPackage ./mcheads {};
     noctalia = callPackage ./noctalia {inherit inputs;};
-  };
-  nvim = callPackage ./nvim {inherit inputs;};
-  website = callPackage ./website {inherit inputs;};
-}
+    niri = callPackage ./niri {
+      inherit inputs;
+      noctalia = callPackage ./noctalia {inherit inputs;};
+    };
+    nvim = callPackage ./nvim {inherit inputs;};
+    website = callPackage ./website {inherit inputs;};
+  }
+  // (import ./java {inherit inputs system;})

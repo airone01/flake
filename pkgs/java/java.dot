@@ -1,0 +1,385 @@
+digraph JavaBootstrapJPB {
+  rankdir=TB;
+  ranksep=0.7;
+  nodesep=0.35;
+  fontname="Helvetica";
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, margin="0.14,0.07"];
+  edge [fontname="Helvetica", fontsize=8, color="#64748b"];
+
+  // ════════════════════════════════════════════════════════════
+  // BASE
+  // ════════════════════════════════════════════════════════════
+  JC [label="javac (OpenJDK)", fillcolor="#e2e8f0", color="#475569"];
+
+  // ════════════════════════════════════════════════════════════
+  // Tractable (javac-only, no external compile deps)
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_tractable {
+    label="Phase 1 — tractable (javac bypass)";
+    style="rounded,filled"; fillcolor="#ecfdf5"; color="#059669"; fontcolor="#065f46"; fontname="Helvetica-Bold";
+    ANTP [label="Ant pre-1.7",  fillcolor="#d1fae5", color="#059669"];
+    ANT  [label="Ant 1.10.x",   fillcolor="#d1fae5", color="#059669"];
+    HC   [label="Hamcrest",     fillcolor="#d1fae5", color="#059669"];
+    JU4  [label="JUnit 4",      fillcolor="#d1fae5", color="#059669"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // Plexus (low-level, built early)
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_plexus {
+    label="Plexus";
+    style="rounded,filled"; fillcolor="#fefce8"; color="#a16207"; fontcolor="#854d0e"; fontname="Helvetica-Bold";
+    PL_CW   [label="plexus-classworlds",          fillcolor="#fef9c3", color="#a16207"];
+    PL_UTIL [label="plexus-utils",                fillcolor="#fef9c3", color="#a16207"];
+    PL_CA   [label="plexus-component-annotations",fillcolor="#fef9c3", color="#a16207"];
+    PL_INTP [label="plexus-interpolation",        fillcolor="#fef9c3", color="#a16207"];
+    PL_CIPH [label="plexus-cipher",               fillcolor="#fef9c3", color="#a16207"];
+    PL_SEC  [label="plexus-sec-dispatcher",       fillcolor="#fef9c3", color="#a16207"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // javax / CDI / DI primitives
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_javax {
+    label="javax / DI primitives";
+    style="rounded,filled"; fillcolor="#f8fafc"; color="#475569"; fontname="Helvetica-Bold";
+    JX_INJ [label="javax.inject", fillcolor="#f1f5f9", color="#475569"];
+    JX_JSR [label="jsr250-api",   fillcolor="#f1f5f9", color="#475569"];
+    JX_CDI [label="cdi-api",      fillcolor="#f1f5f9", color="#475569"];
+    AOPAL  [label="aopalliance",  fillcolor="#f1f5f9", color="#475569"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // Google + Sisu (DI container)
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_di {
+    label="DI container (Guice + Sisu)";
+    style="rounded,filled"; fillcolor="#fdf4ff"; color="#a21caf"; fontcolor="#86198f"; fontname="Helvetica-Bold";
+    GUAVA     [label="guava",       fillcolor="#fae8ff", color="#a21caf"];
+    GUICE     [label="guice",       fillcolor="#fae8ff", color="#a21caf"];
+    SISU_INJ  [label="sisu.inject", fillcolor="#fae8ff", color="#a21caf"];
+    SISU_PLEX [label="sisu.plexus", fillcolor="#fae8ff", color="#a21caf"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // Commons / misc utilities
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_commons {
+    label="Commons / misc";
+    style="rounded,filled"; fillcolor="#f0fdf4"; color="#15803d"; fontcolor="#14532d"; fontname="Helvetica-Bold";
+    COM_CLI  [label="commons-cli",   fillcolor="#dcfce7", color="#15803d"];
+    COM_IO   [label="commons-io",    fillcolor="#dcfce7", color="#15803d"];
+    COM_LANG [label="commons-lang",  fillcolor="#dcfce7", color="#15803d"];
+    COM_LAN3 [label="commons-lang3", fillcolor="#dcfce7", color="#15803d"];
+    JSPECIFY [label="jspecify",      fillcolor="#dcfce7", color="#15803d"];
+    JSOUP    [label="jsoup",         fillcolor="#dcfce7", color="#15803d"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // Logging (SLF4J + Logback)
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_logging {
+    label="Logging";
+    style="rounded,filled"; fillcolor="#f0fdf4"; color="#166534"; fontcolor="#14532d"; fontname="Helvetica-Bold";
+    SLF_API      [label="slf4j-api",        fillcolor="#bbf7d0", color="#166534"];
+    SLF_SMP      [label="slf4j-simple",     fillcolor="#bbf7d0", color="#166534"];
+    LOGBACK_CORE [label="logback-core",     fillcolor="#bbf7d0", color="#166534"];
+    LOGBACK      [label="logback-classic",  fillcolor="#bbf7d0", color="#166534"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // HttpComponents (compile deps of wagon-http and httpclient)
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_httpcomp {
+    label="HttpComponents 4.3.x";
+    style="rounded,filled"; fillcolor="#f0f9ff"; color="#0369a1"; fontcolor="#0c4a6e"; fontname="Helvetica-Bold";
+    COM_LOG    [label="commons-logging 1.1.3", fillcolor="#e0f2fe", color="#0369a1"];
+    COM_CODEC  [label="commons-codec 1.6",     fillcolor="#e0f2fe", color="#0369a1"];
+    HTTPCORE   [label="httpcore 4.3.2",        fillcolor="#e0f2fe", color="#0369a1"];
+    HTTPCLIENT [label="httpclient 4.3.5",      fillcolor="#bae6fd", color="#0369a1"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // Wagon
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_wagon {
+    label="Wagon 2.10";
+    style="rounded,filled"; fillcolor="#eff6ff"; color="#2563eb"; fontcolor="#1e3a8a"; fontname="Helvetica-Bold";
+    WAG_API  [label="wagon-provider-api", fillcolor="#dbeafe", color="#2563eb"];
+    WAG_HTSH [label="wagon-http-shared",  fillcolor="#dbeafe", color="#2563eb"];
+    WAG_FILE [label="wagon-file",         fillcolor="#dbeafe", color="#2563eb"];
+    WAG_HTTP [label="wagon-http",         fillcolor="#dbeafe", color="#2563eb"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // Eclipse Aether
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_aether {
+    label="Eclipse Aether 1.0.2";
+    style="rounded,filled"; fillcolor="#eef2ff"; color="#4338ca"; fontcolor="#3730a3"; fontname="Helvetica-Bold";
+    AE_API  [label="aether-api",             fillcolor="#e0e7ff", color="#4338ca"];
+    AE_SPI  [label="aether-spi",             fillcolor="#e0e7ff", color="#4338ca"];
+    AE_UTIL [label="aether-util",            fillcolor="#e0e7ff", color="#4338ca"];
+    AE_IMPL [label="aether-impl",            fillcolor="#e0e7ff", color="#4338ca"];
+    AE_CONN [label="aether-connector-basic", fillcolor="#e0e7ff", color="#4338ca"];
+    AE_TRAN [label="aether-transport-wagon", fillcolor="#e0e7ff", color="#4338ca"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // Modello (code generator)
+  // ════════════════════════════════════════════════════════════
+  MODELLO [label="modello", fillcolor="#ffedd5", color="#c2410c", fontcolor="#7c2d12"];
+
+  // ════════════════════════════════════════════════════════════
+  // Maven internal modules
+  // ════════════════════════════════════════════════════════════
+  subgraph cluster_maven {
+    label="Maven 3.3.9 modules";
+    style="rounded,filled"; fillcolor="#fff7ed"; color="#c2410c"; fontcolor="#7c2d12"; fontname="Helvetica-Bold";
+    M_ART    [label="maven-artifact",            fillcolor="#fed7aa", color="#c2410c"];
+    M_BUILD  [label="maven-builder-support",     fillcolor="#fed7aa", color="#c2410c"];
+    M_MODEL  [label="maven-model",               fillcolor="#fed7aa", color="#c2410c"];
+    M_MODELB [label="maven-model-builder",       fillcolor="#fed7aa", color="#c2410c"];
+    M_SET    [label="maven-settings",            fillcolor="#fed7aa", color="#c2410c"];
+    M_SETB   [label="maven-settings-builder",    fillcolor="#fed7aa", color="#c2410c"];
+    M_PLUG   [label="maven-plugin-api",          fillcolor="#fed7aa", color="#c2410c"];
+    M_REPOM  [label="maven-repository-metadata", fillcolor="#fed7aa", color="#c2410c"];
+    M_AETHP  [label="maven-aether-provider",     fillcolor="#fed7aa", color="#c2410c"];
+    M_CORE   [label="maven-core",                fillcolor="#fdba74", color="#c2410c"];
+    M_EMB    [label="maven-embedder",            fillcolor="#fdba74", color="#c2410c"];
+    M_COMPAT [label="maven-compat",              fillcolor="#fdba74", color="#c2410c"];
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // Goals
+  // ════════════════════════════════════════════════════════════
+  MVN339 [label="Maven 3.3.9",  fillcolor="#fecaca", color="#dc2626", fontcolor="#991b1b"];
+  MVN35  [label="Maven 3.5+",   fillcolor="#fecaca", color="#dc2626", fontcolor="#991b1b"];
+  GDEPS  [label="Gradle deps",  fillcolor="#fecaca", color="#dc2626", fontcolor="#991b1b", style="rounded,filled,dashed"];
+  GRADLE [label="Gradle",       fillcolor="#ede9fe", color="#7c3aed", fontcolor="#4c1d95"];
+
+  // ════════════════════════════════════════════════════════════
+  // EDGES — every node is built with javac; package edges = compile classpath order
+  // ════════════════════════════════════════════════════════════
+
+  // ── javac builds EVERYTHING (JPB: only OpenJDK + C compiler at the base) ──
+  JC -> ANTP;
+  JC -> HC;
+  JC -> JU4;
+  JC -> PL_CW;
+  JC -> PL_UTIL;
+  JC -> PL_CA;
+  JC -> PL_INTP;
+  JC -> PL_CIPH;
+  JC -> JX_INJ;
+  JC -> JX_JSR;
+  JC -> JX_CDI;
+  JC -> AOPAL;
+  JC -> GUAVA;
+  JC -> GUICE;
+  JC -> SISU_INJ;
+  JC -> SISU_PLEX;
+  JC -> COM_CLI;
+  JC -> COM_IO;
+  JC -> COM_LANG;
+  JC -> COM_LAN3;
+  JC -> SLF_API;
+  JC -> SLF_SMP;
+  JC -> JSPECIFY;
+  JC -> LOGBACK_CORE;
+  JC -> LOGBACK;
+  JC -> COM_LOG;
+  JC -> COM_CODEC;
+  JC -> HTTPCORE;
+  JC -> HTTPCLIENT;
+  JC -> WAG_API;
+  JC -> WAG_HTSH;
+  JC -> WAG_FILE;
+  JC -> WAG_HTTP;
+  JC -> AE_API;
+  JC -> AE_SPI;
+  JC -> AE_UTIL;
+  JC -> AE_IMPL;
+  JC -> AE_CONN;
+  JC -> AE_TRAN;
+  JC -> MODELLO;
+  JC -> M_ART;
+  JC -> M_BUILD;
+  JC -> M_MODEL;
+  JC -> M_MODELB;
+  JC -> M_SET;
+  JC -> M_SETB;
+  JC -> M_PLUG;
+  JC -> M_REPOM;
+  JC -> M_AETHP;
+  JC -> M_CORE;
+  JC -> M_EMB;
+  JC -> M_COMPAT;
+
+  // ── Tractable chain ──
+  ANTP -> ANT;
+  HC -> JU4;
+  HC -> ANT;
+  JU4 -> ANT;
+
+  // ── Plexus internal ──
+  PL_UTIL -> PL_SEC;
+  PL_CIPH -> PL_SEC;
+  JC -> PL_SEC;
+
+  // ── DI primitives ──
+  JX_INJ -> GUICE;
+  AOPAL  -> GUICE;
+  GUAVA  -> GUICE;
+  JX_JSR -> JX_CDI;
+  GUICE      -> SISU_INJ;
+  SISU_INJ   -> SISU_PLEX;
+  JX_CDI     -> SISU_PLEX;
+  PL_CA      -> SISU_PLEX;
+  PL_CW      -> SISU_PLEX;
+  PL_UTIL    -> SISU_PLEX;
+  GUICE      -> SISU_PLEX;
+
+  // ── Commons / misc internal ──
+  // jspecify is a provided (compile-only annotation) dep of jsoup 1.17.2
+  JSPECIFY -> JSOUP;
+  // wagon-http-shared 2.10 specifies jsoup:1.7.2; our overlay supplies 1.17.2
+  JSOUP -> WAG_HTSH;
+
+  // ── Logging ──
+  SLF_API      -> LOGBACK;
+  LOGBACK_CORE -> LOGBACK;
+  // logback-core and logback-classic optional deps (janino, jansi, groovy,
+  // servlet-api, JavaMail, JMS) are all <optional>true</optional> in pom;
+  // a minimal javac build excludes those source files and needs nothing more.
+
+  // ── HttpComponents internal ──
+  HTTPCORE   -> HTTPCLIENT;
+  COM_LOG    -> HTTPCLIENT;
+  COM_CODEC  -> HTTPCLIENT;
+
+  // ── Wagon classpath order ──
+  WAG_API    -> WAG_FILE;
+  WAG_API    -> WAG_HTTP;
+  WAG_HTSH   -> WAG_HTTP;
+  COM_LANG   -> WAG_FILE;
+  COM_LANG   -> WAG_HTSH;
+  COM_IO     -> WAG_HTSH;
+  // wagon-http directly lists httpclient, httpcore, commons-logging in its pom
+  HTTPCLIENT -> WAG_HTTP;
+  HTTPCORE   -> WAG_HTTP;
+  COM_LOG    -> WAG_HTTP;
+
+  // ── Aether classpath order ──
+  AE_API  -> AE_SPI;
+  AE_API  -> AE_UTIL;
+  AE_API  -> AE_IMPL;
+  AE_SPI  -> AE_IMPL;
+  AE_UTIL -> AE_IMPL;
+  AE_API  -> AE_CONN;
+  AE_SPI  -> AE_CONN;
+  AE_UTIL -> AE_CONN;
+  AE_API  -> AE_TRAN;
+  AE_SPI  -> AE_TRAN;
+  WAG_API -> AE_TRAN;
+
+  // ── Modello generates Maven model sources ──
+  MODELLO -> M_MODEL;
+  MODELLO -> M_SET;
+  MODELLO -> M_REPOM;
+
+  // ── Maven module compile order ──
+  // maven-model-builder
+  M_MODEL  -> M_MODELB;
+  M_BUILD  -> M_MODELB;
+  M_ART    -> M_MODELB;
+  PL_INTP  -> M_MODELB;
+  PL_CA    -> M_MODELB;
+  PL_UTIL  -> M_MODELB;
+  GUAVA    -> M_MODELB;
+  COM_LAN3 -> M_MODELB;
+
+  // maven-settings-builder
+  M_SET    -> M_SETB;
+  M_BUILD  -> M_SETB;
+  PL_SEC   -> M_SETB;
+  PL_CA    -> M_SETB;
+  PL_INTP  -> M_SETB;
+  PL_UTIL  -> M_SETB;
+  COM_LAN3 -> M_SETB;
+
+  // maven-aether-provider
+  AE_API  -> M_AETHP;
+  AE_UTIL -> M_AETHP;
+  AE_CONN -> M_AETHP;
+  AE_TRAN -> M_AETHP;
+
+  // maven-core
+  M_ART    -> M_CORE;
+  M_MODEL  -> M_CORE;
+  M_MODELB -> M_CORE;
+  M_SET    -> M_CORE;
+  M_SETB   -> M_CORE;
+  M_REPOM  -> M_CORE;
+  M_PLUG   -> M_CORE;
+  M_AETHP  -> M_CORE;
+  AE_API   -> M_CORE;
+  AE_IMPL  -> M_CORE;
+  AE_UTIL  -> M_CORE;
+  SISU_PLEX -> M_CORE;
+  GUICE    -> M_CORE;
+  PL_CA    -> M_CORE;
+  PL_CW    -> M_CORE;
+  PL_INTP  -> M_CORE;
+  PL_UTIL  -> M_CORE;
+  PL_SEC   -> M_CORE;
+  COM_LAN3 -> M_CORE;
+
+  // maven-compat
+  M_ART    -> M_COMPAT;
+  M_MODEL  -> M_COMPAT;
+  M_MODELB -> M_COMPAT;
+  M_SET    -> M_COMPAT;
+  M_CORE   -> M_COMPAT;
+  WAG_API  -> M_COMPAT;
+  PL_CA    -> M_COMPAT;
+  PL_INTP  -> M_COMPAT;
+  PL_UTIL  -> M_COMPAT;
+  SISU_PLEX -> M_COMPAT;
+
+  // maven-embedder
+  M_CORE   -> M_EMB;
+  M_MODELB -> M_EMB;
+  M_SET    -> M_EMB;
+  M_PLUG   -> M_EMB;
+  PL_CW    -> M_EMB;
+  PL_CA    -> M_EMB;
+  PL_UTIL  -> M_EMB;
+  PL_CIPH  -> M_EMB;
+  PL_SEC   -> M_EMB;
+  SISU_PLEX -> M_EMB;
+  SLF_API  -> M_EMB;
+  SLF_SMP  -> M_EMB;
+  LOGBACK  -> M_EMB;
+  COM_LAN3 -> M_EMB;
+  COM_CLI  -> M_EMB;
+
+  // ── Modules assemble into the product ──
+  M_EMB    -> MVN339;
+  M_CORE   -> MVN339;
+  M_COMPAT -> MVN339;
+  ANT      -> MVN339 [style=dashed, label="built with"];
+  WAG_FILE -> MVN339 [style=dashed, label="bundled in dist"];
+  WAG_HTTP -> MVN339 [style=dashed, label="bundled in dist"];
+  // NOTE: maven-compat is a runtime (not compile) dep of maven-embedder;
+  // build order still requires M_COMPAT before M_EMB.
+
+  // ── Onward ──
+  MVN339 -> MVN35;
+  MVN35  -> GDEPS;
+  GDEPS  -> GRADLE;
+
+  // ── Circular back-edges (upstream build-tool reality, broken by javac bypass) ──
+  GRADLE -> HC  [style=dashed, color="#b45309", fontcolor="#b45309", label="upstream: Gradle", constraint=false];
+  MVN339 -> JU4 [style=dashed, color="#b45309", fontcolor="#b45309", label="upstream: Maven", constraint=false];
+}
