@@ -9,6 +9,7 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "junit";
   version = "4.13.2";
+  __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "junit-team";
@@ -80,7 +81,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   strictDeps = true;
-  __structuredAttrs = true;
 
   meta = {
     description = "JUnit 4 testing framework for Java";

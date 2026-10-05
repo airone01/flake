@@ -17,6 +17,7 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "ant";
   version = "1.10.15";
+  __structuredAttrs = true;
 
   src = fetchurl {
     url = "mirror://apache/ant/source/apache-ant-${finalAttrs.version}-src.tar.bz2";
@@ -62,7 +63,6 @@ stdenv.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  __structuredAttrs = true;
   strictDeps = true;
 
   meta = {

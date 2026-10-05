@@ -8,6 +8,7 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "commons-cli";
   version = "1.10.0";
+  __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "apache";
@@ -51,7 +52,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   strictDeps = true;
-  __structuredAttrs = true;
 
   meta = {
     homepage = "https://commons.apache.org/proper/commons-cli/";

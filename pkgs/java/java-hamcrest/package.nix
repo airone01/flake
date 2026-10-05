@@ -13,6 +13,7 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "java-hamcrest";
   version = "3.0";
+  __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "hamcrest";
@@ -54,7 +55,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   strictDeps = true;
-  __structuredAttrs = true;
 
   meta = {
     homepage = "https://hamcrest.org/JavaHamcrest/";

@@ -8,6 +8,7 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "xml-apis";
   version = "1.3.04";
+  __structuredAttrs = true;
 
   # No public git repository; sourced from Maven Central sources.jar.
   # fetchzip doesn't handle .jar extensions; extract manually with jar xf.
@@ -50,7 +51,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   strictDeps = true;
-  __structuredAttrs = true;
 
   meta = {
     description = "W3C DOM, SAX and JAXP API definitions";

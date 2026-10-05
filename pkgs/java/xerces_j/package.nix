@@ -9,6 +9,7 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "xercesImpl";
   version = "2.9.1";
+  __structuredAttrs = true;
 
   # Xerces-J 2.9.0 (the version bundled in ant_1_7) has no source tarball.
   # 2.9.1 is the next point release; API-compatible and available on GitHub.
@@ -63,7 +64,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   strictDeps = true;
-  __structuredAttrs = true;
 
   meta = {
     description = "Apache Xerces-J XML parser";

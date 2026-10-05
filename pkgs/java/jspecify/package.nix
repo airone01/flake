@@ -11,6 +11,7 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "jspecify";
   version = "0.3.0";
+  __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "jspecify";
@@ -55,7 +56,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   strictDeps = true;
-  __structuredAttrs = true;
 
   meta = {
     homepage = "https://jspecify.dev/";

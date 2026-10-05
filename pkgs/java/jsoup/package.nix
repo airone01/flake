@@ -13,6 +13,7 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "jsoup";
   version = "1.17.2";
+  __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "jhy";
@@ -55,7 +56,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   strictDeps = true;
-  __structuredAttrs = true;
 
   meta = {
     homepage = "https://jsoup.org/";

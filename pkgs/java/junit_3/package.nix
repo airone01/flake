@@ -8,6 +8,7 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "junit";
   version = "3.8.2";
+  __structuredAttrs = true;
 
   # No public git repository for JUnit 3.x; sourced from Maven Central sources.jar
   # (same situation as aopalliance). fetchzip can't unpack .jar extensions, so
@@ -53,7 +54,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   strictDeps = true;
-  __structuredAttrs = true;
 
   meta = {
     description = "JUnit 3 testing framework for Java";
