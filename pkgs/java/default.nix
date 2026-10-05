@@ -34,6 +34,7 @@ in
   lib.fix (self: let
     callPackage = lib.callPackageWith (pkgs // self);
   in {
+    mkJavaPackage = callPackage ./mk-java-package.nix {};
     java-hamcrest = callPackage ./java-hamcrest/package.nix {};
     junit_3 = callPackage ./junit_3/package.nix {};
     "xml-apis" = callPackage ./xml-apis/package.nix {};
