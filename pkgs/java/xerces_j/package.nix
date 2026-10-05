@@ -1,15 +1,12 @@
 {
   lib,
-  stdenvNoCC,
+  mkJavaPackage,
   fetchFromGitHub,
-  jdk,
-  stripJavaArchivesHook,
   xml-apis,
 }:
-stdenvNoCC.mkDerivation (finalAttrs: {
+mkJavaPackage (finalAttrs: {
   pname = "xercesImpl";
   version = "2.9.1";
-  __structuredAttrs = true;
 
   # Xerces-J 2.9.0 (the version bundled in ant_1_7) has no source tarball.
   # 2.9.1 is the next point release; API-compatible and available on GitHub.
@@ -19,11 +16,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     rev = "Xerces-J_${lib.replaceStrings ["."] ["_"] finalAttrs.version}";
     hash = "sha256-uhtVwm8SCSyEkUo9uTM07x+BrMqSSZP42GBMFLM8VF4=";
   };
-
-  nativeBuildInputs = [
-    jdk
-    stripJavaArchivesHook
-  ];
 
   buildPhase = ''
     runHook preBuild
@@ -51,19 +43,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
     runHook postBuild
   '';
-
-  installPhase = ''
-    runHook preInstall
-
-    install -Dm644 xercesImpl-${finalAttrs.version}.jar \
-      $out/share/java/xercesImpl-${finalAttrs.version}.jar
-    ln -s $out/share/java/xercesImpl-${finalAttrs.version}.jar \
-      $out/share/java/xercesImpl.jar
-
-    runHook postInstall
-  '';
-
-  strictDeps = true;
 
   meta = {
     description = "Apache Xerces-J XML parser";
