@@ -11,6 +11,7 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "ant";
   version = "1.7.1";
+  __structuredAttrs = true;
 
   src = fetchurl {
     url = "mirror://apache/ant/source/apache-ant-${finalAttrs.version}-src.tar.bz2";
@@ -22,9 +23,11 @@ stdenv.mkDerivation (finalAttrs: {
     makeWrapper
   ];
 
-  depsVersions.junit = "3.8.2";
-  depsVersions.xercesImpl = "2.9.1";
-  depsVersions.xmlApis = "1.3.04";
+  depsVersions = {
+    junit = "3.8.2";
+    xercesImpl = "2.9.1";
+    xmlApis = "1.3.04";
+  };
 
   postPatch = ''
     # dist-lite depends on test-jar, which has an unconditional
@@ -97,7 +100,6 @@ stdenv.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  __structuredAttrs = true;
   strictDeps = true;
 
   meta = {

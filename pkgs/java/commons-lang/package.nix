@@ -8,6 +8,7 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "commons-lang";
   version = "2.6";
+  __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "apache";
@@ -56,7 +57,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   strictDeps = true;
-  __structuredAttrs = true;
 
   meta = {
     homepage = "https://commons.apache.org/proper/commons-lang/";
