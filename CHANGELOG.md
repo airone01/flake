@@ -1,5 +1,17 @@
 # Changelog
 
+## [13.1.1](https://github.com/airone01/flake/compare/flake-v13.1.0...flake-v13.1.1) (2026-10-13)
+
+
+### Bug Fixes
+
+* **lyra:** default keyboard to english ([c0f5e42](https://github.com/airone01/flake/commit/c0f5e42ec42e4b24c348c17dd658f74a9f48c953))
+
+
+### Code Refactoring
+
+* **noctalia:** good practices ([427af5a](https://github.com/airone01/flake/commit/427af5ad814bb952257d75b9d99c1c8095d70fb6))
+
 ## [13.1.0](https://github.com/airone01/flake/compare/flake-v13.0.0...flake-v13.1.0) (2026-09-26)
 
 
