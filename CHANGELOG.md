@@ -1,5 +1,12 @@
 # Changelog
 
+## [13.2.0](https://github.com/airone01/flake/compare/flake-v13.1.1...flake-v13.2.0) (2026-10-13)
+
+
+### Features
+
+* **cv:** implement complete cv ([9d25370](https://github.com/airone01/flake/commit/9d253702d5a4295a37ae1ee589f00d4ef71f6036))
+
 ## [13.1.1](https://github.com/airone01/flake/compare/flake-v13.1.0...flake-v13.1.1) (2026-10-13)
 
 
