@@ -1,0 +1,136 @@
+From bbb453932decca68040b19c55eb98a0c5cd7f741 Mon Sep 17 00:00:00 2001
+From: airone01 <airone01@proton.me>
+Date: Wed, 14 Oct 2026 16:52:00 +0200
+Subject: [PATCH] fix: update macro syntax for zola 0.23.x
+
+---
+ templates/categories/single.html |  2 +-
+ templates/index.html             |  8 +++-----
+ templates/macros.html            | 24 ++++++++++++------------
+ templates/tags/single.html       |  2 +-
+ 4 files changed, 17 insertions(+), 19 deletions(-)
+
+diff --git a/templates/categories/single.html b/templates/categories/single.html
+index b18ffed..2e04119 100644
+--- a/templates/categories/single.html
++++ b/templates/categories/single.html
+@@ -11,7 +11,7 @@
+ {% block main %}
+ <ul>
+ {% for page in term.pages %}
+-  <li>{{ macro::post_min(page=page) }}</li>
++  <li>{{ <post_min page={page} /> }}</li>
+ {% endfor %}
+ </ul>
+ {% endblock main %}
+diff --git a/templates/index.html b/templates/index.html
+index a436c32..1b719b9 100644
+--- a/templates/index.html
++++ b/templates/index.html
+@@ -1,7 +1,5 @@
+-{% import "macros.html" as macro %}
+-
+ <!DOCTYPE html>
+-<html lang="{% if page.extra.lang %}{{ page.extra.lang }}{% else %}{{ lang }}{% endif %}" itemscope itemtype="http://schema.org/Blog">
++<html lang="{% if page?.extra?.lang %}{{ page?.extra?.lang }}{% else %}{{ lang }}{% endif %}" itemscope itemtype="http://schema.org/Blog">
+ <head>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta http-equiv="content-type" content="text/html; charset=utf-8">
+@@ -100,10 +98,10 @@
+       <div class="span9 bs-docs-sidebar">
+       {% block main %}
+         {% for page in paginator.pages %}
+-          {{ macro::post_max(page=page) }}
++          {{ <post_max page={page} extra={config.extra} /> }}
+         {% endfor %}
+ 
+-        {{ macro::paginator(ref=paginator, extra=config.extra) }}
++        {{ <paginator ref={paginator} /> }}
+       {% endblock main %}
+       </div> <!-- span9 -->
+ 
+diff --git a/templates/macros.html b/templates/macros.html
+index 40d2e3f..cb25f21 100644
+--- a/templates/macros.html
++++ b/templates/macros.html
+@@ -1,22 +1,22 @@
+-{% macro post_max(page) %}
++{% component post_max(page, extra) %}
+ <div>
+   <h1><a href="{{ page.permalink }}">{{ page.title }}</a></h1>
+   <p>{{ page.description }}</p>
+   <dl class="dl-horizontal">
+-    <dt>{{ config.extra.label_date }}</dt>
++    <dt>{{ extra.label_date }}</dt>
+     <dd>{{ page.date | date(format="%Y-%m-%d") }}</dd>
+     
+-    <dt>{{ config.extra.label_author }}</dt>
++    <dt>{{ extra.label_author }}</dt>
+     <dd>
+       {% if page.extra.author %}
+         {{page.extra.author}}
+       {% else %}
+-        {{config.extra.author}}
++        {{extra.author}}
+       {% endif %}
+     </dd>
+ 
+     {% if page.taxonomies.categories %}
+-    <dt>{{ config.extra.label_taxonomy }}</dt>
++    <dt>{{ extra.label_taxonomy }}</dt>
+     <dd>
+       <a href="{{ get_taxonomy_url(kind="categories", name=page.taxonomies.categories[0]) }}">
+         {{ page.taxonomies.categories[0] }}
+@@ -31,24 +31,24 @@
+     </dd>
+     {% endif %}
+ 
+-    <dt>{{ config.extra.label_reading }}</dt>
++    <dt>{{ extra.label_reading }}</dt>
+     <dd>{{ page.reading_time }}'</dd>
+   </dl>
+   <p>
+-    <a href="{{ page.permalink }}" class="btn btn-info" role="button">{{ config.extra.label_read_more }}</a>
++    <a href="{{ page.permalink }}" class="btn btn-info" role="button">{{ extra.label_read_more }}</a>
+   </p>
+   <hr class="soften">
+   <p></p>
+ </div>
+-{% endmacro post_max %}
++{% endcomponent post_max %}
+ 
+ 
+-{% macro post_min(page) %}
++{% component post_min(page) %}
+ <a href="{{ page.permalink }}">{{ page.date }} | {{ page.title }}</a>
+-{% endmacro post_min %}
++{% endcomponent post_min %}
+ 
+ 
+-{% macro paginator(ref, extra) %}
++{% component paginator(ref) %}
+ <div class="pagination pagination-centered">
+   <ul>
+     {% if ref.current_index != 1 %}
+@@ -78,4 +78,4 @@
+     {% endif %}
+   </ul>
+ </div>
+-{% endmacro paginator %}
++{% endcomponent paginator %}
+diff --git a/templates/tags/single.html b/templates/tags/single.html
+index 45199f2..7818e07 100644
+--- a/templates/tags/single.html
++++ b/templates/tags/single.html
+@@ -11,7 +11,7 @@
+ {% block main %}
+ <ul>
+ {% for page in term.pages %}
+-  <li>{{ macro::post_min(page=page) }}</li>
++  <li>{{ <post_min page={page} /> }}</li>
+ {% endfor %}
+ </ul>
+ {% endblock main %}
+-- 
+2.55.0
+

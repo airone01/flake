@@ -10,4 +10,5 @@
   };
   nvim = final.callPackage ../pkgs/nvim {inherit inputs;};
   website = final.callPackage ../pkgs/website {};
+  zola-386 = final.callPackage ../pkgs/zola-386 {};
 }

@@ -2,6 +2,7 @@
 {
   lib,
   pkgs,
+  zola-386,
   ...
 }:
 pkgs.stdenv.mkDerivation {
@@ -12,28 +13,28 @@ pkgs.stdenv.mkDerivation {
 
   nativeBuildInputs = [pkgs.zola];
 
-  zolaTheme = pkgs.fetchFromGitHub {
-    owner = "lopes";
-    repo = "zola.386";
-    rev = "master";
-    hash = "sha256-pmlgG7cS7daJek8U+Epb1Flo4mOESyudiAQDv9YyHRQ=";
-  };
+  zolaTheme = zola-386;
 
   preBuild = ''
     mkdir -p themes/zola.386
-    cp -r $zolaTheme/* themes/zola.386/
+
+    cp -r ${zola-386}/* themes/zola.386/
+
     chmod -R +w themes/zola.386
   '';
 
   buildPhase = ''
     runHook preBuild
-    zola build -o $out
+
+    SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" \
+      zola build -o $out
+
+    runHook postBuild
   '';
 
   meta = with lib; {
     description = "Retro Zola blog";
     homepage = "https://air1.one";
     license = licenses.mit;
-    maintainers = [];
   };
 }
