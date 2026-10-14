@@ -1,5 +1,21 @@
 # Changelog
 
+## [13.3.0](https://github.com/airone01/flake/compare/flake-v13.2.0...flake-v13.3.0) (2026-10-14)
+
+
+### Features
+
+* **ai-robots-txt:** init and add to zola website config ([4ba1649](https://github.com/airone01/flake/commit/4ba164921d7dcdeb7e9ea6bfbdc5e0569ba817d9))
+* **zola-386:** package theme ([1e5c37d](https://github.com/airone01/flake/commit/1e5c37d3c1d6f0b131912c35a8d130adbfc5c38d))
+
+
+### Bug Fixes
+
+* clean up some packages ([19506f0](https://github.com/airone01/flake/commit/19506f00bae7a46ccfe18df4be8674e6ca58736b))
+* **flake:** switch channel to nixpkgs unstable ([32ee6f0](https://github.com/airone01/flake/commit/32ee6f0fbfa047121907d5c01597713e10520fd1))
+* **gitea:** rm deprecated DOMAIN attr ([6580eca](https://github.com/airone01/flake/commit/6580eca6e7d7580decf679a52a1727b068e4bcd2))
+* **website:** move changes to diff file ([15d1207](https://github.com/airone01/flake/commit/15d12076d418fa4fd7e4f42effe31d93c4579950))
+
 ## [13.2.0](https://github.com/airone01/flake/compare/flake-v13.1.1...flake-v13.2.0) (2026-10-13)
 
 
