@@ -1,5 +1,6 @@
 # feature: Zola blog website package with devShells and NixOS modules
 {
+  ai-robots-txt,
   lib,
   pkgs,
   zola-386,
@@ -23,6 +24,9 @@ in
       mkdir -p themes/zola.386
 
       cp -r ${zolaTheme}/* themes/zola.386/
+
+      mkdir -pv templates
+      cat ${ai-robots-txt} >> templates/ai.robots.txt
 
       chmod -R +w themes/zola.386
     '';

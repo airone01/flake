@@ -1,0 +1,6 @@
+User-agent: *
+Disallow:
+Allow: /
+Sitemap: {{ get_url(path="sitemap.xml") }}
+
+{% include "ai.robots.txt" %}
