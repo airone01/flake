@@ -22,7 +22,7 @@ pkgs.stdenv.mkDerivation {
     runHook preBuild
 
     mkdir -pv $out
-    cp -r * $out
+    cp -rv * $out
 
     runHook postBuild;
   '';
