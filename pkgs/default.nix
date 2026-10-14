@@ -6,5 +6,5 @@
 }: let
   pkgs = inputs.nixpkgs.legacyPackages.${system}.extend (import ../overlays {inherit inputs;});
 in {
-  inherit (pkgs) cv initomatic mcheads noctalia niri nvim website;
+  inherit (pkgs) cv initomatic mcheads noctalia niri nvim website zola-386;
 }
