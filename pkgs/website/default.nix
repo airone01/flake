@@ -5,44 +5,42 @@
   pkgs,
   zola-386,
   ...
-}: let
+}:
+pkgs.stdenv.mkDerivation {
+  pname = "zola-website";
+  version = "0.1.0";
+
+  src = ./.;
+
+  nativeBuildInputs = [pkgs.zola];
+
   zolaTheme = zola-386.overrideAttrs (prev: {
     patches = (prev.patches or []) ++ [./0002-fix-index.html-main-blog-page.patch];
   });
-in
-  pkgs.stdenv.mkDerivation {
-    pname = "zola-website";
-    version = "0.1.0";
 
-    src = ./.;
+  preBuild = ''
+    mkdir -pv themes/zola.386
 
-    nativeBuildInputs = [pkgs.zola];
+    cp -rv $zolaTheme/* themes/zola.386/
 
-    inherit zolaTheme;
+    mkdir -pv templates
+    cp -v ${ai-robots-txt}/robots.txt templates/ai.robots.txt
 
-    preBuild = ''
-      mkdir -p themes/zola.386
+    chmod -Rv +w themes/zola.386
+  '';
 
-      cp -r ${zolaTheme}/* themes/zola.386/
+  buildPhase = ''
+    runHook preBuild
 
-      mkdir -pv templates
-      cat ${ai-robots-txt} >> templates/ai.robots.txt
+    SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" \
+      zola build -o $out
 
-      chmod -R +w themes/zola.386
-    '';
+    runHook postBuild
+  '';
 
-    buildPhase = ''
-      runHook preBuild
-
-      SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" \
-        zola build -o $out
-
-      runHook postBuild
-    '';
-
-    meta = with lib; {
-      description = "Retro Zola blog";
-      homepage = "https://air1.one";
-      license = licenses.mit;
-    };
-  }
+  meta = with lib; {
+    description = "Retro Zola blog";
+    homepage = "https://air1.one";
+    license = licenses.mit;
+  };
+}

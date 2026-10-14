@@ -18,6 +18,7 @@ pkgs.stdenvNoCC.mkDerivation (finalAttrs: {
     runHook preBuild
 
     # I just need the robots.txt for Zola.
+    mkdir -pv $out
     cp -v robots.txt $out
 
     runHook postBuild;

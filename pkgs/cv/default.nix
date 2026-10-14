@@ -38,16 +38,18 @@ in
 
     buildPhase = ''
       runHook preBuild
-      export HOME=$TMPDIR
-      pdflatex -interaction=nonstopmode cv.tex
-      pdflatex -interaction=nonstopmode cv.tex
+
+      HOME=$TMPDIR pdflatex -interaction=nonstopmode cv.tex
+
       runHook postBuild
     '';
 
     installPhase = ''
       runHook preInstall
-      mkdir -p "$out"
-      cp cv.pdf "$out/Erwann Lagouche ${dateString}.pdf"
+
+      mkdir -pv "$out"
+      cp -v cv.pdf "$out/Erwann Lagouche ${dateString}.pdf"
+
       runHook postInstall
     '';
 
