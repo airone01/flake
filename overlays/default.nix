@@ -1,4 +1,5 @@
 {inputs}: final: prev: {
+  ai-robots-txt = final.callPackage ../pkgs/ai-robots-txt {};
   cv = final.callPackage ../pkgs/cv {};
   initomatic = final.callPackage ../pkgs/initomatic {};
   mcheads = final.callPackage ../pkgs/mcheads {};
