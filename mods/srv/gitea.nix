@@ -21,7 +21,6 @@ in {
 
       settings = {
         server = {
-          DOMAIN = "git.air1.one";
           ROOT_URL = "https://git.air1.one/";
           HTTP_PORT = 3001;
         };
