@@ -1,0 +1,90 @@
+From 92678e46ce48550112a415f9a54aa4372eadcf47 Mon Sep 17 00:00:00 2001
+From: airone01 <airone01@proton.me>
+Date: Wed, 14 Oct 2026 18:29:21 +0200
+Subject: [PATCH 2/2] fix(index.html): main blog page
+
+---
+ templates/index.html | 50 ++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 48 insertions(+), 2 deletions(-)
+
+diff --git a/templates/index.html b/templates/index.html
+index 1b719b9..f7b9f4f 100644
+--- a/templates/index.html
++++ b/templates/index.html
+@@ -97,7 +97,46 @@
+ 
+       <div class="span9 bs-docs-sidebar">
+       {% block main %}
++        <div class="row" style="margin-left: 1px;">
++          <div class="col-md-12">
++            <h2>Welcome to my place!</h2>
++            <p>My name is Erwann (but you can call me Leo if you have trouble pronouncing it). You can find more information about who I am and what I'm currently hosting on this site in the <a href="/about">about</a> page.</p>
++
++            <div class="web-badges" style="margin-top: 15px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 4px;">
++              <a href="https://www.mabsland.com/Adoption.html" target="_blank" title="CSS">
++                <img src="/images/badges/Censor_14c.gif" alt="CSS" width="88" height="31" style="image-rendering: pixelated;">
++              </a>
++              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" title="CSS">
++                <img src="/images/badges/css.png" alt="CSS" width="88" height="31" style="image-rendering: pixelated;">
++              </a>
++              <a href="https://validator.w3.org/" target="_blank" title="Valid HTML">
++                <img src="/images/badges/qldbwc_graphics_valid-html40.gif" alt="Valid HTML" width="88" height="31" style="image-rendering: pixelated;">
++              </a>
++              <a href="https://neovim.io/" target="_blank" title="Neovim User">
++                <img src="/images/badges/neovim.gif" alt="Neovim" width="88" height="31" style="image-rendering: pixelated;">
++              </a>
++              <a href="https://www.mozilla.org/firefox/new/" target="_blank" title="Get Firefox">
++                <img src="/images/badges/firefoxnow.gif" alt="Firefox" width="88" height="31" style="image-rendering: pixelated;">
++              </a>
++              <a href="https://ffmpeg.org/" target="_blank" title="Get FFmpeg">
++                <img src="/images/badges/ffmpeg.gif" alt="FFmpeg" width="88" height="31" style="image-rendering: pixelated;">
++              </a>
++              <a href="https://old.reddit.com/r/rant/comments/1b5eajq/fuck_windows_11_updates_and_fuck_microsoft/" target="_blank" title="I don't use Windows 3.1">
++                <img src="/images/badges/windows-3-1-no.gif" alt="No Windows 3.1" width="88" height="31" style="image-rendering: pixelated;">
++              </a>
++              <a href="https://www.linuxfromscratch.org/" target="_blank" title="I use GNU Linux">
++                <img src="/images/badges/gnu-linux.gif" alt="Linux" width="88" height="31" style="image-rendering: pixelated;">
++              </a>
++              <img usemap="#noaimini2" src="https://baccyflap.com/noai/miniwidget2.gif" alt="a white rounded rectangle in red outline, with the words 'no ai webring'. there's a no access emoji, a little robot emoji, two arrows pointing left and right, and two crossed arrows">
++            </div>
++
++            <br>
++          </div>
++        </div>
+         {% for page in paginator.pages %}
++          {% if page.extra.unlisted %}
++            {% continue %}
++          {% endif %}
+           {{ <post_max page={page} extra={config.extra} /> }}
+         {% endfor %}
+ 
+@@ -124,11 +163,11 @@
+         </ul>
+         <p></p>
+         <h1>Tags</h1>
+-        <ul class="nav nav-list bs-docs-sidenav">        
++        <ul class="nav nav-list bs-docs-sidenav">
+           {% set tags = get_taxonomy(kind="tags") %}
+           {% for tag in tags.items %}
+             <li><a href="{{ config.base_url }}/tags/{{ tag.name }}">{{ tag.name }}</a></li>
+-          {% endfor %}    
++          {% endfor %}
+         </ul>
+       {% endblock sidebar %}
+       </div>
+@@ -180,5 +219,12 @@
+   <script src="{{ get_url(path="js/search.js", trailing_slash=false) | safe }}"></script>
+   <script src="{{ get_url(path="elasticlunr.min.js", trailing_slash=false) | safe }}"></script>
+   <script src="{{ get_url(path="search_index.en.js", trailing_slash=false) | safe }}"></script>
++
++  <map name="noaimini2">
++    <area href="https://baccyflap.com/noai" target="_blank" shape="rect" coords="5,3,83,14" alt="no ai webring" title="no ai webring">
++    <area href="https://baccyflap.com/noai/?prv&s=ela" target="_top" shape="rect" coords="5,16,16,26" alt="previous" title="previous">
++    <area href="https://baccyflap.com/noai/?rnd" target="_top" shape="rect" coords="38,16,51,27" alt="random" title="random">
++    <area href="https://baccyflap.com/noai/?nxt&s=ela" target="_top" shape="rect" coords="72,16,83,26" alt="next" title="next">
++  </map>
+ </body>
+ </html>
+-- 
+2.55.0
+
