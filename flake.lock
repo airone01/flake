@@ -350,11 +350,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1790155086,
+        "lastModified": 1792247530,
         "narHash": "sha256-tts0wUkdP7nFkHYLBCGoDK1JFQbXZ0i4upqpngrlH6c=",
         "ref": "refs/heads/main",
-        "rev": "877d527521ba30ba61ba696d01abb8185f0487ed",
-        "revCount": 730,
+        "rev": "29e47b415eb3792696a486eec0df6bd20af34323",
+        "revCount": 732,
         "type": "git",
         "url": "https://codeberg.org/alinnow/searchix"
       },
