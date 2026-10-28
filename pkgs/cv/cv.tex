@@ -15,9 +15,44 @@
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
-\usepackage[english]{babel}
 \usepackage{tabularx}
 \input{glyphtounicode}
+
+%=============================================================================
+% Conditional Compilation Engine
+%=============================================================================
+\newif\iffr
+\newif\ifen
+
+\ifdefined\isFrench
+\frtrue
+\enfalse
+\else
+\entrue
+\frfalse
+\fi
+
+% Helper macro for inline bilingual content: \lang{English}{Français}
+\newcommand{\lang}[2]{\iffr#2\else#1\fi}
+
+% Generic condition macro: \ifcond{\flag}{true-content}{false-content}
+\newcommand{\ifcond}[3]{\ifdefined#1#2\else#3\fi}
+
+% Language-aware Babel setup
+\iffr
+\usepackage[french]{babel}
+\else
+\usepackage[english]{babel}
+\fi
+
+% Compile-time assertion: ensure document never exceeds 1 page
+\AtEndDocument{
+  \ifnum\value{page}>1
+  \PackageError{cv}{Document exceeds 1 page (page count:
+  \the\value{page})}{Please adjust spacing or phrasing so the CV fits
+  on a single page.}
+  \fi
+}
 
 %----------FONT OPTIONS----------
 % sans-serif
@@ -125,51 +160,73 @@
 \end{center}
 
 %-----------EDUCATION-----------
-\section{Education}
+\section{\lang{Education}{Formation}}
 \resumeSubHeadingListStart
 \resumeSubheading
 {42 Lyon Auvergne Rhône-Alpes}{Lyon, France}
-{RNCP 7 - Expert Computer Architect (in progress)}{Oct. 2024 -- Present}
+{\lang{RNCP 7 - Expert Computer Architect (in progress)}{RNCP 7 -
+Expert en Architecture Informatique (en cours)}}{\lang{Oct. 2024 --
+Present}{Oct. 2024 -- Présent}}
 \resumeSubheading
 {42 Lyon Auvergne Rhône-Alpes}{Lyon, France}
-{Certificate of Completion}{Oct. 2024 -- Mar. 2026}
+{\lang{Certificate of Completion}{Tronc commun validé}}{\lang{Oct.
+2024 -- Mar. 2026}{Oct. 2024 -- Mars 2026}}
 \resumeSubheading
-{Claude Bernard University of Lyon 1}{Villeurbanne, France}
-{BUT - Computer Science, Systems \& Networking}{Sept. 2021 -- Sept. 2024}
+{\lang{Claude Bernard University of Lyon 1}{Université Claude Bernard
+Lyon 1}}{Villeurbanne, France}
+{\lang{BUT - Computer Science, Application Development}{BUT
+Informatique - Réalisation d'Applications}}{\lang{Sept. 2021 -- Sept.
+2024}{Sept. 2021 -- Sept. 2024}}
 \resumeSubheading
-{Cambridge Assessment (Linguaskill English)}{Maurice La Mache High
-School, Lyon, France}
-{Linguaskill English Test - 180+ (\underline{C1+, max
-grade})}{Apr. 13 2021}
+{Cambridge Assessment (Linguaskill English)}{\lang{Maurice La Mache
+High School, Lyon, France}{Lycée La Mache, Lyon, France}}
+{\lang{Linguaskill English Test - 180+ (\underline{C1+, max
+  grade})}{Test d'anglais Linguaskill - 180+ (\underline{C1+, score
+maximal})}}{\lang{Apr. 13 2021}{13 avr. 2021}}
 \resumeSubHeadingListEnd
 
 %-----------EXPERIENCE-----------
-\section{Experience}
+\section{\lang{Experience}{Expériences}}
 \resumeSubHeadingListStart
 
 \resumeSubheading
-{Open Source Contributor \& Package Maintainer}{Mar. 2026 -- Present}
-{nixpkgs \& NixOS}{Remote}
+{\lang{Open Source Contributor \& Package Maintainer}{Contributeur
+Open Source \& Mainteneur de paquets}}{\lang{Mar. 2026 --
+Present}{Mars 2026 -- Présent}}
+{nixpkgs \& NixOS}{\lang{Remote}{À distance}}
 \resumeItemListStart
-\resumeItem{Authored 6 merged pull requests and reviewed/merged
-~10 automated package-bump PRs on nixpkgs (120k+ packages, 1M+ commits)}
-\resumeItem{Maintain the \emph{Docker Compose} and \emph{Mullvad VPN}
-packages, handling upstream updates and build failures}
-\resumeItem{Actively contribute to bootstrapping the Java/JVM
-  toolchain from source, a multi-month effort to remove binary
-bootstrap dependencies from the package set}
+\resumeItem{\lang{Authored 10+ merged pull requests and reviewed/merged
+    ~10 automated package-bump PRs on nixpkgs (120k+ packages, 1M+
+  commits)}{10+ pull requests mergées et ~10 revues/merges de PRs
+automatisées sur nixpkgs (120k+ paquets, 1M+ commits)}}
+\resumeItem{\lang{Maintain the \emph{Docker Compose} and \emph{Mullvad VPN}
+  packages, handling upstream updates and build failures}{Maintenance
+    des paquets \emph{Docker Compose} et \emph{Mullvad VPN}, gestion des
+mises à jour amont et échecs de build}}
+\resumeItem{\lang{Actively contribute to bootstrapping the Java/JVM
+    toolchain from source, a multi-month effort to remove binary
+  bootstrap dependencies from the package set}{Contribution active au
+    bootstrap source de la chaîne Java/JVM, visant l'élimination des
+dépendances binaires de nixpkgs}}
 \resumeItemListEnd
 
 \resumeSubheading
-{Intern}{Apr. 2026 -- Present}
-{Moggo}{Remote, France}
+{\lang{Intern}{Stagiaire Développeur}}{\lang{Apr. 2026 --
+Present}{Avr. 2026 -- Présent}}
+{Moggo}{\lang{Remote, France}{Télétravail, France}}
 \resumeItemListStart
-\resumeItem{Designed and shipped a chat moderation system with
-automatic message flagging, unblocking safer user communication}
-\resumeItem{Extended user onboarding to capture account preferences,
-enabling filtering options and account customization}
-\resumeItem{Designed and implemented an end-to-end user analytics
-system integrating PostHog, from event tracking to data pipeline}
+\resumeItem{\lang{Designed and shipped a chat moderation system with
+    automatic message flagging, unblocking safer user
+  communication}{Conception et déploiement d'un système de modération
+de chat avec signalement automatique de messages pour sécuriser les échanges}}
+\resumeItem{\lang{Extended user onboarding to capture account preferences,
+  enabling filtering options and account customization}{Évolution du
+    parcours d'onboarding pour capturer les préférences utilisateur,
+permettant le filtrage et la personnalisation}}
+\resumeItem{\lang{Designed and implemented an end-to-end user analytics
+    system integrating PostHog, from event tracking to data
+  pipeline}{Conception et intégration complète d'un système d'analytics
+avec PostHog, du suivi d'événements au pipeline de données}}
 \resumeItemListEnd
 
 % -----------Multiple Positions Heading-----------
@@ -184,70 +241,92 @@ system integrating PostHog, from event tracking to data pipeline}
 %-------------------------------------------
 
 \resumeSubheading
-{Intern}{May 2025 -- June 2025}
+{\lang{Intern}{Stagiaire}}{\lang{May 2025 -- June 2025}{Mai 2025 -- Juin 2025}}
 {LDLC School}{Limonest, France}
 \resumeItemListStart
-\resumeItem{Delivered a working electronics-based proof of concept
-for a pharmaceutical client in under 4 weeks, with live demo}
-\resumeItem{Co-authored and presented a business/technical case on
-digital nudging to representatives of multiple partner companies}
+\resumeItem{\lang{Delivered a working electronics-based proof of concept
+    for a pharmaceutical client in under 4 weeks, with live
+  demo}{Réalisation en moins de 4 semaines d'un PoC électronique
+fonctionnel avec démonstration live pour un client pharmaceutique}}
+\resumeItem{\lang{Co-authored and presented a business/technical case on
+    digital nudging to representatives of multiple partner
+  companies}{Co-rédaction et présentation d'une étude
+    technico-économique sur le nudge numérique devant plusieurs
+entreprises partenaires}}
 \resumeItemListEnd
 
 \resumeSubheading
-{DevOps Apprentice}{June 2023 -- Aug. 2024}
+{\lang{DevOps Apprentice}{Apprenti DevOps}}{\lang{June 2023 -- Aug.
+2024}{Juin 2023 -- Août 2024}}
 {SPIE CityNetworks}{Vénissieux, France}
 \resumeItemListStart
-\resumeItem{Modernized deployment pipelines to Docker and Ansible for
-industrial signaling systems, over a 14-month apprenticeship}
-\resumeItem{Built and maintained CI/CD pipelines under real
-production constraints on embedded and low-level infrastructure}
+\resumeItem{\lang{Modernized deployment pipelines to Docker and Ansible for
+    industrial signaling systems, over a 14-month
+  apprenticeship}{Modernisation des déploiements vers Docker et Ansible
+pour des systèmes de signalisation industrielle (alternance de 14 mois)}}
+\resumeItem{\lang{Built and maintained CI/CD pipelines under real
+    production constraints on embedded and low-level
+  infrastructure}{Création et maintien de pipelines CI/CD sous
+contraintes de production réelles sur infrastructures embarquées et bas niveau}}
 \resumeItemListEnd
 
 \resumeSubHeadingListEnd
 
 %-----------PROJECTS-----------
-\section{Projects}
+\section{\lang{Projects}{Projets}}
 \resumeSubHeadingListStart
 \resumeProjectHeading
 {\textbf{Nix Flake} $|$ \emph{Nix, Linux, Bash, HTML, Go,
-Python}}{March 2024 -- Present}
+Python}}{\lang{March 2024 -- Present}{Mars 2024 -- Présent}}
 \resumeItemListStart
-\resumeItem{Design and maintain a declarative monorepo of NixOS
-  system configurations with CI (GitHub Actions, Hercules CI), site-to-site
-  networking (WireGuard, Traefik, NGINX) and automated secrets
-management (sops-nix)}
+\resumeItem{\lang{Design and maintain a declarative monorepo of NixOS
+    system configurations with CI (GitHub Actions, Hercules CI), site-to-site
+    networking (WireGuard, Traefik, NGINX) and automated secrets
+  management (sops-nix)}{Conception et gestion d'un monorepo déclaratif
+    de configurations NixOS avec CI (GitHub Actions, Hercules CI),
+    réseaux inter-sites (WireGuard, Traefik, NGINX) et gestion de secrets
+(sops-nix)}}
 \resumeItemListEnd
 \resumeProjectHeading
-{\textbf{Full-Stack Chess Game} $|$ \emph{TypeScript, Node.js,
-Svelte(Kit), HTML/CSS, Docker Compose, Git}}{Jan. 2026 -- Mar. 2026}
+{\textbf{\lang{Full-Stack Chess Game}{Plateforme d'échecs
+  full-stack}} $|$ \emph{TypeScript, Node.js,
+Svelte(Kit), HTML/CSS, Docker Compose, Git}}{\lang{Jan. 2026 -- Mar.
+2026}{Janv. 2026 -- Mars 2026}}
 \resumeItemListStart
-\resumeItem{Led the technical stack decisions and architecture for a
-  team project delivering a full chess tournament platform (TypeScript,
-SvelteKit, Docker)}
-\resumeItem{Implemented secure authentication (Google OAuth) and core
-user-facing features end-to-end}
-\resumeItem{Achieved the maximum evaluation score (\emph{125/100}) across
-three independent reviewers}
+\resumeItem{\lang{Led the technical stack decisions and architecture for a
+    team project delivering a full chess tournament platform (TypeScript,
+  SvelteKit, Docker)}{Pilotage des choix technologiques et de
+    l'architecture pour une plateforme de tournois d'échecs en équipe
+(TypeScript, SvelteKit, Docker)}}
+\resumeItem{\lang{Implemented secure authentication (Google OAuth) and core
+  user-facing features end-to-end}{Implémentation de bout en bout de
+l'authentification sécurisée (Google OAuth) et des fonctionnalités clés}}
+\resumeItem{\lang{Achieved the maximum evaluation score (\emph{125/100}) across
+  three independent reviewers}{Attribution de la note maximale
+(\emph{125/100}) par trois évaluateurs indépendants}}
 \resumeItemListEnd
 \resumeSubHeadingListEnd
 
 %-----------SKILLS-----------
-\section{Skills}
+\section{\lang{Skills}{Compétences}}
 \begin{itemize}[leftmargin=0.15in, label={}]
     \small{
     \item{
         \begin{tabularx}{0.97\textwidth}{@{}p{0.47\textwidth}@{\hspace{0.03\textwidth}}p{0.47\textwidth}@{}}
-          \textbf{Systems \& Low-level}: C, x86-64 Assembly, Linux
-          internals (syscalls, PAM, PTY) \newline
-          \textbf{Languages}: Nix, TypeScript/JavaScript, C/C++, Java,
-          Python, SQL \newline
-          \textbf{Frameworks}: React, Svelte(Kit), NestJS, Next.js,
-          Node.js, Bun
+          \textbf{\lang{Systems \& Low-level}{Systèmes \& Bas
+          niveau}}: C, x86-64 Assembly, \lang{Linux internals
+          (syscalls, PAM, PTY)}{internes Linux (syscalls, PAM, PTY)} \newline
+          \textbf{\lang{Languages}{Langages}}: Nix,
+          TypeScript/JavaScript, C/C++, Java, Python, SQL \newline
+          \textbf{Frameworks}: React, Svelte(Kit), NestJS, Next.js, Node.js, Bun
           &
-          \textbf{Spoken Languages}: French (Native), English
-          (Proficient, C1+) \newline
-          \textbf{Soft Skills}: Team leadership (co-led 15-person
-          student org), cross-team collaboration
+          \textbf{\lang{Spoken Languages}{Langues}}: \lang{French
+          (Native), English (Proficient, C1+)}{Français (maternelle),
+          Anglais (courant, C1+)} \newline
+          \textbf{\lang{Soft Skills}{Compétences relationnelles}}:
+          \lang{Team leadership (co-led 15-person student org),
+          cross-team collaboration}{Leadership d'équipe (co-direction
+          asso de 15 pers.), travail collaboratif}
         \end{tabularx}
     }}
 \end{itemize}
