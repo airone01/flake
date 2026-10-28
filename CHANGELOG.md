@@ -1,5 +1,12 @@
 # Changelog
 
+## [13.3.1](https://github.com/airone01/flake/compare/flake-v13.3.0...flake-v13.3.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* **cv:** translate to french ([5821915](https://github.com/airone01/flake/commit/5821915250d23aee67c2ed27d786bf05788da3db))
+
 ## [13.3.0](https://github.com/airone01/flake/compare/flake-v13.2.0...flake-v13.3.0) (2026-10-14)
 
 
