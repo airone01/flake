@@ -7,4 +7,5 @@
   pkgs = inputs.nixpkgs.legacyPackages.${system}.extend (import ../overlays {inherit inputs;});
 in {
   inherit (pkgs) ai-robots-txt cv initomatic mcheads noctalia niri nvim website zola-386;
+  javaTools = pkgs.callPackage ./java-modules/bootstrap {};
 }

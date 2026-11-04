@@ -1,0 +1,275 @@
+diff --git a/org/dom4j/dom/DOMAttribute.java b/org/dom4j/dom/DOMAttribute.java
+index 117a26d..e90a632 100644
+--- a/org/dom4j/dom/DOMAttribute.java
++++ b/org/dom4j/dom/DOMAttribute.java
+@@ -175,6 +175,8 @@ public class DOMAttribute extends DefaultAttribute implements org.w3c.dom.Attr {
+         return DOMNodeHelper.asDOMElement( getParent() );
+     }
+     
++    public boolean isId() { return false; }
++    public org.w3c.dom.TypeInfo getSchemaTypeInfo()  { return null; }
+ }
+ 
+ 
+diff --git a/org/dom4j/dom/DOMCDATA.java b/org/dom4j/dom/DOMCDATA.java
+index 674d859..e6056b9 100644
+--- a/org/dom4j/dom/DOMCDATA.java
++++ b/org/dom4j/dom/DOMCDATA.java
+@@ -226,6 +226,20 @@ public class DOMCDATA extends DefaultCDATA implements org.w3c.dom.CDATASection {
+     protected CDATA createCDATA(String text) {
+         return new DOMCDATA( text );
+     }
++
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+ 
+diff --git a/org/dom4j/dom/DOMComment.java b/org/dom4j/dom/DOMComment.java
+index 83d99ff..39ed257 100644
+--- a/org/dom4j/dom/DOMComment.java
++++ b/org/dom4j/dom/DOMComment.java
+@@ -187,6 +187,20 @@ public class DOMComment extends DefaultComment implements org.w3c.dom.Comment {
+     ) throws DOMException {
+         DOMNodeHelper.replaceData(this, offset, count, arg);
+     }
++
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+ 
+diff --git a/org/dom4j/dom/DOMDocument.java b/org/dom4j/dom/DOMDocument.java
+index 7409af5..a33e983 100644
+--- a/org/dom4j/dom/DOMDocument.java
++++ b/org/dom4j/dom/DOMDocument.java
+@@ -292,6 +292,35 @@ public class DOMDocument extends DefaultDocument implements org.w3c.dom.Document
+             return super.getDocumentFactory();
+         }
+     }        
++
++    // Document
++    public org.w3c.dom.Node adoptNode(org.w3c.dom.Node source) { return null; }
++    public org.w3c.dom.Node renameNode(org.w3c.dom.Node n, String namespaceURI, String qualifiedName) { return null; }
++    public void normalizeDocument();
++    public String getDocumentURI() { return null; }
++    public org.w3c.dom.DOMConfiguration getDomConfig() { return null; }
++    public String getInputEncoding() { return null; }
++    public boolean getStrictErrorChecking() { return false; }
++    public String getXmlEncoding() { return null; }
++    public String getXmlStandalone() { return false; }
++    public String getXmlVersion() { return null; }
++    public void setDocumentURI(String documentURI) {}
++    public void setStaticErrorChecking(boolean strictErrorChecking) {}
++    public void setXmlStandalone(boolean xmlStandalone) {}
++    public void setXmlVersion(boolean xmlVersion) {}
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+ 
+diff --git a/org/dom4j/dom/DOMDocumentFactory.java b/org/dom4j/dom/DOMDocumentFactory.java
+index 9fd126d..c751638 100644
+--- a/org/dom4j/dom/DOMDocumentFactory.java
++++ b/org/dom4j/dom/DOMDocumentFactory.java
+@@ -157,6 +157,10 @@ public class DOMDocumentFactory extends DocumentFactory implements org.w3c.dom.D
+         }
+     }
+ 
++    public Object getFeature(String feature, String version) {
++        return null;
++    }
++
+ }
+ 
+ 
+diff --git a/org/dom4j/dom/DOMDocumentType.java b/org/dom4j/dom/DOMDocumentType.java
+index 5c698f0..be4f0ff 100644
+--- a/org/dom4j/dom/DOMDocumentType.java
++++ b/org/dom4j/dom/DOMDocumentType.java
+@@ -177,6 +177,20 @@ public class DOMDocumentType extends DefaultDocumentType implements org.w3c.dom.
+     public String getInternalSubset() {
+         return getElementName();
+     }
++
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+ 
+diff --git a/org/dom4j/dom/DOMElement.java b/org/dom4j/dom/DOMElement.java
+index 15f65e3..7e745fd 100644
+--- a/org/dom4j/dom/DOMElement.java
++++ b/org/dom4j/dom/DOMElement.java
+@@ -356,6 +356,24 @@ public class DOMElement extends DefaultElement implements org.w3c.dom.Element {
+         }
+         return DOCUMENT_FACTORY.createQName( localName, prefix, namespaceURI );
+     }
++
++    public void setIdAttribute(String name, boolean isId) {}
++    public void setIdAttributeNode(org.w3c.dom.Attr idAttr, boolean isId) {}
++    public void setIdAttributeNS(String namespaceURI, String localeName, boolean isId) {}
++    public org.w3c.dom.TypeInfo getSchemaTypeInfo()  { return null; }
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+ 
+diff --git a/org/dom4j/dom/DOMEntityReference.java b/org/dom4j/dom/DOMEntityReference.java
+index c90d1d6..b5d93db 100644
+--- a/org/dom4j/dom/DOMEntityReference.java
++++ b/org/dom4j/dom/DOMEntityReference.java
+@@ -156,6 +156,20 @@ public class DOMEntityReference extends DefaultEntity implements org.w3c.dom.Ent
+     public boolean hasAttributes() {
+         return DOMNodeHelper.hasAttributes(this);
+     }
++
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+ 
+diff --git a/org/dom4j/dom/DOMNamespace.java b/org/dom4j/dom/DOMNamespace.java
+index bff9e21..cfbaaa0 100644
+--- a/org/dom4j/dom/DOMNamespace.java
++++ b/org/dom4j/dom/DOMNamespace.java
+@@ -150,6 +150,20 @@ public class DOMNamespace extends DefaultNamespace implements org.w3c.dom.Node {
+     public boolean hasAttributes() {
+         return DOMNodeHelper.hasAttributes(this);
+     }
++
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+ 
+diff --git a/org/dom4j/dom/DOMProcessingInstruction.java b/org/dom4j/dom/DOMProcessingInstruction.java
+index 1c81593..2ea4eb7 100644
+--- a/org/dom4j/dom/DOMProcessingInstruction.java
++++ b/org/dom4j/dom/DOMProcessingInstruction.java
+@@ -180,6 +180,20 @@ public class DOMProcessingInstruction extends DefaultProcessingInstruction imple
+     
+     // Implementation methods
+     //-------------------------------------------------------------------------            
++
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+ 
+diff --git a/org/dom4j/dom/DOMText.java b/org/dom4j/dom/DOMText.java
+index 16f7878..a71c7bc 100644
+--- a/org/dom4j/dom/DOMText.java
++++ b/org/dom4j/dom/DOMText.java
+@@ -225,6 +225,23 @@ public class DOMText extends DefaultText implements org.w3c.dom.Text {
+     protected Text createText(String text) {
+         return new DOMText( text );
+     }
++
++    public org.w3c.dom.Text replaceWholeText(String content) { return null; }
++    public String getWholeText() { return null; }
++    public boolean isElementContentWhitespace() { return false; }
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.dom.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+ 

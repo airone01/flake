@@ -1,0 +1,46 @@
+diff --git a/org/apache/html/dom/HTMLElementImpl.java b/org/apache/html/dom/HTMLElementImpl.java
+index 5ae5dc0..d749da6 100644
+--- a/org/apache/html/dom/HTMLElementImpl.java
++++ b/org/apache/html/dom/HTMLElementImpl.java
+@@ -340,6 +340,18 @@ public class HTMLElementImpl
+         return null;
+     }
+ 
+-
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.dom.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+diff --git a/org/apache/xerces/dom/ElementImpl.java b/org/apache/xerces/dom/ElementImpl.java
+index 455f8a8..2115fc7 100644
+--- a/org/apache/xerces/dom/ElementImpl.java
++++ b/org/apache/xerces/dom/ElementImpl.java
+@@ -1166,4 +1166,17 @@ public class ElementImpl
+ 
+     } // getDefaultAttributes()
+ 
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ } // class ElementImpl

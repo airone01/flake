@@ -1,0 +1,13 @@
+diff --git a/org/w3c/dom/ls/DOMWriter.java b/org/w3c/dom/ls/DOMWriter.java
+index c3839fb..ea6faf9 100644
+--- a/org/w3c/dom/ls/DOMWriter.java
++++ b/org/w3c/dom/ls/DOMWriter.java
+@@ -84,7 +84,7 @@ import org.apache.xerces.dom3.DOMErrorHandler;
+  * <p> Within markup, but outside of attributes, any occurrence of a character 
+  * that cannot be represented in the output character encoding is reported 
+  * as an error. An example would be serializing the element 
+- * &lt;LaCañada/&gt; with the encoding="us-ascii". 
++ * &lt;LaCanada/&gt; with the encoding="us-ascii". 
+  * <p> When requested by setting the <code>normalize-characters</code> feature 
+  * on <code>DOMWriter</code>, all data to be serialized, both markup and 
+  * character data, is W3C Text normalized according to the rules defined in 

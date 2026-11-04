@@ -1,0 +1,34 @@
+--- a/org/jaxen/function/ext/LocaleFunctionSupport.java
++++ b/org/jaxen/function/ext/LocaleFunctionSupport.java
+@@ -130,24 +130,24 @@ public abstract class LocaleFunctionSupport implements Function
+      *      be found 
+      */
+     protected Locale findLocale(String localeText) {
+-        StringTokenizer enum = new StringTokenizer( localeText, "-" );
+-        if (enum.hasMoreTokens()) 
++        StringTokenizer enumeration = new StringTokenizer( localeText, "-" );
++        if (enumeration.hasMoreTokens()) 
+         {
+-            String language = enum.nextToken();
+-            if (! enum.hasMoreTokens()) 
++            String language = enumeration.nextToken();
++            if (! enumeration.hasMoreTokens()) 
+             {                
+                 return findLocaleForLanguage(language);
+             }
+             else 
+             {
+-                String country = enum.nextToken();
+-                if (! enum.hasMoreTokens()) 
++                String country = enumeration.nextToken();
++                if (! enumeration.hasMoreTokens()) 
+                 {
+                     return new Locale(language, country);
+                 }
+                 else 
+                 {
+-                    String variant = enum.nextToken();
++                    String variant = enumeration.nextToken();
+                     return new Locale(language, country, variant);
+                 }
+             }

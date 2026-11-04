@@ -1,0 +1,26 @@
+diff --git a/org/dom4j/persistence/Initiator.java b/org/dom4j/persistence/Initiator.java
+index 488ef77..b86e292 100644
+--- a/org/dom4j/persistence/Initiator.java
++++ b/org/dom4j/persistence/Initiator.java
+@@ -3,7 +3,7 @@ package org.dom4j.persistence;
+ import org.dom4j.Document;
+ 
+ /**
+- * Überschrift:   HL7 API
++ * Uberschrift:   HL7 API
+  * Beschreibung:
+  * Copyright:     Copyright (c) 2001
+  * Organisation:  ceyoniq healthcare
+diff --git a/org/dom4j/persistence/MarshallingContext.java b/org/dom4j/persistence/MarshallingContext.java
+index 22252bd..39c9c42 100644
+--- a/org/dom4j/persistence/MarshallingContext.java
++++ b/org/dom4j/persistence/MarshallingContext.java
+@@ -3,7 +3,7 @@ package org.dom4j.persistence;
+ import java.net.URL;
+ 
+ /**
+- * Überschrift:   HL7 API
++ * Uberschrift:   HL7 API
+  * Beschreibung:
+  * Copyright:     Copyright (c) 2001
+  * Organisation:  ceyoniq healthcare

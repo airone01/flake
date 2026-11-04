@@ -1,0 +1,13 @@
+--- a/org/iso_relax/jaxp/ValidatingDocumentBuilderFactory.java
++++ b/org/iso_relax/jaxp/ValidatingDocumentBuilderFactory.java
+@@ -101,4 +101,10 @@ public class ValidatingDocumentBuilderFactory extends DocumentBuilderFactory
+     { _WrappedFactory.setIgnoringElementContentWhitespace(whitespace); }
+     public void setNamespaceAware(boolean awareness)
+     { _WrappedFactory.setNamespaceAware(awareness); }
++
++    // JAXP 1.3 fwd to _WrappedFactory
++    public boolean getFeature(String name) throws ParserConfigurationException
++    { return _WrappedFactory.getFeature(name); }
++    public void setFeature(String name, boolean value) throws ParserConfigurationException
++    { _WrappedFactory.setFeature(name, value); }
+ }

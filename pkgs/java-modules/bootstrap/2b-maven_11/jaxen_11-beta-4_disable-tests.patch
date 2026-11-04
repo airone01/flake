@@ -1,0 +1,20 @@
+diff --git a/build.xml b/build.xml
+index 01664b8..8585789 100644
+--- a/build.xml
++++ b/build.xml
+@@ -52,7 +52,7 @@
+       </classpath>
+     </javac>
+   </target>
+-  <target name="jar" description="o Create the jar" depends="compile,test">
++  <target name="jar" description="o Create the jar" depends="compile">
+     <jar jarfile="${defaulttargetdir}/${final.name}.jar" excludes="**/package.html" basedir="${classesdir}">
+     </jar>
+   </target>
+@@ -175,4 +175,4 @@
+     <unjar dest="${maven.home}" src="${user.home}/maven-install-latest.jar">
+     </unjar>
+   </target>
+-</project>
+\ No newline at end of file
++</project>

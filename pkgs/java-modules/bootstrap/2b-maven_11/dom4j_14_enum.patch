@@ -1,0 +1,79 @@
+diff --git a/org/dom4j/DocumentHelper.java b/org/dom4j/DocumentHelper.java
+index d37944a..c316e0d 100644
+--- a/org/dom4j/DocumentHelper.java
++++ b/org/dom4j/DocumentHelper.java
+@@ -231,7 +231,7 @@ public class DocumentHelper {
+       * existed on the path or were created by this method.
+       */
+     public static Element makeElement(Branch source, String path) {
+-        StringTokenizer enum = new StringTokenizer( path, "/" );
++        StringTokenizer enumeration = new StringTokenizer( path, "/" );
+         Element parent;
+         if ( source instanceof Document ) {
+             Document document = (Document) source;
+@@ -239,7 +239,7 @@ public class DocumentHelper {
+             
+             // lets throw a NoSuchElementException 
+             // if we are given an empty path
+-            String name = enum.nextToken();
++            String name = enumeration.nextToken();
+             if ( parent == null ) {
+                 parent = document.addElement( name );
+             }
+@@ -248,8 +248,8 @@ public class DocumentHelper {
+             parent = (Element) source;
+         }
+         Element element = null;
+-        while ( enum.hasMoreTokens() ) {
+-            String name = enum.nextToken();
++        while ( enumeration.hasMoreTokens() ) {
++            String name = enumeration.nextToken();
+             if ( name.indexOf( ':' ) > 0 ) {
+                 element = parent.element( parent.getQName( name ) );
+             }
+diff --git a/org/dom4j/io/aelfred/XmlParser.java b/org/dom4j/io/aelfred/XmlParser.java
+index a92f6a9..e7b9d35 100644
+--- a/org/dom4j/io/aelfred/XmlParser.java
++++ b/org/dom4j/io/aelfred/XmlParser.java
+@@ -1450,7 +1450,7 @@ loop:
+     {
+     String name;
+     int type;
+-    String enum = null;
++    String enumeration = null;
+ 
+     // Read the attribute name.
+     name = readNmtoken (true);
+@@ -1462,12 +1462,12 @@ loop:
+     // Get the string of enumerated values
+     // if necessary.
+     if (type == ATTRIBUTE_ENUMERATED || type == ATTRIBUTE_NOTATION) {
+-        enum = dataBufferToString ();
++        enumeration = dataBufferToString ();
+     }
+ 
+     // Read the default value.
+     requireWhitespace ();
+-    parseDefault (elementName, name, type, enum);
++    parseDefault (elementName, name, type, enumeration);
+     }
+ 
+ 
+@@ -1565,7 +1565,7 @@ loop:
+     String elementName,
+     String name,
+     int type,
+-    String enum
++    String enumeration
+     ) throws Exception
+     {
+     int valueType = ATTRIBUTE_DEFAULT_SPECIFIED;
+@@ -1595,7 +1595,7 @@ loop:
+         }
+     } else
+         value = readLiteral (flags);
+-    setAttribute (elementName, name, type, enum, value, valueType);
++    setAttribute (elementName, name, type, enumeration, value, valueType);
+     }
+ 
+ 

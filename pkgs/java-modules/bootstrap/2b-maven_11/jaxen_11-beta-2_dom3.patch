@@ -1,0 +1,25 @@
+diff --git a/src/java/main/org/jaxen/dom/NamespaceNode.java b/src/java/main/org/jaxen/dom/NamespaceNode.java
+index 63fd7f5..69a3bdf 100644
+--- a/src/java/main/org/jaxen/dom/NamespaceNode.java
++++ b/src/java/main/org/jaxen/dom/NamespaceNode.java
+@@ -610,6 +610,20 @@ public class NamespaceNode implements Node
+         return null;
+     }
+     }
++
++    // Node
++    public Object getUserData(String key) { return null; }
++    public Object setUserData(String key, Object data, org.w3c.dom.UserDataHandler handler) { return null; }
++    public Object getFeature(String feature, String version) { return null; }
++    public boolean isEqualNode(org.w3c.dom.Node arg) { return false; }
++    public String lookupNamespaceURI(String prefix) { return null; }
++    public boolean isDefaultNamespace(String namespaceURI) { return false; }
++    public String lookupPrefix(String namespaceURI) { return null; }
++    public boolean isSameNode(org.w3c.dom.Node other) { return false; }
++    public void setTextContent(String textContent) {}
++    public String getTextContent() { return null; }
++    public short compareDocumentPosition(org.w3c.dom.Node other) { return 0; }
++    public String getBaseURI() { return null; }
+ }
+ 
+ // end of Namespace.java

@@ -1,0 +1,64 @@
+diff --git a/com/sun/xml/treediff/DocumentTree.java b/com/sun/xml/treediff/DocumentTree.java
+index da4243c..7d39ca4 100644
+--- a/com/sun/xml/treediff/DocumentTree.java
++++ b/com/sun/xml/treediff/DocumentTree.java
+@@ -1711,10 +1711,10 @@ public class DocumentTree extends Object {
+ 
+     /* print the valueIds and the corresponding node. */
+     void printIds() {
+-    	Enumeration enum = node2valueId.keys();
++    	Enumeration enumeration = node2valueId.keys();
+ 
+-        while (enum.hasMoreElements()) {
+-        	Node node = (Node) enum.nextElement();
++        while (enumeration.hasMoreElements()) {
++        	Node node = (Node) enumeration.nextElement();
+             String id = (String) node2valueId.get(node);
+             if (node instanceof ElementNode)
+             	System.err.println("id : " + id + "node: " + ((ElementNode) node).getTagName());
+diff --git a/com/sun/xml/treediff/TreeDiff.java b/com/sun/xml/treediff/TreeDiff.java
+index b21a73d..de9dbe2 100644
+--- a/com/sun/xml/treediff/TreeDiff.java
++++ b/com/sun/xml/treediff/TreeDiff.java
+@@ -378,9 +378,9 @@ public class TreeDiff extends Object {
+ 
+             // deal with the attributes in the node being compared,
+             // which do not have a match.
+-            Enumeration enum = attrsTable.elements();
+-            while (enum.hasMoreElements()) {
+-            	Attr attr = (Attr) enum.nextElement();
++            Enumeration enumeration = attrsTable.elements();
++            while (enumeration.hasMoreElements()) {
++            	Attr attr = (Attr) enumeration.nextElement();
+                 deltaOps.addElement("RMA(" +
+                     	DocumentTree.getNodePath(node) + ", " +
+                         attr.getName() + ")");
+@@ -446,10 +446,10 @@ public class TreeDiff extends Object {
+         // when a match is found, we just ignore it as well as
+         // remove it from the tables.
+ 
+-        Enumeration enum = table2.keys();
+-        while (enum.hasMoreElements()) {
++        Enumeration enumeration = table2.keys();
++        while (enumeration.hasMoreElements()) {
+ 
+-            Integer hashKey = (Integer) enum.nextElement();
++            Integer hashKey = (Integer) enumeration.nextElement();
+             Vector list1 = (Vector) table1.get(hashKey);
+             Vector list2 = (Vector) table2.get(hashKey);
+ 
+@@ -506,11 +506,11 @@ public class TreeDiff extends Object {
+         // now table2 should be empty. The remaining entries in
+         // table1 need to be added to the deleteList.
+ 
+-        enum = table1.keys();
++        enumeration = table1.keys();
+ 
+-        while (enum.hasMoreElements()) {
++        while (enumeration.hasMoreElements()) {
+ 
+-        	Integer hashKey = (Integer) enum.nextElement();
++        	Integer hashKey = (Integer) enumeration.nextElement();
+          	Vector list1 = (Vector) table1.get(hashKey);
+ 
+             //deleteList.addAll(list1);
