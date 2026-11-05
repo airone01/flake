@@ -108,7 +108,7 @@
   # });
 in {
   inherit (baseScope) mkJavaPackage;
-  inherit baseScope junitScope antScope maven11Scope maven20Scope maven22Scope maven38Scope maven39Scope;
+  inherit baseScope junitScope antScope jaxenScope maven11Scope maven20Scope maven22Scope maven38Scope maven39Scope;
 
   inherit (antScope) ant junit3;
   inherit (maven22Scope) maven_20 maven_22;

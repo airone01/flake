@@ -34,5 +34,5 @@ mkJavaPackage (finalAttrs: {
       --replace-fail '@version@' '${finalAttrs.version}'
   '';
 
-  strictDeps = true;
+  javaRelease = 8;
 })

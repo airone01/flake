@@ -30,5 +30,7 @@ mkJavaPackage (finalAttrs: {
     runHook postPatch
   '';
 
+  javaRelease = 8;
+
   javaSourceDir = "xml-apis-${finalAttrs.version}";
 })

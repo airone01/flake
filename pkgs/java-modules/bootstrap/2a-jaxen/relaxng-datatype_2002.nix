@@ -25,5 +25,7 @@ mkJavaPackage (finalAttrs: {
     runHook postPatch
   '';
 
+  javaRelease = 8;
+
   javaSourceDir = "org/relaxng/datatype";
 })

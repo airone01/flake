@@ -28,6 +28,8 @@ mkJavaPackage (finalAttrs: {
 
   patches = [./jaxen_10_enum.patch];
 
+  javaRelease = 8;
+
   classpath = [saxpath];
   javaSourceDir = "org/jaxen";
   excludeSourcePatterns = ["org/jaxen/jdom/*.java" "org/jaxen/dom4j/*.java" "org/jaxen/dom/*.java" "org/jaxen/exml/*.java"];

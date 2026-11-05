@@ -32,6 +32,8 @@ mkJavaPackage (finalAttrs: {
     ./dom4j_15_utf8.patch
   ];
 
+  javaRelease = 8;
+
   javaSourceDir = "org";
 
   classpath = [jaxen_11-beta-4 relaxng-datatype_2002 xsdlib_2006];

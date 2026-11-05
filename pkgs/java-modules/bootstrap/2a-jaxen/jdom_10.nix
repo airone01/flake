@@ -28,6 +28,8 @@ mkJavaPackage (finalAttrs: {
     runHook postPatch
   '';
 
+  javaRelease = 8;
+
   classpath = [saxpath jaxen_10 xml-apis_10];
   javaSourceDir = "org/jdom";
   excludeSourcePatterns = ["org/jdom/xpath/JaxenXPath.java"];

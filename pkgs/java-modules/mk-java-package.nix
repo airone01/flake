@@ -30,7 +30,7 @@ lib.extendMkDerivation {
     extraClasspath ? "",
     # Java release version passed to `javac --release` (default `8` for most compatibility).
     # Set to `null` to omit `--release` and use custom `-source`/`-target` via `javacFlags`.
-    javaRelease ? 21,
+    javaRelease ? null,
     encoding ? "UTF-8",
     javaSourceDir ? "src/main/java",
     excludeSourcePatterns ? [],

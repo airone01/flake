@@ -33,5 +33,7 @@ mkJavaPackage (finalAttrs: {
   patches = [./xml-apis_202_utf8.patch];
   patchFlags = ["-p1" "-d" "xml-apis-${finalAttrs.version}"];
 
+  javaRelease = 8;
+
   javaSourceDir = "xml-apis-${finalAttrs.version}";
 })

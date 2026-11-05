@@ -30,6 +30,8 @@ mkJavaPackage (finalAttrs: {
     runHook postPatch
   '';
 
+  javaRelease = 8;
+
   nativeBuildInputs = [jdk];
 
   javaSourceDir = "org";

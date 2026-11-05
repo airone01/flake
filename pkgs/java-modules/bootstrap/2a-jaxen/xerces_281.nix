@@ -32,6 +32,8 @@ mkJavaPackage (finalAttrs: {
     runHook postPatch
   '';
 
+  javaRelease = 8;
+
   classpath = [xml-apis_130 xml-resolver];
 
   javaSourceDir = "xerces-${finalAttrs.version}";

@@ -31,5 +31,7 @@ mkJavaPackage (finalAttrs: {
     runHook postPatch
   '';
 
+  javaRelease = 8;
+
   javaSourceDir = "saxpath-${finalAttrs.version}-sources";
 })

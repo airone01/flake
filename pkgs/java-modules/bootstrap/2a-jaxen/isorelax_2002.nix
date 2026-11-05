@@ -31,6 +31,8 @@ mkJavaPackage (finalAttrs: {
     runHook postPatch
   '';
 
+  javaRelease = 8;
+
   patches = [./isorelax_2002_jaxp.patch];
   patchFlags = ["-p1" "-d" "isorelax-${finalAttrs.version}"];
 

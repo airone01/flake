@@ -18,6 +18,8 @@ mkJavaPackage (finalAttrs: {
     hash = "sha256-JNF8irM8gTC5wQUX3yjRpykn0yCVPcmskzCYlo6fohk=";
   }).overrideAttrs {name = "jaxen-${finalAttrs.version}-sources";};
 
+  nativeBuildInputs = [jdk];
+
   unpackPhase = ''
     runHook prePatch
 
@@ -26,7 +28,7 @@ mkJavaPackage (finalAttrs: {
     runHook postPatch
   '';
 
-  nativeBuildInputs = [jdk];
+  javaRelease = 8;
 
   javaSourceDir = "org/jaxen";
 

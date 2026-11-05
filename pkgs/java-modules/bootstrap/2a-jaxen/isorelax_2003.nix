@@ -16,6 +16,8 @@ mkJavaPackage (finalAttrs: {
     stripRoot = false;
   };
 
+  javaRelease = 8;
+
   javaSourceDir = "org";
 
   # Build without Ant & JAXP support

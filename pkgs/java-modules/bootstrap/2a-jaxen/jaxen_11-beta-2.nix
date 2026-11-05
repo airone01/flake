@@ -43,6 +43,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     runHook postBuild
   '';
 
+  javaRelease = 8;
+
   installPhase = ''
     runHook preInstall
 

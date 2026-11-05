@@ -29,6 +29,8 @@ mkJavaPackage (finalAttrs: {
     runHook postPatch
   '';
 
+  javaRelease = 8;
+
   javaSourceDir = "com/sun/msv";
   classpath = [relaxng-datatype_2002 isorelax_2002 xsdlib_2006 xml-resolver];
 })

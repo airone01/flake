@@ -38,10 +38,11 @@ mkJavaPackage (finalAttrs: {
     # ./dom4j_14_dom3.patch
   ];
 
-  javaSourceDir = "org";
+  javaRelease = 8;
 
   classpath = [jaxen_10 relaxng-datatype_2002 saxpath xsdlib_2006];
 
+  javaSourceDir = "org";
   excludeSourcePatterns = [
     # pull-parser (org.gjt.xpp) has no source release
     "org/dom4j/xpp/*"

@@ -27,6 +27,8 @@ mkJavaPackage (finalAttrs: {
     runHook postConfigure
   '';
 
+  javaRelease = 8;
+
   classpath = [relaxng-datatype_2002 isorelax_2003];
   javaSourceDir = "com/sun";
 
