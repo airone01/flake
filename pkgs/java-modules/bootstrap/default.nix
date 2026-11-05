@@ -22,41 +22,47 @@
     inherit (baseScope) hamcrestCore;
     inherit (junitScope) junit4;
 
-    ant_jdk8 = self.callPackage ./2-ant/ant_jdk8.nix {};
     ant = self.callPackage ./2-ant/ant.nix {};
+  });
+
+  jaxenScope = lib.makeScope newScope (self: {
+    inherit (baseScope) mkJavaPackage;
+    inherit (antScope) ant;
+
+    dom4j_14 = self.callPackage ./2a-jaxen/dom4j_14.nix {};
+    dom4j_15 = self.callPackage ./2a-jaxen/dom4j_15.nix {};
+    dom4j_161 = self.callPackage ./2a-jaxen/dom4j_161.nix {};
+    isorelax_2002 = self.callPackage ./2a-jaxen/isorelax_2002.nix {};
+    isorelax_2003 = self.callPackage ./2a-jaxen/isorelax_2003.nix {};
+    jaxen_10 = self.callPackage ./2a-jaxen/jaxen_10.nix {};
+    jaxen_11-beta-2 = self.callPackage ./2a-jaxen/jaxen_11-beta-2.nix {};
+    jaxen_11-beta-4 = self.callPackage ./2a-jaxen/jaxen_11-beta-4.nix {};
+    jaxen_11-beta-6 = self.callPackage ./2a-jaxen/jaxen_11-beta-6.nix {};
+    jaxen_11-beta-9 = self.callPackage ./2a-jaxen/jaxen_11-beta-9.nix {};
+    jdom_10 = self.callPackage ./2a-jaxen/jdom_10.nix {};
+    msv_2002 = self.callPackage ./2a-jaxen/msv_2002.nix {};
+    relaxng-datatype_2002 = self.callPackage ./2a-jaxen/relaxng-datatype_2002.nix {};
+    saxpath = self.callPackage ./2a-jaxen/saxpath.nix {};
+    xsdlib_2006 = self.callPackage ./2a-jaxen/xsdlib_2006.nix {};
+    xerces_281 = self.callPackage ./2a-jaxen/xerces_281.nix {};
+    xml-apis_10 = self.callPackage ./2a-jaxen/xml-apis_10.nix {};
+    xml-apis_130 = self.callPackage ./2a-jaxen/xml-apis_130.nix {};
+    xml-apis_202 = self.callPackage ./2a-jaxen/xml-apis_202.nix {};
+    xml-resolver = self.callPackage ./2a-jaxen/xml-resolver.nix {};
   });
 
   maven11Scope = lib.makeScope newScope (self: {
     inherit (baseScope) mkJavaPackage;
-    inherit (antScope) ant ant_jdk8;
+    inherit (antScope) ant;
+    inherit (jaxenScope) jaxen_11-beta-9;
 
-    dom4j_161 = self.callPackage ./2b-maven_11/dom4j_161.nix {};
-    dom4j_14 = self.callPackage ./2b-maven_11/dom4j_14.nix {};
-    dom4j_15 = self.callPackage ./2b-maven_11/dom4j_15.nix {};
-    isorelax_2002 = self.callPackage ./2b-maven_11/isorelax_2002.nix {};
-    isorelax_2003 = self.callPackage ./2b-maven_11/isorelax_2003.nix {};
-    jaxen_10 = self.callPackage ./2b-maven_11/jaxen_10.nix {};
-    jaxen_11-beta-2 = self.callPackage ./2b-maven_11/jaxen_11-beta-2.nix {};
-    jaxen_11-beta-4 = self.callPackage ./2b-maven_11/jaxen_11-beta-4.nix {};
-    jaxen_11-beta-6 = self.callPackage ./2b-maven_11/jaxen_11-beta-6.nix {};
-    jaxen_11-beta-9 = self.callPackage ./2b-maven_11/jaxen_11-beta-9.nix {};
-    jdom_10 = self.callPackage ./2b-maven_11/jdom_10.nix {};
     maven_11 = self.callPackage ./2b-maven_11/maven_11.nix {};
-    msv_2002 = self.callPackage ./2b-maven_11/msv_2002.nix {};
-    relaxng-datatype_2002 = self.callPackage ./2b-maven_11/relaxng-datatype_2002.nix {};
-    saxpath = self.callPackage ./2b-maven_11/saxpath.nix {};
-    xsdlib_2006 = self.callPackage ./2b-maven_11/xsdlib_2006.nix {};
-    xerces_281 = self.callPackage ./2b-maven_11/xerces_281.nix {};
-    xml-apis_202 = self.callPackage ./2b-maven_11/xml-apis_202.nix {};
-    xml-apis_10 = self.callPackage ./2b-maven_11/xml-apis_10.nix {};
-    xml-apis_130 = self.callPackage ./2b-maven_11/xml-apis_130.nix {};
-    xml-resolver = self.callPackage ./2b-maven_11/xml-resolver.nix {};
   });
 
   maven20Scope = lib.makeScope newScope (self: {
     inherit (baseScope) mkJavaPackage hamcrestCore;
     inherit (junitScope) junit4;
-    inherit (antScope) ant ant_jdk8;
+    inherit (antScope) ant;
 
     commons-cli_10 = self.callPackage ./3-maven_20/commons-cli_10.nix {};
     commons-lang_10 = self.callPackage ./3-maven_20/commons-lang_10.nix {};
