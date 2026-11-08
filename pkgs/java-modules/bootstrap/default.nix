@@ -51,10 +51,20 @@
     xml-resolver = self.callPackage ./2a-jaxen/xml-resolver.nix {};
   });
 
+  maven11DepsScope = lib.makeScope newScope (self: {
+    inherit (baseScope) mkJavaPackage;
+
+    commons-logging = self.callPackage ./2b-maven-deps/commons-logging.nix {};
+    javax-jms_2 = self.callPackage ./2b-maven-deps/javax-jms_2.nix {};
+    javax-mail_14 = self.callPackage ./2b-maven-deps/javax-mail_14.nix {};
+    log4j_12 = self.callPackage ./2b-maven-deps/log4j_12.nix {};
+  });
+
   maven11Scope = lib.makeScope newScope (self: {
     inherit (baseScope) mkJavaPackage;
     inherit (antScope) ant;
     inherit (jaxenScope) jaxen_11-beta-9;
+    inherit (maven11DepsScope) commons-logging log4j_12;
 
     maven_11 = self.callPackage ./2z-maven_11/maven_11.nix {};
   });
@@ -103,12 +113,9 @@
   });
   #
   # Graveyard
-  # javax-jms_2 = self.callPackage ./2z-maven_11/javax-jms_2.nix {};
-  # javax-mail_14 = self.callPackage ./2z-maven_11/javax-mail_14.nix {};
-  # log4j_12 = self.callPackage ./2z-maven_11/log4j_12.nix {};
 in {
   inherit (baseScope) mkJavaPackage;
-  inherit baseScope junitScope antScope jaxenScope maven11Scope maven20Scope maven22Scope maven38Scope maven39Scope;
+  inherit baseScope junitScope antScope jaxenScope maven11DepsScope maven11Scope maven20Scope maven22Scope maven38Scope maven39Scope;
 
   inherit (antScope) ant junit3;
   inherit (maven22Scope) maven_20 maven_22;

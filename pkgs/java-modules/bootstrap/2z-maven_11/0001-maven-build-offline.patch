@@ -1,16 +1,25 @@
-From 9655d5d035a0c2a6fc106b522ce9ec06df763de6 Mon Sep 17 00:00:00 2001
+From 8a23afb43c29e0478d2741ae4d502efabfb6f1dc Mon Sep 17 00:00:00 2001
 From: airone01 <airone01@proton.me>
 Date: Sun, 8 Nov 2026 18:12:10 +0100
-Subject: [PATCH] Enable offline mode Maven build
+Subject: [PATCH] maven: build offline
 
 ---
- project.properties | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ project.properties | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/project.properties b/project.properties
-index 2c6f1aa..c75205e 100644
+index 2c6f1aa..a6e4ad4 100644
 --- a/project.properties
 +++ b/project.properties
+@@ -21,7 +21,7 @@
+ 
+ # TODO: remove http://people.apache.org/repo/m1-snapshot-repository/, just there for SNAPSHOTs
+ #maven.repo.remote = http://people.apache.org/repo/m1-snapshot-repository/,http://repo1.maven.org/maven
+-maven.repo.remote = http://repo1.maven.org/maven
++maven.repo.local=@repository@
+ 
+ # Repository to deploy to
+ maven.repo.list=apache.snapshots
 @@ -225,7 +225,7 @@ maven.bootstrap.dir = ${basedir}/bootstrap
  # Offline mode:
  # maven.bootstrap.online = -o

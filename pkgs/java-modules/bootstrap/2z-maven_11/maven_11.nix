@@ -1,45 +1,65 @@
 {
   ant,
+  commons-logging,
   fetchurl,
-  # log4j_12,
+  lib,
+  log4j_12,
+  replaceVars,
   stdenvNoCC,
-}:
-stdenvNoCC.mkDerivation (finalAttrs: {
-  pname = "maven";
-  version = "1.1";
+}: let
+  repoDir = "/build/.m2/repository";
 
-  src = fetchurl {
-    url = "mirror://apache/maven/maven-1/${finalAttrs.version}/source/maven-${finalAttrs.version}-src.tar.gz";
-    hash = "sha256-PTBtbLTQ+XntEQNg6jAI70o4qu6efBzbjf9NHSQQ+F4=";
-  };
+  concatDepInstall = lib.lists.foldr (a: b:
+    ''
+      install -Dm 644 \
+        "${a}/share/java/${a.pname}-${a.version}.jar" \
+        "${repoDir}/${a.pname}/jars/${a.pname}-${a.version}.jar"
+    ''
+    + b) "";
+  installDeps = concatDepInstall [
+    commons-logging
+    log4j_12
+  ];
+in
+  stdenvNoCC.mkDerivation (finalAttrs: {
+    pname = "maven";
+    version = "1.1";
 
-  nativeBuildInputs = [ant];
+    src = fetchurl {
+      url = "mirror://apache/maven/maven-1/${finalAttrs.version}/source/maven-${finalAttrs.version}-src.tar.gz";
+      hash = "sha256-PTBtbLTQ+XntEQNg6jAI70o4qu6efBzbjf9NHSQQ+F4=";
+    };
 
-  patches = [./0001-Enable-offline-mode-Maven-build.patch];
+    nativeBuildInputs = [ant];
 
-  # cp \
-  #   ${log4j_12}/share/java/*.jar \
-  #   ''$REPO
-  buildPhase = ''
-    runHook preBuild
+    patches = [
+      (replaceVars ./0001-maven-build-offline.patch {
+        repository = repoDir;
+      })
+    ];
 
-    export MAVEN_HOME="/build/maven-home"
-    export REPO="/build/.m2/repository"
-    mkdir -pv ''$MAVEN_HOME ''$REPO
+    buildPhase = ''
+      runHook preBuild
 
-    ant \
-      -Dmaven.repo.local="$REPO" \
-      -Dant.build.javac.source=8 \
-      -Dant.build.javac.target=8 \
-      -f build-bootstrap.xml
+      export MAVEN_HOME="/build/maven-home"
+      export REPO="/build/.m2/repository"
+      mkdir -pv ''$MAVEN_HOME ''$REPO
 
-    runHook postBuild
-  '';
+      ${installDeps}
+      ls -Rlah "${repoDir}"
 
-  installPhase = ''
-    ls -lah
-    exit 1
+      ant \
+        -Dant.build.javac.source=8 \
+        -Dant.build.javac.target=8 \
+        -f build-bootstrap.xml
 
-    mkdir -pv $out
-  '';
-})
+      runHook postBuild
+    '';
+
+    installPhase = ''
+      ls -lah
+      exit 1
+
+      mkdir -pv $out
+    '';
+  })
