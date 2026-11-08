@@ -48,7 +48,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    ln -s jaxen-${finalAttrs.version}.jar $out/share/java/jaxen.jar
+    install -Dm 644 target/jaxen-${finalAttrs.version}.jar $out/share/java/jaxen-${finalAttrs.version}.jar
+    ln -s $out/share/java/jaxen-${finalAttrs.version}.jar $out/share/java/jaxen.jar
 
     runHook postInstall
   '';
