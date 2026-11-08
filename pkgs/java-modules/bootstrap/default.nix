@@ -56,7 +56,7 @@
     inherit (antScope) ant;
     inherit (jaxenScope) jaxen_11-beta-9;
 
-    maven_11 = self.callPackage ./2b-maven_11/maven_11.nix {};
+    maven_11 = self.callPackage ./2z-maven_11/maven_11.nix {};
   });
 
   maven20Scope = lib.makeScope newScope (self: {
@@ -103,9 +103,9 @@
   });
   #
   # Graveyard
-  # javax-jms_2 = self.callPackage ./2b-maven_11/javax-jms_2.nix {};
-  # javax-mail_14 = self.callPackage ./2b-maven_11/javax-mail_14.nix {};
-  # log4j_12 = self.callPackage ./2b-maven_11/log4j_12.nix {};
+  # javax-jms_2 = self.callPackage ./2z-maven_11/javax-jms_2.nix {};
+  # javax-mail_14 = self.callPackage ./2z-maven_11/javax-mail_14.nix {};
+  # log4j_12 = self.callPackage ./2z-maven_11/log4j_12.nix {};
 in {
   inherit (baseScope) mkJavaPackage;
   inherit baseScope junitScope antScope jaxenScope maven11Scope maven20Scope maven22Scope maven38Scope maven39Scope;
