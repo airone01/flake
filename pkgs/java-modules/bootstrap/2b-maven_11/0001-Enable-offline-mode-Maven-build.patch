@@ -1,0 +1,25 @@
+From 9655d5d035a0c2a6fc106b522ce9ec06df763de6 Mon Sep 17 00:00:00 2001
+From: airone01 <airone01@proton.me>
+Date: Sun, 8 Nov 2026 18:12:10 +0100
+Subject: [PATCH] Enable offline mode Maven build
+
+---
+ project.properties | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/project.properties b/project.properties
+index 2c6f1aa..c75205e 100644
+--- a/project.properties
++++ b/project.properties
+@@ -225,7 +225,7 @@ maven.bootstrap.dir = ${basedir}/bootstrap
+ # Offline mode:
+ # maven.bootstrap.online = -o
+ # ------------------------------------------------------------------------------
+-maven.bootstrap.online=
++maven.bootstrap.online= -o
+ 
+ # ------------------------------------------------------------------------------
+ # The bootstrap classes consist of an Ant task front that:
+-- 
+2.55.0
+
