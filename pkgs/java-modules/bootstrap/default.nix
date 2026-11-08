@@ -54,17 +54,21 @@
   maven11DepsScope = lib.makeScope newScope (self: {
     inherit (baseScope) mkJavaPackage;
 
+    classworlds = self.callPackage ./2b-maven-deps/classworlds.nix {};
+    commons-cli_10 = self.callPackage ./2b-maven-deps/commons-cli_10.nix {};
+    commons-lang_10 = self.callPackage ./2b-maven-deps/commons-lang_10.nix {};
     commons-logging = self.callPackage ./2b-maven-deps/commons-logging.nix {};
     javax-jms_2 = self.callPackage ./2b-maven-deps/javax-jms_2.nix {};
     javax-mail_14 = self.callPackage ./2b-maven-deps/javax-mail_14.nix {};
     log4j_12 = self.callPackage ./2b-maven-deps/log4j_12.nix {};
+    plexus-utils = self.callPackage ./2b-maven-deps/plexus-utils.nix {};
   });
 
   maven11Scope = lib.makeScope newScope (self: {
     inherit (baseScope) mkJavaPackage;
     inherit (antScope) ant;
     inherit (jaxenScope) jaxen_11-beta-9;
-    inherit (maven11DepsScope) commons-logging log4j_12;
+    inherit (maven11DepsScope) commons-cli_10 commons-logging log4j_12 plexus-utils;
 
     maven_11 = self.callPackage ./2z-maven_11/maven_11.nix {};
   });
@@ -74,8 +78,6 @@
     inherit (junitScope) junit4;
     inherit (antScope) ant;
 
-    commons-cli_10 = self.callPackage ./3-maven_20/commons-cli_10.nix {};
-    commons-lang_10 = self.callPackage ./3-maven_20/commons-lang_10.nix {};
     doxia_10 = self.callPackage ./3-maven_20/doxia_10.nix {};
     maven_20 = self.callPackage ./3-maven_20/maven_20.nix {};
   });

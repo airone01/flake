@@ -2,6 +2,7 @@
   ant,
   commons-lang_10,
   fetchurl,
+  jdk,
   stdenvNoCC,
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
@@ -14,7 +15,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     hash = "sha256-+kvwhQyJap1WefMNmSGpiz0mJngBlDPzbvgQI1rljsg=";
   };
 
-  nativeBuildInputs = [ant];
+  nativeBuildInputs = [ant jdk];
 
   buildPhase = ''
     runHook preBuild
@@ -25,8 +26,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     ant \
       -Dskip.pull=true \
       jar
-
-    ls -lah target/
 
     runHook postBuild
   '';

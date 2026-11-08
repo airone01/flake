@@ -1,9 +1,11 @@
 {
   ant,
+  commons-cli_10,
   commons-logging,
   fetchurl,
   lib,
   log4j_12,
+  plexus-utils,
   replaceVars,
   stdenvNoCC,
 }: let
@@ -13,12 +15,14 @@
     ''
       install -Dm 644 \
         "${a}/share/java/${a.pname}-${a.version}.jar" \
-        "${repoDir}/${a.pname}/jars/${a.pname}-${a.version}.jar"
+        "${repoDir}/${a.passthru.groupId or a.pname}/jars/${a.pname}-${a.version}.jar"
     ''
     + b) "";
   installDeps = concatDepInstall [
+    commons-cli_10
     commons-logging
     log4j_12
+    plexus-utils
   ];
 in
   stdenvNoCC.mkDerivation (finalAttrs: {
@@ -36,6 +40,7 @@ in
       (replaceVars ./0001-maven-build-offline.patch {
         repository = repoDir;
       })
+      ./0002-maven-bump-commons-cli-dep.patch
     ];
 
     buildPhase = ''

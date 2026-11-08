@@ -1,7 +1,7 @@
 From 8a23afb43c29e0478d2741ae4d502efabfb6f1dc Mon Sep 17 00:00:00 2001
 From: airone01 <airone01@proton.me>
 Date: Sun, 8 Nov 2026 18:12:10 +0100
-Subject: [PATCH] maven: build offline
+Subject: [PATCH 1/2] maven: build offline
 
 ---
  project.properties | 4 ++--
