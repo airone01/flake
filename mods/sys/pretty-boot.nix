@@ -1,6 +1,5 @@
 {
   boot = {
-    initrd.systemd.enable = true;
     kernelParams = [
       "quiet"
       "plymouth.use-simpledrm"
