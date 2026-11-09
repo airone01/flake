@@ -3,8 +3,10 @@
   pkgs,
   lib ? pkgs.lib,
   niri ? pkgs.niri,
+  noctalia ? pkgs.noctalia,
   ...
 }: let
+  # TODO: Use Noctalia v5 Niri color template @ assets/templates/niri/niri.kdl
   colorGenScript = pkgs.writeShellScriptBin "noctalia-color-generation" ''
         CONFIG_DIR="''${XDG_CONFIG_HOME:-$HOME/.config}"
         COLORS_FILE="$CONFIG_DIR/noctalia/colors.json"
@@ -29,63 +31,40 @@
         fi
   '';
 
-  rawSettings = builtins.readFile ./noctalia.json;
-  baseParsed = builtins.fromJSON (builtins.replaceStrings ["/home/r1"] ["@HOME@"] rawSettings);
-
-  settingsObj = baseParsed.settings or baseParsed;
-  updatedSettings =
-    settingsObj
-    // {
-      hooks =
-        (settingsObj.hooks or {})
-        // {
-          enabled = true;
-          colorGeneration = "${colorGenScript}/bin/noctalia-color-generation";
-        };
-      sessionMenu =
-        (settingsObj.sessionMenu or {})
-        // {
-          powerOptions = map (
-            opt:
-              if (opt.action or "") == "logout"
-              then opt // {command = "niri msg action quit --skip-confirmation";}
-              else opt
-          ) (settingsObj.sessionMenu.powerOptions or []);
-        };
-    };
-
-  parsed =
-    if baseParsed ? settings
-    then baseParsed // {settings = updatedSettings;}
-    else updatedSettings;
-
-  settingsTemplate = pkgs.writeText "noctalia-settings-template.json" (builtins.toJSON (parsed.settings or parsed));
+  defaultConfigDir = pkgs.runCommand "noctalia-default-config" {} ''
+    install -Dm 644 ${./config.toml} $out/noctalia/config.toml
+  '';
 in
   pkgs.symlinkJoin {
-    name = "noctalia-shell-${pkgs.noctalia-shell.version or "4.7.7"}";
-    paths = [pkgs.noctalia-shell colorGenScript];
+    name = "noctalia-${
+      if lib.isNull noctalia.version
+      then (lib.throw "`noctalia` package should have a version attr")
+      else noctalia.version
+    }";
+
+    paths = [noctalia colorGenScript];
+
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild = ''
-      wrapProgram $out/bin/noctalia-shell \
+      wrapProgram $out/bin/noctalia \
         --run '
-          if [ -z "$NOCTALIA_SETTINGS_FILE" ]; then
-            _runtime_dir="''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/noctalia"
-            mkdir -p "$_runtime_dir"
-            _settings_file="$_runtime_dir/settings.json"
-            ${pkgs.gnused}/bin/sed "s|@HOME@|$HOME|g" "${settingsTemplate}" > "$_settings_file"
-            export NOCTALIA_SETTINGS_FILE="$_settings_file"
+          # If user has no config of their own, fallback
+          if [ -z "$NOCTALIA_CONFIG_HOME" ] && [ ! -d "''${XDG_CONFIG_HOME:-$HOME/.config}/noctalia"]; then
+            export NOCTALIA_CONFIG_HOME="${defaultConfigDir}"
           fi
         ' \
         --prefix PATH : "/run/current-system/sw/bin:/etc/profiles/per-user/\$USER/bin:${lib.makeBinPath (with pkgs; [xdg-utils glib bash coreutils jq desktop-file-utils niri])}"
     '';
+
     passthru =
-      (pkgs.noctalia-shell.passthru or {})
+      (noctalia.passthru or {})
       // {
         inherit colorGenScript;
       };
+
     meta =
-      (pkgs.noctalia-shell.meta or {})
+      (noctalia.meta or {})
       // {
-        mainProgram = "noctalia-shell";
+        mainProgram = "noctalia";
       };
   }

@@ -74,7 +74,7 @@
         Mod+Q { close-window; }
         Mod+S { spawn-sh "${
       if noctaliaBin != null
-      then "${noctaliaBin} ipc call launcher toggle"
+      then "${noctaliaBin} msg panel-toggle launcher"
       else "rofi -show drun"
     }"; }
         Mod+E { spawn "thunar"; }
@@ -115,7 +115,7 @@
         XF86AudioNext { spawn "playerctl" "next"; }
         XF86AudioPrev { spawn "playerctl" "previous"; }
 
-        ${lib.optionalString (noctaliaBin != null) ''Mod+L { spawn-sh "${noctaliaBin} ipc call lockScreen lock"; }''}
+        ${lib.optionalString (noctaliaBin != null) ''Mod+L { spawn-sh "${noctaliaBin} msg lock-screen"; }''}
 
         ${
       if lib.hasInfix "fr" keyboardLayout

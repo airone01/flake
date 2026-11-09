@@ -4,7 +4,7 @@
   initomatic = final.callPackage ../pkgs/initomatic {};
   mcheads = final.callPackage ../pkgs/mcheads {};
   noctalia = final.callPackage ../pkgs/noctalia {
-    inherit (prev) niri;
+    inherit (prev) niri noctalia;
   };
   niri = final.callPackage ../pkgs/niri {
     inherit (prev) niri;
