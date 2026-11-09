@@ -37,7 +37,7 @@
 in
   pkgs.symlinkJoin {
     name = "noctalia-${
-      if lib.isNull noctalia.version
+      if builtins.isNull noctalia.version
       then (lib.throw "`noctalia` package should have a version attr")
       else noctalia.version
     }";
