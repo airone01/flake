@@ -17,12 +17,10 @@
     kitty
     localsend
     mc # midnight commander
-    ncspot # spotify
     obsidian
     pfetch
     qbittorrent
     ranger
-    spotify
     switcheroo
     vesktop # discord
     vlc
@@ -62,7 +60,6 @@
     builtins.elem (lib.getName pkg) [
       "discord"
       "obsidian"
-      "spotify"
     ];
 
   services = {
