@@ -21,6 +21,7 @@
       gtaac = "git add . && git commit";
       gtf = "git fetch";
       gtc = "git commit";
+      gtca = "git commit --amend";
       gtcc = "git checkout";
       gtccb = "git checkout -b";
       gtd = "git diff";
@@ -38,6 +39,9 @@
       gtr = "git restore";
       gtrs = "git reset";
       gtrb = "git rebase";
+      gtrbi = "git rebase -i";
+      gtrbc = "git rebase --continue";
+      gtrbs = "git rebase --autosquash";
 
       # just
       jtc = "just check";
