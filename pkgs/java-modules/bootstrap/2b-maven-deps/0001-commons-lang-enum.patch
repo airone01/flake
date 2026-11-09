@@ -1,0 +1,332 @@
+From 077352935bc986c134e731f2b306b65ca4e107a4 Mon Sep 17 00:00:00 2001
+From: airone01 <airone01@proton.me>
+Date: Mon, 9 Nov 2026 00:45:03 +0100
+Subject: [PATCH] commons-lang: enum
+
+---
+ org/apache/commons/lang/enum/Enum.java       | 44 ++++++++++----------
+ org/apache/commons/lang/enum/EnumUtils.java  | 32 +++++++-------
+ org/apache/commons/lang/enum/ValuedEnum.java | 26 ++++++------
+ 3 files changed, 51 insertions(+), 51 deletions(-)
+
+diff --git a/org/apache/commons/lang/enum/Enum.java b/org/apache/commons/lang/enum/Enum.java
+index 84d15a5..2928b2b 100644
+--- a/org/apache/commons/lang/enum/Enum.java
++++ b/org/apache/commons/lang/enum/Enum.java
+@@ -51,7 +51,7 @@
+  * information on the Apache Software Foundation, please see
+  * <http://www.apache.org/>.
+  */
+-package org.apache.commons.lang.enum;
++package org.apache.commons.lang.enumeration;
+ 
+ import java.io.Serializable;
+ import java.lang.reflect.InvocationTargetException;
+@@ -114,7 +114,7 @@ import org.apache.commons.lang.StringUtils;
+  * }
+  * </pre>
+  *
+- * <p>As shown, each enum has a name. This can be accessed using <code>getName</code>.</p>
++ * <p>As shown, each enumeration has a name. This can be accessed using <code>getName</code>.</p>
+  *
+  * <p>The <code>getEnum</code> and <code>iterator</code> methods are recommended.
+  * Unfortunately, Java restrictions require these to be coded as shown in each subclass.
+@@ -129,7 +129,7 @@ import org.apache.commons.lang.StringUtils;
+  *
+  * <pre>
+  * public final class ExtraColorEnum extends ColorEnum {
+- *   // NOTE: Color enum declared above is final, change that to get this
++ *   // NOTE: Color enumeration declared above is final, change that to get this
+  *   // example to compile.
+  *   public static final ColorEnum YELLOW = new ExtraColorEnum("Yellow");
+  *
+@@ -286,7 +286,7 @@ public abstract class Enum implements Comparable, Serializable {
+     /**
+      * <p>Constructor to add a new named item to the enumeration.</p>
+      *
+-     * @param name  the name of the enum object,
++     * @param name  the name of the enumeration object,
+      *  must not be empty or <code>null</code>
+      * @throws IllegalArgumentException if the name is <code>null</code>
+      *  or an empty string
+@@ -304,7 +304,7 @@ public abstract class Enum implements Comparable, Serializable {
+     /**
+      * Initializes the enumeration.
+      * 
+-     * @param name  the enum name
++     * @param name  the enumeration name
+      * @throws IllegalArgumentException if the name is null or empty or duplicate
+      * @throws IllegalArgumentException if the enumClass is null or invalid
+      */
+@@ -345,7 +345,7 @@ public abstract class Enum implements Comparable, Serializable {
+ 
+     /**
+      * <p>Handle the deserialization of the class to ensure that multiple
+-     * copies are not wastefully created, or illegal enum types created.</p>
++     * copies are not wastefully created, or illegal enumeration types created.</p>
+      *
+      * @return the resolved object
+      */
+@@ -366,8 +366,8 @@ public abstract class Enum implements Comparable, Serializable {
+      *  be <code>null</code>
+      * @param name  the name of the <code>Enum</code> to get,
+      *  may be <code>null</code>
+-     * @return the enum object, or null if the enum does not exist
+-     * @throws IllegalArgumentException if the enum class
++     * @return the enumeration object, or null if the enumeration does not exist
++     * @throws IllegalArgumentException if the enumeration class
+      *  is <code>null</code>
+      */
+     protected static Enum getEnum(Class enumClass, String name) {
+@@ -382,14 +382,14 @@ public abstract class Enum implements Comparable, Serializable {
+      * <p>Gets the <code>Map</code> of <code>Enum</code> objects by
+      * name using the <code>Enum</code> class.</p>
+      *
+-     * <p>If the requested class has no enum objects an empty
++     * <p>If the requested class has no enumeration objects an empty
+      * <code>Map</code> is returned.</p>
+      * 
+      * @param enumClass  the class of the <code>Enum</code> to get,
+      *  must not be <code>null</code>
+-     * @return the enum object Map
+-     * @throws IllegalArgumentException if the enum class is <code>null</code>
+-     * @throws IllegalArgumentException if the enum class is not a subclass of Enum
++     * @return the enumeration object Map
++     * @throws IllegalArgumentException if the enumeration class is <code>null</code>
++     * @throws IllegalArgumentException if the enumeration class is not a subclass of Enum
+      */
+     protected static Map getEnumMap(Class enumClass) {
+         Entry entry = getEntry(enumClass);
+@@ -404,14 +404,14 @@ public abstract class Enum implements Comparable, Serializable {
+      * <code>Enum</code> class.</p>
+      *
+      * <p>The list is in the order that the objects were created (source code order).
+-     * If the requested class has no enum objects an empty <code>List</code> is
++     * If the requested class has no enumeration objects an empty <code>List</code> is
+      * returned.</p>
+      * 
+      * @param enumClass  the class of the <code>Enum</code> to get,
+      *  must not be <code>null</code>
+-     * @return the enum object Map
+-     * @throws IllegalArgumentException if the enum class is <code>null</code>
+-     * @throws IllegalArgumentException if the enum class is not a subclass of Enum
++     * @return the enumeration object Map
++     * @throws IllegalArgumentException if the enumeration class is <code>null</code>
++     * @throws IllegalArgumentException if the enumeration class is not a subclass of Enum
+      */
+     protected static List getEnumList(Class enumClass) {
+         Entry entry = getEntry(enumClass);
+@@ -426,14 +426,14 @@ public abstract class Enum implements Comparable, Serializable {
+      * an <code>Enum</code> class.</p>
+      *
+      * <p>The <code>Iterator</code> is in the order that the objects were
+-     * created (source code order). If the requested class has no enum
++     * created (source code order). If the requested class has no enumeration
+      * objects an empty <code>Iterator</code> is returned.</p>
+      * 
+      * @param enumClass  the class of the <code>Enum</code> to get,
+      *  must not be <code>null</code>
+      * @return an iterator of the Enum objects
+-     * @throws IllegalArgumentException if the enum class is <code>null</code>
+-     * @throws IllegalArgumentException if the enum class is not a subclass of Enum
++     * @throws IllegalArgumentException if the enumeration class is <code>null</code>
++     * @throws IllegalArgumentException if the enumeration class is not a subclass of Enum
+      */
+     protected static Iterator iterator(Class enumClass) {
+         return Enum.getEnumList(enumClass).iterator();
+@@ -444,7 +444,7 @@ public abstract class Enum implements Comparable, Serializable {
+      * <p>Gets an <code>Entry</code> from the map of Enums.</p>
+      * 
+      * @param enumClass  the class of the <code>Enum</code> to get
+-     * @return the enum entry
++     * @return the enumeration entry
+      */
+     private static Entry getEntry(Class enumClass) {
+         if (enumClass == null) {
+@@ -463,7 +463,7 @@ public abstract class Enum implements Comparable, Serializable {
+      * <p>This accounts for subclassed Enums.</p>
+      * 
+      * @param enumClass  the class of the <code>Enum</code> to get
+-     * @return the enum entry
++     * @return the enumeration entry
+      */
+     private static Entry createEntry(Class enumClass) {
+         Entry entry = new Entry();
+@@ -497,7 +497,7 @@ public abstract class Enum implements Comparable, Serializable {
+      * advanced Enums may be different. If overridden, it must return a
+      * constant value.</p>
+      * 
+-     * @return the <code>Class</code> of the enum
++     * @return the <code>Class</code> of the enumeration
+      * @since 2.0
+      */
+     public Class getEnumClass() {
+diff --git a/org/apache/commons/lang/enum/EnumUtils.java b/org/apache/commons/lang/enum/EnumUtils.java
+index 40f882c..83fb1f9 100644
+--- a/org/apache/commons/lang/enum/EnumUtils.java
++++ b/org/apache/commons/lang/enum/EnumUtils.java
+@@ -51,7 +51,7 @@
+  * information on the Apache Software Foundation, please see
+  * <http://www.apache.org/>.
+  */
+-package org.apache.commons.lang.enum;
++package org.apache.commons.lang.enumeration;
+ 
+ import java.util.Iterator;
+ import java.util.List;
+@@ -81,8 +81,8 @@ public class EnumUtils {
+      * 
+      * @param enumClass  the class of the <code>Enum</code> to get
+      * @param name  the name of the Enum to get, may be <code>null</code>
+-     * @return the enum object
+-     * @throws IllegalArgumentException if the enum class is <code>null</code>
++     * @return the enumeration object
++     * @throws IllegalArgumentException if the enumeration class is <code>null</code>
+      */
+     public static Enum getEnum(Class enumClass, String name) {
+         return Enum.getEnum(enumClass, name);
+@@ -93,8 +93,8 @@ public class EnumUtils {
+      * 
+      * @param enumClass  the class of the <code>Enum</code> to get
+      * @param value  the value of the <code>Enum</code> to get
+-     * @return the enum object, or null if the enum does not exist
+-     * @throws IllegalArgumentException if the enum class is <code>null</code>
++     * @return the enumeration object, or null if the enumeration does not exist
++     * @throws IllegalArgumentException if the enumeration class is <code>null</code>
+      */
+     public static ValuedEnum getEnum(Class enumClass, int value) {
+         return (ValuedEnum) ValuedEnum.getEnum(enumClass, value);
+@@ -104,13 +104,13 @@ public class EnumUtils {
+      * <p>Gets the <code>Map</code> of <code>Enum</code> objects by
+      * name using the <code>Enum</code> class.</p>
+      *
+-     * <p>If the requested class has no enum objects an empty
++     * <p>If the requested class has no enumeration objects an empty
+      * <code>Map</code> is returned. The <code>Map</code> is unmodifiable.</p>
+      * 
+      * @param enumClass  the class of the <code>Enum</code> to get
+-     * @return the enum object Map
+-     * @throws IllegalArgumentException if the enum class is <code>null</code>
+-     * @throws IllegalArgumentException if the enum class is not a subclass
++     * @return the enumeration object Map
++     * @throws IllegalArgumentException if the enumeration class is <code>null</code>
++     * @throws IllegalArgumentException if the enumeration class is not a subclass
+      *  of <code>Enum</code>
+      */
+     public static Map getEnumMap(Class enumClass) {
+@@ -124,13 +124,13 @@ public class EnumUtils {
+      * <p>The list is in the order that the objects were created
+      * (source code order).</p>
+      *
+-     * <p>If the requested class has no enum objects an empty
++     * <p>If the requested class has no enumeration objects an empty
+      * <code>List</code> is returned. The <code>List</code> is unmodifiable.</p>
+      * 
+      * @param enumClass  the class of the Enum to get
+-     * @return the enum object Map
+-     * @throws IllegalArgumentException if the enum class is <code>null</code>
+-     * @throws IllegalArgumentException if the enum class is not a subclass
++     * @return the enumeration object Map
++     * @throws IllegalArgumentException if the enumeration class is <code>null</code>
++     * @throws IllegalArgumentException if the enumeration class is not a subclass
+      *  of <code>Enum</code>
+      */
+     public static List getEnumList(Class enumClass) {
+@@ -144,14 +144,14 @@ public class EnumUtils {
+      * <p>The iterator is in the order that the objects were created
+      * (source code order).</p>
+      *
+-     * <p>If the requested class has no enum objects an empty
++     * <p>If the requested class has no enumeration objects an empty
+      * <code>Iterator</code> is returned. The <code>Iterator</code>
+      * is unmodifiable.</p>
+      * 
+      * @param enumClass  the class of the <code>Enum</code> to get
+      * @return an <code>Iterator</code> of the <code>Enum</code> objects
+-     * @throws IllegalArgumentException if the enum class is <code>null</code>
+-     * @throws IllegalArgumentException if the enum class is not a subclass of <code>Enum</code>
++     * @throws IllegalArgumentException if the enumeration class is <code>null</code>
++     * @throws IllegalArgumentException if the enumeration class is not a subclass of <code>Enum</code>
+      */
+     public static Iterator iterator(Class enumClass) {
+         return Enum.getEnumList(enumClass).iterator();
+diff --git a/org/apache/commons/lang/enum/ValuedEnum.java b/org/apache/commons/lang/enum/ValuedEnum.java
+index cbabe5f..c9b16ac 100644
+--- a/org/apache/commons/lang/enum/ValuedEnum.java
++++ b/org/apache/commons/lang/enum/ValuedEnum.java
+@@ -51,7 +51,7 @@
+  * information on the Apache Software Foundation, please see
+  * <http://www.apache.org/>.
+  */
+-package org.apache.commons.lang.enum;
++package org.apache.commons.lang.enumeration;
+ 
+ import java.util.Iterator;
+ import java.util.List;
+@@ -123,7 +123,7 @@ import org.apache.commons.lang.ClassUtils;
+  * }
+  * </pre>
+  *
+- * <p>As shown, each enum has a name and a value. These can be accessed using
++ * <p>As shown, each enumeration has a name and a value. These can be accessed using
+  * <code>getName</code> and <code>getValue</code>.</p>
+  *
+  * <p>The <code>getEnum</code> and <code>iterator</code> methods are recommended.
+@@ -141,15 +141,15 @@ public abstract class ValuedEnum extends Enum {
+     private static final long serialVersionUID = -7129650521543789085L;
+     
+     /**
+-     * The value contained in enum.
++     * The value contained in enumeration.
+      */
+     private final int iValue;
+ 
+     /**
+-     * Constructor for enum item.
++     * Constructor for enumeration item.
+      *
+-     * @param name  the name of enum item
+-     * @param value  the value of enum item
++     * @param name  the name of enumeration item
++     * @param value  the value of enumeration item
+      */
+     protected ValuedEnum(String name, int value) {
+         super(name);
+@@ -165,8 +165,8 @@ public abstract class ValuedEnum extends Enum {
+      * 
+      * @param enumClass  the class of the <code>Enum</code> to get
+      * @param value  the value of the <code>Enum</code> to get
+-     * @return the enum object, or null if the enum does not exist
+-     * @throws IllegalArgumentException if the enum class is <code>null</code>
++     * @return the enumeration object, or null if the enumeration does not exist
++     * @throws IllegalArgumentException if the enumeration class is <code>null</code>
+      */
+     protected static Enum getEnum(Class enumClass, int value) {
+         if (enumClass == null) {
+@@ -174,18 +174,18 @@ public abstract class ValuedEnum extends Enum {
+         }
+         List list = Enum.getEnumList(enumClass);
+         for (Iterator it = list.iterator(); it.hasNext();) {
+-            ValuedEnum enum = (ValuedEnum) it.next();
+-            if (enum.getValue() == value) {
+-                return enum;
++            ValuedEnum enumeration = (ValuedEnum) it.next();
++            if (enumeration.getValue() == value) {
++                return enumeration;
+             }
+         }
+         return null;
+     }
+ 
+     /**
+-     * <p>Get value of enum item.</p>
++     * <p>Get value of enumeration item.</p>
+      *
+-     * @return the enum item's value.
++     * @return the enumeration item's value.
+      */
+     public final int getValue() {
+         return iValue;
+-- 
+2.55.0
+

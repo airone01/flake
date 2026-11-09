@@ -53,15 +53,25 @@
 
   maven11DepsScope = lib.makeScope newScope (self: {
     inherit (baseScope) mkJavaPackage;
+    inherit (junitScope) junit4;
+    inherit (jaxenScope) dom4j_15 jaxen_11-beta-4;
 
     classworlds = self.callPackage ./2b-maven-deps/classworlds.nix {};
+    commons-beanutils_16 = self.callPackage ./2b-maven-deps/commons-beanutils_16.nix {};
     commons-cli_10 = self.callPackage ./2b-maven-deps/commons-cli_10.nix {};
+    commons-collections_21 = self.callPackage ./2b-maven-deps/commons-collections_21.nix {};
+    commons-discovery_02 = self.callPackage ./2b-maven-deps/commons-discovery_02.nix {};
+    commons-jelly = self.callPackage ./2b-maven-deps/commons-jelly.nix {};
+    commons-jexl = self.callPackage ./2b-maven-deps/commons-jexl.nix {};
     commons-lang_10 = self.callPackage ./2b-maven-deps/commons-lang_10.nix {};
+    commons-lang_20 = self.callPackage ./2b-maven-deps/commons-lang_20.nix {};
     commons-logging = self.callPackage ./2b-maven-deps/commons-logging.nix {};
     javax-jms_2 = self.callPackage ./2b-maven-deps/javax-jms_2.nix {};
     javax-mail_14 = self.callPackage ./2b-maven-deps/javax-mail_14.nix {};
     log4j_12 = self.callPackage ./2b-maven-deps/log4j_12.nix {};
     plexus-utils = self.callPackage ./2b-maven-deps/plexus-utils.nix {};
+    servlet-api_2 = self.callPackage ./2b-maven-deps/servlet-api_2.nix {};
+    jstl_10 = self.callPackage ./2b-maven-deps/jstl_10.nix {};
   });
 
   maven11Scope = lib.makeScope newScope (self: {

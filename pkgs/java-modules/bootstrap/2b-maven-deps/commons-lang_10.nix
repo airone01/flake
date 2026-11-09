@@ -14,30 +14,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     hash = "sha256-1EWgla3/qMEoN+3zOEVczYb0BGNarZSV8pYiD/zX1NI=";
   };
 
-  nativeBuildInputs = [
-    ant
-    jdk8
-    # (ant
-    #   .overrideAttrs (prevAttrs: {
-    #   jdk = jdk8;
-    #   installPhase = ''
-    #     runHook preInstall
-    #
-    #     mkdir -p $out/share/ant
-    #     cp -r dist/* $out/share/ant/
-    #     rm -rf $out/share/ant/bin/*.bat $out/share/ant/bin/*.cmd
-    #
-    #     makeWrapper $out/share/ant/bin/ant $out/bin/ant \
-    #       --set ANT_HOME $out/share/ant \
-    #       --set JAVA_HOME "${jdk8}"
-    #
-    #     runHook postInstall
-    #   '';
-    # }))
-  ];
-
-  # hash = "sha256-aaolH/ufMTEsIdZ9sZeEPgsDs8jMPgr25uktmOsPLq0=";
-  # export PATH="${jdk8_headless}/bin:''$PATH"
+  nativeBuildInputs = [ant jdk8];
 
   buildPhase = ''
     runHook preBuild
@@ -60,7 +37,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    install -Dm644 dist/commons-lang-${finalAttrs.version}.jar $out/share/java/commons-lang-${finalAttrs.version}.jar
+    install -Dm 644 dist/commons-lang-${finalAttrs.version}.jar $out/share/java/commons-lang-${finalAttrs.version}.jar
     ln -s commons-lang-${finalAttrs.version}.jar $out/share/java/commons-lang.jar
 
     runHook postInstall

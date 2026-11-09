@@ -1,0 +1,29 @@
+From 00997bee8d02236c70c96f0722aaa52c21313f47 Mon Sep 17 00:00:00 2001
+From: airone01 <airone01@proton.me>
+Date: Mon, 9 Nov 2026 01:00:50 +0100
+Subject: [PATCH] commons-discovery: enum
+
+---
+ .../commons/discovery/resource/DiscoverResources.java       | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/org/apache/commons/discovery/resource/DiscoverResources.java b/org/apache/commons/discovery/resource/DiscoverResources.java
+index 816c11a..2ffcd7a 100644
+--- a/org/apache/commons/discovery/resource/DiscoverResources.java
++++ b/org/apache/commons/discovery/resource/DiscoverResources.java
+@@ -150,9 +150,9 @@ public class DiscoverResources
+                     if (log.isDebugEnabled())
+                         log.debug("getNextResources: search using ClassLoader '" + loader + "'");
+                     try {
+-                        Enumeration enum = JDKHooks.getJDKHooks().getResources(loader, resourceName);
+-                        if (enum != null && enum.hasMoreElements()) {
+-                            return enum;
++                        Enumeration enumeration = JDKHooks.getJDKHooks().getResources(loader, resourceName);
++                        if (enumeration != null && enumeration.hasMoreElements()) {
++                            return enumeration;
+                         }
+                     } catch( IOException ex ) {
+                         log.warn("getNextResources: Ignoring Exception", ex);
+-- 
+2.55.0
+

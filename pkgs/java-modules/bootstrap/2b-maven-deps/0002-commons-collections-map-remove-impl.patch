@@ -1,0 +1,47 @@
+From 41b655c3cd9f2b7cc9aede34cede3394c6211bc7 Mon Sep 17 00:00:00 2001
+From: airone01 <airone01@proton.me>
+Date: Mon, 9 Nov 2026 01:13:30 +0100
+Subject: [PATCH 2/2] commons-collections: map remove impl
+
+---
+ org/apache/commons/collections/MultiHashMap.java | 6 +++---
+ org/apache/commons/collections/MultiMap.java     | 1 -
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/org/apache/commons/collections/MultiHashMap.java b/org/apache/commons/collections/MultiHashMap.java
+index 10ff9f4..f7d54d3 100644
+--- a/org/apache/commons/collections/MultiHashMap.java
++++ b/org/apache/commons/collections/MultiHashMap.java
+@@ -158,15 +158,15 @@ public class MultiHashMap extends HashMap implements MultiMap
+         return false;
+     }
+     
+-    public Object remove( Object key, Object item )
++    public boolean remove( Object key, Object item )
+     {
+         ArrayList valuesForKey = (ArrayList) super.get( key );
+         
+         if ( valuesForKey == null )
+-            return null;
++            return false;
+         
+         valuesForKey.remove( item );
+-        return item;
++        return true;
+     }
+     
+     public void clear()
+diff --git a/org/apache/commons/collections/MultiMap.java b/org/apache/commons/collections/MultiMap.java
+index d034b47..3f78755 100644
+--- a/org/apache/commons/collections/MultiMap.java
++++ b/org/apache/commons/collections/MultiMap.java
+@@ -76,6 +76,5 @@ import java.util.Map;
+  */
+ public interface MultiMap extends Map {
+     
+-    public Object remove( Object key, Object item );
+    
+ }
+-- 
+2.55.0
+

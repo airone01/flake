@@ -1,0 +1,25 @@
+From c4e574404456e122c8228873eaa0045b73adbd87 Mon Sep 17 00:00:00 2001
+From: airone01 <airone01@proton.me>
+Date: Sun, 8 Nov 2026 23:09:34 +0100
+Subject: [PATCH 3/3] commons-jexl: out version
+
+---
+ build.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/build.xml b/build.xml
+index d2206c0..c4224b0 100644
+--- a/build.xml
++++ b/build.xml
+@@ -20,7 +20,7 @@
+   </property>
+   <property name="javadocdir" value="dist/docs/api">
+   </property>
+-  <property name="final.name" value="commons-jexl-1.0-beta-3-SNAPSHOT">
++  <property name="final.name" value="commons-jexl-1.0">
+   </property>
+   <path id="build.classpath">
+     <fileset dir="${libdir}">
+-- 
+2.55.0
+
