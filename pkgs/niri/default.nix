@@ -80,7 +80,6 @@
         Mod+E { spawn "thunar"; }
         Mod+R { spawn "kitty" "-e" "yazi"; }
         Mod+Shift+B { spawn "firefox"; }
-        Mod+V { spawn-sh "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
         Print { spawn "grimblast" "copy" "area"; }
 
         Mod+F { maximize-column; }
