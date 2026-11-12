@@ -2,6 +2,7 @@
   ai-robots-txt = final.callPackage ../pkgs/ai-robots-txt {};
   cv = final.callPackage ../pkgs/cv {};
   initomatic = final.callPackage ../pkgs/initomatic {};
+  lstr = final.callPackage ../pkgs/lstr {};
   mcheads = final.callPackage ../pkgs/mcheads {};
   noctalia = final.callPackage ../pkgs/noctalia {
     inherit (prev) niri noctalia;

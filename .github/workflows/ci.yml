@@ -7,70 +7,126 @@ on:
       - main
 
 jobs:
-  nix-matrix:
-    name: Generate checks matrix
+  gen-matrix:
+    name: Discover Targets
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
+    env:
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
       - uses: cachix/install-nix-action@v30
-      - id: set-matrix
-        name: Generate Nix Matrix
-        run: |
-          set -Eeu
-          matrix="$(nix eval --json '.#githubActions.matrix')"
-          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
-
-  nix-build:
-    name: ${{ matrix.name }} (${{ matrix.system }})
-    needs: nix-matrix
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix: ${{fromJSON(needs.nix-matrix.outputs.matrix)}}
-      fail-fast: false
-    steps:
-      - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v30
-      - id: check-cache
-        name: Check if check is already cached
-        run: |
-          set -Eeuo pipefail
-          out_path="$(nix eval --raw '.#${{ matrix.attr }}.outPath')"
-          hash="$(basename "$out_path" | cut -d- -f1)"
-          echo "Store path: $out_path"
-          echo "Hash: $hash"
-
-          is_cached=false
-          for cache in "https://airone01.cachix.org" "https://cache.nixos.org"; do
-            code="$(curl -s -o /dev/null -w "%{http_code}" "$cache/$hash.narinfo")"
-            if [ "$code" = "200" ]; then
-              echo "Path is already cached in $cache. Skipping build."
-              is_cached=true
-              break
-            fi
-          done
-
-          echo "is_cached=$is_cached" >> "$GITHUB_OUTPUT"
-
       - uses: cachix/cachix-action@v17
         if: steps.check-cache.outputs.is_cached != 'true'
         with:
           name: airone01
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - id: set-matrix
+        name: Discover Targets
+        run: |
+          set -Eeu
+          matrix="$(nix run '.#lstr' -- diff-available-targets $BASE_SHA $HEAD_SHA -- . | jq -c '{include:([(.nixosConfigurations[]? | {type: "nixosConfigurations", target: ., os: "ubuntu-latest"}), (.packages // {} | to_entries[] | .key as $system | .value[] | {type: "packages", target: ., system: $system, os: "ubuntu-latest"})])}')"
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
-      - name: Build derivation
+  eval-targets:
+    name: Eval / ${{ matrix.target }}${{ matrix.system && format(' / {0}', matrix.system) || '' }}
+    needs: gen-matrix
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix: ${{fromJSON(needs.gen-matrix.outputs.matrix)}}
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+      - uses: cachix/install-nix-action@v30
+      - uses: cachix/cachix-action@v17
         if: steps.check-cache.outputs.is_cached != 'true'
-        run: nix build -L '.#${{ matrix.attr }}'
+        with:
+          name: airone01
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - name: Evaluate and Diff Target
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -u
+          nix run '.#lstr' -- diff-target '${{ matrix.type }}' '${{ matrix.target }}' $BASE_SHA $HEAD_SHA -- . || rc=$?
+          case "$rc" in
+            0)
+              needs_rebuild=false
+              ;;
+            101)
+              needs_rebuild=true
+              ;;
+            *)
+              echo "Unexpectde exit code $rc"
+              exit "$rc"
+              ;;
+          esac
+          mkdir -p target-status
+          jq -nc \
+            --argjson item '${{ toJSON(matrix) }}' \
+            --argjson rc "$rc" \
+            --argjson needs_rebuild "$needs_rebuild" \
+            '$item + {rc: $rc, needs_rebuild: $needs_rebuild}' \
+            > "target-status/${{ strategy.job-index }}.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: target-status-${{ strategy.job-index }}
+          path: target-status/${{ strategy.job-index }}.json
+          if-no-files-found: error
 
-  nix-build-failures:
-    name: No build failures
-    needs: nix-build
+  prepare-build:
+    name: Prepare Build Matrix
+    needs: eval-targets
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: target-status-*
+          path: all-statuses
+          merge-multiple: true
+      - id: build-matrix
+        run: |
+          set -Eeuo pipefail
+          filtered="$(jq -sc '{include: [.[] | select(.needs_rebuild == true) | del(.rc, .needs_rebuild)]}' all-statuses/*.json)"
+          echo "matrix=$filtered" >> "$GITHUB_OUTPUT"
+
+  build-targets:
+    name: Build / ${{ matrix.target }}${{ matrix.system && format(' / {0}', matrix.system) || '' }}
+    needs: prepare-build
+    if: fromJSON(needs.prepare-build.outputs.matrix).include[0] != null
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix: ${{ fromJSON(needs.prepare-build.outputs.matrix) }}
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v30
+      - uses: cachix/cachix-action@v17
+        if: steps.check-cache.outputs.is_cached != 'true'
+        with:
+          name: airone01
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - name: Build Derivation
+        run: nix run '.#lstr' -- build-target '${{ matrix.type }}' '${{ matrix.target }}' -- .
+
+  no-build-failures:
+    name: No Build Failures
+    needs: build-targets
     runs-on: ubuntu-latest
     if: always()
     steps:
       - run: |
-          if [[ "${{ needs.nix-build.result }}" != "success" ]]; then
+          if [[ "${{ needs.build-targets.result }}" != "success" ]]; then
             echo "One or more matrix jobs failed."
             exit 1
           fi
