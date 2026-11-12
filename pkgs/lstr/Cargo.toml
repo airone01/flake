@@ -1,0 +1,14 @@
+[package]
+name = "lstr"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.104"
+clap = { version = "4.6.7", features = ["derive"] }
+console = "0.16.6"
+git2 = "0.21.0"
+serde = "1.0.229"
+serde_json = "1.0.154"
+similar = { version = "3.2.1", features = ["inline"] }
+tempdir = "0.3.7"
