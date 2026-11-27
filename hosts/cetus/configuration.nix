@@ -59,8 +59,12 @@
   # check for zfs errors periodically
   services.zfs.autoScrub.enable = true;
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    zfs.forceImportRoot = false;
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
 }
