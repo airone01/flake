@@ -11,5 +11,6 @@
   niri = final.callPackage ../pkgs/niri/package.nix {inherit (prev) niri;};
   nvim = final.callPackage ../pkgs/nvim/package.nix {inherit inputs;};
   website = final.callPackage ../pkgs/website/package.nix {};
+  wallpapers = final.callPackage ../pkgs/wallpapers/package.nix {};
   zola-386 = final.callPackage ../pkgs/zola-386/package.nix {};
 }
