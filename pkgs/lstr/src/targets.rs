@@ -70,10 +70,10 @@ pub fn diff_available_targets(
     let base_json = handle_base.join().unwrap()?;
     let head_json = handle_head.join().unwrap()?;
 
-    if head_json != base_json {
-        print!("{head_json}");
-        eprintln!();
+    print!("{head_json}");
+    eprintln!();
 
+    if head_json != base_json {
         let base_pretty = pretty_json(base_json)?;
         let head_pretty = pretty_json(head_json)?;
 
