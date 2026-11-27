@@ -13,25 +13,26 @@
 This repository contains my personal NixOS configurations for multiple machines
 and deployments. It's very faulty to say the least, but I love it.
 
-> [!IMPORTANT]
-> This repo is opinionated, modules and derivations are tailored for my use. If
-> I ever define something and I decide to share it, I will update this note
-> accordingly and explain usage in this README, but for now, there is not much
-> for you I'm afraid. Nothing is stopping you from yoinking code however, the
-> repo is MIT licensed!
+## Packages
+
+Some of the more interesting packages exposed in this flake are:
+
+- `mek-fonts`/*: Some fonts by [MEK.txt](https://mektxt.com/)
+- `noctalia`: my DE config
+- `nvim` & `nvim-full`: light and full versions of my NeoVim configuration. Uses
+  [nvf](https://github.com/NotAShelf/nvf).
+- `wallpapers`: wallpapers I like
 
 ## Organization
 
-This repository is now trying to follow the
-[dendritic pattern](https://github.com/mightyiam/dendritic). For this reason,
-all modules and features are dropped into the `modules` directory.
-
-Notable stuff `modules/` include:
+The directory are organized roughly as followed:
 
 - `hosts/`: hosts configurations
+- `mods/`: configurations shared across hosts
+- `common/`: shared configurations shortcuts
 - `pkgs/`: half source-code, half nix derivations of small apps and scripts
-- `srv/`: services configurations
-- `*.nix`: any feature detailed at the top of the file
+- `misc/`: some files used by outside programs
+- `secrets/`: sops-nix encrypted secrets
 
 ## Machines
 
@@ -44,12 +45,6 @@ Notable stuff `modules/` include:
 | aquarius   |             | Abandoned  |
 | cygnus     |             | Abandoned  |
 | ursamajor  |             | Abandoned  |
-
-### Commit Message Convention
-
-This repository uses
-[conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
-Configured at [`.commitlintrc.yml`](.commitlintrc.yml).
 
 ## License
 
