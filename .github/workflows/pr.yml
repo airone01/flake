@@ -88,22 +88,26 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.build-matrix.outputs.matrix }}
+      has-targets: ${{ steps.build-matrix.outputs.has_targets }}
     steps:
       - uses: actions/download-artifact@v8
         with:
           pattern: target-status-*
           path: all-statuses
           merge-multiple: true
-      - id: build-matrix
+      - name: Preare Build Matrix
+        id: build-matrix
         run: |
           set -Eeuo pipefail
           filtered="$(jq -sc '{include: [.[] | select(.needs_rebuild == true) | del(.rc, .needs_rebuild)]}' all-statuses/*.json)"
+          has_targets="$(jq -r 'if (.include | length) > 0 then "true" else "false" end' <<< "$filtered")"
           echo "matrix=$filtered" >> "$GITHUB_OUTPUT"
+          echo "has_targets=$has_targets" >> "$GITHUB_OUTPUT"
 
   build-targets:
     name: Build / ${{ matrix.target }}${{ matrix.system && format(' / {0}', matrix.system) || '' }}
     needs: prepare-build
-    if: fromJSON(needs.prepare-build.outputs.matrix).include[0] != null
+    if: needs.prepare-build.outputs.has_targets == 'true'
     runs-on: ${{ matrix.os }}
     strategy:
       matrix: ${{ fromJSON(needs.prepare-build.outputs.matrix) }}
@@ -127,7 +131,7 @@ jobs:
     if: always()
     steps:
       - run: |
-          if [[ "${{ needs.build-targets.result }}" != "success" ]]; then
+          if [[ "${{ needs.build-targets.result }}" != "success" && "${{ needs.build-targets.result }}" != "skipped" ]]; then
             echo "One or more matrix jobs failed."
             exit 1
           fi
