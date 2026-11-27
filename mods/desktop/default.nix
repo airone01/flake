@@ -40,6 +40,10 @@
       fira-code-symbols
       mplus-outline-fonts.githubRelease
       dina-font
+      # Mek
+      grout
+      mek-sans
+      monomek
     ];
 
     fontconfig.defaultFonts = {
