@@ -1,5 +1,40 @@
 # Changelog
 
+## [14.0.0](https://github.com/airone01/flake/compare/flake-v13.3.1...flake-v14.0.0) (2026-11-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **noctalia:** Noctalia major version bump. Major config changes.
+
+### Features
+
+* **lstr:** init ([d1f5db8](https://github.com/airone01/flake/commit/d1f5db8aa8e925e0e4b01b73ed0e7ed405727efd))
+* **lstr:** logger ([fc12799](https://github.com/airone01/flake/commit/fc127995ca0ad0920dd709a7db327287e0a49138))
+* mek.txt typefaces ([d742010](https://github.com/airone01/flake/commit/d7420108e0c0b450b51cc20fe8bed877c9f999ad))
+* **nvim:** add french language pack ([1477916](https://github.com/airone01/flake/commit/1477916e60bb97d9f2929716efba202965101941))
+* **nvim:** lighter version ([07bad32](https://github.com/airone01/flake/commit/07bad32b562a479ac7d4babe3edaf3158a8622c6))
+* some git aliases ([4d62d90](https://github.com/airone01/flake/commit/4d62d908f5710b975c05bdcece15bd3fde61f012))
+* **wallpapers:** package and convert to jxl ([44881e0](https://github.com/airone01/flake/commit/44881e08ba56af931f7c3c09e0c76f50f5aaa8e5))
+
+
+### Bug Fixes
+
+* **cetus:** disable boot.zfs.forceImportRoot ([54b735f](https://github.com/airone01/flake/commit/54b735fb65ea0876e88203bd284bbe26e038e4c4))
+* **desktop:** disable jack compat ([f88ce13](https://github.com/airone01/flake/commit/f88ce1385517ab9a7135308c83cd24202b1538bd))
+* **lstr:** output targets when no diff ([46dae1c](https://github.com/airone01/flake/commit/46dae1c7d7dd4a566d05049e8c877e19c6564664))
+* **noctalia:** update for v5 ([1af3d2e](https://github.com/airone01/flake/commit/1af3d2efce411babdf645a5e25f6811246d6d5d7))
+* remove ncspot/spotify ([3f379b7](https://github.com/airone01/flake/commit/3f379b7756d87272ba6aadc5ddf3e17730b8b4ae))
+* remove nix-github-actions ([49bc8c8](https://github.com/airone01/flake/commit/49bc8c802ca147485d5e8fdfca7a77db6e3aa2f3))
+* remove old cliphist command ([ed3df26](https://github.com/airone01/flake/commit/ed3df263b9331f3c652caae8f8bdff4b4350dc21))
+* set nixpkgs branch to nixos-unstable ([1138da2](https://github.com/airone01/flake/commit/1138da25389b962a34e0f6698c1f2c4cc501ef32))
+* **sys:** rm outdated initrd.systemd.enable ([61e2829](https://github.com/airone01/flake/commit/61e2829786e0e2fd0fedcfc9cf3d3eddd28b9c64))
+
+
+### Documentation
+
+* update readme ([b6532f4](https://github.com/airone01/flake/commit/b6532f4f446cf2ebf8830d0e916aab53b61667c7))
+
 ## [13.3.1](https://github.com/airone01/flake/compare/flake-v13.3.0...flake-v13.3.1) (2026-10-28)
 
 
