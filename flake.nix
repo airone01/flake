@@ -11,10 +11,6 @@
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-github-actions = {
-      url = "github:nix-community/nix-github-actions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nvf = {
       url = "github:notashelf/nvf";
@@ -75,16 +71,6 @@
           };
         }
     );
-
-    nixosChecks = nixpkgs.lib.foldl' (
-      acc: name: let
-        host = self.nixosConfigurations.${name};
-        sys = host.pkgs.stdenv.hostPlatform.system;
-      in
-        nixpkgs.lib.recursiveUpdate acc {
-          ${sys}.${name} = host.config.system.build.toplevel;
-        }
-    ) {} (builtins.attrNames (self.nixosConfigurations or {}));
   in {
     packages = forAllSystems (
       system: import ./pkgs {inherit inputs system;}
@@ -125,9 +111,5 @@
     });
 
     nixosConfigurations = import ./hosts {inherit nixpkgs inputs;};
-
-    githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
-      checks = nixpkgs.lib.recursiveUpdate self.packages nixosChecks;
-    };
   };
 }
