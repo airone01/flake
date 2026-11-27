@@ -2,9 +2,11 @@ use std::fmt::Display;
 use std::{path::PathBuf, process::Command, thread};
 
 use anyhow::{Result, bail};
+use log::{error, info, trace, warn};
 
 use crate::deriv_type::DerivType;
-use crate::diff::{checkout, log_diff, pretty_json};
+use crate::diff::{log_diff, pretty_json};
+use crate::git::checkout;
 
 fn gen_eval_package(path: PathBuf, target: String) -> Command {
     let mut cmd = Command::new("nix");
@@ -57,14 +59,20 @@ fn eval_one_target(
     })(tmp_path, target)
     .output()?;
     if !out.status.success() {
-        eprintln!("{}", String::from_utf8(out.stderr.clone())?);
+        error!(
+            "Evaluation failed with the following error:\n{}",
+            String::from_utf8(out.stderr.clone())?
+        );
     }
 
     let json = pretty_json(String::from_utf8(out.stdout.clone())?)?;
     if destroy_after_use {
+        trace!("Destroying '{}' after use", tmpdir.path().to_str().unwrap());
         tmpdir
             .close()
-            .unwrap_or_else(|error| eprintln!("Failed to close temp dir {}", error));
+            .unwrap_or_else(|error| error!("Failed to close temp dir {}", error));
+    } else {
+        warn!("Temp dir '{}' left behind", tmpdir.path().to_str().unwrap())
     }
 
     Ok(json)
@@ -106,7 +114,9 @@ pub fn diff_target(
         .unwrap()
         .expect("Head derivation should evaluate!");
 
-    if base_attrpath != head_attrpath {
+    if base_attrpath == head_attrpath {
+        info!("There are no diffs");
+    } else {
         log_diff(&base_ref, &head_ref, base_attrpath, head_attrpath);
         bail!(TargetDiffErr);
     }

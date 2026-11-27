@@ -1,8 +1,12 @@
 use std::{path::PathBuf, process::Command, thread};
 
 use anyhow::Result;
+use log::{error, info, trace, warn};
 
-use crate::diff::{checkout, log_diff, pretty_json};
+use crate::{
+    diff::{log_diff, pretty_json},
+    git::checkout,
+};
 
 fn gen_eval_targets(path: PathBuf) -> Command {
     let mut cmd = Command::new("nix");
@@ -40,13 +44,19 @@ fn eval_available_targets(
 
     let out = gen_eval_targets(tmp_path).output()?;
     if !out.status.success() {
-        eprintln!("{}", String::from_utf8(out.stderr.clone())?);
+        error!(
+            "Evaluation failed with the following error:\n{}",
+            String::from_utf8(out.stderr.clone())?
+        );
     }
 
     if destroy_after_use {
+        trace!("Destroying '{}' after use", tmpdir.path().to_str().unwrap());
         tmpdir
             .close()
-            .unwrap_or_else(|error| eprintln!("Failed to close temp dir {}", error));
+            .unwrap_or_else(|error| error!("Failed to close temp dir {}", error));
+    } else {
+        warn!("Temp dir '{}' left behind", tmpdir.path().to_str().unwrap())
     }
 
     Ok(String::from_utf8(out.stdout.clone())?)
@@ -71,9 +81,10 @@ pub fn diff_available_targets(
     let head_json = handle_head.join().unwrap()?;
 
     print!("{head_json}");
-    eprintln!();
 
-    if head_json != base_json {
+    if head_json == base_json {
+        info!("There are no diffs");
+    } else {
         let base_pretty = pretty_json(base_json)?;
         let head_pretty = pretty_json(head_json)?;
 

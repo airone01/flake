@@ -4,6 +4,7 @@ use std::{
 };
 
 use anyhow::Result;
+use log::error;
 
 use crate::deriv_type::DerivType;
 
@@ -38,7 +39,10 @@ pub fn build_target(
     let out = gen_build(repo_dir, target_type, system, target).output()?;
 
     if !out.status.success() {
-        eprintln!("{}", String::from_utf8(out.stderr)?);
+        error!(
+            "Build failed with the following error:\n{}",
+            String::from_utf8(out.stderr)?
+        );
     }
 
     Ok(())
