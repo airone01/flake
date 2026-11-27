@@ -275,6 +275,7 @@
             # programmingWordlist.enable = true;
             languages = [
               "en"
+              "fr"
               # TODO add "fr" here and configure dictionary
             ];
           };
