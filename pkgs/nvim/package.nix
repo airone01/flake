@@ -279,7 +279,15 @@
             ];
           };
 
-          statusline.lualine.enable = true;
+          statusline.lualine = {
+            enable = true;
+
+            # lsp path indication below the tab bar
+            integrations.breadcrumbs = {
+              nvim-navic.enable = true;
+              navbuddy.enable = true;
+            };
+          };
 
           syntaxHighlighting = true;
 
@@ -357,12 +365,6 @@
                 nvim-cmp.enable = true;
                 which-key.enable = true;
               };
-            };
-
-            # lsp path indication below the tab bar
-            breadcrumbs = {
-              enable = true;
-              navbuddy.enable = true;
             };
 
             # render written colors e.g. `#f00`
