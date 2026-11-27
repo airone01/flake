@@ -1,9 +1,12 @@
 {inputs}: final: prev: {
   ai-robots-txt = final.callPackage ../pkgs/ai-robots-txt {};
   cv = final.callPackage ../pkgs/cv {};
+  grout = final.callPackage ../pkgs/mek-fonts/grout.nix {};
   initomatic = final.callPackage ../pkgs/initomatic {};
   lstr = final.callPackage ../pkgs/lstr {};
   mcheads = final.callPackage ../pkgs/mcheads {};
+  mek-sans = final.callPackage ../pkgs/mek-fonts/mek-sans.nix {};
+  monomek = final.callPackage ../pkgs/mek-fonts/monomek.nix {};
   noctalia = final.callPackage ../pkgs/noctalia {
     inherit (prev) niri noctalia;
   };
