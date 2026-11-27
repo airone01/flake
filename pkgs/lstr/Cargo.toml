@@ -1,13 +1,15 @@
 [package]
 name = "lstr"
-version = "0.2.1"
+version = "0.3.0"
 edition = "2024"
 
 [dependencies]
 anyhow = "1.0.104"
 clap = { version = "4.6.7", features = ["derive"] }
+colog = "1.4.0"
 console = "0.16.6"
 git2 = "0.21.0"
+log = "0.4.35"
 serde = "1.0.229"
 serde_json = "1.0.154"
 similar = { version = "3.2.1", features = ["inline"] }

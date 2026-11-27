@@ -6,11 +6,11 @@
 }:
 rustPlatform.buildRustPackage {
   pname = "lstr";
-  version = "0.2.1";
+  version = "0.3.0";
 
   src = ./.;
 
-  cargoHash = "sha256-Bs0/ImutXEmQBWk9bj/SmwwWbBqX0ly7sb4dLaOBfvw=";
+  cargoHash = "sha256-8rLhPX50hXBQ00+80Hmy1XEMZ7/8him6pUSruGLtUCs=";
 
   nativeBuildInputs = [pkg-config];
 
